@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged/')
 
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
@@ -21,7 +22,7 @@ Plug 'JuliaEditorSupport/julia-vim'
 Plug 'vim-latex/vim-latex'
 Plug 'dfm/shifttab.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'vim-scripts/Vim-R-plugin'
-Plug 'roosta/srcery'
+Plug 'srcery-colors/srcery-vim'
 Plug 'kmszk/skyknight'
 
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
@@ -47,7 +48,8 @@ let g:airline#extensions#tabline#enabled=1
 set number
 set background=dark
 set termguicolors
-colorscheme skyknight
+set t_Co=256
+colorscheme srcery
 
 " Syntastic config
 set statusline+=%#warningmsg#
