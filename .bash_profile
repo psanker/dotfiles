@@ -52,9 +52,6 @@ export PATH=$PATH:$GOPATH/bin
 # LaTeX
 export PATH="/Library/TeX/texbin:$PATH"
 
-# so I don't remember the bloody IP
-alias cpsxssh="ssh -i ~/Documents/phys-chops/edx2ami.pem ubuntu@54.156.197.224"
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

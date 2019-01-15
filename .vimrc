@@ -4,7 +4,6 @@ call plug#begin('~/.vim/plugged/')
 
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
@@ -22,6 +21,8 @@ Plug 'JuliaEditorSupport/julia-vim'
 Plug 'vim-latex/vim-latex'
 Plug 'dfm/shifttab.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'vim-scripts/Vim-R-plugin'
+Plug 'roosta/srcery'
+Plug 'kmszk/skyknight'
 
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
@@ -37,18 +38,16 @@ set backspace=indent,eol,start
 " AUTOCOMPLETE MENU
 set wildmenu
 
-" Include project root for fuzzy search
 set path+=**
 
 " Theme stuff
 let g:quantum_black=1
 let g:quantum_italics=1
-let g:airline_theme='srcery'
 let g:airline#extensions#tabline#enabled=1
 set number
 set background=dark
 set termguicolors
-colorscheme srcery
+colorscheme skyknight
 
 " Syntastic config
 set statusline+=%#warningmsg#
