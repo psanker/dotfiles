@@ -21,9 +21,13 @@ Plug 'fatih/vim-go'
 Plug 'JuliaEditorSupport/julia-vim'
 Plug 'vim-latex/vim-latex'
 Plug 'dfm/shifttab.nvim', { 'do' : ':UpdateRemotePlugins' }
-Plug 'vim-scripts/Vim-R-plugin'
+Plug 'jalvesaq/Nvim-R'
 Plug 'srcery-colors/srcery-vim'
 Plug 'kmszk/skyknight'
+Plug 'majutsushi/tagbar'
+Plug 'JuliaEditorSupport/julia-vim'
+Plug 'jpalardy/vim-slime'
+Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
@@ -32,24 +36,39 @@ call plug#end()
 
 filetype plugin indent on
 
+" GLOBAL SETTINGS
+let mapleader=","
+set number relativenumber
+set splitright
+set splitbelow
+
 " UI changes
 set mouse=a
 set backspace=indent,eol,start
 
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+
 " AUTOCOMPLETE MENU
 set wildmenu
-
 set path+=**
+
+" Code folding set to off
+set nofoldenable
 
 " Theme stuff
 let g:quantum_black=1
 let g:quantum_italics=1
 let g:airline#extensions#tabline#enabled=1
-set number
+set cursorline
 set background=dark
 set termguicolors
 set t_Co=256
 colorscheme srcery
+
+let g:slime_target = "tmux"
 
 " Syntastic config
 set statusline+=%#warningmsg#
@@ -58,8 +77,11 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+
+" Airline fix
+nnoremap <Leader>ar :AirlineRefresh<CR>
 
 " YCM C++ Settings
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
@@ -73,9 +95,6 @@ set tags=tags
 " Default file encoding to utf-8
 set encoding=utf-8
 
-" Localleader
-let maplocalleader = ","
-
 " Linter configuration
 let g:ale_linters = {
 			\'html': ['htmlhint'],
@@ -87,6 +106,18 @@ let g:javascript_plugin_flow=1
 
 " Maps NerdTree to Alt-N -- OSX ONLY
 noremap ˜ :NERDTreeToggle<CR>
+
+" Tagbar support
+let g:tagbar_type_r = {
+    \ 'ctagstype' : 'r',
+    \ 'kinds'     : [
+        \ 'f:Functions',
+        \ 'g:GlobalVariables',
+        \ 'v:FunctionVariables',
+    \ ]
+\ }
+
+nnoremap <Leader>tb :TagbarToggle<CR>
 
 " Finds the next placeholder and enters insert mode
 nnoremap <Leader><Space><Space> <CR>/<++><CR>:noh<CR>da>i
@@ -101,7 +132,7 @@ autocmd FileType tex setlocal ts=4 sw=4 sts=0 expandtab
 augroup PythonSettings
 	autocmd FileType python inoremap <S-tab> <C-o>:call ShiftTab()<CR>
 	autocmd FileType python setlocal noshowmode
-	autocmd FileType python noremap <Leader>;f <Esc>o<BS>def<Space><++>(<++>):<Enter><++><Esc>
+	autocmd FileType python noremap <Leader>;f <Esc>o<BS>def<Space><++>(<++>):<CR><++><Esc>
 augroup END
 
 augroup JuliaSettings
@@ -126,6 +157,18 @@ augroup END
 
 augroup RSettings
 	autocmd FileType R setlocal ts=4 sw=4 sts=0 expandtab
+	"let vimrplugin_assign 
+	let R_assign = 0
+
+	autocmd FileType r nnoremap Â A<Space>%>%<Space>
+	autocmd FileType r inoremap Â <Space>%>%<Space>
+
+	set foldmethod=indent
+
+	let g:syntastic_enable_r_lintr_checker = 1
+	let g:syntastic_r_checkers = ['lintr']
+
+	let g:syntastic_r_lintr_linters = "with_defaults(line_length_linter = NULL, trailing_blank_lines_linter = NULL, trailing_whitespace_linter = NULL, closed_curly_linter = NULL, spaces_left_parentheses_linter = NULL, open_curly_linter = NULL)"
 augroup END
 
 autocmd BufRead,BufNewFile *.htmlhintrc setfiletype json
