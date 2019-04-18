@@ -8,7 +8,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
-Plug 'vim-syntastic/syntastic'
+Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -70,16 +70,6 @@ colorscheme srcery
 
 let g:slime_target = "tmux"
 
-" Syntastic config
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
 " Airline fix
 nnoremap <Leader>ar :AirlineRefresh<CR>
 
@@ -90,7 +80,7 @@ let g:ycm_server_keep_logfiles = 1
 let g:ycm_path_to_python_interpreter='/anaconda3/bin/python'
 
 " Add tag searching to root dir
-set tags=tags
+set tags=tags,./.git/tags
 
 " Default file encoding to utf-8
 set encoding=utf-8
@@ -98,7 +88,8 @@ set encoding=utf-8
 " Linter configuration
 let g:ale_linters = {
 			\'html': ['htmlhint'],
-			\'javascript': ['eslint', 'flow']
+			\'javascript': ['eslint', 'flow'],
+            \'r': ['lintr']
 			\}
 
 " Allow Flow syntax
@@ -122,12 +113,23 @@ nnoremap <Leader>tb :TagbarToggle<CR>
 " Finds the next placeholder and enters insert mode
 nnoremap <Leader><Space><Space> <CR>/<++><CR>:noh<CR>da>i
 
-autocmd FileType javascript setlocal ts=4 sw=4 sts=0 expandtab
-autocmd FileType scss setlocal ts=4 sw=4 sts=0 expandtab
-autocmd FileType json setlocal ts=4 sw=4 sts=0 expandtab
-autocmd FileType go setlocal ts=4 sw=4 sts=0 expandtab
-autocmd FileType julia setlocal ts=4 sw=4 sts=0 expandtab
-autocmd FileType tex setlocal ts=4 sw=4 sts=0 expandtab
+setlocal ts=4 sw=4 sts=0 expandtab
+
+"autocmd FileType javascript setlocal ts=4 sw=4 sts=0 expandtab
+"autocmd FileType scss setlocal ts=4 sw=4 sts=0 expandtab
+"autocmd FileType json setlocal ts=4 sw=4 sts=0 expandtab
+"autocmd FileType go setlocal ts=4 sw=4 sts=0 expandtab
+"autocmd FileType julia setlocal ts=4 sw=4 sts=0 expandtab
+"autocmd FileType tex setlocal ts=4 sw=4 sts=0 expandtab
+autocmd FileType yaml setlocal ts=2 sw=2 sts=0 expandtab
+
+augroup FortranSettings
+	autocmd!
+	let fortran_free_source=1
+	let fortran_have_tabs=1
+	let fortran_more_precise=1
+	let fortran_do_enddo=1
+augroup END
 
 augroup PythonSettings
 	autocmd FileType python inoremap <S-tab> <C-o>:call ShiftTab()<CR>
@@ -140,6 +142,7 @@ augroup JuliaSettings
 augroup END
 
 augroup TexSettings
+	autocmd!
 	autocmd FileType tex setlocal ts=4 sw=4 sts=0 expandtab
 	autocmd FileType tex set nofoldenable
 
@@ -152,10 +155,12 @@ augroup TexSettings
 augroup END
 
 augroup XMLSettings
+	autocmd!
 	autocmd FileType xml setlocal ts=4 sw=4 sts=0 expandtab
 augroup END
 
 augroup RSettings
+	autocmd!
 	autocmd FileType R setlocal ts=4 sw=4 sts=0 expandtab
 	"let vimrplugin_assign 
 	let R_assign = 0
@@ -168,7 +173,7 @@ augroup RSettings
 	let g:syntastic_enable_r_lintr_checker = 1
 	let g:syntastic_r_checkers = ['lintr']
 
-	let g:syntastic_r_lintr_linters = "with_defaults(line_length_linter = NULL, trailing_blank_lines_linter = NULL, trailing_whitespace_linter = NULL, closed_curly_linter = NULL, spaces_left_parentheses_linter = NULL, open_curly_linter = NULL)"
+	let R_setwidth = 0
 augroup END
 
 autocmd BufRead,BufNewFile *.htmlhintrc setfiletype json
@@ -183,3 +188,5 @@ noremap Ç :VCoolor<CR>
 
 " RGB
 noremap ‰ :VCoolIns r<CR> 
+
+syntax on

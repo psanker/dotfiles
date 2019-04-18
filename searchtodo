@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+RFILESLS=$(find . -name "*.R")
+
+while IFS=$(echo -en "\n") read -ra RFILES; do
+    for i in "${RFILES[@]}"; do
+        count=0
+
+        lns="$(grep "TODO:" "$i")"
+
+        while IFS=$(echo -en "\n") read -ra arraylns; do
+            if [ ${#arraylns[@]} -gt 0 ]; then
+                if [ $count -eq 0 ]; then
+                    printf "%s:\n" "$i"
+                    count=1
+                fi
+
+                for l in "${arraylns[@]}"; do
+                    echo "$l" | sed -E 's/^[ tab]+|[ tab]+$//g'
+                done
+            fi
+        done <<< "$lns"
+    done
+done <<< "$RFILESLS"
