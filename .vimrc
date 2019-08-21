@@ -3,8 +3,7 @@ set nocompatible
 call plug#begin('~/.vim/plugged/')
 
 Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
@@ -22,15 +21,35 @@ Plug 'JuliaEditorSupport/julia-vim'
 Plug 'vim-latex/vim-latex'
 Plug 'dfm/shifttab.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'jalvesaq/Nvim-R'
-Plug 'srcery-colors/srcery-vim'
 Plug 'kmszk/skyknight'
 Plug 'majutsushi/tagbar'
 Plug 'JuliaEditorSupport/julia-vim'
 Plug 'jpalardy/vim-slime'
 Plug 'christoomey/vim-tmux-navigator'
 
+" Themes
+Plug 'srcery-colors/srcery-vim'
+Plug 'ntk148v/vim-horizon'
+Plug 'danilo-augusto/vim-afterglow'
+"Plug 'YorickPeterse/happy_hacking.vim'
+Plug 'psanker/happy_hacking.vim'
+
+" nvim compat
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
+
+" ncm-r support
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'gaalcaras/ncm-R'
+
+" Custom R syntax
+Plug 'psanker/R-Vim-runtime'
+
+" Vim 8 only
+if !has('nvim')
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 call plug#end()
 
@@ -61,12 +80,15 @@ set nofoldenable
 " Theme stuff
 let g:quantum_black=1
 let g:quantum_italics=1
-let g:airline#extensions#tabline#enabled=1
 set cursorline
 set background=dark
 set termguicolors
 set t_Co=256
-colorscheme srcery
+colorscheme happy_hacking
+set laststatus=2
+let g:lightline = {
+    \ 'colorscheme' : 'seoul256',
+    \ }
 
 let g:slime_target = "tmux"
 
@@ -151,7 +173,7 @@ augroup TexSettings
 	let g:Tex_GotoError = 0
 	map <Leader>lb :<C-U>exec '!bibtex '.Tex_GetMainFileName(':p:t:r')<CR>
 	map <F17> <S-F5>
-	set spell
+	autocmd FileType text set spell
 augroup END
 
 augroup XMLSettings
@@ -162,18 +184,45 @@ augroup END
 augroup RSettings
 	autocmd!
 	autocmd FileType R setlocal ts=4 sw=4 sts=0 expandtab
+	autocmd FileType rmd setlocal ts=4 sw=4 sts=0 expandtab
 	"let vimrplugin_assign 
 	let R_assign = 0
+	let R_setwidth = 0
+    let R_clear_line = 0
+    let R_args_in_stline = 0
 
 	autocmd FileType r nnoremap Â A<Space>%>%<Space>
 	autocmd FileType r inoremap Â <Space>%>%<Space>
+	autocmd FileType r inoremap [ []<Left>
+	autocmd FileType r inoremap ( ()<Left>
+	autocmd FileType r inoremap " ""<Left>
+	autocmd FileType r inoremap ' ''<Left>
 
-	set foldmethod=indent
+	autocmd FileType rmd nnoremap Â A<Space>%>%<Space>
+	autocmd FileType rmd inoremap Â <Space>%>%<Space>
+	autocmd FileType rmd inoremap [ []<Left>
+	autocmd FileType rmd inoremap ( ()<Left>
+	autocmd FileType rmd inoremap " ""<Left>
+	autocmd FileType rmd inoremap ' ''<Left>
+
+	autocmd FileType r set nofoldenable
+	autocmd FileType rmd set nofoldenable
 
 	let g:syntastic_enable_r_lintr_checker = 1
 	let g:syntastic_r_checkers = ['lintr']
+    let g:r_syntax_fun_pattern = 1
 
-	let R_setwidth = 0
+    let g:ale_r_lintr_options = 'with_defaults(
+                \ object_usage_linter = NULL,
+                \ line_length_linter(120),
+                \ spaces_left_parentheses_linter = NULL)'
+augroup END
+
+augroup XMLSettings
+	autocmd!
+	com! FormatXML :%!python3 -c "import xml.dom.minidom, sys; print(xml.dom.minidom.parse(sys.stdin).toprettyxml())"
+
+	autocmd FileType xml nnoremap = :FormatXML<CR>
 augroup END
 
 autocmd BufRead,BufNewFile *.htmlhintrc setfiletype json
@@ -188,5 +237,12 @@ noremap Ç :VCoolor<CR>
 
 " RGB
 noremap ‰ :VCoolIns r<CR> 
+
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 
 syntax on
