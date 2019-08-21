@@ -121,7 +121,9 @@ alias rstudio='/Applications/RStudio.app/Contents/MacOS/RStudio'
 # Alias to Skim
 alias skim='/Applications/Skim.app/Contents/MacOS/Skim'
 
-# Alias to searchtodo
+# Aliases to custom shell scripts
 alias todo='~/dev/searchtodo'
+alias fullpath='~/dev/fullpath'
+
 
 export RSTUDIO_PANDOC=/Applications/RStudio.app/Contents/MacOS/pandoc
