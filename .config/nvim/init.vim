@@ -11,24 +11,31 @@ Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'lumiliet/vim-twig'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'pangloss/vim-javascript'
 Plug 'KabbAmine/vCoolor.vim'
-Plug 'fatih/vim-go'
 Plug 'JuliaEditorSupport/julia-vim'
 Plug 'vim-latex/vim-latex'
 Plug 'dfm/shifttab.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'jalvesaq/Nvim-R'
-Plug 'kmszk/skyknight'
 Plug 'majutsushi/tagbar'
-Plug 'JuliaEditorSupport/julia-vim'
 Plug 'jpalardy/vim-slime'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'chrisbra/csv.vim'
 
+" Syntax and language support
+Plug 'JuliaEditorSupport/julia-vim'
+Plug 'fatih/vim-go'
+Plug 'lumiliet/vim-twig'
+Plug 'pangloss/vim-javascript'
+Plug 'plasticboy/vim-markdown'
+Plug 'elzr/vim-json'
+Plug 'godlygeek/tabular'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+
 " Themes
+Plug 'kmszk/skyknight'
 Plug 'srcery-colors/srcery-vim'
 Plug 'ntk148v/vim-horizon'
 Plug 'danilo-augusto/vim-afterglow'
@@ -65,6 +72,7 @@ set splitbelow
 " UI changes
 set mouse=a
 set backspace=indent,eol,start
+set nohlsearch
 
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -136,7 +144,7 @@ nnoremap <Leader>tb :TagbarToggle<CR>
 " Finds the next placeholder and enters insert mode
 nnoremap <Leader><Space><Space> <CR>/<++><CR>:noh<CR>da>i
 
-setlocal ts=4 sw=4 sts=0 expandtab
+set tabstop=4 shiftwidth=4 softtabstop=0 expandtab
 
 "autocmd FileType javascript setlocal ts=4 sw=4 sts=0 expandtab
 "autocmd FileType scss setlocal ts=4 sw=4 sts=0 expandtab
@@ -145,6 +153,29 @@ setlocal ts=4 sw=4 sts=0 expandtab
 "autocmd FileType julia setlocal ts=4 sw=4 sts=0 expandtab
 "autocmd FileType tex setlocal ts=4 sw=4 sts=0 expandtab
 autocmd FileType yaml setlocal ts=2 sw=2 sts=0 expandtab
+
+" disable header folding
+let g:vim_markdown_folding_disabled = 1
+
+" do not use conceal feature, the implementation is not so good
+let g:vim_markdown_conceal = 0
+
+" disable math tex conceal feature
+let g:tex_conceal = ""
+let g:vim_markdown_math = 1
+
+" support front matter of various format
+let g:vim_markdown_frontmatter = 1  " for YAML format
+let g:vim_markdown_toml_frontmatter = 1  " for TOML format
+let g:vim_markdown_json_frontmatter = 1  " for JSON format
+
+augroup pandoc_syntax
+    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+augroup END
+
+" do not close the preview tab when switching to other buffers
+let g:mkdp_auto_close = 0
+nnoremap µ :MarkdownPreview<CR>
 
 augroup FortranSettings
 	autocmd!
@@ -158,7 +189,7 @@ augroup PythonSettings
     autocmd FileType python let maplocalleader="\\"
 	autocmd FileType python inoremap <S-tab> <C-o>:call ShiftTab()<CR>
 	autocmd FileType python setlocal noshowmode
-	autocmd FileType python noremap <Leader>;f <Esc>o<BS>def<Space><++>(<++>):<CR><++><Esc>
+	autocmd FileType python noremap <Leader>;f <Esc>o<BS>def<Space>():<CR><++><Esc>
 
     " Emulate \l and \ss from Nvim-R in python to SLIME
     autocmd FileType python vnoremap <LocalLeader>ss :'<,'>SlimeSend<CR>
