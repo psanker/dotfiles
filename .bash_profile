@@ -34,7 +34,7 @@ export PATH="/Library/Frameworks/GDAL.framework/Programs:$PATH"
 export PATH="/Applications/CMake.app/Contents/bin:$PATH"
 
 # Julia
-export PATH="/Applications/Julia-1.0.app/Contents/Resources/julia/bin:$PATH"
+export PATH="/Applications/Julia-1.1.app/Contents/Resources/julia/bin:$PATH"
 
 # Julia 0.7
 alias julia7="/Applications/Julia-0.7.app/Contents/Resources/julia/bin/julia"
@@ -69,7 +69,7 @@ if [ $? -eq 0 ]; then
     \eval "$__conda_setup"
 else
     if [ -f "/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/anaconda3/etc/profile.d/conda.sh"
+# . "/anaconda3/etc/profile.d/conda.sh"  # commented out by conda initialize
         CONDA_CHANGEPS1=false conda activate base
     else
         \export PATH="/anaconda3/bin:$PATH"
@@ -89,7 +89,7 @@ if [ $? -eq 0 ]; then
     \eval "$__conda_setup"
 else
     if [ -f "/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/anaconda3/etc/profile.d/conda.sh"
+# . "/anaconda3/etc/profile.d/conda.sh"  # commented out by conda initialize
         CONDA_CHANGEPS1=false conda activate base
     else
         \export PATH="/anaconda3/bin:$PATH"
@@ -97,3 +97,19 @@ else
 fi
 unset __conda_setup
 # <<< conda init <<<
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/patrickanker/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/patrickanker/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/patrickanker/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/patrickanker/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
