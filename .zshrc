@@ -124,6 +124,10 @@ alias skim='/Applications/Skim.app/Contents/MacOS/Skim'
 # Alias to nvim
 alias nv='nvim'
 
+# Set git to use nv
+export VISUAL=nv
+export EDITOR="$VISUAL"
+
 # Aliases to custom shell scripts
 alias todo='~/dev/searchtodo'
 alias fullpath='~/dev/fullpath'
