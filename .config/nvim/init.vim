@@ -154,6 +154,9 @@ set tabstop=4 shiftwidth=4 softtabstop=0 expandtab
 "autocmd FileType tex setlocal ts=4 sw=4 sts=0 expandtab
 autocmd FileType yaml setlocal ts=2 sw=2 sts=0 expandtab
 
+" Don't hide the delimiter -- usually using vim to check the raw content
+let g:csv_no_conceal=1
+
 " disable header folding
 let g:vim_markdown_folding_disabled = 1
 
