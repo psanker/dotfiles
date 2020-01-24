@@ -144,7 +144,7 @@ nnoremap <Leader>tb :TagbarToggle<CR>
 " Finds the next placeholder and enters insert mode
 nnoremap <Leader><Space><Space> <CR>/<++><CR>:noh<CR>da>i
 
-set tabstop=4 shiftwidth=4 softtabstop=0 expandtab
+set tabstop=2 shiftwidth=2 softtabstop=0 expandtab
 
 "autocmd FileType javascript setlocal ts=4 sw=4 sts=0 expandtab
 "autocmd FileType scss setlocal ts=4 sw=4 sts=0 expandtab
@@ -228,8 +228,6 @@ augroup END
 
 augroup RSettings
 	autocmd!
-	autocmd FileType R setlocal ts=4 sw=4 sts=0 expandtab
-	autocmd FileType rmd setlocal ts=4 sw=4 sts=0 expandtab
 	"let vimrplugin_assign 
 	let R_assign = 0
 	let R_setwidth = 0
