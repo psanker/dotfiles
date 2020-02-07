@@ -236,6 +236,8 @@ augroup RSettings
 
 	autocmd FileType r nnoremap Â A<Space>%>%<Space>
 	autocmd FileType r inoremap Â <Space>%>%<Space>
+  autocmd FileType r nnoremap ‰ <Esc>0i#'<Space>
+  autocmd FileType r inoremap ‰ <Esc>0i#'<Space>
 	autocmd FileType r inoremap [ []<Left>
 	autocmd FileType r inoremap ( ()<Left>
 	autocmd FileType r inoremap " ""<Left>
@@ -243,6 +245,8 @@ augroup RSettings
 
 	autocmd FileType rmd nnoremap Â A<Space>%>%<Space>
 	autocmd FileType rmd inoremap Â <Space>%>%<Space>
+  autocmd FileType rmd nnoremap ‰ <Esc>0i#'<Space>
+  autocmd FileType rmd inoremap ‰ <Esc>0i#'<Space>
 	autocmd FileType rmd inoremap [ []<Left>
 	autocmd FileType rmd inoremap ( ()<Left>
 	autocmd FileType rmd inoremap " ""<Left>
