@@ -40,6 +40,8 @@ paq {
   'hrsh7th/cmp-buffer';
   'hrsh7th/vim-vsnip';
 
+  -- Mainly for inlay hints for Rust
+  'simrat39/rust-tools.nvim';
 }
 
 local set = vim.opt
@@ -61,6 +63,7 @@ set.termguicolors = true
 set.number = true
 set.relativenumber = true
 set.hlsearch = false
+set.smartindent = true
 
 set.cursorline = true
 
@@ -128,8 +131,13 @@ lspconfig.util.default_config = vim.tbl_deep_extend(
 )
 
 lspconfig.r_language_server.setup({})
-lspconfig.rust_analyzer.setup({})
 
+local rt = require('rust-tools')
+rt.setup({
+  tools = {
+    inlay_hints = true,
+  }
+})
 
 local cmp = require('cmp')
 cmp.setup({
