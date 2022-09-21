@@ -184,6 +184,9 @@ require('telescope').load_extension('harpoon')
 vim.keymap.set('n', '˜', ':NvimTreeToggle<CR>')
 vim.keymap.set('n', '<Leader>bd', ':%bd|e#<CR>|:bd#<CR>')
 
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+
 vim.keymap.set('n', '<Leader>ff', '<cmd> lua require("telescope.builtin").find_files()<CR>')
 vim.keymap.set('n', '<Leader>fg', '<cmd> lua require("telescope.builtin").live_grep()<CR>')
 vim.keymap.set('n', '<Leader>fb', '<cmd> lua require("telescope.builtin").buffers()<CR>')
@@ -272,11 +275,11 @@ vim.api.nvim_create_autocmd('User', {
     bufmap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
 
     -- Renames all references to the symbol under the cursor
-    bufmap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
+    bufmap('n', '<Leader>r', '<cmd>lua vim.lsp.buf.rename()<cr>')
 
     -- Selects a code action available at the current cursor position
-    bufmap('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-    bufmap('x', '<F4>', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
+    bufmap('n', '<Leader>q', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+    bufmap('x', '<Leader>q', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
 
     -- Show diagnostics in a floating window
     bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
