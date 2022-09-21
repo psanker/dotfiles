@@ -186,6 +186,7 @@ vim.keymap.set('n', '<Leader>bd', ':%bd|e#<CR>|:bd#<CR>')
 
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', '<Leader>x', '<cmd>! chmod +x %<CR>')
 
 vim.keymap.set('n', '<Leader>ff', '<cmd> lua require("telescope.builtin").find_files()<CR>')
 vim.keymap.set('n', '<Leader>fg', '<cmd> lua require("telescope.builtin").live_grep()<CR>')
