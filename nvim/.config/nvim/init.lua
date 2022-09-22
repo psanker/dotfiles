@@ -4,18 +4,18 @@ paq {
   "savq/paq-nvim";
   'neovim/nvim-lspconfig';
 
-	'tpope/vim-fugitive';
+  'tpope/vim-fugitive';
   'airblade/vim-gitgutter';
   'kyazdani42/nvim-web-devicons';
 
-	'nvim-lualine/lualine.nvim';
-	'tpope/vim-surround';
-	'tpope/vim-commentary';
-	'tpope/vim-repeat';
+  'nvim-lualine/lualine.nvim';
+  'tpope/vim-surround';
+  'tpope/vim-commentary';
+  'tpope/vim-repeat';
   'dense-analysis/ale';
-	'andymass/vim-matchup';
-	'nvim-lua/plenary.nvim';
-	'nvim-telescope/telescope.nvim';
+  'andymass/vim-matchup';
+  'nvim-lua/plenary.nvim';
+  'nvim-telescope/telescope.nvim';
 
   'akinsho/bufferline.nvim';
   'ThePrimeagen/harpoon';
@@ -24,7 +24,8 @@ paq {
   'jalvesaq/Nvim-R';
 
   'ellisonleao/gruvbox.nvim';
-  {'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({with_sync = true}) end};
+  { 'nvim-treesitter/nvim-treesitter',
+    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end };
 
   -- Completion tools
   'hrsh7th/nvim-cmp';
@@ -67,7 +68,7 @@ set.smartindent = true
 set.cursorline = true
 
 -- Whitespace chars for diagnostics
-set.listchars:append {eol = '¬', tab = '>~', trail = '~', extends = '>', precedes = '<', space = '␣'}
+set.listchars:append { eol = '¬', tab = '>~', trail = '~', extends = '>', precedes = '<', space = '␣' }
 vim.nohls = true
 
 -- Split defaults
@@ -81,14 +82,14 @@ set.splitbelow = true
 -- noselect: Do not select, force to select one from the menu
 -- shortness: avoid showing extra messages when using completion
 -- updatetime: set updatetime for CursorHold
-set.completeopt = {'menuone', 'noselect', 'noinsert'}
-set.shortmess = vim.opt.shortmess + { c = true}
-vim.api.nvim_set_option('updatetime', 300) 
+set.completeopt = { 'menuone', 'noselect', 'noinsert' }
+set.shortmess = vim.opt.shortmess + { c = true }
+vim.api.nvim_set_option('updatetime', 300)
 
 -- Fixed column for diagnostics to appear
 -- Show autodiagnostic popup on cursor hover_range
--- Goto previous / next diagnostic warning / error 
--- Show inlay_hints more frequently 
+-- Goto previous / next diagnostic warning / error
+-- Show inlay_hints more frequently
 vim.cmd([[
 set signcolumn=yes
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
@@ -117,7 +118,7 @@ local lsp_defaults = {
     vim.lsp.protocol.make_client_capabilities()
   ),
   on_attach = function(client, bufnr)
-    vim.api.nvim_exec_autocmds('User', {pattern = 'LspAttached'})
+    vim.api.nvim_exec_autocmds('User', { pattern = 'LspAttached' })
   end
 }
 
@@ -139,7 +140,7 @@ lspconfig.sumneko_lua.setup({
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
+        globals = { 'vim' },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
@@ -154,18 +155,14 @@ lspconfig.sumneko_lua.setup({
 })
 
 local rt = require('rust-tools')
-rt.setup({
-  tools = {
-    inlay_hints = true,
-  }
-})
+rt.setup({})
 
 local cmp = require('cmp')
 cmp.setup({
   -- Enable LSP snippets
   snippet = {
     expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body)
+      vim.fn["vsnip#anonymous"](args.body)
     end,
   },
   mapping = {
@@ -185,17 +182,17 @@ cmp.setup({
   },
   -- Installed sources:
   sources = {
-    { name = 'path' },                              -- file paths
-    { name = 'nvim_lsp', keyword_length = 3 },      -- from language server
-    { name = 'nvim_lsp_signature_help'},            -- display function signatures with current parameter emphasized
-    { name = 'nvim_lua', keyword_length = 2},       -- complete neovim's Lua runtime API such vim.lsp.*
-    { name = 'buffer', keyword_length = 2 },        -- source current buffer
-    { name = 'vsnip', keyword_length = 2 },         -- nvim-cmp source for vim-vsnip 
-    { name = 'calc'},                               -- source for math calculation
+    { name = 'path' }, -- file paths
+    { name = 'nvim_lsp', keyword_length = 3 }, -- from language server
+    { name = 'nvim_lsp_signature_help' }, -- display function signatures with current parameter emphasized
+    { name = 'nvim_lua', keyword_length = 2 }, -- complete neovim's Lua runtime API such vim.lsp.*
+    { name = 'buffer', keyword_length = 2 }, -- source current buffer
+    { name = 'vsnip', keyword_length = 2 }, -- nvim-cmp source for vim-vsnip
+    { name = 'calc' }, -- source for math calculation
   },
   window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
 })
 
@@ -236,7 +233,7 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
-vim.keymap.set('n', '<Leader>x', '<cmd>! chmod +x %<CR>', {silent = true})
+vim.keymap.set('n', '<Leader>x', '<cmd>! chmod +x %<CR>', { silent = true })
 
 -- better yanking/pasting
 vim.keymap.set('x', '<Leader>p', '"_dP')
@@ -244,7 +241,7 @@ vim.keymap.set('n', 'Y', 'yg$')
 
 vim.keymap.set('n', '<Leader>y', '"+y')
 vim.keymap.set('v', '<Leader>y', '"+y')
-vim.keymap.set('n', '<Leader>Y', '"+Y', {noremap = false})
+vim.keymap.set('n', '<Leader>Y', '"+Y', { noremap = false })
 
 vim.keymap.set('n', '<Leader>d', '"_d')
 vim.keymap.set('v', '<Leader>d', '"_d')
@@ -288,7 +285,7 @@ endif
 
 -- Better R settings
 vim.cmd [[let R_csv_app = 'terminal:vd' ]]
-vim.cmd [[let R_assign = 0 ]] 
+vim.cmd [[let R_assign = 0 ]]
 vim.cmd [[let R_nvim_wd = 1]]
 
 vim.diagnostic.config({
@@ -305,7 +302,7 @@ vim.api.nvim_create_autocmd('User', {
   desc = 'LSP actions',
   callback = function()
     local bufmap = function(mode, lhs, rhs)
-      local opts = {buffer = true}
+      local opts = { buffer = true }
       vim.keymap.set(mode, lhs, rhs, opts)
     end
 
@@ -324,7 +321,7 @@ vim.api.nvim_create_autocmd('User', {
     -- Jumps to the definition of the type symbol
     bufmap('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
 
-    -- Lists all the references 
+    -- Lists all the references
     bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
 
     -- Displays a function's signature information
@@ -347,4 +344,3 @@ vim.api.nvim_create_autocmd('User', {
     bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
   end
 })
-
