@@ -98,9 +98,13 @@ autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 -- Plugin Setup --
 require('bufferline').setup {}
 require("nvim-tree").setup()
+require('gruvbox').setup({
+  italic = false,
+  invert_selection = false,
+})
 require('lualine').setup({
   options = {
-    theme = 'gruvbox_light'
+    theme = 'gruvbox_dark'
   }
 })
 require('nvim-treesitter.configs').setup({
