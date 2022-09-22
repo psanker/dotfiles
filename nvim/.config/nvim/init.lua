@@ -238,6 +238,8 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
 vim.keymap.set('n', '<Leader>x', '<cmd>! chmod +x %<CR>', { silent = true })
+vim.keymap.set('n', '{', '{zz')
+vim.keymap.set('n', '}', '}zz')
 
 -- better yanking/pasting
 vim.keymap.set('x', '<Leader>p', '"_dP')
