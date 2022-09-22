@@ -231,6 +231,7 @@ require('telescope').load_extension('harpoon')
 -- Keymaps
 vim.keymap.set('n', '˜', ':NvimTreeToggle<CR>')
 vim.keymap.set('n', '<Leader>bd', ':%bd|e#<CR>|:bd#<CR>')
+vim.keymap.set('n', '<Leader>c', '<cmd> source ~/.config/nvim/init.lua<CR>')
 
 -- better viewing after jumps
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
