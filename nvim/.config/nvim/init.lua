@@ -53,7 +53,6 @@ g.loaded_netrwPlugin = 1
 -- Global settings
 g.mapleader = ' '
 
-set.mouse = 'a'
 set.tabstop = 2
 set.shiftwidth = 2
 set.softtabstop = 2
@@ -131,6 +130,28 @@ lspconfig.util.default_config = vim.tbl_deep_extend(
 )
 
 lspconfig.r_language_server.setup({})
+lspconfig.sumneko_lua.setup({
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+})
 
 local rt = require('rust-tools')
 rt.setup({
@@ -210,15 +231,33 @@ require('telescope').load_extension('harpoon')
 vim.keymap.set('n', '˜', ':NvimTreeToggle<CR>')
 vim.keymap.set('n', '<Leader>bd', ':%bd|e#<CR>|:bd#<CR>')
 
+-- better viewing after jumps
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
-vim.keymap.set('n', '<Leader>x', '<cmd>! chmod +x %<CR>')
+vim.keymap.set('n', 'n', 'nzz')
+vim.keymap.set('n', 'N', 'Nzz')
+vim.keymap.set('n', '<Leader>x', '<cmd>! chmod +x %<CR>', {silent = true})
 
+-- better yanking/pasting
+vim.keymap.set('x', '<Leader>p', '"_dP')
+vim.keymap.set('n', 'Y', 'yg$')
+
+vim.keymap.set('n', '<Leader>y', '"+y')
+vim.keymap.set('v', '<Leader>y', '"+y')
+vim.keymap.set('n', '<Leader>Y', '"+Y', {noremap = false})
+
+vim.keymap.set('n', '<Leader>d', '"_d')
+vim.keymap.set('v', '<Leader>d', '"_d')
+
+vim.keymap.set('n', '<Leader>fr', function() vim.lsp.buf.formatting() end)
+
+-- Telescope
 vim.keymap.set('n', '<Leader>ff', '<cmd> lua require("telescope.builtin").find_files()<CR>')
 vim.keymap.set('n', '<Leader>fg', '<cmd> lua require("telescope.builtin").live_grep()<CR>')
 vim.keymap.set('n', '<Leader>fb', '<cmd> lua require("telescope.builtin").buffers()<CR>')
 vim.keymap.set('n', '<Leader>fh', '<cmd> lua require("telescope.builtin").help_tags()<CR>')
 
+-- easy pairs
 vim.keymap.set('i', "'", "''<Esc>ha")
 vim.keymap.set('i', '"', '""<Esc>ha')
 vim.keymap.set('i', '(', '()<Esc>ha')
@@ -236,9 +275,6 @@ vim.keymap.set('n', '<Leader>hw', '<cmd> lua require("harpoon.ui").nav_file(2)<C
 vim.keymap.set('n', '<Leader>he', '<cmd> lua require("harpoon.ui").nav_file(3)<CR>')
 vim.keymap.set('n', '<Leader>hr', '<cmd> lua require("harpoon.ui").nav_file(4)<CR>')
 
--- Format on save, tapping into LSP
-vim.cmd([[au BufWritePre * lua vim.lsp.buf.formatting_sync()]])
-
 -- Theme config
 set.background = 'dark'
 vim.cmd([[colorscheme gruvbox]])
@@ -249,13 +285,6 @@ if filereadable('.lintr')
   let g:ale_r_lintr_options = join(readfile('.lintr'))
 endif
 ]])
-
--- Ale fix for R
-g.ale_fixers = {
-  r = { 'styler' },
-  rust = { 'rustfmt' },
-}
-g.ale_fix_on_save = 1
 
 -- Better R settings
 vim.cmd [[let R_csv_app = 'terminal:vd' ]]
