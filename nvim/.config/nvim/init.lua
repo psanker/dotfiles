@@ -1,48 +1,55 @@
 local paq = require("paq")
 
 paq {
-  "savq/paq-nvim";
-  'neovim/nvim-lspconfig';
+    "savq/paq-nvim";
+    'neovim/nvim-lspconfig';
 
-  'tpope/vim-fugitive';
-  'airblade/vim-gitgutter';
-  'kyazdani42/nvim-web-devicons';
+    'tpope/vim-fugitive';
+    'airblade/vim-gitgutter';
+    'kyazdani42/nvim-web-devicons';
 
-  'nvim-lualine/lualine.nvim';
-  'tpope/vim-surround';
-  'tpope/vim-commentary';
-  'tpope/vim-repeat';
-  'dense-analysis/ale';
-  'andymass/vim-matchup';
-  'nvim-lua/plenary.nvim';
-  'nvim-telescope/telescope.nvim';
+    'nvim-lualine/lualine.nvim';
+    'tpope/vim-surround';
+    'tpope/vim-commentary';
+    'tpope/vim-repeat';
+    'dense-analysis/ale';
+    'andymass/vim-matchup';
 
-  'akinsho/bufferline.nvim';
-  'ThePrimeagen/harpoon';
+    -- Very helpful utilities
+    'nvim-lua/plenary.nvim';
+    'nvim-telescope/telescope.nvim';
+    'SmiteshP/nvim-navic';
+    'kdheepak/lazygit.nvim';
 
-  'kyazdani42/nvim-tree.lua';
-  'jalvesaq/Nvim-R';
+    'ThePrimeagen/harpoon';
 
-  'ellisonleao/gruvbox.nvim';
-  { 'nvim-treesitter/nvim-treesitter',
-    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end };
+    'kyazdani42/nvim-tree.lua';
+    'jalvesaq/Nvim-R';
 
-  -- Completion tools
-  'hrsh7th/nvim-cmp';
+    { 'nvim-treesitter/nvim-treesitter',
+        run = function() require('nvim-treesitter.install').update({ with_sync = true }) end };
 
-  -- LSP completion source:
-  'hrsh7th/cmp-nvim-lsp';
+    -- Completion tools
+    'hrsh7th/nvim-cmp';
 
-  -- Useful completion sources:
-  'hrsh7th/cmp-nvim-lua';
-  'hrsh7th/cmp-nvim-lsp-signature-help';
-  'hrsh7th/cmp-vsnip';
-  'hrsh7th/cmp-path';
-  'hrsh7th/cmp-buffer';
-  'hrsh7th/vim-vsnip';
+    -- LSP completion source:
+    'hrsh7th/cmp-nvim-lsp';
 
-  -- Mainly for inlay hints for Rust
-  'simrat39/rust-tools.nvim';
+    -- Useful completion sources:
+    'hrsh7th/cmp-nvim-lua';
+    'hrsh7th/cmp-nvim-lsp-signature-help';
+    'hrsh7th/cmp-vsnip';
+    'hrsh7th/cmp-path';
+    'hrsh7th/cmp-buffer';
+    'hrsh7th/vim-vsnip';
+
+    -- Mainly for inlay hints for Rust
+    'simrat39/rust-tools.nvim';
+
+    -- Themes
+    'savq/melange';
+    'ellisonleao/gruvbox.nvim';
+    'folke/tokyonight.nvim';
 }
 
 local set = vim.opt
@@ -54,9 +61,9 @@ g.loaded_netrwPlugin = 1
 -- Global settings
 g.mapleader = ' '
 
-set.tabstop = 2
-set.shiftwidth = 2
-set.softtabstop = 2
+set.tabstop = 4
+set.shiftwidth = 4
+set.softtabstop = 4
 set.expandtab = true
 
 set.termguicolors = true
@@ -96,135 +103,150 @@ autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
 
 -- Plugin Setup --
-require('bufferline').setup {}
 require("nvim-tree").setup()
 require('gruvbox').setup({
-  italic = false,
-  invert_selection = false,
+    italic = false,
+    invert_selection = false,
 })
 require('lualine').setup({
-  options = {
-    theme = 'gruvbox_dark'
-  }
+    options = {
+        theme = 'gruvbox_light'
+    },
+    sections = {
+        lualine_c = {
+            { require('nvim-navic').get_location, cond = require('nvim-navic').is_available },
+        }
+    }
 })
 require('nvim-treesitter.configs').setup({
-  ensure_installed = { 'r', 'rust', 'python' },
-  highlight = {
-    enable = true
-  },
+    ensure_installed = { 'r', 'rust', 'python' },
+    highlight = {
+        enable = true
+    },
 })
 
 local lsp_defaults = {
-  flags = {
-    debounce_text_changes = 150,
-  },
-  capabilities = require('cmp_nvim_lsp').update_capabilities(
-    vim.lsp.protocol.make_client_capabilities()
-  ),
-  on_attach = function(client, bufnr)
-    vim.api.nvim_exec_autocmds('User', { pattern = 'LspAttached' })
-  end
+    flags = {
+        debounce_text_changes = 150,
+    },
+    capabilities = require('cmp_nvim_lsp').update_capabilities(
+        vim.lsp.protocol.make_client_capabilities()
+    ),
+    on_attach = function(client, bufnr)
+        vim.api.nvim_exec_autocmds('User', { pattern = 'LspAttached' })
+    end
 }
 
 local lspconfig = require('lspconfig')
 
 lspconfig.util.default_config = vim.tbl_deep_extend(
-  'force',
-  lspconfig.util.default_config,
-  lsp_defaults
+    'force',
+    lspconfig.util.default_config,
+    lsp_defaults
 )
 
-lspconfig.r_language_server.setup({})
+lspconfig.r_language_server.setup({
+    on_attach = function(client, bufnr)
+        require('nvim-navic').attach(client, bufnr)
+    end
+})
 lspconfig.sumneko_lua.setup({
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
+    on_attach = function(client, bufnr)
+        require('nvim-navic').attach(client, bufnr)
+    end,
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { 'vim' },
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+                enable = false,
+            },
+        },
     },
-  },
 })
 
 local rt = require('rust-tools')
-rt.setup({})
+rt.setup({
+    on_attach = function(client, bufnr)
+        require('nvim-navic').attach(client, bufnr)
+    end
+})
 
 local cmp = require('cmp')
 cmp.setup({
-  -- Enable LSP snippets
-  snippet = {
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
-    end,
-  },
-  mapping = {
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    -- Add tab support
-    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-    ['<Tab>'] = cmp.mapping.select_next_item(),
-    ['<C-S-f>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
-    })
-  },
-  -- Installed sources:
-  sources = {
-    { name = 'path' }, -- file paths
-    { name = 'nvim_lsp', keyword_length = 3 }, -- from language server
-    { name = 'nvim_lsp_signature_help' }, -- display function signatures with current parameter emphasized
-    { name = 'nvim_lua', keyword_length = 2 }, -- complete neovim's Lua runtime API such vim.lsp.*
-    { name = 'buffer', keyword_length = 2 }, -- source current buffer
-    { name = 'vsnip', keyword_length = 2 }, -- nvim-cmp source for vim-vsnip
-    { name = 'calc' }, -- source for math calculation
-  },
-  window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
-  },
+    -- Enable LSP snippets
+    snippet = {
+        expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+        end,
+    },
+    mapping = {
+        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<C-n>'] = cmp.mapping.select_next_item(),
+        -- Add tab support
+        ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+        ['<Tab>'] = cmp.mapping.select_next_item(),
+        ['<C-S-f>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+        })
+    },
+    -- Installed sources:
+    sources = {
+        { name = 'path' }, -- file paths
+        { name = 'nvim_lsp', keyword_length = 3 }, -- from language server
+        { name = 'nvim_lsp_signature_help' }, -- display function signatures with current parameter emphasized
+        { name = 'nvim_lua', keyword_length = 2 }, -- complete neovim's Lua runtime API such vim.lsp.*
+        { name = 'buffer', keyword_length = 2 }, -- source current buffer
+        { name = 'vsnip', keyword_length = 2 }, -- nvim-cmp source for vim-vsnip
+        { name = 'calc' }, -- source for math calculation
+    },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
 })
 
 require('telescope').setup({
-  defaults = {
-    vimgrep_arguments = {
-      'rg',
-      '--color=never',
-      '--no-heading',
-      '--with-filename',
-      '--line-number',
-      '--column',
-      '--smart-case',
-      '--hidden',
-      '--glob=!.git'
-    }
-  },
-  pickers = {
-    find_files = {
-      find_command = {
-        'rg',
-        '--files',
-        '--hidden',
-        '--glob=!.git'
+    defaults = {
+        vimgrep_arguments = {
+            'rg',
+            '--color=never',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--smart-case',
+            '--hidden',
+            '--glob=!.git'
+        }
+    },
+    pickers = {
+        find_files = {
+            find_command = {
+                'rg',
+                '--files',
+                '--hidden',
+                '--glob=!.git'
 
-      }
+            }
+        }
     }
-  }
 })
 require('telescope').load_extension('harpoon')
 
@@ -255,18 +277,25 @@ vim.keymap.set('v', '<Leader>d', '"_d')
 
 vim.keymap.set('n', '<Leader>fr', function() vim.lsp.buf.formatting() end)
 
+-- Open up a damn terminal
+vim.keymap.set('n', '<Leader>tt', '<cmd>vs<cr><cmd>terminal<cr>30<C-w><')
+
+vim.keymap.set('n', '<Leader>gg', '<cmd>LazyGit<CR>', { silent = true})
+
 -- Telescope
 vim.keymap.set('n', '<Leader>ff', '<cmd> lua require("telescope.builtin").find_files()<CR>')
 vim.keymap.set('n', '<Leader>fg', '<cmd> lua require("telescope.builtin").live_grep()<CR>')
 vim.keymap.set('n', '<Leader>fb', '<cmd> lua require("telescope.builtin").buffers()<CR>')
 vim.keymap.set('n', '<Leader>fh', '<cmd> lua require("telescope.builtin").help_tags()<CR>')
+vim.keymap.set('n', '<Leader>fs', '<cmd> lua require("telescope.builtin").lsp_document_symbols()<CR>')
+vim.keymap.set('n', '<Leader>fS', '<cmd> lua require("telescope.builtin").lsp_workspace_symbols()<CR>')
 
 -- easy pairs
-vim.keymap.set('i', "'", "''<Esc>ha")
-vim.keymap.set('i', '"', '""<Esc>ha')
-vim.keymap.set('i', '(', '()<Esc>ha')
-vim.keymap.set('i', '[', '[]<Esc>ha')
-vim.keymap.set('i', '{', '{}<Esc>ha')
+-- vim.keymap.set('i', "'", "''<Esc>ha")
+-- vim.keymap.set('i', '"', '""<Esc>ha')
+-- vim.keymap.set('i', '(', '()<Esc>ha')
+-- vim.keymap.set('i', '[', '[]<Esc>ha')
+-- vim.keymap.set('i', '{', '{}<Esc>ha')
 
 -- Harpoon maps
 vim.keymap.set('n', '<Leader>hh', '<cmd> lua require("harpoon.ui").toggle_quick_menu()<CR>')
@@ -274,14 +303,14 @@ vim.keymap.set('n', '<Leader>ha', '<cmd> lua require("harpoon.mark").add_file()<
 vim.keymap.set('n', '<Leader>hn', '<cmd> lua require("harpoon.ui").nav_next()<CR>')
 vim.keymap.set('n', '<Leader>hp', '<cmd> lua require("harpoon.ui").nav_prev()<CR>')
 
-vim.keymap.set('n', '<Leader>hq', '<cmd> lua require("harpoon.ui").nav_file(1)<CR>')
-vim.keymap.set('n', '<Leader>hw', '<cmd> lua require("harpoon.ui").nav_file(2)<CR>')
-vim.keymap.set('n', '<Leader>he', '<cmd> lua require("harpoon.ui").nav_file(3)<CR>')
-vim.keymap.set('n', '<Leader>hr', '<cmd> lua require("harpoon.ui").nav_file(4)<CR>')
+vim.keymap.set('n', '<Leader>hq', '<cmd> lua require("harpoon.ui").nav_file(4)<CR>')
+vim.keymap.set('n', '<Leader>hw', '<cmd> lua require("harpoon.ui").nav_file(3)<CR>')
+vim.keymap.set('n', '<Leader>he', '<cmd> lua require("harpoon.ui").nav_file(2)<CR>')
+vim.keymap.set('n', '<Leader>hr', '<cmd> lua require("harpoon.ui").nav_file(1)<CR>')
 
 -- Theme config
 set.background = 'dark'
-vim.cmd([[colorscheme gruvbox]])
+vim.cmd([[colorscheme tokyonight-moon]])
 
 -- For R, read .lintr if it exists
 vim.cmd([[
@@ -296,7 +325,7 @@ vim.cmd [[let R_assign = 0 ]]
 vim.cmd [[let R_nvim_wd = 1]]
 
 vim.diagnostic.config({
-  virtual_text = false
+    virtual_text = false
 })
 
 -- Show line diagnostics automatically in hover window
@@ -305,49 +334,49 @@ vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {f
 
 -- Autocomplete settings
 vim.api.nvim_create_autocmd('User', {
-  pattern = 'LspAttached',
-  desc = 'LSP actions',
-  callback = function()
-    local bufmap = function(mode, lhs, rhs)
-      local opts = { buffer = true }
-      vim.keymap.set(mode, lhs, rhs, opts)
+    pattern = 'LspAttached',
+    desc = 'LSP actions',
+    callback = function()
+        local bufmap = function(mode, lhs, rhs)
+            local opts = { buffer = true }
+            vim.keymap.set(mode, lhs, rhs, opts)
+        end
+
+        -- Displays hover information about the symbol under the cursor
+        bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+
+        -- Jump to the definition
+        bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
+
+        -- Jump to declaration
+        bufmap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
+
+        -- Lists all the implementations for the symbol under the cursor
+        bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
+
+        -- Jumps to the definition of the type symbol
+        bufmap('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
+
+        -- Lists all the references
+        bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
+
+        -- Displays a function's signature information
+        bufmap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
+
+        -- Renames all references to the symbol under the cursor
+        bufmap('n', '<Leader>r', '<cmd>lua vim.lsp.buf.rename()<cr>')
+
+        -- Selects a code action available at the current cursor position
+        bufmap('n', '<Leader>q', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+        bufmap('x', '<Leader>q', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
+
+        -- Show diagnostics in a floating window
+        bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
+
+        -- Move to the previous diagnostic
+        bufmap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+
+        -- Move to the next diagnostic
+        bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
     end
-
-    -- Displays hover information about the symbol under the cursor
-    bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
-
-    -- Jump to the definition
-    bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
-
-    -- Jump to declaration
-    bufmap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
-
-    -- Lists all the implementations for the symbol under the cursor
-    bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
-
-    -- Jumps to the definition of the type symbol
-    bufmap('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
-
-    -- Lists all the references
-    bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
-
-    -- Displays a function's signature information
-    bufmap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
-
-    -- Renames all references to the symbol under the cursor
-    bufmap('n', '<Leader>r', '<cmd>lua vim.lsp.buf.rename()<cr>')
-
-    -- Selects a code action available at the current cursor position
-    bufmap('n', '<Leader>q', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-    bufmap('x', '<Leader>q', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
-
-    -- Show diagnostics in a floating window
-    bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
-
-    -- Move to the previous diagnostic
-    bufmap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
-
-    -- Move to the next diagnostic
-    bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
-  end
 })
