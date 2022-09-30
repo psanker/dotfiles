@@ -18,7 +18,6 @@ paq {
     -- Very helpful utilities
     'nvim-lua/plenary.nvim';
     'nvim-telescope/telescope.nvim';
-    'SmiteshP/nvim-navic';
     'kdheepak/lazygit.nvim';
 
     'ThePrimeagen/harpoon';
@@ -28,6 +27,7 @@ paq {
 
     { 'nvim-treesitter/nvim-treesitter',
         run = function() require('nvim-treesitter.install').update({ with_sync = true }) end };
+    'nvim-treesitter/nvim-treesitter-context';
 
     -- Completion tools
     'hrsh7th/nvim-cmp';
@@ -111,18 +111,16 @@ require('gruvbox').setup({
 require('lualine').setup({
     options = {
         theme = 'gruvbox_light'
-    },
-    sections = {
-        lualine_c = {
-            { require('nvim-navic').get_location, cond = require('nvim-navic').is_available },
-        }
     }
 })
 require('nvim-treesitter.configs').setup({
-    ensure_installed = { 'r', 'rust', 'python' },
+    ensure_installed = { 'r', 'rust', 'python', 'go' },
     highlight = {
         enable = true
     },
+})
+require('treesitter-context').setup({
+    enable = true
 })
 
 local lsp_defaults = {
@@ -145,15 +143,8 @@ lspconfig.util.default_config = vim.tbl_deep_extend(
     lsp_defaults
 )
 
-lspconfig.r_language_server.setup({
-    on_attach = function(client, bufnr)
-        require('nvim-navic').attach(client, bufnr)
-    end
-})
+lspconfig.r_language_server.setup({})
 lspconfig.sumneko_lua.setup({
-    on_attach = function(client, bufnr)
-        require('nvim-navic').attach(client, bufnr)
-    end,
     settings = {
         Lua = {
             runtime = {
@@ -175,13 +166,10 @@ lspconfig.sumneko_lua.setup({
         },
     },
 })
+lspconfig.gopls.setup({})
 
 local rt = require('rust-tools')
-rt.setup({
-    on_attach = function(client, bufnr)
-        require('nvim-navic').attach(client, bufnr)
-    end
-})
+rt.setup({})
 
 local cmp = require('cmp')
 cmp.setup({
@@ -280,7 +268,7 @@ vim.keymap.set('n', '<Leader>fr', function() vim.lsp.buf.formatting() end)
 -- Open up a damn terminal
 vim.keymap.set('n', '<Leader>tt', '<cmd>vs<cr><cmd>terminal<cr>30<C-w><')
 
-vim.keymap.set('n', '<Leader>gg', '<cmd>LazyGit<CR>', { silent = true})
+vim.keymap.set('n', '<Leader>gg', '<cmd>LazyGit<CR>', { silent = true })
 
 -- Telescope
 vim.keymap.set('n', '<Leader>ff', '<cmd> lua require("telescope.builtin").find_files()<CR>')

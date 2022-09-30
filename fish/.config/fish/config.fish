@@ -3,7 +3,7 @@ fish_add_path "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 fish_add_path /Users/patrickanker/.local/bin
 fish_add_path /Library/Frameworks/Python.framework/Versions/3.10/bin
 fish_add_path /Applications/RStudio.app/Contents/MacOS
-fish_add_path "$HOME/go/bin"
+fish_add_path "$HOME/go"
 fish_add_path "$HOME/.cargo/bin"
 
 set --export SHELL /usr/local/bin/fish
