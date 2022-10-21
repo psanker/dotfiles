@@ -14,6 +14,7 @@ paq {
     'tpope/vim-repeat';
     'dense-analysis/ale';
     'andymass/vim-matchup';
+    'ggandor/leap.nvim';
 
     -- Very helpful utilities
     'nvim-lua/plenary.nvim';
@@ -122,6 +123,7 @@ require('nvim-treesitter.configs').setup({
 require('treesitter-context').setup({
     enable = true
 })
+require('leap').add_default_mappings()
 
 local lsp_defaults = {
     flags = {
@@ -167,6 +169,8 @@ lspconfig.sumneko_lua.setup({
     },
 })
 lspconfig.gopls.setup({})
+lspconfig.taplo.setup({})
+lspconfig.ltex.setup({})
 
 local rt = require('rust-tools')
 rt.setup({})
@@ -266,7 +270,7 @@ vim.keymap.set('v', '<Leader>d', '"_d')
 vim.keymap.set('n', '<Leader>fr', function() vim.lsp.buf.formatting() end)
 
 -- Open up a damn terminal
-vim.keymap.set('n', '<Leader>tt', '<cmd>vs<cr><cmd>terminal<cr>30<C-w><')
+vim.keymap.set('n', '<Leader>tt', '<cmd>vs<cr><cmd>terminal<cr>')
 
 vim.keymap.set('n', '<Leader>gg', '<cmd>LazyGit<CR>', { silent = true })
 
