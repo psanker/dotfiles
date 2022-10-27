@@ -25,10 +25,11 @@ paq {
 
     'kyazdani42/nvim-tree.lua';
     'jalvesaq/Nvim-R';
+    'iamcco/markdown-preview.nvim';
 
     { 'nvim-treesitter/nvim-treesitter',
         run = function() require('nvim-treesitter.install').update({ with_sync = true }) end };
-    'nvim-treesitter/nvim-treesitter-context';
+    'SmiteshP/nvim-navic';
 
     -- Completion tools
     'hrsh7th/nvim-cmp';
@@ -74,6 +75,8 @@ set.hlsearch = false
 set.smartindent = true
 
 set.cursorline = true
+set.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+set.cmdheight = 0
 
 -- Whitespace chars for diagnostics
 set.listchars:append { eol = '¬', tab = '>~', trail = '~', extends = '>', precedes = '<', space = '␣' }
@@ -120,9 +123,6 @@ require('nvim-treesitter.configs').setup({
         enable = true
     },
 })
-require('treesitter-context').setup({
-    enable = true
-})
 require('leap').add_default_mappings()
 
 local lsp_defaults = {
@@ -132,12 +132,13 @@ local lsp_defaults = {
     capabilities = require('cmp_nvim_lsp').update_capabilities(
         vim.lsp.protocol.make_client_capabilities()
     ),
-    on_attach = function(client, bufnr)
+    on_attach = function(_, _)
         vim.api.nvim_exec_autocmds('User', { pattern = 'LspAttached' })
     end
 }
 
 local lspconfig = require('lspconfig')
+local navic = require('nvim-navic')
 
 lspconfig.util.default_config = vim.tbl_deep_extend(
     'force',
@@ -145,8 +146,15 @@ lspconfig.util.default_config = vim.tbl_deep_extend(
     lsp_defaults
 )
 
-lspconfig.r_language_server.setup({})
+lspconfig.r_language_server.setup({
+    on_attach = function(client, bufnr)
+        navic.attach(client, bufnr)
+    end,
+})
 lspconfig.sumneko_lua.setup({
+    on_attach = function(client, bufnr)
+        navic.attach(client, bufnr)
+    end,
     settings = {
         Lua = {
             runtime = {
@@ -168,12 +176,26 @@ lspconfig.sumneko_lua.setup({
         },
     },
 })
-lspconfig.gopls.setup({})
-lspconfig.taplo.setup({})
+lspconfig.gopls.setup({
+    on_attach = function(client, bufnr)
+        navic.attach(client, bufnr)
+    end
+})
+lspconfig.taplo.setup({
+    on_attach = function(client, bufnr)
+        navic.attach(client, bufnr)
+    end
+})
 lspconfig.ltex.setup({})
 
 local rt = require('rust-tools')
-rt.setup({})
+rt.setup({
+    server = {
+        on_attach = function(client, bufnr)
+            navic.attach(client, bufnr)
+        end,
+    },
+})
 
 local cmp = require('cmp')
 cmp.setup({
