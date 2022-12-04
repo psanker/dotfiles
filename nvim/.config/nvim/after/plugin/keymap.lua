@@ -3,7 +3,6 @@ local Remap = require("psanker.keymap")
 local nmap = Remap.nmap
 local nnoremap = Remap.nnoremap
 local vnoremap = Remap.vnoremap
-local inoremap = Remap.inoremap
 local xnoremap = Remap.xnoremap
 
 -- 0. General --
@@ -72,23 +71,24 @@ nnoremap('<Leader>fs', function() require("telescope.builtin").lsp_document_symb
 nnoremap('<Leader>fS', function() require("telescope.builtin").lsp_workspace_symbols() end)
 
 -- 4. Harpoon (h) --
-vim.keymap.set('n', '<Leader>hh', '<cmd> lua require("harpoon.ui").toggle_quick_menu()<CR>')
-vim.keymap.set('n', '<Leader>ha', '<cmd> lua require("harpoon.mark").add_file()<CR>')
-vim.keymap.set('n', '<Leader>hn', '<cmd> lua require("harpoon.ui").nav_next()<CR>')
-vim.keymap.set('n', '<Leader>hp', '<cmd> lua require("harpoon.ui").nav_prev()<CR>')
+nnoremap('<Leader>hh', '<cmd> lua require("harpoon.ui").toggle_quick_menu()<CR>')
+nnoremap('<Leader>ha', '<cmd> lua require("harpoon.mark").add_file()<CR>')
+nnoremap('<Leader>hn', '<cmd> lua require("harpoon.ui").nav_next()<CR>')
+nnoremap('<Leader>hp', '<cmd> lua require("harpoon.ui").nav_prev()<CR>')
 
-vim.keymap.set('n', '<Leader>hq', '<cmd> lua require("harpoon.ui").nav_file(4)<CR>')
-vim.keymap.set('n', '<Leader>hw', '<cmd> lua require("harpoon.ui").nav_file(3)<CR>')
-vim.keymap.set('n', '<Leader>he', '<cmd> lua require("harpoon.ui").nav_file(2)<CR>')
-vim.keymap.set('n', '<Leader>hr', '<cmd> lua require("harpoon.ui").nav_file(1)<CR>')
+nnoremap('<Leader>hq', '<cmd> lua require("harpoon.ui").nav_file(4)<CR>')
+nnoremap('<Leader>hw', '<cmd> lua require("harpoon.ui").nav_file(3)<CR>')
+nnoremap('<Leader>he', '<cmd> lua require("harpoon.ui").nav_file(2)<CR>')
+nnoremap('<Leader>hr', '<cmd> lua require("harpoon.ui").nav_file(1)<CR>')
 
--- Trouble (x) maps
-vim.keymap.set('n', '<Leader>xx', '<cmd> TroubleToggle<CR>')
-vim.keymap.set('n', '<Leader>xq', '<cmd> TroubleToggle quickfix<CR>')
+-- 5. Trouble (x) maps --
+nnoremap('<Leader>xx', '<cmd> TroubleToggle<CR>')
+nnoremap('<Leader>xq', '<cmd> TroubleToggle quickfix<CR>')
 
--- TODO commments (t) maps
-vim.keymap.set('n', '<Leader>tt', '<cmd> TodoTelescope<CR>')
-vim.keymap.set('n', ']t', function() require('todo-comments').jump_next() end, { desc = "Next TODO comment" })
-vim.keymap.set('n', '[t', function() require('todo-comments').jump_prev() end, { desc = "Previous TODO comment" })
+-- 6. TODO commments (t) maps --
+nnoremap('<Leader>tt', '<cmd> TodoTelescope<CR>')
+nnoremap(']t', function() require('todo-comments').jump_next() end, { desc = "Next TODO comment" })
+nnoremap('[t', function() require('todo-comments').jump_prev() end, { desc = "Previous TODO comment" })
 
--- LSP maps (GENERAL)
+-- 7. Zen mode --
+nnoremap('<Leader>z', '<cmd>ZenMode<CR>')

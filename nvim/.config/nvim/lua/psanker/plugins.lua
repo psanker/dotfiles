@@ -55,6 +55,7 @@ return require('packer').startup(function(use)
     use 'ggandor/leap.nvim'
     use 'andymass/vim-matchup'
     use 'mbbill/undotree'
+    use 'folke/zen-mode.nvim'
 
     -- File explorer
     use 'kyazdani42/nvim-tree.lua'
