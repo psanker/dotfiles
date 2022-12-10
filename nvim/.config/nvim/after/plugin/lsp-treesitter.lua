@@ -66,12 +66,24 @@ lsp.configure('rust_analyzer', {
         navic.attach(client, bufnr)
     end,
     settings = {
-        rust = {
+        ["rust-analyzer"] = {
             unstable_features = true,
             build_on_save = false,
             all_features = true,
+            diagnostics = {
+                experimental = true,
+            },
         }
     }
 })
 
 lsp.setup()
+
+-- Trying rust-tools to get inlay-hints?
+require('rust-tools').setup({
+    tools = {
+        inlay_hints = {
+            auto = true
+        }
+    }
+})

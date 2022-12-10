@@ -42,7 +42,6 @@ nmap('<Leader>Y', '"+Y')
 nnoremap('<Leader>d', '"_d')
 vnoremap('<Leader>d', '"_d')
 
-
 -- 1. LSP --
 nnoremap('<Leader>fr', function() vim.lsp.buf.format({ async = true }) end)
 nnoremap('K', function() vim.lsp.buf.hover() end)
@@ -91,4 +90,8 @@ nnoremap(']t', function() require('todo-comments').jump_next() end, { desc = "Ne
 nnoremap('[t', function() require('todo-comments').jump_prev() end, { desc = "Previous TODO comment" })
 
 -- 7. Zen mode --
-nnoremap('<Leader>z', '<cmd>ZenMode<CR>')
+nnoremap('<Leader>zz', '<cmd>ZenMode<CR>')
+nnoremap('<Leader>zp', '<cmd>SoftPencil<CR>')
+
+-- 8. Undo Tree --
+nnoremap('<Leader>u', '<cmd>UndotreeToggle<CR>')

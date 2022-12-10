@@ -32,6 +32,7 @@ return require('packer').startup(function(use)
             -- Snippets
             { 'L3MON4D3/LuaSnip' },
             { 'rafamadriz/friendly-snippets' },
+            { 'hrsh7th/vim-vsnip' },
         }
     }
 
@@ -56,6 +57,7 @@ return require('packer').startup(function(use)
     use 'andymass/vim-matchup'
     use 'mbbill/undotree'
     use 'folke/zen-mode.nvim'
+    use 'preservim/vim-pencil'
 
     -- File explorer
     use 'kyazdani42/nvim-tree.lua'
@@ -63,6 +65,7 @@ return require('packer').startup(function(use)
     -- Language-specific stuff
     use 'jalvesaq/Nvim-R'
     use 'iamcco/markdown-preview.nvim'
+    use 'simrat39/rust-tools.nvim'
 
     -- Themes & appearance
     use 'nvim-lualine/lualine.nvim'
@@ -72,5 +75,6 @@ return require('packer').startup(function(use)
     use 'savq/melange'
     use 'ellisonleao/gruvbox.nvim'
     use 'folke/tokyonight.nvim'
+    use { 'catppuccin/nvim', as = 'catppuccin' }
 
 end)
