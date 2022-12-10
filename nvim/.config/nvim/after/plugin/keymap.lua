@@ -92,6 +92,13 @@ nnoremap('[t', function() require('todo-comments').jump_prev() end, { desc = "Pr
 -- 7. Zen mode --
 nnoremap('<Leader>zz', '<cmd>ZenMode<CR>')
 nnoremap('<Leader>zp', '<cmd>SoftPencil<CR>')
+nnoremap('<Leader>qp', '<cmd>NoPencil<CR>')
 
 -- 8. Undo Tree --
 nnoremap('<Leader>u', '<cmd>UndotreeToggle<CR>')
+
+-- 9. Tabs and bufferline --
+nnoremap('<Leader>nt', '<cmd>tabnew<CR>')
+nnoremap('<Leader>qt', '<cmd>tabclose<CR>')
+nnoremap('<Leader>]t', '<cmd>tabnext<CR>')
+nnoremap('<Leader>[t', '<cmd>tabprev<CR>')

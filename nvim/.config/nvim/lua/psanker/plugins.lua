@@ -7,6 +7,7 @@ return require('packer').startup(function(use)
     use 'neovim/nvim-lspconfig'
     use 'mfussenegger/nvim-dap'
     use 'jose-elias-alvarez/null-ls.nvim'
+    use 'akinsho/bufferline.nvim'
 
     ---- Mason-specific infra
     use 'williamboman/mason.nvim'

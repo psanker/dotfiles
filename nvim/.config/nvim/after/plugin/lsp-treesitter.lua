@@ -87,3 +87,4 @@ require('rust-tools').setup({
         }
     }
 })
+
