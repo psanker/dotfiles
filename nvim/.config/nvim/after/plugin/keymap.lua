@@ -24,11 +24,11 @@ nnoremap('}', '}zz')
 
 -- Hide/show command line
 nnoremap('<Leader>cl', function()
-  if (vim.o.cmdheight == 0) then
-    vim.o.cmdheight = 1
-  else
-    vim.o.cmdheight = 0
-  end
+    if (vim.o.cmdheight == 0) then
+        vim.o.cmdheight = 1
+    else
+        vim.o.cmdheight = 0
+    end
 end)
 
 -- better yanking/pasting
