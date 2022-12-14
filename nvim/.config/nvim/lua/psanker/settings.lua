@@ -48,3 +48,11 @@ vim.cmd [[let R_nvim_wd = 1]]
 -- Show line diagnostics automatically in hover
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
+-- Vimwiki stuff
+g.vimiwiki_list = {
+    {
+        path = '~/workspace/dt-handbook/',
+        syntax = 'markdown',
+        ext = '.qmd'
+    }
+}

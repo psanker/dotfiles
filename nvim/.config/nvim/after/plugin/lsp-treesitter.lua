@@ -3,6 +3,57 @@ require('nvim-treesitter.configs').setup({
     highlight = {
         enable = true
     },
+    textobjects = {
+        move = {
+            enable = true,
+            set_jumps = true,
+
+            goto_next_start = {
+                ["]p"] = "@parameter.inner",
+                ["]m"] = "@function.outer",
+                ["]]"] = "@class.outer",
+            },
+            goto_next_end = {
+                ["]M"] = "@function.outer",
+                ["]["] = "@class.outer",
+            },
+            goto_previous_start = {
+                ["[p"] = "@parameter.inner",
+                ["[m"] = "@function.outer",
+                ["[["] = "@class.outer",
+            },
+            goto_previous_end = {
+                ["[M"] = "@function.outer",
+                ["[]"] = "@class.outer",
+            },
+        },
+        lsp_interop = {
+            enable = true,
+            border = 'none',
+            peek_definition_code = {
+                ["<leader>df"] = "@function.outer",
+                ["<leader>dF"] = "@class.outer",
+            },
+        },
+        select = {
+            enable = true,
+            lookahead = true,
+
+            keymaps = {
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+
+                ["ac"] = "@conditional.outer",
+                ["ic"] = "@conditional.inner",
+
+                ["aa"] = "@parameter.outer",
+                ["ia"] = "@parameter.inner",
+
+                ["av"] = "@variable.outer",
+                ["iv"] = "@variable.inner",
+            },
+        },
+    },
 })
 
 local lsp = require('lsp-zero')
@@ -76,6 +127,12 @@ lsp.configure('rust_analyzer', {
         }
     }
 })
+lsp.configure('cssls', {
+    on_attach = function(client, bufnr)
+        navic.attach(client, bufnr)
+    end
+})
+lsp.configure('emmet_ls', {})
 
 lsp.setup()
 
@@ -88,3 +145,13 @@ require('rust-tools').setup({
     }
 })
 
+require('neorg').setup({
+    load = {
+        ['core.defaults'] = {},
+        ['core.norg.completion'] = {
+            config = {
+                engine = 'nvim-cmp'
+            },
+        },
+    }
+})

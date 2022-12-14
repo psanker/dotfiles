@@ -10,6 +10,7 @@ nnoremap('˜', ':NvimTreeToggle<CR>')
 nnoremap('<Leader>bd', ':%bd|e#<CR>|:bd#<CR>')
 nnoremap('<Leader>c', '<cmd> source ~/.config/nvim/init.lua<CR>')
 nnoremap('<Leader>bp', '<cmd> echo expand("%:p")<CR>')
+nnoremap('|', ':!')
 
 -- better viewing after jumps
 nnoremap('<C-d>', '<C-d>zz')
@@ -64,7 +65,7 @@ nnoremap('<Leader>gg', '<cmd>LazyGit<CR>', { silent = true })
 -- 3. Telescope (f) --
 nnoremap('<Leader>ff', function() require("telescope.builtin").find_files() end)
 nnoremap('<Leader>fg', function() require("telescope.builtin").live_grep() end)
-nnoremap('<Leader>fb', function() require("telescope.builtin").buffers() end)
+nnoremap('<Leader>fb', function() require("telescope.builtin").current_buffer_fuzzy_find() end)
 nnoremap('<Leader>fh', function() require("telescope.builtin").help_tags() end)
 nnoremap('<Leader>fs', function() require("telescope.builtin").lsp_document_symbols() end)
 nnoremap('<Leader>fS', function() require("telescope.builtin").lsp_workspace_symbols() end)
@@ -85,7 +86,8 @@ nnoremap('<Leader>xx', '<cmd> TroubleToggle<CR>')
 nnoremap('<Leader>xq', '<cmd> TroubleToggle quickfix<CR>')
 
 -- 6. TODO commments (t) maps --
-nnoremap('<Leader>tt', '<cmd> TodoTelescope<CR>')
+nnoremap('<Leader>tt', '<cmd> TodoTrouble<CR>')
+nnoremap('<Leader>tT', '<cmd> TodoTelescope<CR>')
 nnoremap(']t', function() require('todo-comments').jump_next() end, { desc = "Next TODO comment" })
 nnoremap('[t', function() require('todo-comments').jump_prev() end, { desc = "Previous TODO comment" })
 
@@ -97,8 +99,3 @@ nnoremap('<Leader>qp', '<cmd>NoPencil<CR>')
 -- 8. Undo Tree --
 nnoremap('<Leader>u', '<cmd>UndotreeToggle<CR>')
 
--- 9. Tabs and bufferline --
-nnoremap('<Leader>nt', '<cmd>tabnew<CR>')
-nnoremap('<Leader>qt', '<cmd>tabclose<CR>')
-nnoremap('<Leader>]t', '<cmd>tabnext<CR>')
-nnoremap('<Leader>[t', '<cmd>tabprev<CR>')
