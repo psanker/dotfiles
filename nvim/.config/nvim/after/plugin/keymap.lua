@@ -43,18 +43,11 @@ nmap('<Leader>Y', '"+Y')
 nnoremap('<Leader>d', '"_d')
 vnoremap('<Leader>d', '"_d')
 
+-- Move visual blocks around!!
+vnoremap('J', ":m '>+1<CR>gv=gv")
+vnoremap('K', ":m '<-2<CR>gv=gv")
+
 -- 1. LSP --
-nnoremap('<Leader>fr', function() vim.lsp.buf.format({ async = true }) end)
-nnoremap('K', function() vim.lsp.buf.hover() end)
-nnoremap('gd', function() vim.lsp.buf.definition() end) -- Jump to the definition
-nnoremap('gD', function() vim.lsp.buf.declaration() end) -- Jump to the declaration
-nnoremap('gi', function() vim.lsp.buf.implementation() end) -- Lists all implementations of symbol
-nnoremap('go', function() vim.lsp.buf.type_definition() end) -- Jump to def of symbol
-nnoremap('gr', function() vim.lsp.buf.references() end) -- List all references
-nnoremap('<C-k>', function() vim.lsp.buf.signature_help() end) -- Displays function signature
-nnoremap('<Leader>r', function() vim.lsp.buf.rename() end) -- Renames all references of symbol
-nnoremap('<Leader>q', function() vim.lsp.buf.code_action() end) -- Selects a code action
-xnoremap('<Leader>q', function() vim.lsp.buf.range_code_action() end) -- "" for a range
 nnoremap('gl', function() vim.diagnostic.open_float() end) -- Show diagnostics in floating pane
 nnoremap('[d', function() vim.diagnostic.goto_prev() end) -- Go to prev diagnositc
 nnoremap(']d', function() vim.diagnostic.goto_next() end) -- Go to next diagnostic
@@ -63,12 +56,18 @@ nnoremap(']d', function() vim.diagnostic.goto_next() end) -- Go to next diagnost
 nnoremap('<Leader>gg', '<cmd>LazyGit<CR>', { silent = true })
 
 -- 3. Telescope (f) --
-nnoremap('<Leader>ff', function() require("telescope.builtin").find_files() end)
-nnoremap('<Leader>fg', function() require("telescope.builtin").live_grep() end)
-nnoremap('<Leader>fb', function() require("telescope.builtin").current_buffer_fuzzy_find() end)
-nnoremap('<Leader>fh', function() require("telescope.builtin").help_tags() end)
-nnoremap('<Leader>fs', function() require("telescope.builtin").lsp_document_symbols() end)
-nnoremap('<Leader>fS', function() require("telescope.builtin").lsp_workspace_symbols() end)
+local builtin = require("telescope.builtin")
+nnoremap('<Leader>ff', builtin.find_files)
+nnoremap('<Leader>fg', builtin.live_grep)
+nnoremap('<Leader>ft', function ()
+    local tag = vim.fn.input("Tag > ")
+    builtin.grep_string({search = ":" .. tag .. ":"})
+end)
+
+nnoremap('<Leader>fb', builtin.current_buffer_fuzzy_find)
+nnoremap('<Leader>f?', builtin.help_tags)
+nnoremap('<Leader>fs', builtin.lsp_document_symbols)
+nnoremap('<Leader>fS', builtin.lsp_workspace_symbols)
 
 -- 4. Harpoon (h) --
 nnoremap('<Leader>hh', '<cmd> lua require("harpoon.ui").toggle_quick_menu()<CR>')
@@ -98,4 +97,3 @@ nnoremap('<Leader>qp', '<cmd>NoPencil<CR>')
 
 -- 8. Undo Tree --
 nnoremap('<Leader>u', '<cmd>UndotreeToggle<CR>')
-

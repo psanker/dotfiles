@@ -1,3 +1,8 @@
+local remap = require("psanker.keymap")
+local nnoremap = remap.nnoremap
+local inoremap = remap.nnoremap
+local xnoremap = remap.nnoremap
+
 require('nvim-treesitter.configs').setup({
     ensure_installed = { 'r', 'rust', 'python', 'go' },
     highlight = {
@@ -59,6 +64,17 @@ require('nvim-treesitter.configs').setup({
 local lsp = require('lsp-zero')
 local navic = require('nvim-navic')
 
+local cmp = require('cmp')
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
+local cmp_mappings = lsp.defaults.cmp_mappings({
+    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+    ['<C-space>'] = cmp.mapping.complete(),
+})
+
+cmp_mappings['<Tab>'] = nil
+cmp_mappings['<S-Tab>'] = nil
+
 lsp.set_preferences({
     suggest_lsp_servers = true,
     setup_servers_on_start = true,
@@ -70,16 +86,30 @@ lsp.set_preferences({
     sign_icons = {}
 })
 
-lsp.configure('r_language_server', {
-    on_attach = function(client, bufnr)
-        navic.attach(client, bufnr)
-    end
+lsp.setup_nvim_cmp({
+    mapping = cmp_mappings
 })
 
+lsp.on_attach(function(client, bufnr)
+    local opts = { buffer = bufnr }
+
+    nnoremap('<Leader>fr', function() vim.lsp.buf.format({ async = true }) end, opts)
+    nnoremap('K', function() vim.lsp.buf.hover() end, opts)
+    nnoremap('gd', function() vim.lsp.buf.definition() end, opts) -- Jump to the definition
+    nnoremap('gD', function() vim.lsp.buf.declaration() end, opts) -- Jump to the declaration
+    nnoremap('gi', function() vim.lsp.buf.implementation() end, opts) -- Lists all implementations of symbol
+    nnoremap('go', function() vim.lsp.buf.type_definition() end, opts) -- Jump to def of symbol
+    nnoremap('gr', function() vim.lsp.buf.references() end, opts) -- List all references
+    nnoremap('<C-h>', function() vim.lsp.buf.signature_help() end, opts) -- Displays function signature
+    inoremap('<C-h>', function() vim.lsp.buf.signature_help() end, opts) -- Displays function signature
+    nnoremap('<Leader>r', function() vim.lsp.buf.rename() end, opts) -- Renames all references of symbol
+    nnoremap('<Leader>q', function() vim.lsp.buf.code_action() end, opts) -- Selects a code action
+    xnoremap('<Leader>q', function() vim.lsp.buf.range_code_action() end, opts) -- "" for a range
+
+    pcall(function() navic.attach(client, bufnr) end)
+end)
+
 lsp.configure('sumneko_lua', {
-    on_attach = function(client, bufnr)
-        navic.attach(client, bufnr)
-    end,
     settings = {
         Lua = {
             runtime = {
@@ -101,21 +131,8 @@ lsp.configure('sumneko_lua', {
         },
     },
 })
-lsp.configure('gopls', {
-    on_attach = function(client, bufnr)
-        navic.attach(client, bufnr)
-    end,
-})
-lsp.configure('taplo', {
-    on_attach = function(client, bufnr)
-        navic.attach(client, bufnr)
-    end,
-})
 lsp.configure('rust_analyzer', {
     cmd = { "rustup", "run", "nightly", "rust-analyzer" },
-    on_attach = function(client, bufnr)
-        navic.attach(client, bufnr)
-    end,
     settings = {
         ["rust-analyzer"] = {
             unstable_features = true,
@@ -127,12 +144,6 @@ lsp.configure('rust_analyzer', {
         }
     }
 })
-lsp.configure('cssls', {
-    on_attach = function(client, bufnr)
-        navic.attach(client, bufnr)
-    end
-})
-lsp.configure('emmet_ls', {})
 
 lsp.setup()
 

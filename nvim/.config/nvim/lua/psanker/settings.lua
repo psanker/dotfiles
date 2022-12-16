@@ -12,10 +12,17 @@ set.shiftwidth = 4
 set.softtabstop = 4
 set.expandtab = true
 
+-- Better undo/swap support
+set.swapfile = false
+set.backup = false
+set.undodir = os.getenv("HOME") .. "/.local/share/nvim/undo"
+set.undofile = true
+
 set.termguicolors = true
 set.number = true
 set.relativenumber = true
 set.hlsearch = false
+set.incsearch = true
 set.smartindent = true
 
 set.cursorline = true
@@ -38,7 +45,7 @@ set.splitbelow = true
 -- updatetime: set updatetime for CursorHold
 set.completeopt = { 'menuone', 'noselect', 'noinsert' }
 set.shortmess = vim.opt.shortmess + { c = true }
-set.updatetime = 250
+set.updatetime = 50
 
 -- Better R settings
 vim.cmd [[let R_csv_app = 'terminal:vd' ]]
