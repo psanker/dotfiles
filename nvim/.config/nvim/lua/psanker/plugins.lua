@@ -41,6 +41,7 @@ return require('packer').startup(function(use)
     use 'tpope/vim-surround'
     use 'tpope/vim-commentary'
     use 'tpope/vim-repeat'
+    use 'tpope/vim-fugitive'
 
     -- Todos and troubleshooting
     use 'folke/trouble.nvim'
@@ -56,7 +57,6 @@ return require('packer').startup(function(use)
 
     -- Incredible tools
     use 'nvim-telescope/telescope.nvim'
-    use 'kdheepak/lazygit.nvim'
     use 'ThePrimeagen/harpoon'
     use 'ggandor/leap.nvim'
     use 'andymass/vim-matchup'
@@ -84,6 +84,7 @@ return require('packer').startup(function(use)
     use 'kyazdani42/nvim-web-devicons'
     use 'airblade/vim-gitgutter'
     use 'nyoom-engineering/oxocarbon.nvim'
+    use 'EdenEast/nightfox.nvim'
 
     use 'savq/melange'
     use 'ellisonleao/gruvbox.nvim'

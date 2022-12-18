@@ -1,7 +1,7 @@
 local set = vim.opt
 local g = vim.g
 
-g.my_colorscheme = 'catppuccin'
+g.my_colorscheme = 'nightfox'
 
 require('catppuccin').setup({
     flavour = 'mocha'

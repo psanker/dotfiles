@@ -6,9 +6,8 @@ local vnoremap = Remap.vnoremap
 local xnoremap = Remap.xnoremap
 
 -- 0. General --
-nnoremap('˜', ':NvimTreeToggle<CR>')
+nnoremap('<M-N>', ':NvimTreeToggle<CR>')
 nnoremap('<Leader>bd', ':%bd|e#<CR>|:bd#<CR>')
-nnoremap('<Leader>c', '<cmd> source ~/.config/nvim/init.lua<CR>')
 nnoremap('<Leader>bp', '<cmd> echo expand("%:p")<CR>')
 nnoremap('|', ':!')
 
@@ -52,22 +51,25 @@ nnoremap('gl', function() vim.diagnostic.open_float() end) -- Show diagnostics i
 nnoremap('[d', function() vim.diagnostic.goto_prev() end) -- Go to prev diagnositc
 nnoremap(']d', function() vim.diagnostic.goto_next() end) -- Go to next diagnostic
 
--- 2. LazyGit --
-nnoremap('<Leader>gg', '<cmd>LazyGit<CR>', { silent = true })
+-- 2. Git --
+nnoremap('<Leader>gg', '<cmd>Git<CR>', { silent = true })
 
 -- 3. Telescope (f) --
 local builtin = require("telescope.builtin")
-nnoremap('<Leader>ff', builtin.find_files)
-nnoremap('<Leader>fg', builtin.live_grep)
-nnoremap('<Leader>ft', function ()
+nnoremap('<Leader>ff', builtin.find_files, { desc = "[f]ind [f]ile" })
+nnoremap('<Leader>fw', builtin.grep_string, { desc = "[f]ind [w]ord under cursor" })
+nnoremap('<Leader>fg', builtin.live_grep, { desc = "[f]ind string using [g]rep" })
+nnoremap('<Leader>ft', function()
     local tag = vim.fn.input("Tag > ")
-    builtin.grep_string({search = ":" .. tag .. ":"})
-end)
+    builtin.grep_string({ search = ":" .. tag .. ":" })
+end, { desc = "[f]ind vimwiki-style [t]ag" })
+nnoremap('<Leader>fk', '<cmd> Telescope keymaps<CR>', { desc = '[f]ind [k]eymap' })
 
-nnoremap('<Leader>fb', builtin.current_buffer_fuzzy_find)
-nnoremap('<Leader>f?', builtin.help_tags)
-nnoremap('<Leader>fs', builtin.lsp_document_symbols)
-nnoremap('<Leader>fS', builtin.lsp_workspace_symbols)
+nnoremap('<Leader>/', builtin.current_buffer_fuzzy_find,
+    { desc = "Find in current buffer using fuzzy find (akin to [/])" })
+nnoremap('<Leader>f?', builtin.help_tags, { desc = "[f]ind in help[?]" })
+nnoremap('<Leader>fs', builtin.lsp_document_symbols, { desc = "[f]ind [s]ymbol in current document" })
+nnoremap('<Leader>fS', builtin.lsp_workspace_symbols, { desc = "[f]ind [S]ymbol in current workspace" })
 
 -- 4. Harpoon (h) --
 nnoremap('<Leader>hh', '<cmd> lua require("harpoon.ui").toggle_quick_menu()<CR>')
