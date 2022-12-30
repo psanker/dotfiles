@@ -1,12 +1,6 @@
 local g = vim.g
 
 require("nvim-tree").setup()
-require("bufferline").setup({
-    options = {
-        mode = "buffers",
-        separator_style = "thin",
-    },
-})
 require('leap').add_default_mappings()
 
 require('todo-comments').setup({
