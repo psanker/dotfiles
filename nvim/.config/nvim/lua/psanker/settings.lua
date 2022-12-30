@@ -63,3 +63,4 @@ g.vimiwiki_list = {
         ext = '.qmd'
     }
 }
+

@@ -53,6 +53,7 @@ return require('packer').startup(function(use)
     -- Context
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
     use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use 'nvim-treesitter/playground'
     use 'SmiteshP/nvim-navic'
 
     -- Incredible tools
@@ -63,8 +64,7 @@ return require('packer').startup(function(use)
     use 'mbbill/undotree'
 
     -- Writing
-    use 'vimwiki/vimwiki'
-    use 'folke/zen-mode.nvim'
+    use { 'shortcuts/no-neck-pain.nvim', tag = '*' }
     use 'preservim/vim-pencil'
     use {
         'nvim-neorg/neorg',
@@ -76,19 +76,25 @@ return require('packer').startup(function(use)
 
     -- Language-specific stuff
     use 'jalvesaq/Nvim-R'
-    use 'iamcco/markdown-preview.nvim'
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
     use 'simrat39/rust-tools.nvim'
+    use { 'psanker/zk-nvim', branch = 'better-linking' }
 
     -- Themes & appearance
     use 'nvim-lualine/lualine.nvim'
     use 'kyazdani42/nvim-web-devicons'
     use 'airblade/vim-gitgutter'
-    use 'nyoom-engineering/oxocarbon.nvim'
-    use 'EdenEast/nightfox.nvim'
 
     use 'savq/melange'
     use 'ellisonleao/gruvbox.nvim'
-    use 'folke/tokyonight.nvim'
     use { 'catppuccin/nvim', as = 'catppuccin' }
+    use 'nyoom-engineering/oxocarbon.nvim'
+    use 'EdenEast/nightfox.nvim'
+    use 'folke/tokyonight.nvim'
+    use 'rebelot/kanagawa.nvim'
+
 
 end)

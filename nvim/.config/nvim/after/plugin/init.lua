@@ -1,14 +1,11 @@
+local g = vim.g
+
 require("nvim-tree").setup()
 require("bufferline").setup({
     options = {
         mode = "buffers",
-        separator_style = "slant",
+        separator_style = "thin",
     },
-})
-require("lualine").setup({
-    options = {
-        theme = 'OceanicNext'
-    }
 })
 require('leap').add_default_mappings()
 
@@ -30,3 +27,7 @@ vim.api.nvim_create_autocmd(
     { "BufRead", "BufNewFile" },
     { pattern = { "*.qmd" }, command = "set ft=rmd" }
 )
+
+g.mkdp_port = 8800
+g.mkdp_page_title = '${name} - md.nvim'
+g.mkdp_auto_start = 1

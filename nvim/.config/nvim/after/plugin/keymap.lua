@@ -93,7 +93,7 @@ nnoremap(']t', function() require('todo-comments').jump_next() end, { desc = "Ne
 nnoremap('[t', function() require('todo-comments').jump_prev() end, { desc = "Previous TODO comment" })
 
 -- 7. Zen mode --
-nnoremap('<Leader>zz', '<cmd>ZenMode<CR>')
+nnoremap('<Leader>zz', '<cmd>NoNeckPain<CR>')
 nnoremap('<Leader>zp', '<cmd>SoftPencil<CR>')
 nnoremap('<Leader>qp', '<cmd>NoPencil<CR>')
 

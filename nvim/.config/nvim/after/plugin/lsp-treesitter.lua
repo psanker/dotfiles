@@ -69,11 +69,8 @@ local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-    ['<C-space>'] = cmp.mapping.complete(),
+    ['<C-Space>'] = cmp.mapping.complete(),
 })
-
-cmp_mappings['<Tab>'] = nil
-cmp_mappings['<S-Tab>'] = nil
 
 lsp.set_preferences({
     suggest_lsp_servers = true,
@@ -90,22 +87,34 @@ lsp.setup_nvim_cmp({
     mapping = cmp_mappings
 })
 
-lsp.on_attach(function(client, bufnr)
+local function bind_lsp_keymaps(client, bufnr)
     local opts = { buffer = bufnr }
 
     nnoremap('<Leader>fr', function() vim.lsp.buf.format({ async = true }) end, opts)
-    nnoremap('K', function() vim.lsp.buf.hover() end, opts)
-    nnoremap('gd', function() vim.lsp.buf.definition() end, opts) -- Jump to the definition
-    nnoremap('gD', function() vim.lsp.buf.declaration() end, opts) -- Jump to the declaration
-    nnoremap('gi', function() vim.lsp.buf.implementation() end, opts) -- Lists all implementations of symbol
-    nnoremap('go', function() vim.lsp.buf.type_definition() end, opts) -- Jump to def of symbol
-    nnoremap('gr', function() vim.lsp.buf.references() end, opts) -- List all references
-    nnoremap('<C-h>', function() vim.lsp.buf.signature_help() end, opts) -- Displays function signature
-    inoremap('<C-h>', function() vim.lsp.buf.signature_help() end, opts) -- Displays function signature
-    nnoremap('<Leader>r', function() vim.lsp.buf.rename() end, opts) -- Renames all references of symbol
-    nnoremap('<Leader>q', function() vim.lsp.buf.code_action() end, opts) -- Selects a code action
-    xnoremap('<Leader>q', function() vim.lsp.buf.range_code_action() end, opts) -- "" for a range
+    nnoremap('K', function() vim.lsp.buf.hover() end,
+        { buffer = bufnr, desc = 'Display hover information of symbol under cursor' })
+    nnoremap('gd', function() vim.lsp.buf.definition() end,
+        { buffer = bufnr, desc = 'Go to definition of symbol under cursor' }) -- Jump to the definition
+    nnoremap('gD', function() vim.lsp.buf.declaration() end,
+        { buffer = bufnr, desc = 'Go to declaration of symbol under cursor' }) -- Jump to the declaration
+    nnoremap('gi', function() vim.lsp.buf.implementation() end,
+        { buffer = bufnr, desc = 'List all implementations of symbol under cursor' }) -- Lists all implementations of symbol
+    nnoremap('go', function() vim.lsp.buf.type_definition() end,
+        { buffer = bufnr, desc = 'Go to type definition of symbol under cursor' }) -- Jump to def of symbol
+    nnoremap('gr', function() vim.lsp.buf.references() end,
+        { buffer = bufnr, desc = 'List all references of symbol under cursor' }) -- List all references
+    nnoremap('<C-h>', function() vim.lsp.signature_help() end,
+        { buffer = bufnr, desc = 'Display signature of symbol under cursor' }) -- Displays function signature
+    inoremap('<C-h>', function() vim.lsp.buf.signature_help() end,
+        { buffer = bufnr, desc = 'Display signature of symbol under cursor' }) -- Displays function signature
+    nnoremap('<Leader>r', function() vim.lsp.buf.rename() end, { buffer = bufnr, desc = 'Rename symbol under cursor' }) -- Renames all references of symbol
+    nnoremap('<Leader>q', function() vim.lsp.buf.code_action() end, { buffer = bufnr, desc = 'Perform a code action' }) -- Selects a code action
+    xnoremap('<Leader>q', function() vim.lsp.buf.range_code_action() end,
+        { buffer = bufnr, desc = 'Perform a code action' }) -- "" for a range
+end
 
+lsp.on_attach(function(client, bufnr)
+    bind_lsp_keymaps(client, bufnr)
     pcall(function() navic.attach(client, bufnr) end)
 end)
 
@@ -165,4 +174,27 @@ require('neorg').setup({
             },
         },
     }
+})
+
+require("zk").setup({
+    -- can be "telescope", "fzf" or "select" (`vim.ui.select`)
+    -- it's recommended to use "telescope" or "fzf"
+    picker = "telescope",
+
+    lsp = {
+        -- `config` is passed to `vim.lsp.start_client(config)`
+        config = {
+            cmd = { "zk", "lsp" },
+            name = "zk",
+            -- on_attach = ...
+            on_attach = bind_lsp_keymaps,
+            -- etc, see `:h vim.lsp.start_client()`
+        },
+
+        -- automatically attach buffers in a zk notebook that match the given filetypes
+        auto_attach = {
+            enabled = true,
+            filetypes = { "markdown" },
+        },
+    },
 })
