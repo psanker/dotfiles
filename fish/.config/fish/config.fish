@@ -18,6 +18,7 @@ if status is-interactive
     alias nv="nvim"
     alias gi="gitignore"
     alias pt="python3.10 -m poetry"
+    alias bfg="java -jar $HOME/.local/bin/bfg.jar"
 end
 
 source ~/.config/.env
