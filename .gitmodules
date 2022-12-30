@@ -4,3 +4,9 @@
 [submodule "tmux/.tmux/plugins/tmux-pomodoro-plus"]
 	path = tmux/.tmux/plugins/tmux-pomodoro-plus
 	url = https://github.com/olimorris/tmux-pomodoro-plus
+[submodule "gpg"]
+	path = gpg
+	url = ./gpg
+[submodule "git"]
+	path = git
+	url = ./git
