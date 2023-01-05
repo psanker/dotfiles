@@ -63,11 +63,11 @@ return require('packer').startup(function(use)
     use 'mbbill/undotree'
 
     -- Writing
-    use { 'shortcuts/no-neck-pain.nvim', tag = '*' }
-    use 'preservim/vim-pencil'
     use {
-        'nvim-neorg/neorg',
-        run = ':Neorg sync-parsers',
+        'folke/zen-mode.nvim',
+        config = function()
+            require('zen-mode').setup()
+        end,
     }
 
     -- File explorer
@@ -94,6 +94,4 @@ return require('packer').startup(function(use)
     use 'EdenEast/nightfox.nvim'
     use 'folke/tokyonight.nvim'
     use 'rebelot/kanagawa.nvim'
-
-
 end)

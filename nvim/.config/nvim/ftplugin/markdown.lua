@@ -1,8 +1,6 @@
-local set = vim.opt
+require('psanker.writing')
 
-require('psanker.zk').setup()
-require('psanker.zk').register_commands()
+local Remap = require("psanker.keymap")
+local nnoremap = Remap.nnoremap
 
-set.spell = true
-
-vim.cmd [[SoftPencil]]
+nnoremap('<Leader>tn', 'a<!--::--><Esc>2F:a')

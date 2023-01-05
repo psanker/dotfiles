@@ -6,7 +6,7 @@ local vnoremap = Remap.vnoremap
 local xnoremap = Remap.xnoremap
 
 -- 0. General --
-nnoremap('<M-N>', ':NvimTreeToggle<CR>')
+nnoremap('<Leader>bf', ':NvimTreeToggle<CR>')
 nnoremap('<Leader>bd', ':%bd|e#<CR>|:bd#<CR>')
 nnoremap('<Leader>bp', '<cmd> echo expand("%:p")<CR>')
 nnoremap('|', ':!')
@@ -93,9 +93,22 @@ nnoremap(']t', function() require('todo-comments').jump_next() end, { desc = "Ne
 nnoremap('[t', function() require('todo-comments').jump_prev() end, { desc = "Previous TODO comment" })
 
 -- 7. Zen mode --
+local function pencil_state()
+    local enabled = false
+
+    return function ()
+        if enabled then
+            vim.cmd [[NoPencil]]
+        else
+            vim.cmd [[SoftPencil]]
+        end
+    end
+end
+
+local pstate = pencil_state()
+
 nnoremap('<Leader>zz', '<cmd>NoNeckPain<CR>')
-nnoremap('<Leader>zp', '<cmd>SoftPencil<CR>')
-nnoremap('<Leader>qp', '<cmd>NoPencil<CR>')
+nnoremap('<Leader>zp', pstate)
 
 -- 8. Undo Tree --
 nnoremap('<Leader>u', '<cmd>UndotreeToggle<CR>')
