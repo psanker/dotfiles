@@ -6,10 +6,10 @@ local vnoremap = Remap.vnoremap
 local xnoremap = Remap.xnoremap
 
 -- 0. General --
-nnoremap('<Leader>bf', ':NvimTreeToggle<CR>')
 nnoremap('<Leader>bd', ':%bd|e#<CR>|:bd#<CR>')
 nnoremap('<Leader>bp', '<cmd> echo expand("%:p")<CR>')
 nnoremap('|', ':!')
+nnoremap('XX', '<cmd>call delete(@%) | bdelete!<CR><cmd>qa!<CR>') -- Equivalent to ZZ but for deletion of file
 
 -- better viewing after jumps
 nnoremap('<C-d>', '<C-d>zz')
@@ -52,10 +52,31 @@ nnoremap('[d', function() vim.diagnostic.goto_prev() end) -- Go to prev diagnosi
 nnoremap(']d', function() vim.diagnostic.goto_next() end) -- Go to next diagnostic
 
 -- 2. Git --
-nnoremap('<Leader>gg', '<cmd>Git<CR>', { silent = true })
+local function fugitive_state()
+    local open = false
+
+    return function()
+        open = not open
+
+        if open then
+            vim.cmd [[Git]]
+        else
+            vim.cmd [[Git]]
+            vim.cmd [[q]]
+        end
+    end
+end
+
+local f_state = fugitive_state()
+
+nnoremap('<Leader>gg', f_state, { silent = true, desc = 'Toggle fu[g]itive window' })
+nnoremap('<Leader>gp', '<cmd>Git pull<CR>', { silent = true, desc = '[g]it [p]ull' })
+nnoremap('<Leader>gP', '<cmd>Git push<CR>', { silent = true, desc = '[g]it [P]ush' })
+nnoremap('<Leader>gl', '<cmd>Git log<CR>', { desc = '[g]it [l]og' })
 
 -- 3. Telescope (f) --
 local builtin = require("telescope.builtin")
+nnoremap('<Leader>fb', '<cmd>NvimTreeToggle<CR>', { desc = '[f]ile [b]rowser' })
 nnoremap('<Leader>ff', builtin.find_files, { desc = "[f]ind [f]ile" })
 nnoremap('<Leader>fw', builtin.grep_string, { desc = "[f]ind [w]ord under cursor" })
 nnoremap('<Leader>fg', builtin.live_grep, { desc = "[f]ind string using [g]rep" })
@@ -83,32 +104,18 @@ nnoremap('<Leader>he', '<cmd> lua require("harpoon.ui").nav_file(2)<CR>')
 nnoremap('<Leader>hr', '<cmd> lua require("harpoon.ui").nav_file(1)<CR>')
 
 -- 5. Trouble (x) maps --
-nnoremap('<Leader>xx', '<cmd> TroubleToggle<CR>')
 nnoremap('<Leader>xq', '<cmd> TroubleToggle quickfix<CR>')
 
--- 6. TODO commments (t) maps --
+-- 6. TODO commments (t) and Trouble maps --
 nnoremap('<Leader>tt', '<cmd> TodoTrouble<CR>')
 nnoremap('<Leader>tT', '<cmd> TodoTelescope<CR>')
-nnoremap(']t', function() require('todo-comments').jump_next() end, { desc = "Next TODO comment" })
-nnoremap('[t', function() require('todo-comments').jump_prev() end, { desc = "Previous TODO comment" })
+nnoremap('<Leader>tx', '<cmd> TroubleToggle<CR>')
 
 -- 7. Zen mode --
-local function pencil_state()
-    local enabled = false
-
-    return function ()
-        if enabled then
-            vim.cmd [[NoPencil]]
-        else
-            vim.cmd [[SoftPencil]]
-        end
-    end
-end
-
-local pstate = pencil_state()
-
 nnoremap('<Leader>zz', '<cmd>NoNeckPain<CR>')
-nnoremap('<Leader>zp', pstate)
 
 -- 8. Undo Tree --
 nnoremap('<Leader>u', '<cmd>UndotreeToggle<CR>')
+
+-- 9. Note capture --
+nnoremap('<Leader>qn', '<cmd>FloatermNew! --cwd=~/personal/pkm ~/.local/bin/quick-note.sh<CR>')

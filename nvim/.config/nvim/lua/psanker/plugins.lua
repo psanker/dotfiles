@@ -7,6 +7,7 @@ return require('packer').startup(function(use)
     use 'neovim/nvim-lspconfig'
     use 'mfussenegger/nvim-dap'
     use 'jose-elias-alvarez/null-ls.nvim'
+    use 'voldikss/vim-floaterm'
 
     ---- Mason-specific infra
     use 'williamboman/mason.nvim'
@@ -69,9 +70,12 @@ return require('packer').startup(function(use)
             require('zen-mode').setup()
         end,
     }
+    use {
+        'nvim-orgmode/orgmode',
+    }
 
     -- File explorer
-    use 'kyazdani42/nvim-tree.lua'
+    use 'nvim-tree/nvim-tree.lua'
 
     -- Language-specific stuff
     use 'jalvesaq/Nvim-R'
@@ -86,6 +90,7 @@ return require('packer').startup(function(use)
     use 'nvim-lualine/lualine.nvim'
     use 'kyazdani42/nvim-web-devicons'
     use 'airblade/vim-gitgutter'
+    use 'glepnir/dashboard-nvim'
 
     use 'savq/melange'
     use 'ellisonleao/gruvbox.nvim'
@@ -94,4 +99,5 @@ return require('packer').startup(function(use)
     use 'EdenEast/nightfox.nvim'
     use 'folke/tokyonight.nvim'
     use 'rebelot/kanagawa.nvim'
+    use 'rose-pine/neovim'
 end)

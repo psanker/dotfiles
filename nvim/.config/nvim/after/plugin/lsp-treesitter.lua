@@ -3,10 +3,13 @@ local nnoremap = remap.nnoremap
 local inoremap = remap.nnoremap
 local xnoremap = remap.nnoremap
 
+require('orgmode').setup_ts_grammar()
+
 require('nvim-treesitter.configs').setup({
-    ensure_installed = { 'r', 'rust', 'python', 'go' },
+    ensure_installed = { 'r', 'rust', 'python', 'go', 'org' },
     highlight = {
-        enable = true
+        enable = true,
+        additional_vim_regex_highlighting = { 'org' },
     },
     textobjects = {
         move = {
@@ -84,13 +87,20 @@ lsp.set_preferences({
 })
 
 lsp.setup_nvim_cmp({
-    mapping = cmp_mappings
+    mapping = cmp_mappings,
+    sources = {
+        { name = 'path' },
+        { name = 'orgmode' },
+        { name = 'nvim_lsp', keyword_length = 3 },
+        { name = 'buffer', keyword_length = 3 },
+        { name = 'luasnip', keyword_length = 2 },
+    },
 })
 
 local function bind_lsp_keymaps(client, bufnr)
     local opts = { buffer = bufnr }
 
-    nnoremap('<Leader>fr', function() vim.lsp.buf.format({ async = true }) end, opts)
+    nnoremap('<Leader>F', function() vim.lsp.buf.format({ async = true }) end, opts)
     nnoremap('K', function() vim.lsp.buf.hover() end,
         { buffer = bufnr, desc = 'Display hover information of symbol under cursor' })
     nnoremap('gd', function() vim.lsp.buf.definition() end,
