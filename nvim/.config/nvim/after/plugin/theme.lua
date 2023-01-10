@@ -1,14 +1,18 @@
 local set = vim.opt
 local g = vim.g
 
-g.my_colorscheme = 'kanagawa'
+g.my_colorscheme = 'rose-pine'
 
-require('catppuccin').setup({
-    flavour = 'mocha'
-})
+-- require('catppuccin').setup({
+--     flavour = 'mocha'
+-- })
 
-require('tokyonight').setup({
-    style = 'night'
+-- require('tokyonight').setup({
+--     style = 'night'
+-- })
+
+require('rose-pine').setup({
+    dark_variant = 'moon'
 })
 
 local function element_in(el, tab)
@@ -43,7 +47,7 @@ end
 
 require("lualine").setup({
     options = {
-        theme = 'kanagawa'
+        theme = 'rose-pine'
     },
     sections = {
         lualine_x = {

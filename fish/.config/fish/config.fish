@@ -5,6 +5,7 @@ fish_add_path /Library/Frameworks/Python.framework/Versions/3.10/bin
 fish_add_path /Applications/RStudio.app/Contents/MacOS
 fish_add_path "$HOME/go"
 fish_add_path "$HOME/.cargo/bin"
+fish_add_path /usr/local/opt/llvm/bin
 
 set --export SHELL /usr/local/bin/fish
 set --export VISUAL nvim
@@ -24,3 +25,7 @@ end
 source ~/.config/.env
 set -gx VOLTA_HOME "$HOME/.volta"
 set -gx PATH "$VOLTA_HOME/bin" $PATH
+
+set -gx CC "/usr/local/opt/llvm/bin/clang++"
+set -gx LDFLAGS "-L/usr/loca/opt/llvm/lib"
+set -gx CPPFLAGS "-I/usr/local/opt/llvm/include"

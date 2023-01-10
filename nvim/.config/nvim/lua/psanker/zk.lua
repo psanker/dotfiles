@@ -83,13 +83,18 @@ return {
         local vnoremap = Remap.vnoremap
 
         nnoremap('<M-m>', '<cmd>MarkdownPreviewToggle<CR>')
-        nnoremap('<Leader>nn', '<cmd>ZkNew {dir = "refile"}<CR>')
-        nnoremap('<Leader>nw', '<cmd>ZkNew {dir = "work"}<CR>')
-        nnoremap('<Leader>ng', '<cmd>ZkNew {dir = "general"}<CR>')
-        nnoremap('<Leader>nm', '<cmd>ZkNew {dir = "work", template = "meeting.md"}<CR>')
-        vnoremap('<Leader>nn', ":'<,'>ZkNewFromTitleSelection {dir = 'refile'}<CR>")
-        vnoremap('<Leader>nw', ":'<,'>ZkNewFromTitleSelection {dir = 'work'}<CR>")
-        vnoremap('<Leader>ng', ":'<,'>ZkNewFromTitleSelection {dir = 'general'}<CR>")
+
+        nnoremap('<Leader>nn', '<cmd>ZkNew {dir = "notes"}<CR>', { desc = '[n]ew [n]ote' })
+        nnoremap('<Leader>nj', '<cmd>ZkNew {dir = "journal"}<CR>', { desc = '[n]ew [j]ournal entry' })
+        nnoremap('<Leader>nm', '<cmd>ZkNew {dir = "notes", template = "meeting.md"}<CR>',
+            { desc = '[n]ew [m]eeting note' })
+
+        vnoremap('<Leader>nn', ":'<,'>ZkNewFromTitleSelection {dir = 'notes'}<CR>",
+            { desc = '[n]ew [n]ote; title from selected text' })
+
+        vnoremap('<Leader>ni', ":'<,'>ZkNewFromTitleSelection {dir = 'notes', edit = false}<CR>",
+            { desc = 'New [n]ote [i]nsert link; title from selected text' })
+
         nnoremap('<Leader>fn', '<cmd>ZkNotes<CR>')
         vnoremap('<Leader>fn', ":'<,'>ZkMatch<CR>")
         nnoremap('<Leader>ft', '<cmd>ZkTags<CR>')

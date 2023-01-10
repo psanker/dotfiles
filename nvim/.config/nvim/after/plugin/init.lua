@@ -1,7 +1,7 @@
 local g = vim.g
 
-require("nvim-tree").setup()
 require('leap').add_default_mappings()
+require('nvim-tree').setup()
 
 require('todo-comments').setup({
     search = {
