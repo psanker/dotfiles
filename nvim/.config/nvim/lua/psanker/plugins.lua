@@ -90,7 +90,12 @@ return require('packer').startup(function(use)
     use 'nvim-lualine/lualine.nvim'
     use 'kyazdani42/nvim-web-devicons'
     use 'airblade/vim-gitgutter'
-    use 'glepnir/dashboard-nvim'
+    use {
+        'goolord/alpha-nvim',
+        config = function()
+            require('alpha').setup(require('psanker.dashboard').config)
+        end
+    }
 
     use 'savq/melange'
     use 'ellisonleao/gruvbox.nvim'
