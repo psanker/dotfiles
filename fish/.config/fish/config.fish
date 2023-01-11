@@ -29,3 +29,6 @@ set -gx PATH "$VOLTA_HOME/bin" $PATH
 set -gx CC "/usr/local/opt/llvm/bin/clang++"
 set -gx LDFLAGS "-L/usr/loca/opt/llvm/lib"
 set -gx CPPFLAGS "-I/usr/local/opt/llvm/include"
+
+# INIT STARSHIP
+starship init fish | source
