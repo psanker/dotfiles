@@ -91,6 +91,12 @@ return require('packer').startup(function(use)
     }
     use {
         'nvim-orgmode/orgmode',
+        config = function()
+            require("orgmode").setup({
+                org_agenda_files = { '~/personal/pkm/**/*' },
+                org_default_notes_file = '~/personal/pkm/todo.org',
+            })
+        end,
     }
 
     -- File explorer
@@ -113,6 +119,18 @@ return require('packer').startup(function(use)
         'goolord/alpha-nvim',
         config = function()
             require('alpha').setup(require('psanker.dashboard').config)
+        end
+    }
+    use {
+        'lukas-reineke/headlines.nvim',
+        config = function()
+            require('headlines').setup()
+        end,
+    }
+    use {
+        'akinsho/org-bullets.nvim',
+        config = function()
+            require('org-bullets').setup({})
         end
     }
 
