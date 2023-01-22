@@ -94,9 +94,9 @@ local section = {
 
 local config = {
     layout = {
-        { type = "padding", val = 20 },
+        { type = "padding", val = 15 },
         section.header,
-        { type = "padding", val = 10 },
+        { type = "padding", val = 5 },
         section.buttons,
         section.footer,
     },

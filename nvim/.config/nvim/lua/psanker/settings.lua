@@ -26,6 +26,7 @@ set.incsearch = true
 set.smartindent = true
 
 set.cursorline = true
+set.laststatus = 3
 set.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
 
 -- Whitespace chars for diagnostics

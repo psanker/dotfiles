@@ -3,7 +3,7 @@ local nnoremap = remap.nnoremap
 local inoremap = remap.nnoremap
 local xnoremap = remap.nnoremap
 
-require('orgmode').setup_ts_grammar()
+-- require('orgmode').setup_ts_grammar()
 
 require('nvim-treesitter.configs').setup({
     ensure_installed = { 'r', 'rust', 'python', 'go', 'org' },
@@ -125,7 +125,10 @@ end
 
 lsp.on_attach(function(client, bufnr)
     bind_lsp_keymaps(client, bufnr)
-    pcall(function() navic.attach(client, bufnr) end)
+
+    if client.server_capabilities.documentSymbolProvider then
+        pcall(function() navic.attach(client, bufnr) end)
+    end
 end)
 
 lsp.configure('sumneko_lua', {

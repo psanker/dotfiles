@@ -103,19 +103,19 @@ nnoremap('<Leader>hw', '<cmd> lua require("harpoon.ui").nav_file(3)<CR>')
 nnoremap('<Leader>he', '<cmd> lua require("harpoon.ui").nav_file(2)<CR>')
 nnoremap('<Leader>hr', '<cmd> lua require("harpoon.ui").nav_file(1)<CR>')
 
--- 5. Trouble (x) maps --
-nnoremap('<Leader>xq', '<cmd> TroubleToggle quickfix<CR>')
+-- 5. View different windows
+nnoremap('<Leader>vo', '<cmd>SymbolsOutline<CR>')
+nnoremap('<Leader>vt', '<cmd>TodoTrouble<CR>')
+nnoremap('<Leader>vT', '<cmd>TodoTelescope<CR>')
+nnoremap('<Leader>vx', '<cmd>TroubleToggle<CR>')
 
--- 6. TODO commments (t) and Trouble maps --
-nnoremap('<Leader>tt', '<cmd> TodoTrouble<CR>')
-nnoremap('<Leader>tT', '<cmd> TodoTelescope<CR>')
-nnoremap('<Leader>tx', '<cmd> TroubleToggle<CR>')
-
--- 7. Zen mode --
+-- 6. Zen mode --
 nnoremap('<Leader>zz', '<cmd>NoNeckPain<CR>')
 
--- 8. Undo Tree --
+-- 7. Undo Tree --
 nnoremap('<Leader>u', '<cmd>UndotreeToggle<CR>')
 
--- 9. Note capture --
+-- 8. Note capture and quick actions (q) --
 nnoremap('<Leader>qn', '<cmd>FloatermNew! --cwd=~/personal/pkm ~/.local/bin/quick-note.sh<CR>')
+nnoremap('<Leader>qj', '<cmd>FloatermNew! --cwd=~/personal/pkm ~/.local/bin/quick-journal.sh<CR>')
+nnoremap('<Leader>qx', '<cmd>TroubleToggle quickfix<CR>')
