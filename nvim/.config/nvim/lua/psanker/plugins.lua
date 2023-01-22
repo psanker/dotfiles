@@ -27,6 +27,43 @@ return require('packer').startup(function(use)
     use 'mfussenegger/nvim-dap'
     use 'jose-elias-alvarez/null-ls.nvim'
     use 'voldikss/vim-floaterm'
+    use {
+        "folke/noice.nvim",
+        config = function()
+            require("noice").setup({
+                lsp = {
+                    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+                    override = {
+                        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                        ["vim.lsp.util.stylize_markdown"] = true,
+                        ["cmp.entry.get_documentation"] = true,
+                    },
+                },
+                -- you can enable a preset for easier configuration
+                presets = {
+                    bottom_search = true, -- use a classic bottom cmdline for search
+                    command_palette = true, -- position the cmdline and popupmenu together
+                    long_message_to_split = true, -- long messages will be sent to a split
+                    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+                    lsp_doc_border = false, -- add a border to hover docs and signature help
+                },
+            })
+        end,
+        requires = {
+            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+            "MunifTanjim/nui.nvim",
+            -- OPTIONAL:
+            --   `nvim-notify` is only needed, if you want to use the notification view.
+            --   If not available, we use `mini` as the fallback
+            "rcarriga/nvim-notify",
+        }
+    }
+    use {
+        'NvChad/nvim-colorizer.lua',
+        config = function()
+            require('colorizer').setup({})
+        end
+    }
 
     ---- Mason-specific infra
     use 'williamboman/mason.nvim'
@@ -89,15 +126,6 @@ return require('packer').startup(function(use)
             require('zen-mode').setup()
         end,
     }
-    use {
-        'nvim-orgmode/orgmode',
-        config = function()
-            require("orgmode").setup({
-                org_agenda_files = { '~/personal/pkm/**/*' },
-                org_default_notes_file = '~/personal/pkm/todo.org',
-            })
-        end,
-    }
 
     -- File explorer
     use 'nvim-tree/nvim-tree.lua'
@@ -112,9 +140,35 @@ return require('packer').startup(function(use)
     use { 'psanker/zk-nvim', branch = 'better-linking' }
 
     -- Themes & appearance
-    use 'nvim-lualine/lualine.nvim'
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = {
+            { 'rose-pine/neovim' },
+        },
+        config = function()
+            require('rose-pine').setup({
+                dark_variant = 'moon',
+            })
+
+            require('psanker.statusline')
+        end
+    }
     use 'kyazdani42/nvim-web-devicons'
-    use 'airblade/vim-gitgutter'
+    use {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup({
+                signs = {
+                    add          = { text = '│' },
+                    change       = { text = '│' },
+                    delete       = { text = '_' },
+                    topdelete    = { text = '‾' },
+                    changedelete = { text = '~' },
+                    untracked    = { text = '┆' },
+                },
+            })
+        end
+    }
     use {
         'goolord/alpha-nvim',
         config = function()
@@ -124,22 +178,25 @@ return require('packer').startup(function(use)
     use {
         'lukas-reineke/headlines.nvim',
         config = function()
-            require('headlines').setup()
+            require('headlines').setup({
+                markdown = {
+                    headline_highlights = false,
+                },
+            })
         end,
     }
     use {
-        'akinsho/org-bullets.nvim',
+        'simrat39/symbols-outline.nvim',
         config = function()
-            require('org-bullets').setup({})
+            require('symbols-outline').setup()
         end
     }
 
-    use 'savq/melange'
-    use 'ellisonleao/gruvbox.nvim'
-    use { 'catppuccin/nvim', as = 'catppuccin' }
-    use 'nyoom-engineering/oxocarbon.nvim'
-    use 'EdenEast/nightfox.nvim'
-    use 'folke/tokyonight.nvim'
-    use 'rebelot/kanagawa.nvim'
-    use 'rose-pine/neovim'
+    -- use 'savq/melange'
+    -- use 'ellisonleao/gruvbox.nvim'
+    -- use { 'catppuccin/nvim', as = 'catppuccin' }
+    -- use 'nyoom-engineering/oxocarbon.nvim'
+    -- use 'EdenEast/nightfox.nvim'
+    -- use 'folke/tokyonight.nvim'
+    -- use 'rebelot/kanagawa.nvim'
 end)

@@ -1,3 +1,27 @@
+local function tbl_length(tbl)
+    local len = 0
+
+    for _, _ in pairs(tbl) do
+        len = len + 1
+    end
+
+    return len
+end
+
+--Get dirname of file
+--@param file string
+--@return string The full dirname for the file
+local function dirname(file)
+    return file:gsub('(.*)(/.*)$', '%1')
+end
+
+--Get basename of file
+--@param file string
+--@return string The full basename for the file
+local function basename(file)
+    return file:gsub('(.*/)(.*)$', '%2')
+end
+
 -- Improved linking module + custom commands based on linking
 return {
     setup = function()
@@ -34,11 +58,9 @@ return {
             zk.pick_notes(opts, { multi_select = false }, function(note)
                 assert(note ~= nil, "Something screwy happened")
 
-                api.link(note.path, location, nil, { title = selected_text }, function(err, foo)
-                    if not foo then
-                        error(err)
-                    end
-                end)
+                api.link(note.path, location, nil, { title = selected_text },
+                    function(err, foo) if not foo then error(err) end
+                    end)
             end)
         end, { needs_selection = true })
 
@@ -76,6 +98,36 @@ return {
                 end)
             end)
         end, { needs_selection = false })
+
+        -- Journaling stuff
+        commands.add('ZkDailyEntry', function(opts)
+            local today = os.date('%Y%m%d')
+            local today_human = os.date('%Y-%m-%d')
+            local entry_path = 'journal/' .. today .. '.md'
+
+            api.list(nil, { select = { 'path' }, hrefs = { entry_path } }, function(err, res)
+                assert(res ~= nil, tostring(err))
+
+                if tbl_length(res) == 0 then
+                    api.new(nil, {
+                        title = today_human,
+                        dir = 'journal',
+                        date = 'today',
+                        template = 'journal.md'
+                    }, function(err, res)
+                        assert(res ~= nil, tostring(err))
+
+                        local dir = dirname(res.path)
+                        local new_path = dir .. '/' .. basename(entry_path)
+                        os.rename(res.path, new_path)
+
+                        vim.cmd('e ' .. new_path)
+                    end)
+                else
+                    vim.cmd('e ' .. res[1]['path'])
+                end
+            end)
+        end)
     end,
     register_commands = function()
         local Remap = require('psanker.keymap')
@@ -85,7 +137,7 @@ return {
         nnoremap('<M-m>', '<cmd>MarkdownPreviewToggle<CR>')
 
         nnoremap('<Leader>nn', '<cmd>ZkNew {dir = "notes"}<CR>', { desc = '[n]ew [n]ote' })
-        nnoremap('<Leader>nj', '<cmd>ZkNew {dir = "journal"}<CR>', { desc = '[n]ew [j]ournal entry' })
+        nnoremap('<Leader>nj', '<cmd>ZkDailyEntry<CR>', { desc = '[n]ew [j]ournal entry' })
         nnoremap('<Leader>nm', '<cmd>ZkNew {dir = "notes", template = "meeting.md"}<CR>',
             { desc = '[n]ew [m]eeting note' })
 
