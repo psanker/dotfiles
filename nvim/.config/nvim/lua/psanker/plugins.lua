@@ -47,6 +47,9 @@ return require('packer').startup(function(use)
                     inc_rename = false, -- enables an input dialog for inc-rename.nvim
                     lsp_doc_border = false, -- add a border to hover docs and signature help
                 },
+                messages = {
+                    enabled = false,
+                },
             })
         end,
         requires = {
@@ -55,13 +58,17 @@ return require('packer').startup(function(use)
             -- OPTIONAL:
             --   `nvim-notify` is only needed, if you want to use the notification view.
             --   If not available, we use `mini` as the fallback
-            "rcarriga/nvim-notify",
+            -- "rcarriga/nvim-notify",
         }
     }
     use {
         'NvChad/nvim-colorizer.lua',
         config = function()
-            require('colorizer').setup({})
+            require('colorizer').setup({
+                user_default_options = {
+                    names = false,
+                },
+            })
         end
     }
 
@@ -159,13 +166,23 @@ return require('packer').startup(function(use)
         config = function()
             require('gitsigns').setup({
                 signs = {
-                    add          = { text = '│' },
-                    change       = { text = '│' },
+                    add          = { text = '+' },
+                    change       = { text = 'Δ' },
                     delete       = { text = '_' },
                     topdelete    = { text = '‾' },
                     changedelete = { text = '~' },
                     untracked    = { text = '┆' },
                 },
+                on_attach = function(bufnr)
+                    local function map(mode, l, r, opts)
+                        opts = opts or {}
+                        opts.buffer = bufnr
+                        vim.keymap.set(mode, l, r, opts)
+                    end
+
+                    -- Text object
+                    map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+                end
             })
         end
     }
