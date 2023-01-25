@@ -158,6 +158,7 @@ meh - h : yabai -m space --mirror y-axis
 hyper - o ; apps
 apps < escape ; default
 
+apps < n : open ~
 apps < f : open /Applications/Firefox.app
 apps < k : open /Applications/kitty.app
 apps < m : open /System/Applications/Mail.app
