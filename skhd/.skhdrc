@@ -125,18 +125,19 @@ lalt + shift - l : yabai -m window --swap east
 lalt + shift - o : yabai -m window --swap largest
 lalt + shift - i : yabai -m window --swap smallest
 
-## Moving to different spaces / displays
-meh - 1 : yabai -m window --space 1
-meh - 2 : yabai -m window --space 2
-meh - 3 : yabai -m window --space 3
-meh - 4 : yabai -m window --space 4
-meh - 5 : yabai -m window --space 5
-
-lalt - 1 : yabai -m display --focus 1
-lalt - 2 : yabai -m display --focus 2
-
+## Moving windows to different spaces
 shift + lalt - 1 : yabai -m window --space 1
 shift + lalt - 2 : yabai -m window --space 2
+shift + lalt - 3 : yabai -m window --space 3
+shift + lalt - 4 : yabai -m window --space 4
+shift + lalt - 5 : yabai -m window --space 5
+
+## Moving to / sending windows to displays
+ctrl + lalt - 1 : yabai -m display --focus 1
+ctrl + lalt - 2 : yabai -m display --focus 2
+
+meh - 1 : yabai -m window --display 1
+meh - 2 : yabai -m window --display 2
 
 ## Take window out of management
 lalt - t : yabai -m window --toggle float;\
@@ -153,6 +154,9 @@ meh - e : yabai -m window --toggle split
 meh - r : yabai -m space --rotate 90
 meh - h : yabai -m space --mirror y-axis
 
+## Reset sizing
+shift + lalt - 0 : yabai -m space --balance
+
 # Application opening/switching mode
 :: apps @
 hyper - o ; apps
@@ -164,3 +168,4 @@ apps < k : open /Applications/kitty.app
 apps < m : open /System/Applications/Mail.app
 apps < shift - m : open /System/Applications/Music.app
 apps < s : open /Applications/Slack.app
+apps < shift - o : open /Applications/Obsidian.app

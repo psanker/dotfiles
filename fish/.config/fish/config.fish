@@ -20,6 +20,7 @@ if status is-interactive
     alias gi="gitignore"
     alias pt="python3.10 -m poetry"
     alias bfg="java -jar $HOME/.local/bin/bfg.jar"
+    alias sioyek="/Applications/sioyek.app/Contents/MacOS/sioyek"
 end
 
 source ~/.config/.env
