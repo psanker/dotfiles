@@ -1,4 +1,4 @@
-local writing = require('psanker.writing')
+local writing = require('psanker.edit.writing')
 
 local Remap = require("psanker.keymap")
 local nnoremap = Remap.nnoremap

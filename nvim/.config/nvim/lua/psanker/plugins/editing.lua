@@ -6,10 +6,9 @@ return {
             'nvim-telescope/telescope.nvim',
         },
         config = function()
-            local bind_lsp_keymaps = require('psanker.lsp').bind_lsp_keymaps
+            local bind_lsp_keymaps = require('psanker.edit.lsp').bind_lsp_keymaps
 
             require('zk').setup({
-
                 -- can be "telescope", "fzf" or "select" (`vim.ui.select`)
                 -- it's recommended to use "telescope" or "fzf"
                 picker = "telescope",
@@ -32,11 +31,12 @@ return {
                 }
             })
 
-            require('psanker.zk').setup()
-            require('psanker.zk').register_commands()
+            require('psanker.edit.pkm').setup()
+            require('psanker.edit.pkm').register_commands()
 
             require('telescope').load_extension('zk')
         end,
+        keys = { '<Leader>ft', '<Leader>fn' }
     },
     {
         'andymass/vim-matchup',
@@ -44,7 +44,7 @@ return {
     },
     {
         'ggandor/leap.nvim',
-        keys = { 's', 'S' },
+        event = 'VeryLazy',
         config = function(_)
             require('leap').add_default_mappings()
         end,
