@@ -74,48 +74,13 @@ nnoremap('<Leader>gp', '<cmd>Git pull<CR>', { silent = true, desc = '[g]it [p]ul
 nnoremap('<Leader>gP', '<cmd>Git push<CR>', { silent = true, desc = '[g]it [P]ush' })
 nnoremap('<Leader>gl', '<cmd>Git log<CR>', { desc = '[g]it [l]og' })
 
--- 3. Telescope (f) --
-local builtin = require("telescope.builtin")
-nnoremap('<Leader>fb', '<cmd>NvimTreeToggle<CR>', { desc = '[f]ile [b]rowser' })
-nnoremap('<Leader>ff', builtin.find_files, { desc = "[f]ind [f]ile" })
-nnoremap('<Leader>fw', builtin.grep_string, { desc = "[f]ind [w]ord under cursor" })
-nnoremap('<Leader>fg', builtin.live_grep, { desc = "[f]ind string using [g]rep" })
-nnoremap('<Leader>ft', function()
-    local tag = vim.fn.input("Tag > ")
-    builtin.grep_string({ search = ":" .. tag .. ":" })
-end, { desc = "[f]ind vimwiki-style [t]ag" })
-nnoremap('<Leader>fk', '<cmd> Telescope keymaps<CR>', { desc = '[f]ind [k]eymap' })
-
-nnoremap('<Leader>/', builtin.current_buffer_fuzzy_find,
-    { desc = "Find in current buffer using fuzzy find (akin to [/])" })
-nnoremap('<Leader>f?', builtin.help_tags, { desc = "[f]ind in help[?]" })
-nnoremap('<Leader>fs', builtin.lsp_document_symbols, { desc = "[f]ind [s]ymbol in current document" })
-nnoremap('<Leader>fS', builtin.lsp_workspace_symbols, { desc = "[f]ind [S]ymbol in current workspace" })
-
--- 4. Harpoon (h) --
-nnoremap('<Leader>hh', '<cmd> lua require("harpoon.ui").toggle_quick_menu()<CR>')
-nnoremap('<Leader>ha', '<cmd> lua require("harpoon.mark").add_file()<CR>')
-nnoremap('<Leader>hn', '<cmd> lua require("harpoon.ui").nav_next()<CR>')
-nnoremap('<Leader>hp', '<cmd> lua require("harpoon.ui").nav_prev()<CR>')
-
-nnoremap('<Leader>hq', '<cmd> lua require("harpoon.ui").nav_file(4)<CR>')
-nnoremap('<Leader>hw', '<cmd> lua require("harpoon.ui").nav_file(3)<CR>')
-nnoremap('<Leader>he', '<cmd> lua require("harpoon.ui").nav_file(2)<CR>')
-nnoremap('<Leader>hr', '<cmd> lua require("harpoon.ui").nav_file(1)<CR>')
-
--- 5. View different windows
+-- 3. View different windows
 nnoremap('<Leader>vo', '<cmd>SymbolsOutline<CR>')
 nnoremap('<Leader>vt', '<cmd>TodoTrouble<CR>')
 nnoremap('<Leader>vT', '<cmd>TodoTelescope<CR>')
 nnoremap('<Leader>vx', '<cmd>TroubleToggle<CR>')
 
--- 6. Zen mode --
-nnoremap('<Leader>zz', '<cmd>NoNeckPain<CR>')
-
--- 7. Undo Tree --
-nnoremap('<Leader>u', '<cmd>UndotreeToggle<CR>')
-
--- 8. Note capture and quick actions (q) --
+-- 4. Note capture and quick actions (q) --
 nnoremap('<Leader>qn', '<cmd>FloatermNew! --cwd=~/personal/pkm ~/.local/bin/quick-note.sh<CR>')
 nnoremap('<Leader>qj', '<cmd>FloatermNew! --cwd=~/personal/pkm ~/.local/bin/quick-journal.sh<CR>')
 nnoremap('<Leader>qx', '<cmd>TroubleToggle quickfix<CR>')

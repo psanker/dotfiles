@@ -55,8 +55,6 @@ vim.cmd [[let R_app = 'radian' ]]
 vim.cmd [[let R_assign = 0 ]]
 vim.cmd [[let R_nvim_wd = 1]]
 
--- Show line diagnostics automatically in hover
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 -- Vimwiki stuff
 g.vimiwiki_list = {
@@ -66,3 +64,8 @@ g.vimiwiki_list = {
         ext = '.qmd'
     }
 }
+
+-- Markdown things
+g.mkdp_port = 8800
+g.mkdp_page_title = '${name} - md.nvim'
+g.mkdp_auto_start = 0
