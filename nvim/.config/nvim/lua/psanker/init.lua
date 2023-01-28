@@ -1,2 +1,3 @@
 require('psanker.settings')
-require('psanker.plugins')
+require('psanker.lazy')
+require('psanker.autocmd')
