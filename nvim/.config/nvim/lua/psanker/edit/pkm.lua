@@ -9,17 +9,17 @@ local function tbl_length(tbl)
 end
 
 --Get dirname of file
---@param file string
---@return string The full dirname for the file
+---@param file string
+---@return string The full dirname for the file
 local function dirname(file)
-    return file:gsub('(.*)(/.*)$', '%1')
+    return file:gsub('(.*)(/.*)$', '%1')[1]
 end
 
 --Get basename of file
---@param file string
---@return string The full basename for the file
+---@param file string
+---@return string The full basename for the file
 local function basename(file)
-    return file:gsub('(.*/)(.*)$', '%2')
+    return file:gsub('(.*/)(.*)$', '%2')[1]
 end
 
 -- Improved linking module + custom commands based on linking
@@ -62,8 +62,6 @@ return {
         local Remap = require('psanker.keymap')
         local nnoremap = Remap.nnoremap
         local vnoremap = Remap.vnoremap
-
-        nnoremap('<M-m>', '<cmd>MarkdownPreviewToggle<CR>')
 
         nnoremap('<Leader>nn', '<cmd>ZkNew {dir = "notes"}<CR>', { desc = '[n]ew [n]ote' })
         nnoremap('<Leader>nj', '<cmd>ZkDailyEntry<CR>', { desc = '[n]ew [j]ournal entry' })

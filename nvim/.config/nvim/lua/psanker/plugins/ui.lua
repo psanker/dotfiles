@@ -43,8 +43,9 @@ return {
             { 'rose-pine/neovim' },
         },
         config = function(_)
-            require('psanker.statusline')
-        end
+            require('psanker.ui.statusline')
+        end,
+        event = { 'BufEnter' },
     },
     {
         'lewis6991/gitsigns.nvim',
@@ -75,7 +76,8 @@ return {
     {
         'goolord/alpha-nvim',
         config = function(_)
-            require('alpha').setup(require('psanker.dashboard').config)
-        end
+            require('alpha').setup(require('psanker.ui.dashboard').config)
+        end,
+        event = 'BufEnter',
     },
 }

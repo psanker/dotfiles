@@ -2,7 +2,10 @@ return {
     {
         'nvim-treesitter/nvim-treesitter',
         build = ":TSUpdate",
-        event = 'BufReadPost',
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter-textobjects',
+        },
+        event = 'BufEnter',
         config = function()
             require('nvim-treesitter.configs').setup({
                 ensure_installed = { 'r', 'rust', 'python', 'go', 'org' },
@@ -65,11 +68,6 @@ return {
         end
     },
     {
-        'nvim-treesitter/nvim-treesitter-textobjects',
-        dependencies = 'nvim-treesitter/nvim-treesitter',
-        event = { 'CursorHold', 'CursorMoved', 'InsertEnter' },
-    },
-    {
         'nvim-treesitter/playground',
         dependencies = 'nvim-treesitter/nvim-treesitter',
         cmd = 'TSPlayground',
@@ -79,6 +77,6 @@ return {
         config = function(_)
             require('symbols-outline').setup()
         end,
-        event = { 'CursorHold', 'CursorMoved', 'InsertEnter' },
+        event = { 'BufReadPost', 'BufNewFile' },
     },
 }
