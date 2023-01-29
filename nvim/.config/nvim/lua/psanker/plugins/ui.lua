@@ -11,18 +11,25 @@ return {
     },
     {
         'folke/zen-mode.nvim',
-        config = function(_)
-            require('zen-mode').setup()
+        opts = {
+            window = {
+                width = .75,
+            },
+        },
+        config = function(_, opts)
+            require('zen-mode').setup(opts)
         end,
         keys = {
             {
                 '<Leader>zz',
                 function()
-                    require('zen-mode').toggle({
-                        window = {
-                            width = .75,
-                        },
-                    })
+                    vim.g.zen_mode_open = not vim.g.zen_mode_open
+
+                    if vim.g.zen_mode_open then
+                        require('zen-mode').open()
+                    else
+                        require('zen-mode').close()
+                    end
                 end,
                 desc = 'Toggle Zen mode',
             },

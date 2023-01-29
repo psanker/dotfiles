@@ -36,7 +36,7 @@ return {
 
             require('telescope').load_extension('zk')
         end,
-        keys = { '<Leader>ft', '<Leader>fn' }
+        keys = { '<Leader>ft', '<Leader>fn', '<Leader>nm', '<Leader>nn', '<Leader>nj' }
     },
     {
         'andymass/vim-matchup',
@@ -48,5 +48,9 @@ return {
         config = function(_)
             require('leap').add_default_mappings()
         end,
+    },
+    {
+        'junegunn/vim-easy-align',
+        event = { 'BufReadPost', 'BufNewFile' },
     },
 }
