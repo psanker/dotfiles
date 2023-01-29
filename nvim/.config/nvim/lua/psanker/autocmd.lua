@@ -4,7 +4,7 @@ vim.api.nvim_create_autocmd(
 )
 
 vim.api.nvim_create_autocmd(
-    {'CursorHold', 'CursorHoldI'},
+    { 'CursorHold', 'CursorHoldI' },
     {
         pattern = '*',
         command = 'lua vim.diagnostic.open_float(nil, {focus=false})'

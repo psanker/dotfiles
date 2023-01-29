@@ -3,6 +3,7 @@ local g = vim.g
 
 g.loaded = 1
 g.loaded_netrwPlugin = 1
+g.syntax_on = 1
 
 -- Global settings
 g.mapleader = ' '
@@ -69,3 +70,6 @@ g.vimiwiki_list = {
 g.mkdp_port = 8800
 g.mkdp_page_title = '${name} - md.nvim'
 g.mkdp_auto_start = 0
+
+-- zen-mode and neovim bug workaround
+g.zen_mode_open = false

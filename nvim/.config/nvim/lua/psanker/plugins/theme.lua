@@ -1,9 +1,15 @@
 return {
     {
         'rose-pine/neovim',
-        config = function ()
+        config = function()
             require('rose-pine').setup({
                 dark_variant = 'moon',
+                highlight_groups = {
+                    NormalNC = {
+                        fg = 'subtle',
+                        bg = 'base'
+                    },
+                },
             })
 
             vim.cmd.colorscheme('rose-pine')
@@ -22,5 +28,8 @@ return {
         end,
         event = { 'BufReadPre', 'BufNewFile' },
     },
-    'kyazdani42/nvim-web-devicons',
+    {
+        'kyazdani42/nvim-web-devicons',
+        event = { 'BufEnter' },
+    },
 }

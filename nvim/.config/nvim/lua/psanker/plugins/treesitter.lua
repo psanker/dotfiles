@@ -11,7 +11,6 @@ return {
                 ensure_installed = { 'r', 'rust', 'python', 'go', 'org' },
                 highlight = {
                     enable = true,
-                    additional_vim_regex_highlighting = { 'org' },
                 },
                 textobjects = {
                     move = {
@@ -65,6 +64,36 @@ return {
                     },
                 },
             })
+
+            vim.api.nvim_create_augroup('buf_syntax', { clear = true })
+
+            vim.api.nvim_create_user_command('BufSyntaxOn', function()
+                vim.bo.syntax = 'on'
+                vim.cmd('TSBufEnable highlight')
+            end, {})
+
+            vim.api.nvim_create_user_command('BufSyntaxOff', function()
+                vim.bo.syntax = 'off'
+                vim.cmd('TSBufDisable highlight')
+            end, {})
+
+            vim.api.nvim_create_autocmd(
+                { 'BufLeave' },
+                {
+                    group = 'buf_syntax',
+                    pattern = '*',
+                    command = 'BufSyntaxOff'
+                }
+            )
+
+            vim.api.nvim_create_autocmd(
+                { 'BufEnter' },
+                {
+                    group = 'buf_syntax',
+                    pattern = '*',
+                    command = 'BufSyntaxOn'
+                }
+            )
         end
     },
     {

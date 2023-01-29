@@ -127,16 +127,60 @@ lualine.setup({
                 symbols = {
                     modified = apply_color('PsaFileModified', '(+)')
                 },
+                fmt = function(str)
+                    if vim.g.zen_mode_open then
+                        return ''
+                    end
+
+                    return str
+                end,
             },
         },
         lualine_x = {
             { word_count },
-            'encoding',
-            'fileformat',
+            {
+                'encoding',
+                fmt = function(str)
+                    if vim.g.zen_mode_open then
+                        return ''
+                    end
+
+                    return str
+                end,
+            },
+            {
+                'fileformat',
+                fmt = function(str)
+                    if vim.g.zen_mode_open then
+                        return ''
+                    end
+
+                    return str
+                end,
+            }
         },
         lualine_y = {
-            'branch',
-            { 'diff', symbols = { modified = 'Δ' } },
+            {
+                'branch',
+                fmt = function(str)
+                    if vim.g.zen_mode_open then
+                        return ''
+                    end
+
+                    return str
+                end,
+            },
+            {
+                'diff',
+                symbols = { modified = 'Δ' },
+                fmt = function(str)
+                    if vim.g.zen_mode_open then
+                        return ''
+                    end
+
+                    return str
+                end,
+            },
         },
         lualine_z = {
             { macro_recording },
