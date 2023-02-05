@@ -12,14 +12,14 @@ end
 ---@param file string
 ---@return string The full dirname for the file
 local function dirname(file)
-    return file:gsub('(.*)(/.*)$', '%1')[1]
+    return file:gsub('(.*)(/.*)$', '%1')
 end
 
 --Get basename of file
 ---@param file string
 ---@return string The full basename for the file
 local function basename(file)
-    return file:gsub('(.*/)(.*)$', '%2')[1]
+    return file:gsub('(.*/)(.*)$', '%2')
 end
 
 -- Improved linking module + custom commands based on linking

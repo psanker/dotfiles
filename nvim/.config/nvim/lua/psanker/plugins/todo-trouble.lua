@@ -1,7 +1,7 @@
 return {
     {
         'folke/trouble.nvim',
-        cmd = { 'TroubleToggle', 'TroubleRefresh', 'Trouble', 'TroubleClose' }
+        cmd = { 'TroubleToggle', 'TroubleRefresh', 'Trouble', 'TroubleClose' },
     },
     {
         'folke/todo-comments.nvim',
@@ -21,6 +21,7 @@ return {
                     },
                 }
             })
-        end
+        end,
+        event = { 'BufReadPost', 'BufNewFile' },
     },
 }

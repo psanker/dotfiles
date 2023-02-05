@@ -1,0 +1,63 @@
+# [Created by task 2.6.2 2/4/2023 14:57:43]
+# Taskwarrior program configuration file.
+# For more documentation, see https://taskwarrior.org or try 'man task', 'man task-color',
+# 'man task-sync' or 'man taskrc'
+
+# Here is an example of entries that use the default, override and blank values
+#   variable=foo   -- By specifying a value, this overrides the default
+#   variable=      -- By specifying no value, this means no default
+#   #variable=foo  -- By commenting out the line, or deleting it, this uses the default
+
+# You can also refence environment variables:
+#   variable=$HOME/task
+#   variable=$VALUE
+
+# Use the command 'task show' to see all defaults and overrides
+
+# Files
+
+# To use the default location of the XDG directories,
+# move this configuration file from ~/.taskrc to ~/.config/task/taskrc and uncomment below
+
+data.location=~/.local/share/task
+hooks.location=~/.config/task/hooks
+
+# Color theme (uncomment one to use)
+#include light-16.theme
+#include light-256.theme
+#include dark-16.theme
+#include dark-256.theme
+#include dark-red-256.theme
+#include dark-green-256.theme
+#include dark-blue-256.theme
+#include dark-violets-256.theme
+#include dark-yellow-green.theme
+#include dark-gray-256.theme
+#include dark-gray-blue-256.theme
+#include solarized-dark-256.theme
+#include solarized-light-256.theme
+#include no-color.theme
+
+# In the AM config
+taskd.certificate=$HOME/.local/share/task/private.certificate.pem
+taskd.key=$HOME/.local/share/task/private.key.pem
+taskd.ca=$HOME/.local/share/task/ca.cert.pem
+taskd.server=inthe.am:53589
+taskd.credentials=inthe_am/psa251/4331f25f-b457-4cf1-acf2-1132b22da3d6
+taskd.trust=strict
+
+
+
+context.ptl.read=project:ptl
+context.ptl.write=project:ptl
+news.version=2.6.0
+
+uda.twgcalsyncduration.type=duration
+uda.twgcalsyncduration.label=GCal duration
+
+uda.taskwarrior-tui.quick-tag.name=sync
+uda.taskwarrior-tui.shortcuts.1=~/.local/bin/twgcalsync.sh
+context.today.read=due:today or scheduled:today +PENDING
+context=today
+context.tomorrow.read=due:tomorrow or scheduled:tomorrow +PENDING
+context.tomorrow.write=due:tomorrow OR scheduled:tomorrow +PENDING

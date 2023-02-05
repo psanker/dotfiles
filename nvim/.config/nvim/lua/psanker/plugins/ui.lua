@@ -33,7 +33,13 @@ return {
                 end,
                 desc = 'Toggle Zen mode',
             },
-        }
+        },
+        on_open = function (_)
+            require('lualine').setup(require('psanker.ui.statusline').opts(true))
+        end,
+        on_close = function ()
+            require('lualine').setup(require('psanker.ui.statusline').opts(false))
+        end,
     },
     {
         'nvim-tree/nvim-tree.lua',
@@ -50,7 +56,7 @@ return {
             { 'rose-pine/neovim' },
         },
         config = function(_)
-            require('psanker.ui.statusline')
+            require('lualine').setup(require('psanker.ui.statusline').opts(false))
         end,
         event = { 'BufEnter' },
     },

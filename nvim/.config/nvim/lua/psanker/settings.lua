@@ -4,6 +4,7 @@ local g = vim.g
 g.loaded = 1
 g.loaded_netrwPlugin = 1
 g.syntax_on = 1
+g.inactive_buf_syntax = 0
 
 -- Global settings
 g.mapleader = ' '
@@ -43,7 +44,7 @@ set.splitbelow = true
 -- menuone: popup even when there's only one match
 -- noinsert: Do not insert text until a selection is made
 -- noselect: Do not select, force to select one from the menu
--- shortness: avoid showing extra messages when using completion
+-- shortmess: avoid showing extra messages when using completion
 -- updatetime: set updatetime for CursorHold
 set.completeopt = { 'menuone', 'noselect', 'noinsert' }
 set.shortmess = vim.opt.shortmess + { c = true }

@@ -150,9 +150,9 @@ lalt - f : yabai -m window --toggle zoom-fullscreen
 lalt - q : yabai -m window --close
 
 ## Space stuff
-meh - e : yabai -m window --toggle split
-meh - r : yabai -m space --rotate 90
-meh - h : yabai -m space --mirror y-axis
+shift + lalt - e : yabai -m window --toggle split
+shift + lalt - r : yabai -m space --rotate 90
+shift + lalt - v : yabai -m space --mirror y-axis
 
 ## Reset sizing
 shift + lalt - 0 : yabai -m space --balance
