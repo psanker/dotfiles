@@ -65,36 +65,57 @@ return {
                 },
             })
 
-            vim.api.nvim_create_augroup('buf_syntax', { clear = true })
+            vim.api.nvim_create_augroup('inactive_buf_syntax', { clear = true })
 
-            vim.api.nvim_create_user_command('BufSyntaxOn', function()
-                vim.bo.syntax = 'on'
-                vim.cmd('TSBufEnable highlight')
+            vim.api.nvim_create_user_command('InactiveBufSyntaxEnable', function()
+                vim.g.inactive_buf_syntax = 1
+
+                vim.cmd('TSEnable highlight')
+                vim.o.syntax = 'on'
+                print('Inactive buffers now have syntax highlighted')
             end, {})
 
-            vim.api.nvim_create_user_command('BufSyntaxOff', function()
-                vim.bo.syntax = 'off'
-                vim.cmd('TSBufDisable highlight')
+            vim.api.nvim_create_user_command('InactiveBufSyntaxDisable', function()
+                vim.g.inactive_buf_syntax = 0
+                print('Inactive buffers now will have syntax greyed out')
             end, {})
 
-            vim.api.nvim_create_autocmd(
-                { 'BufLeave' },
-                {
-                    group = 'buf_syntax',
-                    pattern = '*',
-                    command = 'BufSyntaxOff'
-                }
-            )
+            vim.api.nvim_create_user_command('InactiveBufSyntaxOn', function()
+                if vim.g.inactive_buf_syntax ~= 1 then
+                    vim.bo.syntax = 'on'
+                    vim.cmd('TSBufEnable highlight')
+                end
+            end, {})
 
-            vim.api.nvim_create_autocmd(
-                { 'BufEnter' },
-                {
-                    group = 'buf_syntax',
-                    pattern = '*',
-                    command = 'BufSyntaxOn'
-                }
-            )
-        end
+            vim.api.nvim_create_user_command('InactiveBufSyntaxOff', function()
+                if vim.g.inactive_buf_syntax ~= 1 then
+                    vim.bo.syntax = 'off'
+                    vim.cmd('TSBufDisable highlight')
+                end
+            end, {})
+
+            -- vim.api.nvim_create_autocmd(
+            --     { 'BufLeave' },
+            --     {
+            --         group = 'inactive_buf_syntax',
+            --         pattern = '*',
+            --         command = 'InactiveBufSyntaxOff'
+            --     }
+            -- )
+
+            -- vim.api.nvim_create_autocmd(
+            --     { 'BufEnter' },
+            --     {
+            --         group = 'inactive_buf_syntax',
+            --         pattern = '*',
+            --         command = 'InactiveBufSyntaxOn'
+            --     }
+            -- )
+        end,
+        keys = {
+            { '<Leader>bsi', '<cmd>InactiveBufSyntaxEnable<CR>' },
+            { '<Leader>bso', '<cmd>InactiveBufSyntaxDisable<CR>' },
+        },
     },
     {
         'nvim-treesitter/playground',

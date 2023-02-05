@@ -3,6 +3,7 @@ fish_add_path "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 fish_add_path /Users/patrickanker/.local/bin
 fish_add_path /Library/Frameworks/Python.framework/Versions/3.10/bin
 fish_add_path /Applications/RStudio.app/Contents/MacOS
+fish_add_path /usr/local/go/bin
 fish_add_path "$HOME/go"
 fish_add_path "$HOME/.cargo/bin"
 fish_add_path /usr/local/opt/llvm/bin
@@ -21,6 +22,9 @@ if status is-interactive
     alias pt="python3.10 -m poetry"
     alias bfg="java -jar $HOME/.local/bin/bfg.jar"
     alias sioyek="/Applications/sioyek.app/Contents/MacOS/sioyek"
+    alias cat="bat"
+    alias t="task"
+    alias tw="taskwarrior-tui"
 end
 
 source ~/.config/.env

@@ -10,8 +10,14 @@ function M.bind_lsp_keymaps(_, bufnr)
     local opts = { buffer = bufnr }
 
     nnoremap('<Leader>F', function() vim.lsp.buf.format({ async = true }) end, opts)
-    nnoremap('K', function() vim.lsp.buf.hover() end,
-        { buffer = bufnr, desc = 'Display hover information of symbol under cursor' })
+    nnoremap(
+        'K',
+        function()
+            vim.lsp.buf.hover()
+            vim.lsp.buf.hover()
+        end,
+        { buffer = bufnr, desc = 'Display hover information of symbol under cursor' }
+    )
     nnoremap('gd', function() vim.lsp.buf.definition() end,
         { buffer = bufnr, desc = 'Go to definition of symbol under cursor' }) -- Jump to the definition
     nnoremap('gD', function() vim.lsp.buf.declaration() end,
@@ -108,8 +114,11 @@ function M.setup_lsp(lsp, navic)
     })
 
     lsp.setup()
+
+    vim.diagnostic.config({
+        virtual_text = true,
+        float = false,
+    })
 end
-
-
 
 return M
