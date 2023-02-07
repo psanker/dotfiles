@@ -15,6 +15,10 @@ set --export RSTUDIO_PANDOC /Applications/RStudio.app/Contents/MacOS/pandoc
 set --export GPG_TTY (eval tty)
 set --export LEDGER_FILE "$HOME/personal/pkm/finance/current.journal"
 
+set --export NNN_PLUG "p:preview-tui;f:fzopen"
+set --export NNN_FIFO "/tmp/nnn.fifo"
+set --export SPLIT "v"
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
 
@@ -29,6 +33,11 @@ if status is-interactive
     alias hl="hledger"
     alias hlu="hledger-ui"
     alias hlw="hledger-web"
+
+    alias nnn="nnn -dea"
+    alias ls="nnn -dea"
+    alias ll="nnn -dea"
+    alias la="nnn -deHa"
 end
 
 source ~/.config/.env
