@@ -10,3 +10,6 @@
 [submodule "git"]
 	path = git
 	url = ./git
+[submodule "hledger"]
+	path = hledger
+	url = ./hledger
