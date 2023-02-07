@@ -17,7 +17,22 @@ set --export LEDGER_FILE "$HOME/personal/pkm/finance/current.journal"
 
 set --export NNN_PLUG "p:preview-tui;f:fzopen"
 set --export NNN_FIFO "/tmp/nnn.fifo"
-set --export SPLIT "v"
+
+set BLK "0B"
+set CHR "0B"
+set DIR "02" 
+set EXE "09" 
+set REG "07" 
+set HARDLINK "06" 
+set SYMLINK "05" 
+set MISSING "04" 
+set ORPHAN "04" 
+set FIFO "03" 
+set SOCK "03" 
+set OTHER "0F"
+
+set --export NNN_COLORS "6666"
+set --export NNN_FCOLORS "$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
@@ -34,10 +49,10 @@ if status is-interactive
     alias hlu="hledger-ui"
     alias hlw="hledger-web"
 
-    alias nnn="nnn -dea"
-    alias ls="nnn -dea"
-    alias ll="nnn -dea"
-    alias la="nnn -deHa"
+    alias nnn="n -dea"
+    alias ls="n -dea"
+    alias ll="n -dea"
+    alias la="n -deHa"
 end
 
 source ~/.config/.env
