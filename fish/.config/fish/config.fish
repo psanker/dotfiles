@@ -13,6 +13,7 @@ set --export VISUAL nvim
 set --export EDITOR "$VISUAL"
 set --export RSTUDIO_PANDOC /Applications/RStudio.app/Contents/MacOS/pandoc
 set --export GPG_TTY (eval tty)
+set --export LEDGER_FILE "$HOME/personal/pkm/finance/current.journal"
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
@@ -25,6 +26,9 @@ if status is-interactive
     alias cat="bat"
     alias t="task"
     alias tw="taskwarrior-tui"
+    alias hl="hledger"
+    alias hlu="hledger-ui"
+    alias hlw="hledger-web"
 end
 
 source ~/.config/.env

@@ -169,3 +169,6 @@ apps < m : open /System/Applications/Mail.app
 apps < shift - m : open /System/Applications/Music.app
 apps < s : open /Applications/Slack.app
 apps < shift - o : open /Applications/Obsidian.app
+
+# Shortcut to create a new kitty term on the fly
+lalt - return : kitty --single-instance ~
