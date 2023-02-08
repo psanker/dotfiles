@@ -7,6 +7,7 @@ fish_add_path /usr/local/go/bin
 fish_add_path "$HOME/go"
 fish_add_path "$HOME/.cargo/bin"
 fish_add_path /usr/local/opt/llvm/bin
+fish_add_path /Users/patrickanker/.spicetify
 
 set --export SHELL /usr/local/bin/fish
 set --export VISUAL nvim
