@@ -165,9 +165,10 @@ apps < escape ; default
 apps < n : open ~
 apps < f : open /Applications/Firefox.app
 apps < k : open /Applications/kitty.app
-apps < m : open /System/Applications/Mail.app
-apps < shift - m : open /System/Applications/Music.app
-apps < s : open /Applications/Slack.app
+apps < m : open /System/Applications/Messages.app
+apps < shift - m : open /System/Applications/Mail.app
+apps < s : open /Applications/Spotify.app
+apps < shift - s : open /Applications/Slack.app
 apps < shift - o : open /Applications/Obsidian.app
 
 # Shortcut to create a new kitty term on the fly
