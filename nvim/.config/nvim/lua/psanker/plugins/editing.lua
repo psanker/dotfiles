@@ -1,7 +1,6 @@
 return {
     {
-        'psanker/zk-nvim',
-        branch = 'better-linking',
+        'mickael-menu/zk-nvim',
         dependencies = {
             'nvim-telescope/telescope.nvim',
         },

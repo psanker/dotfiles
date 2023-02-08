@@ -14,7 +14,7 @@ export TRANSPARENT=0x00000000
 
 # General bar colors
 # export BAR_COLOR=0xcc24273a
-export BAR_COLOR=0x662a273f
+export BAR_COLOR=0x882a273f
 export ICON_COLOR=$WHITE # Color of all icons
 export LABEL_COLOR=$WHITE # Color of all labels
 export BACKGROUND_1=0xff393552
