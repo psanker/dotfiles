@@ -8,7 +8,7 @@ sketchybar --add       event           spotify_change $SPOTIFY_EVENT        \
                                        popup.horizontal=on                  \
                                        popup.align=center                   \
                                        popup.height=120                     \
-                                       icon=􁁒                               \
+                                       icon=􀫀                               \
                                        icon.font="$FONT:Regular:25.0"       \
                                        label.drawing=off                    \
                                        drawing=off                          \
