@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10" "11" "12" "13" "14" "15")
+SPACE_ICONS=("󰈹" "󰄛" "󰭹" "󰇮" "" "6" "7" "8" "9" "10" "11" "12" "13" "14" "15")
 
 # Destroy space on right click, focus space on left click.
 # New space by left clicking separator (>)
@@ -21,6 +21,7 @@ do
                               background.padding_right=-8                   \
                               background.color=$BACKGROUND_1                \
                               background.drawing=on                         \
+                              icon.font="Hasklug Nerd Font:Regular:16.0"    \
                               label.font="sketchybar-app-font:Regular:16.0" \
                               label.background.height=26                    \
                               label.background.drawing=on                   \
