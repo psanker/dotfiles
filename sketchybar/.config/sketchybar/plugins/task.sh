@@ -15,15 +15,16 @@ if [ "$TW_ACTIVE_SIZE" -gt "$TW_ACTIVE_MAX_LEN" ]; then
 fi
 
 if [ "$TW_COUNT" -gt 0 ]; then
-    label=""
-
     if [ "$TW_ACTIVE_SIZE" -gt 0 ]; then
-        label="$TW_ACTIVE"
+        sketchybar --set "$NAME" icon="􀷾 $TW_COUNT" \
+                                 label="$TW_ACTIVE" \
+                                 width=dynamic
+    else
+        sketchybar --set "$NAME" icon="􀷾 $TW_COUNT" \
+                                 label="" \
+                                 label.width=0 \
+                                 width=dynamic
     fi
-
-    sketchybar --set "$NAME" icon="􀷾 $TW_COUNT" \
-                             label="$label" \
-                             width=dynamic
 else
     sketchybar --set "$NAME" icon="" label="" width=0
 fi
