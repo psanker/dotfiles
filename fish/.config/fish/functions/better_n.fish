@@ -1,4 +1,4 @@
-function n --wraps nnn --description 'support nnn quit and change directory'
+function better_n --wraps nnn --description 'support nnn quit and change directory'
     # Block nesting of nnn in subshells
     if test -n "$NNNLVL" -a "$NNNLVL" -ge 1
         echo "nnn is already running"
