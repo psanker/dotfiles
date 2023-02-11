@@ -50,10 +50,16 @@ if status is-interactive
     alias hlu="hledger-ui"
     alias hlw="hledger-web"
 
-    alias nnn="n -dea"
-    alias ls="n -dea"
-    alias ll="n -dea"
-    alias la="n -deHa"
+    alias n="better_n -deaH"
+    alias n3="better_n -deaH"
+    alias nnn="better_n -deaH"
+
+    alias ls="exa -la --color=always --group-directories-first"
+    alias la="exa -la --color=always --group-directories-first"
+    alias ll="exa -l --color=always --group-directories-first"
+    alias lt="exa -aT --color=always --group-directories-first"
+
+    alias reload=". ~/.config/fish/config.fish"
 end
 
 source ~/.config/.env
