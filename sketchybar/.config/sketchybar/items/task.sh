@@ -13,8 +13,10 @@ sketchybar --add item task right \
                       label.background.color=$BACKGROUND_2 \
                       label.background.height=26 \
                       label.background.corner_radius=9 \
+                      label.width=0 \
                       background.color=$BACKGROUND_1 \
                       background.height=26 \
                       script="$PLUGIN_DIR/task.sh" \
+                      updates=on \
                       update_freq=30
 
