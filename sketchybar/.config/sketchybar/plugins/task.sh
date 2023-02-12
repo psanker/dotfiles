@@ -18,6 +18,7 @@ if [ "$TW_COUNT" -gt 0 ]; then
     if [ "$TW_ACTIVE_SIZE" -gt 0 ]; then
         sketchybar --set "$NAME" icon="􀷾 $TW_COUNT" \
                                  label="$TW_ACTIVE" \
+                                 label.width=dynamic \
                                  width=dynamic
     else
         sketchybar --set "$NAME" icon="􀷾 $TW_COUNT" \
