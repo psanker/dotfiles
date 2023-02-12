@@ -172,4 +172,4 @@ apps < shift - s : open /Applications/Slack.app
 apps < shift - o : open /Applications/Obsidian.app
 
 # Shortcut to create a new kitty term on the fly
-lalt - return : kitty --single-instance ~
+lalt - return : kitty --single-instance --listen-on=unix:"$TMPDIR/kitty" "$HOME"

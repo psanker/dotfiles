@@ -16,8 +16,9 @@ set --export RSTUDIO_PANDOC /Applications/RStudio.app/Contents/MacOS/pandoc
 set --export GPG_TTY (eval tty)
 set --export LEDGER_FILE "$HOME/personal/pkm/finance/current.journal"
 
-set --export NNN_PLUG "p:preview-tui;f:fzopen"
+set --export NNN_PLUG "p:preview-tui;f:fzopen;x:togglex"
 set --export NNN_FIFO "/tmp/nnn.fifo"
+set --export NNN_OPENER "/usr/bin/open"
 
 set BLK "0B"
 set CHR "0B"
@@ -59,10 +60,13 @@ if status is-interactive
     alias ll="exa -l --color=always --group-directories-first"
     alias lt="exa -aT --color=always --group-directories-first"
 
-    alias reload=". ~/.config/fish/config.fish"
+    alias reload="source ~/.config/fish/config.fish"
 end
 
-source ~/.config/.env
+if test -e "$HOME/.config/.env"
+    source ~/.config/.env
+end
+
 set -gx VOLTA_HOME "$HOME/.volta"
 set -gx PATH "$VOLTA_HOME/bin" $PATH
 
