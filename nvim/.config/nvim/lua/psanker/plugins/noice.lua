@@ -1,6 +1,7 @@
 return {
     {
         "folke/noice.nvim",
+        tag = "stable",
         config = function(_)
             require("noice").setup({
                 lsp = {

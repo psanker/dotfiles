@@ -6,7 +6,7 @@ return {
     {
         'mbbill/undotree',
         keys = {
-            { '<Leader>u', '<cmd>UndotreeToggle<CR>' }
+            { '<Leader>u', '<cmd>UndotreeToggle<CR>', desc = 'Toggle [u]ndotree' }
         },
     },
     {
@@ -31,15 +31,26 @@ return {
                         require('zen-mode').close()
                     end
                 end,
-                desc = 'Toggle Zen mode',
+                desc = 'Toggle [z]en mode (z)',
             },
         },
-        on_open = function (_)
+        on_open = function(_)
             require('lualine').setup(require('psanker.ui.statusline').opts(true))
         end,
-        on_close = function ()
+        on_close = function()
             require('lualine').setup(require('psanker.ui.statusline').opts(false))
         end,
+    },
+    {
+        'folke/which-key.nvim',
+        tag = "stable",
+        opts = {
+            plugins = {
+                spelling = {
+                    enabled = true,
+                },
+            },
+        },
     },
     {
         'nvim-tree/nvim-tree.lua',

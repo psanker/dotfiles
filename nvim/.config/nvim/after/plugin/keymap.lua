@@ -75,12 +75,13 @@ nnoremap('<Leader>gP', '<cmd>Git push<CR>', { silent = true, desc = '[g]it [P]us
 nnoremap('<Leader>gl', '<cmd>Git log<CR>', { desc = '[g]it [l]og' })
 
 -- 3. View different windows
-nnoremap('<Leader>vo', '<cmd>SymbolsOutline<CR>')
-nnoremap('<Leader>vt', '<cmd>TodoTrouble<CR>')
-nnoremap('<Leader>vT', '<cmd>TodoTelescope<CR>')
-nnoremap('<Leader>vx', '<cmd>TroubleToggle<CR>')
+nnoremap('<Leader>vo', '<cmd>SymbolsOutline<CR>', { desc = '[v]iew [o]utline' })
+nnoremap('<Leader>vt', '<cmd>TodoTrouble<CR>', { desc = '[v]iew [t]odos' })
+nnoremap('<Leader>vT', '<cmd>TodoTelescope<CR>', { desc = '[v]iew [T]odos in Telescope' })
+nnoremap('<Leader>vx', '<cmd>TroubleToggle<CR>', { desc = '[v]iew quickfi[x]' })
 
 -- 4. Note capture and quick actions (q) --
-nnoremap('<Leader>qn', '<cmd>FloatermNew! --cwd=~/personal/pkm ~/.local/bin/quick-note.sh<CR>')
-nnoremap('<Leader>qj', '<cmd>FloatermNew! --cwd=~/personal/pkm ~/.local/bin/quick-journal.sh<CR>')
-nnoremap('<Leader>qx', '<cmd>TroubleToggle quickfix<CR>')
+nnoremap('<Leader>qn', '<cmd>FloatermNew! --cwd=~/personal/pkm ~/.local/bin/quick-note.sh<CR>',
+    { desc = 'Open a [q]uick note in a floating term' })
+nnoremap('<Leader>qj', '<cmd>FloatermNew! --cwd=~/personal/pkm ~/.local/bin/quick-journal.sh<CR>',
+    { desc = 'Open a [q]uick journal entry in a floating term' })
