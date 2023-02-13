@@ -25,26 +25,33 @@ if [ "$TW_ACTIVE_SIZE" -gt "$TW_ACTIVE_MAX_LEN" ]; then
    TW_ACTIVE="$(echo "$TW_ACTIVE" | cut -c -"$cut_size")..."
 fi
 
-if [ "$TW_COUNT" -gt 0 ]; then
-    active_bg="$BACKGROUND_2"
+width="0"
+bg="off"
+icon=""
+label=""
+label_bg="off"
+label_width="0"
+label_bg_color="$BACKGROUND_2"
 
-    if [ -n "$TW_ACTIVE_OVERDUE" ]; then
-        active_bg="$RED"
-    fi
+if [ "$TW_COUNT" -gt 0 ]; then
+    bg="on"
+    width="dynamic"
+    icon="􀷾 $TW_COUNT" 
 
     if [ "$TW_ACTIVE_SIZE" -gt 0 ]; then
-        sketchybar --set "$NAME" icon="􀷾 $TW_COUNT" \
-                                 label="$TW_ACTIVE" \
-                                 label.width=dynamic \
-                                 label.background.color="$active_bg" \
-                                 width=dynamic
-    else
-        sketchybar --set "$NAME" icon="􀷾 $TW_COUNT" \
-                                 label="" \
-                                 label.width=0 \
-                                 label.background.color="$active_bg" \
-                                 width=dynamic
+        label_width="dynamic"
+        label_bg_color="$BACKGROUND_2"
+
+        if [ -n "$TW_ACTIVE_OVERDUE" ]; then
+            label_bg_color="$RED"
+        fi
     fi
-else
-    sketchybar --set "$NAME" icon="" label="" width=0
 fi
+
+sketchybar --set "$NAME" icon="$icon" \
+                         label="$label" \
+                         label.width="$label_width" \
+                         label.background.drawing="$label_bg" \
+                         label.background.color="$label_bg_color" \
+                         background.drawing="$bg" \
+                         width="$width"
