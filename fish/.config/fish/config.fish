@@ -55,10 +55,13 @@ if status is-interactive
     alias n3="better_n -deaH"
     alias nnn="better_n -deaH"
 
-    alias ls="exa -la --color=always --group-directories-first"
+    alias ls="exa --group-directories-first"
     alias la="exa -la --color=always --group-directories-first"
     alias ll="exa -l --color=always --group-directories-first"
     alias lt="exa -aT --color=always --group-directories-first"
+
+    alias z="zathura"
+    alias zf="z (fzf)"
 
     alias reload="source ~/.config/fish/config.fish"
 end

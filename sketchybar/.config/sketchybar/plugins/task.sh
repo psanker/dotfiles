@@ -4,12 +4,18 @@ source "$HOME/.config/sketchybar/colors.sh"
 
 TW_COUNT=$(task +TODAY count)
 TW_ACTIVE_ID=$(task +ACTIVE ids | cut -w -f1)
-TW_ACTIVE=$(task "$TW_ACTIVE_ID" info | \
-            grep Description | \
-            awk '{ for (i=2; i<=NF; i++) printf("%s%s", $i, (i<NF ? OFS : ORS))}')
-TW_ACTIVE_OVERDUE=$(task "$TW_ACTIVE_ID" info | \
-                    grep "Virtual tags" | \
-                    grep OVERDUE)
+
+TW_ACTIVE=""
+TW_ACTIVE_OVERDUE=""
+
+if [ -n "$TW_ACTIVE_ID" ]; then
+    TW_ACTIVE=$(task "$TW_ACTIVE_ID" info | \
+                grep Description | \
+                awk '{ for (i=2; i<=NF; i++) printf("%s%s", $i, (i<NF ? OFS : ORS))}')
+    TW_ACTIVE_OVERDUE=$(task "$TW_ACTIVE_ID" info | \
+                        grep "Virtual tags" | \
+                        grep OVERDUE)
+fi
 
 TW_ACTIVE_SIZE=${#TW_ACTIVE}
 TW_ACTIVE_MAX_LEN=35
