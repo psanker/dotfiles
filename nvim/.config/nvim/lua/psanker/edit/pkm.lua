@@ -58,29 +58,4 @@ return {
             end)
         end)
     end,
-    register_commands = function()
-        local Remap = require('psanker.keymap')
-        local nnoremap = Remap.nnoremap
-        local vnoremap = Remap.vnoremap
-
-        nnoremap('<Leader>nn', '<cmd>ZkNew {dir = "notes"}<CR>', { desc = '[n]ew [n]ote' })
-        nnoremap('<Leader>nj', '<cmd>ZkDailyEntry<CR>', { desc = '[n]ew [j]ournal entry' })
-        nnoremap('<Leader>nm', '<cmd>ZkNew {dir = "notes", template = "meeting.md"}<CR>',
-            { desc = '[n]ew [m]eeting note' })
-
-        vnoremap('<Leader>nn', ":'<,'>ZkNewFromTitleSelection {dir = 'notes'}<CR>",
-            { desc = '[n]ew [n]ote; title from selected text' })
-
-        vnoremap('<Leader>ni', ":'<,'>ZkNewFromTitleSelection {dir = 'notes', edit = false}<CR>",
-            { desc = 'New [n]ote [i]nsert link; title from selected text' })
-
-        nnoremap('<Leader>fn', '<cmd>ZkNotes<CR>')
-        vnoremap('<Leader>fn', ":'<,'>ZkMatch<CR>")
-        nnoremap('<Leader>ft', '<cmd>ZkTags<CR>')
-        nnoremap('<Leader>lb', '<cmd>ZkBacklinks<CR>')
-        nnoremap('<Leader>ll', '<cmd>ZkLinks<CR>')
-        nnoremap('<Leader>li', "<cmd>ZkInsertLink<CR>")
-        vnoremap('<Leader>li', ":'<,'>ZkInsertLinkAtSelection<CR>")
-        vnoremap('<Leader>ls', ":'<,'>ZkInsertLinkAtSelection {match = true}<CR>")
-    end,
 }

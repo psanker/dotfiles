@@ -74,3 +74,7 @@ g.mkdp_auto_start = 0
 
 -- zen-mode and neovim bug workaround
 g.zen_mode_open = false
+
+-- Which-key help
+set.timeout = true
+set.timeoutlen = 500

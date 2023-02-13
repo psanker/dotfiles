@@ -113,8 +113,9 @@ return {
             -- )
         end,
         keys = {
-            { '<Leader>bsi', '<cmd>InactiveBufSyntaxEnable<CR>' },
-            { '<Leader>bso', '<cmd>InactiveBufSyntaxDisable<CR>' },
+            { '<Leader>bsi', '<cmd>InactiveBufSyntaxEnable<CR>', desc = '[b]uffers: enable inactive buffer [s]yntax (i)' },
+            { '<Leader>bso', '<cmd>InactiveBufSyntaxDisable<CR>',
+                desc = '[b]uffers: disable inactive buffer [s]yntax (o)' },
         },
     },
     {
