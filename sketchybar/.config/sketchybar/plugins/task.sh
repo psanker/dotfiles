@@ -25,6 +25,7 @@ if [ "$TW_ACTIVE_SIZE" -gt "$TW_ACTIVE_MAX_LEN" ]; then
    TW_ACTIVE="$(echo "$TW_ACTIVE" | cut -c -"$cut_size")..."
 fi
 
+
 width="0"
 bg="off"
 icon=""
@@ -38,9 +39,10 @@ if [ "$TW_COUNT" -gt 0 ]; then
     width="dynamic"
     icon="􀷾 $TW_COUNT" 
 
-    if [ "$TW_ACTIVE_SIZE" -gt 0 ]; then
+    if [ -n "$TW_ACTIVE" ]; then
+        label_bg="on"
         label_width="dynamic"
-        label_bg_color="$BACKGROUND_2"
+        label="$TW_ACTIVE"
 
         if [ -n "$TW_ACTIVE_OVERDUE" ]; then
             label_bg_color="$RED"
