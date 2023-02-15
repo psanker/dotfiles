@@ -162,7 +162,7 @@ shift + lalt - 0 : yabai -m space --balance
 hyper - o ; apps
 apps < escape ; default
 
-apps < n : open ~
+apps < n : open ~ && skhd -k "escape"
 apps < f : open /Applications/Firefox.app && skhd -k "escape"
 apps < k : open /Applications/kitty.app && skhd -k "escape"
 apps < m : open /System/Applications/Messages.app && skhd -k "escape"
