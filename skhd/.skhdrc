@@ -163,13 +163,21 @@ hyper - o ; apps
 apps < escape ; default
 
 apps < n : open ~
-apps < f : open /Applications/Firefox.app
-apps < k : open /Applications/kitty.app
-apps < m : open /System/Applications/Messages.app
-apps < shift - m : open /System/Applications/Mail.app
-apps < s : open /Applications/Spotify.app
-apps < shift - s : open /Applications/Slack.app
-apps < shift - o : open /Applications/Obsidian.app
+apps < f : open /Applications/Firefox.app && skhd -k "escape"
+apps < k : open /Applications/kitty.app && skhd -k "escape"
+apps < m : open /System/Applications/Messages.app && skhd -k "escape"
+apps < shift - m : open /System/Applications/Mail.app && skhd -k "escape"
+apps < s : open /Applications/Spotify.app && skhd -k "escape"
+apps < shift - s : open /Applications/Slack.app && skhd -k "escape"
+apps < shift - o : open /Applications/Obsidian.app && skhd -k "escape"
+
+# Pomodoro shortcuts
+:: pomo @
+hyper - p ; pomo
+pomo < escape ; default
+
+pomo < p : pomo start && skhd -k "escape"
+pomo < x : pomo cancel && skhd -k "escape"
 
 # Shortcut to create a new kitty term on the fly
 lalt - return : kitty --single-instance --listen-on=unix:"$TMPDIR/kitty" "$HOME"
