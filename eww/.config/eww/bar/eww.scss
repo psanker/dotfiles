@@ -1,0 +1,193 @@
+/* Created   by https://github.com/rxyhn 
+Designed  by https://github.com/rxyhn
+Maintaned by https://github.com/rxyhn
+ */
+
+// Global
+*{
+    all: unset;
+}
+
+// Variable Color's
+$background: #232136;
+$foreground: #e0def4;
+
+$black: $background;
+$gray: #393552;
+$grey: $gray;
+$red: #eb6f92;
+$green: #9ccfd8;
+$yellow: #f6c177;
+$blue: #3e8fb0;
+$magenta: #c4a7e7;
+$cyan: #ea9a97;
+$white: $foreground;
+
+$fontSize: 1.2rem;
+
+// EWW BAR
+.eww_bar{
+    background-color: $background;
+    opacity: 0.95;
+    padding: .3rem;
+}
+
+// Launcher
+.launcher_icon{
+    color: $white;
+    font-family: "SF Pro Display";
+    font-size: $fontSize + 0.5rem;
+    padding: 0 1rem 0 0.5rem;
+}
+
+// Workspaces
+.workspaces-widget {
+    font-family: "SF Pro Display";
+    font-weight: bold;
+    background-color: $grey;
+    border-radius: 5px;
+    padding: 0 .1rem;
+}
+
+.workspace-entries-cont {
+    margin: 0 1rem;
+}
+
+.workspace-entry {
+    margin: .55rem 0 .55rem 0;
+    padding: 0 0.55rem;
+}
+
+.workspace-entry.current {
+    background-color: $red;
+    padding: .2rem 0;
+    border-radius: 20px;
+    color: $black;
+}
+
+// Control Panel
+.control {
+    padding: 0 1rem;
+    font-family: SF Pro Display;
+    font-size: $fontSize;
+    background-color: $grey;
+    border-radius: 5px;
+    color: $magenta;
+}
+
+.control-item:hover {
+    color: $white;
+}
+
+.bat {
+    font-family: SF Pro Display;
+    font-size: $fontSize;
+    padding-right: .5rem;
+}
+
+.wifi-icon{
+    margin-right: .2rem;
+}
+.brightness-icon{
+    margin: 0 .2rem 0 .2rem;
+    color: $yellow;
+}
+.volume-icon{
+    margin: 0 .2rem 0 .2rem;
+}
+scale trough {
+    all: unset;
+    background-color: $background;
+    border-radius: 5px;
+    min-height: 10px;
+    min-width: 80px;
+    margin: 0 .3rem 0 .3rem;
+}
+.bribar trough highlight {
+    background-color: $yellow;
+    border-radius: 5px;
+}
+.volbar trough highlight {
+    background-color: $green;
+    border-radius: 5px;
+}
+
+// Clock
+.time {
+    font-family: "SF Pro Display";
+    font-size: $fontSize;
+    color: $white;
+    border-radius: 5px;
+    margin-left: 1.5rem;
+}
+
+// Calendar
+.cal-box {
+    background-color: $black;
+    font-family: Comic Mono;
+    font-size: $fontSize;
+    font-weight: bold;
+
+    .cal-inner-box {
+        padding: 1rem 1rem .2rem;
+
+        .cal {
+            &.highlight {
+                padding: 10rem;
+            }
+
+            padding: .8rem .25rem 0rem;
+            margin-left: 10px;
+        }
+    }
+}
+
+calendar:selected {
+    color: $blue;
+}
+
+calendar.header {
+    color: $blue;
+    font-weight: bold;
+}
+
+calendar.button {
+    color: $magenta;
+}
+
+calendar.highlight {
+    color: $magenta;
+    font-weight: bold;
+}
+
+calendar:indeterminate {
+    color: $background;
+}
+
+// Powermenu
+.powermenu {
+    font-family: feather;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 1.5rem;
+}
+.button-bspres, .button-reb, .button-lock,
+.button-quit, .button-off{
+    padding: .2rem .5rem .2rem .3rem;
+}
+.button-off{
+    margin-right: .5rem;
+    color: $red;
+}
+.button-bspres{
+    color: $green;
+}
+.button-reb{
+    color: $yellow
+}
+.button-quit{
+    color: $magenta;
+}
+.button-lock{
+    color: $blue;
+}

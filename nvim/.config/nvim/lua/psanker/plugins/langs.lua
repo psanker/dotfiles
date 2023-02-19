@@ -55,4 +55,8 @@ return {
         end
     },
     ft = { 'quarto' },
+    {
+        'elkowar/yuck.vim',
+        ft = { 'yuck' },
+    },
 }
