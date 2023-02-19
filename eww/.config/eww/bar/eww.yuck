@@ -1,0 +1,228 @@
+;; Created   by https://github.com/rxyhn
+;; Designed  by https://github.com/rxyhn
+;; Maintaned by https://github.com/rxyhn
+
+;; put path to aesthetic bar config files here ;;
+(defvar eww "/usr/bin/eww -c $HOME/.config/eww/bar")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;							Widget Section's							 ;;	
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Launcher Widgets ;;
+(defwidget launcher []
+	(box :orientation "h" 
+		 :space-evenly "false" 
+		 :spacing -15
+  	(button :class "launcher_icon" 
+		   	:onclick "scripts/popup launcher"  "􀣺")))
+
+;; Workspaces Widgets ;;
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/bar/scripts/get-workspaces")
+(deflisten current_workspace :initial "1" "bash ~/.config/eww/bar/scripts/get-active-workspace")
+
+(defwidget workspaces []
+  (eventbox :onscroll "bash ~/.config/eww/bar/scripts/change-active-workspace {} ${current_workspace}" :class "workspaces-widget"
+    (box :space-evenly true :class "workspace-entries-cont"
+      (for workspace in workspaces
+        (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+          (box :class "workspace-entry workspace-entry-${workspace.id} ${workspace.id == current_workspace ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
+            (label :text "${workspace.id}" :class "workspace-entry-content")))))))
+
+;; Battery Widgets ;;
+(defpoll battery			:interval "1s"	"scripts/battery icon")
+(defpoll battery-capacity	:interval "1s"	"scripts/battery percent")
+(defwidget bat []
+	(box	:orientation "h"	
+			:space-evenly "false"
+            :class "control-item"
+	(label	:class "bat"		
+			:halign "end"		
+			:text battery	
+			:tooltip "Battery: ${battery-capacity}%")))
+
+;; Wifi Widgets ;;
+(defpoll wifi-icon :interval "1s" "scripts/wifi icon")
+(defpoll wifi-name :interval "1s" "scripts/wifi name")
+(defwidget wifi []
+	(box		:orientation "h"  
+				:tooltip wifi-name
+                :class "control-item"
+	(button		:onclick "scripts/popup wifi" 
+				:class "wifi-icon control-item" wifi-icon)))
+
+;; Brightness Widgets ;;
+; (defwidget bright []
+;   (eventbox :onhover "${eww} update bright=true"   
+;   			:onhoverlost "${eww} update bright=false"
+;   			(box    :orientation "h"  
+; 			  		:space-evenly "false"  
+; 					:spacing 2
+;   			(revealer :transition "slideup" 
+; 			  		  :reveal bright   
+; 					  :duration "550ms"
+;   			(scale :class "bribar" 
+; 			  	   :value current-brightness 
+; 				   :tooltip "Brightness: ${current-brightness}%" 
+; 				   :onchange "brightnessctl set {}%" 
+; 				   :orientation "h" 
+; 				   :flipped true 
+; 				   :max 101 
+; 				   :min 0))
+;   			(label :class "brightness-icon" 
+; 			  	   :text ""))))
+; (defpoll current-brightness :interval "1s" "brightnessctl -m -d amdgpu_bl0 | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")
+; (defvar bright false)
+
+;; Volume Widgets ;;
+(defpoll current-volume :interval "1s" "pamixer --get-volume")
+(defpoll current-volume-icon :interval "1s" "scripts/volume")
+(defvar volum false)
+(defwidget volum []
+	(eventbox :onhover "${eww} update volum=true" 		
+			  :onhoverlost "${eww} update volum=false"
+	(box      :orientation "h" 	  
+			  :space-evenly "false" 
+			  :spacing "2"
+	(button   :onclick "scripts/popup audio"   
+              :class "volume-icon control-item" 
+              "${current-volume-icon}")
+	(revealer :transition "slideright" 
+			  :reveal volum         
+			  :duration "550ms"
+	(scale    :class "volbar" 	  
+			  :value current-volume
+			  :orientation "h"      
+			  :flipped true 
+			  :tooltip "Volume: ${current-volume}%" 
+			  :max 101 
+			  :min 0 
+			  :onchange "pamixer --set-volume {}" )))))
+
+;; Control Panel Widgets ;;	
+(defwidget control []
+	(box :orientation "h" 
+		 :space-evenly false  
+		 :class "control"
+(bat)
+(wifi)
+(volum)))
+
+;; Clock Widgets ;;
+(defpoll timestamp :interval "1s" "date '+%A, %Y-%m-%d %H:%M'")
+(defwidget time []
+	(box	:orientation "h" 
+			:class "time" 
+			:halign "end"
+	(button	:onclick "scripts/popup calendar"	
+			:class "time-hour" timestamp)))
+
+;; Calendar Widgets ;;
+(defwidget cal []
+	(box :class "cal-box" 
+		 :orientation "h"
+	(box :class "cal-inner-box"
+	(calendar :class "cal" 
+			  :day calendar_day 
+			  :month calendar_month 
+			  :year calendar_year))))
+(defpoll calendar_day :interval "10h"
+    "date '+%d'")
+(defpoll calendar_month :interval "10h"
+    "scripts/calendar")
+(defpoll calendar_year :interval "10h"
+    "date '+%Y'")
+
+;; Powermenu Widgets ;;
+(defwidget power []
+	(eventbox	:onhover "${eww} update power=true"	
+				:onhoverlost "${eww} update power=false" 
+	(box		:orientation "h"					
+				:space-evenly "false" 	 
+				:vexpand "false" 	
+				:class "powermenu"
+	(revealer	:transition "slideright"				
+				:reveal power			 
+				:duration "550ms"
+	(box		:orientation "h"					
+				:space-evenly "false"
+
+	(button   	:class "button-bspres"  			
+				:tooltip "Hyprland Restart" 
+				:onclick "hyprctl reload" "􀅉" )
+
+  	(button		:class "button-reb"					
+	  			:tooltip "Reboot"		 
+				:onclick "reboot" "􀊯")
+
+	(button		:class "button-quit" 				
+				:tooltip "Logout" 		 
+				:onclick "killall Hyprland" "􀆧")
+
+	(button		:class "button-lock" 				
+				:tooltip "Lock Screen"	 
+				:onclick "swaylock -ef -c 232136" "􀎠")))
+
+	(button		:class "button-off"					
+				:tooltip "Shutdown"		 
+				:onclick "shutdown now"	"􀆨"))))
+(defvar power false)
+
+;; Top Widgets ;;
+(defwidget top []
+	(box	:orientation "h" 
+			:space-evenly "false" 
+(launcher)
+(workspaces)))
+
+;; Bottom Widgets ;;
+(defwidget bottom []
+	(box	:orientation "h" 
+			:space-evenly false 
+(time)
+(power)))
+
+;; End Widgets ;;
+(defwidget end []
+	(box :orientation "h" 
+		 :space-evenly false 
+		 :halign "end" 
+		 :spacing 5
+(control)
+(bottom)))
+
+;; Bar Widgets ;;
+(defwidget bar []
+	(box :class "eww_bar" 
+		 :orientation "h" 
+		 :vexpand "false" 
+		 :hexpand "false"
+(top)
+(end)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;							Window Section's							 ;;	
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Bar Windows ;;
+(defwindow bar
+	:geometry (geometry :anchor "bottom center"
+                        :x "0" 
+						:y "0" 
+						:width "100%")
+	:monitor 0
+	:reserve (struts :distance "35px" 
+					 :side "top")
+    :stacking "bg"
+    :exclusive true
+	:hexpand "false"
+	:vexpand "false"
+(bar))
+
+;; Calendar Windows ;;
+(defwindow calendar
+    :monitor 0
+	:geometry (geometry :anchor "bottom right"
+                        :x "0" 
+						:y "0" 
+						:width "270px" 
+						:height "60px")
+(cal))
