@@ -7,6 +7,11 @@ full="$(cat "$bat/charge_full")"
 per=$(( 100*now/full ))
 per="${per%.*}"
 
+# Sometimes the battery may overcharge, reading wrong mAh values
+if [ $per -gt 100 ]; then
+    per=100
+fi
+
 icon() {
     [ $(cat "$bat/status") = Charging ] && echo "􀢋" && exit
     [ $(cat "$bat/status") = Full ] && echo "􀢋" && exit

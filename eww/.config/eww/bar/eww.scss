@@ -15,6 +15,7 @@ $foreground: #e0def4;
 $black: $background;
 $gray: #393552;
 $grey: $gray;
+$grey2: #56526e;
 $red: #eb6f92;
 $green: #9ccfd8;
 $yellow: #f6c177;
@@ -33,7 +34,7 @@ $fontSize: 1.2rem;
 }
 
 // Launcher
-.launcher_icon{
+.launcher_icon {
     color: $white;
     font-family: "SF Pro Display";
     font-size: $fontSize + 0.5rem;
@@ -44,25 +45,62 @@ $fontSize: 1.2rem;
 .workspaces-widget {
     font-family: "SF Pro Display";
     font-weight: bold;
+    font-size: $fontSize + 0.05rem;
     background-color: $grey;
     border-radius: 5px;
-    padding: 0 .1rem;
 }
 
 .workspace-entries-cont {
-    margin: 0 1rem;
+    margin: 0 1rem 0 0.6rem;
 }
 
 .workspace-entry {
-    margin: .55rem 0 .55rem 0;
-    padding: 0 0.55rem;
+    margin: 0.3rem 0;
+    padding: 0 0.8rem;
+    color: $magenta;
 }
 
 .workspace-entry.current {
-    background-color: $red;
     padding: .2rem 0;
     border-radius: 20px;
-    color: $black;
+    color: $red;
+}
+
+// Window title
+.window-title {
+    margin-left: 0.75rem;   
+    font-size: $fontSize - 0.1rem;
+    color: $magenta;
+}
+
+////// Task widgets //////
+
+// Taskwarrior
+.task-widgets {
+    background-color: $grey;
+    padding: 0 0 0 1rem;
+    border-radius: 5px;
+
+    .task {
+        .task-count {
+            padding: 0 1rem 0 0;
+            font-weight: bold;
+            color: $yellow;
+        }
+        
+        .task-description {
+            padding: 0 1rem;
+            border-radius: 5px;
+            background-color: $grey2;
+
+            &.overdue {
+                background-color: scale-color($red, $lightness: -15%);
+                color: $white;
+                font-weight: 500;
+                text-shadow: 0 1px 4px $black;
+            }
+        }
+    }
 }
 
 // Control Panel
@@ -75,10 +113,6 @@ $fontSize: 1.2rem;
     color: $magenta;
 }
 
-.control-item:hover {
-    color: $white;
-}
-
 .bat {
     font-family: SF Pro Display;
     font-size: $fontSize;
@@ -88,6 +122,11 @@ $fontSize: 1.2rem;
 .wifi-icon{
     margin-right: .2rem;
 }
+
+.control-item:hover {
+    color: $white;
+}
+
 .brightness-icon{
     margin: 0 .2rem 0 .2rem;
     color: $yellow;

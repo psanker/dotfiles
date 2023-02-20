@@ -24,12 +24,27 @@ calendar() {
     fi
 }
 
+gcalendar() {
+    if [ -n "$(pidof gnome-calendar)" ]; then
+        cal_workspace=$(hyprctl clients -j | \
+                        jq ".[] | {(.class): .workspace.id}" | \
+                        grep org.gnome.Calendar | \
+                        awk '{print $2}')
+
+        hyprctl dispatch workspace "$cal_workspace"
+    else
+        gnome-calendar
+    fi
+}
+
 if [ "$1" = "launcher" ]; then
     $HOME/.local/bin/launcher
 elif [ "$1" = "wifi" ]; then
+    # Refresh station list
+    nmcli d wifi &
     kitty -1 nmtui
 elif [ "$1" = "audio" ]; then
     pavucontrol
 elif [ "$1" = "calendar" ]; then
-    calendar
+    gcalendar
 fi

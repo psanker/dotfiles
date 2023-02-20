@@ -15,7 +15,7 @@ return {
                 'williamboman/mason-lspconfig.nvim',
                 config = function()
                     require('mason-lspconfig').setup({
-                        ensure_installed = { "sumneko_lua", "rust_analyzer", "r_language_server" }
+                        ensure_installed = { "lua_language_server", "rust_analyzer", "r_language_server" }
                     })
                 end,
             },
