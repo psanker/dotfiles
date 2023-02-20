@@ -3,7 +3,7 @@ fish_add_path /usr/local/go/bin
 fish_add_path /usr/local/opt/llvm/bin
 fish_add_path "$HOME/.spicetify"
 fish_add_path "$HOME/.local/bin"
-fish_add_path "$HOME/go"
+fish_add_path "$HOME/go/bin"
 fish_add_path "$HOME/.cargo/bin"
 
 set --export SHELL /usr/bin/fish
@@ -53,6 +53,7 @@ if status is-interactive
     alias hlu="hledger-ui"
     alias hlw="hledger-web"
 
+
     alias ls="exa --group-directories-first"
     alias la="exa -la --color=always --group-directories-first"
     alias ll="exa -l --color=always --group-directories-first"
@@ -63,7 +64,6 @@ if status is-interactive
     alias n="better_n -deaH"
     alias n3="better_n -deaH"
     alias nnn="better_n -deaH"
-
 
     alias z="zathura"
     alias zf="z (fzf)"

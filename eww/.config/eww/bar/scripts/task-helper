@@ -1,0 +1,47 @@
+#!/bin/bash
+
+description() {
+    raw="$(task +ACTIVE ids | \
+           cut -d" " -f1 | \
+           xargs -I {} task {} info | \
+           grep ^Description | \
+           cut -d" " -f1 --complement | \
+           xargs)"
+
+    raw_length=${#raw}
+    raw_length_max=20
+
+    if [ $raw_length -gt $raw_length_max ]; then
+        cut_size=$(( raw_length_max - 3 ))
+        raw="$(echo "$raw" | cut -c -$cut_size)..."
+    fi
+
+    echo "$raw"
+}
+
+count() {
+    echo "$(task +TODAY count)"
+}
+
+overdue() {
+    active_id=$(task +ACTIVE ids | cut -d" " -f1)
+    out="false"
+
+    if [ -n "$active_id" ]; then
+        task_overdue=$(task $active_id info | \
+                        grep "Virtual tags" | \
+                        grep "OVERDUE")
+        if [ -n "$task_overdue" ]; then
+            out="true"
+        fi
+    fi
+
+    echo "$out"
+}
+
+case "$1" in
+    "description") description ;;
+    "count") count ;;
+    "overdue") overdue ;;
+esac
+

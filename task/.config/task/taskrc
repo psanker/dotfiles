@@ -19,6 +19,9 @@
 # To use the default location of the XDG directories,
 # move this configuration file from ~/.taskrc to ~/.config/task/taskrc and uncomment below
 
+# Cool it on the context set warnings
+verbose=no
+
 data.location=~/.local/share/task
 hooks.location=~/.config/task/hooks
 
@@ -56,10 +59,10 @@ uda.twgcalsyncduration.type=duration
 uda.twgcalsyncduration.label=GCal duration
 
 uda.taskwarrior-tui.quick-tag.name=sync
-uda.taskwarrior-tui.shortcuts.1=~/.local/bin/twgcalsync.sh
+uda.taskwarrior-tui.shortcuts.1=task sync
 context.today.read=due:today or scheduled:today +PENDING
 context.tomorrow.read=due:tomorrow or scheduled:tomorrow +PENDING
 context.tomorrow.write=due:tomorrow OR scheduled:tomorrow +PENDING
-context=today
 context.week.read=+WEEK
 context.week.write=+WEEK
+context=today

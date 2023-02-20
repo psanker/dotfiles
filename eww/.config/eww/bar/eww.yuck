@@ -8,11 +8,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;							Widget Section's							 ;;	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;; LEFT SIDE ;;;;
 ;; Launcher Widgets ;;
 (defwidget launcher []
 	(box :orientation "h" 
 		 :space-evenly "false" 
-		 :spacing -15
+         :halign "start"
   	(button :class "launcher_icon" 
 		   	:onclick "scripts/popup launcher"  "􀣺")))
 
@@ -20,13 +22,59 @@
 (deflisten workspaces :initial "[]" "bash ~/.config/eww/bar/scripts/get-workspaces")
 (deflisten current_workspace :initial "1" "bash ~/.config/eww/bar/scripts/get-active-workspace")
 
+;; a little annoying that this has to be manually specified -- limitations of DSL without full
+;; Lisp capabilities
 (defwidget workspaces []
   (eventbox :onscroll "bash ~/.config/eww/bar/scripts/change-active-workspace {} ${current_workspace}" :class "workspaces-widget"
     (box :space-evenly true :class "workspace-entries-cont"
-      (for workspace in workspaces
-        (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
-          (box :class "workspace-entry workspace-entry-${workspace.id} ${workspace.id == current_workspace ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
-            (label :text "${workspace.id}" :class "workspace-entry-content")))))))
+      (eventbox :onclick "hyprctl dispatch workspace 1"
+        (box :class "workspace-entry workspace-entry-1 ${current_workspace == 1 ? "current" : ""}"
+          (label :text "󰈹" :class "workspace-entry-content")))
+      (eventbox :onclick "hyprctl dispatch workspace 2"
+        (box :class "workspace-entry workspace-entry-2 ${current_workspace == 2 ? "current" : ""}"
+          (label :text "󰄛" :class "workspace-entry-content")))
+      (eventbox :onclick "hyprctl dispatch workspace 3"
+        (box :class "workspace-entry workspace-entry-3 ${current_workspace == 3 ? "current" : ""}"
+          (label :text "󰭹" :class "workspace-entry-content")))
+      (eventbox :onclick "hyprctl dispatch workspace 4"
+        (box :class "workspace-entry workspace-entry-4 ${current_workspace == 4 ? "current" : ""}"
+          (label :text "󰇮" :class "workspace-entry-content")))
+      (eventbox :onclick "hyprctl dispatch workspace 5"
+        (box :class "workspace-entry workspace-entry-5 ${current_workspace == 5 ? "current" : ""}"
+          (label :text "󰐌" :class "workspace-entry-content"))))))
+
+;; Current window widget
+(deflisten window :initial "..." "bash ~/.config/eww/bar/scripts/get-window-title")
+(defwidget window_w []
+  (box
+    :class "window-title"
+    (label :text "${window}" :class "window-title-label")))
+
+;;;; RIGHT SIDE ;;;;
+
+;; Tasks/working Widgets
+(defpoll task-count :interval "1s" "scripts/task-helper count")
+; Cursed shell script but I love it
+(defpoll task-description :interval "1s" "scripts/task-helper description")
+(defpoll task-overdue :interval "1s" "scripts/task-helper overdue")
+(defwidget task [] 
+  (box :orientation "h"
+       :class "task"
+       :space-evenly false
+       :visible "${task-count > 0 ? "true" : "false"}"
+    (button :class "task-count"
+            :onclick "hyprctl dispatch -- exec kitty -1 taskwarrior-tui"
+            "􀷾 ${task-count}"
+      )
+    (label :class "task-description ${task-overdue == "true" ? "overdue" : ""}"
+           :visible "${strlength(task-description) > 0 ? "true" : "false"}"
+           :text task-description)))
+
+(defwidget task-widgets [] 
+  (box  :orientation "h"
+        :space-evenly false
+        :class "task-widgets"
+    (task)))
 
 ;; Battery Widgets ;;
 (defpoll battery			:interval "1s"	"scripts/battery icon")
@@ -44,11 +92,13 @@
 (defpoll wifi-icon :interval "1s" "scripts/wifi icon")
 (defpoll wifi-name :interval "1s" "scripts/wifi name")
 (defwidget wifi []
-	(box		:orientation "h"  
-				:tooltip wifi-name
-                :class "control-item"
-	(button		:onclick "scripts/popup wifi" 
-				:class "wifi-icon control-item" wifi-icon)))
+    (eventbox
+        :cursor "pointer"
+        (box		:orientation "h"  
+                    :tooltip wifi-name
+                    :class "control-item"
+        (button		:onclick "scripts/popup wifi" 
+                    :class "wifi-icon control-item" wifi-icon))))
 
 ;; Brightness Widgets ;;
 ; (defwidget bright []
@@ -80,12 +130,10 @@
 (defwidget volum []
 	(eventbox :onhover "${eww} update volum=true" 		
 			  :onhoverlost "${eww} update volum=false"
+              :cursor "pointer"
 	(box      :orientation "h" 	  
 			  :space-evenly "false" 
 			  :spacing "2"
-	(button   :onclick "scripts/popup audio"   
-              :class "volume-icon control-item" 
-              "${current-volume-icon}")
 	(revealer :transition "slideright" 
 			  :reveal volum         
 			  :duration "550ms"
@@ -96,7 +144,10 @@
 			  :tooltip "Volume: ${current-volume}%" 
 			  :max 101 
 			  :min 0 
-			  :onchange "pamixer --set-volume {}" )))))
+			  :onchange "pamixer --set-volume {}" ))
+	(button   :onclick "scripts/popup audio"   
+              :class "volume-icon control-item" 
+              "${current-volume-icon}"))))
 
 ;; Control Panel Widgets ;;	
 (defwidget control []
@@ -108,12 +159,12 @@
 (volum)))
 
 ;; Clock Widgets ;;
-(defpoll timestamp :interval "1s" "date '+%A, %Y-%m-%d %H:%M'")
+(defpoll timestamp :interval "1s" "date '+%a, %b %d  %H:%M'")
 (defwidget time []
 	(box	:orientation "h" 
 			:class "time" 
 			:halign "end"
-	(button	:onclick "scripts/popup calendar"	
+	(button	:onclick "scripts/popup calendar"
 			:class "time-hour" timestamp)))
 
 ;; Calendar Widgets ;;
@@ -146,13 +197,9 @@
 	(box		:orientation "h"					
 				:space-evenly "false"
 
-	(button   	:class "button-bspres"  			
-				:tooltip "Hyprland Restart" 
-				:onclick "hyprctl reload" "􀅉" )
-
   	(button		:class "button-reb"					
 	  			:tooltip "Reboot"		 
-				:onclick "reboot" "􀊯")
+				:onclick "yad --form --text=\"Are you sure you want to reboot?\" && systemctl reboot" "􀊯")
 
 	(button		:class "button-quit" 				
 				:tooltip "Logout" 		 
@@ -164,15 +211,18 @@
 
 	(button		:class "button-off"					
 				:tooltip "Shutdown"		 
-				:onclick "shutdown now"	"􀆨"))))
+				:onclick "shutdown now" "􀆨"))))
 (defvar power false)
 
 ;; Top Widgets ;;
 (defwidget top []
 	(box	:orientation "h" 
 			:space-evenly "false" 
+            :align "start"
+            :width "400px"
 (launcher)
-(workspaces)))
+(workspaces)
+(window_w)))
 
 ;; Bottom Widgets ;;
 (defwidget bottom []
@@ -185,8 +235,10 @@
 (defwidget end []
 	(box :orientation "h" 
 		 :space-evenly false 
+         :spacing 5
 		 :halign "end" 
-		 :spacing 5
+         :hexpand "true"
+(task-widgets)
 (control)
 (bottom)))
 
@@ -195,7 +247,7 @@
 	(box :class "eww_bar" 
 		 :orientation "h" 
 		 :vexpand "false" 
-		 :hexpand "false"
+         :hexpand "false"
 (top)
 (end)))
 
@@ -211,7 +263,7 @@
 	:monitor 0
 	:reserve (struts :distance "35px" 
 					 :side "top")
-    :stacking "bg"
+    :stacking "fg"
     :exclusive true
 	:hexpand "false"
 	:vexpand "false"
