@@ -19,6 +19,8 @@ progs=(
     "rclone"
     "wtype"
     "bemoji-git"
+    "hyprpaper"
+    "gammastep"
 )
 
 yay -S "${progs[@]}"

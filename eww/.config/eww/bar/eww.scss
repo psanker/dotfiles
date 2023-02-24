@@ -57,7 +57,7 @@ $fontSize: 1.2rem;
 .workspace-entry {
     margin: 0.3rem 0;
     padding: 0 0.8rem;
-    color: $magenta;
+    color: $white;
 }
 
 .workspace-entry.current {
@@ -110,7 +110,7 @@ $fontSize: 1.2rem;
     font-size: $fontSize;
     background-color: $grey;
     border-radius: 5px;
-    color: $magenta;
+    color: $white;
 }
 
 .bat {
@@ -157,7 +157,7 @@ scale trough {
     font-size: $fontSize;
     color: $white;
     border-radius: 5px;
-    margin-left: 1.5rem;
+    margin: 0 1.5rem;
 }
 
 // Calendar
@@ -229,4 +229,22 @@ calendar:indeterminate {
 }
 .button-lock{
     color: $blue;
+}
+
+// Power popup
+
+.power-popup-cont {
+    background-color: $background;
+    padding: 1.5rem 0;
+    opacity: 0.95;
+}
+
+.power-popup-button {
+    padding: 1rem 0.75rem;
+    font-size: $fontSize;
+    font-weight: bold;
+}
+
+.power-popup-button:hover {
+    color: $yellow;
 }

@@ -9,14 +9,47 @@
 ;;							Widget Section's							 ;;	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Power popup widgets
+(defvar power-popup-open false)
+(defwidget power-popup-cont []
+    (revealer
+                :reveal power-popup-open
+                :transition "crossfade"
+                :duration "550ms"
+    (eventbox
+                :cursor "pointer"
+	(box		:orientation "v"					
+				:space-evenly "false" 	 
+				:vexpand "false" 	
+				:class "power-popup-cont"
+
+  	(button		:class "power-popup-button reb"					
+	  			:tooltip "Reboot"		 
+				:onclick "${eww} update power-popup-open=false && yad --form --text=\"Are you sure you want to reboot?\" && systemctl reboot" "􀊯")
+
+	(button		:class "power-popup-button quit" 				
+				:tooltip "Logout" 		 
+				:onclick "${eww} update power-popup-open=false && killall Hyprland" "􀆧")
+
+	(button		:class "power-popup-button lock" 				
+				:tooltip "Lock Screen"	 
+				:onclick "${eww} update power-popup-open=false && swaylock -ef -c 232136" "􀎠")
+
+	(button		:class "power-popup-button off"					
+				:tooltip "Shutdown"		 
+				:onclick "${eww} update power-popup-open=false && shutdown now" "􀆨")))))
+
+
 ;;;; LEFT SIDE ;;;;
 ;; Launcher Widgets ;;
 (defwidget launcher []
+    (eventbox
+         :cursor "pointer"
 	(box :orientation "h" 
 		 :space-evenly "false" 
          :halign "start"
   	(button :class "launcher_icon" 
-		   	:onclick "scripts/popup launcher"  "􀣺")))
+		   	:onclick "${eww} update power-popup-open=${!power-popup-open}"  "􀣺"))))
 
 ;; Workspaces Widgets ;;
 (deflisten workspaces :initial "[]" "bash ~/.config/eww/bar/scripts/get-workspaces")
@@ -134,17 +167,6 @@
 	(box      :orientation "h" 	  
 			  :space-evenly "false" 
 			  :spacing "2"
-	(revealer :transition "slideright" 
-			  :reveal volum         
-			  :duration "550ms"
-	(scale    :class "volbar" 	  
-			  :value current-volume
-			  :orientation "h"      
-			  :flipped true 
-			  :tooltip "Volume: ${current-volume}%" 
-			  :max 101 
-			  :min 0 
-			  :onchange "pamixer --set-volume {}" ))
 	(button   :onclick "scripts/popup audio"   
               :class "volume-icon control-item" 
               "${current-volume-icon}"))))
@@ -183,37 +205,6 @@
 (defpoll calendar_year :interval "10h"
     "date '+%Y'")
 
-;; Powermenu Widgets ;;
-(defwidget power []
-	(eventbox	:onhover "${eww} update power=true"	
-				:onhoverlost "${eww} update power=false" 
-	(box		:orientation "h"					
-				:space-evenly "false" 	 
-				:vexpand "false" 	
-				:class "powermenu"
-	(revealer	:transition "slideright"				
-				:reveal power			 
-				:duration "550ms"
-	(box		:orientation "h"					
-				:space-evenly "false"
-
-  	(button		:class "button-reb"					
-	  			:tooltip "Reboot"		 
-				:onclick "yad --form --text=\"Are you sure you want to reboot?\" && systemctl reboot" "􀊯")
-
-	(button		:class "button-quit" 				
-				:tooltip "Logout" 		 
-				:onclick "killall Hyprland" "􀆧")
-
-	(button		:class "button-lock" 				
-				:tooltip "Lock Screen"	 
-				:onclick "swaylock -ef -c 232136" "􀎠")))
-
-	(button		:class "button-off"					
-				:tooltip "Shutdown"		 
-				:onclick "shutdown now" "􀆨"))))
-(defvar power false)
-
 ;; Top Widgets ;;
 (defwidget top []
 	(box	:orientation "h" 
@@ -228,8 +219,7 @@
 (defwidget bottom []
 	(box	:orientation "h" 
 			:space-evenly false 
-(time)
-(power)))
+(time)))
 
 ;; End Widgets ;;
 (defwidget end []
@@ -278,3 +268,16 @@
 						:width "270px" 
 						:height "60px")
 (cal))
+
+;; Power popup dialog
+(defwindow power-popup
+    :monitor 0
+    :geometry (geometry :anchor "bottom left"
+                        :x "0"
+                        :y "0"
+                        :height "100px")
+    :stacking "fg"
+    :exclusive true
+    :vexpand true
+    :hexpand false
+(power-popup-cont))
