@@ -9,6 +9,7 @@ procs=(
     "mako"
     "eww"
     "hyprpaper"
+    "gammastep"
 )
 
 for proc in "${procs[@]}"; do
@@ -16,6 +17,11 @@ for proc in "${procs[@]}"; do
 		killall -9 ${proc}
 	fi
 done
+
+# Start gammastep *first*
+if [[ ! $(pidof gammastep) ]]; then
+    gammastep &
+fi
 
 # GTK theme
 THEME="rose-pine-moon-gtk"

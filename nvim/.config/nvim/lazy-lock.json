@@ -35,6 +35,7 @@
   "plenary.nvim": { "branch": "master", "commit": "9a0d3bf7b832818c042aaf30f692b081ddd58bd9" },
   "quarto-nvim": { "branch": "main", "commit": "0f2b3f6f0e1a856378f0fd6551d45d16920089fd" },
   "rust-tools.nvim": { "branch": "master", "commit": "bd1aa99ffb911a1cf99b3fcf3b44c0391c57e3ef" },
+  "swhkd": { "branch": "main", "commit": "3b19fc33b32efde88311579152a1078a8004397c" },
   "symbols-outline.nvim": { "branch": "master", "commit": "512791925d57a61c545bc303356e8a8f7869763c" },
   "telescope.nvim": { "branch": "master", "commit": "203bf5609137600d73e8ed82703d6b0e320a5f36" },
   "todo-comments.nvim": { "branch": "main", "commit": "74c7d28cb50b0713c881ef69bcb6cdd77d8907d1" },
