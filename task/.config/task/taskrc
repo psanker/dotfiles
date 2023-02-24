@@ -65,4 +65,4 @@ context.tomorrow.read=due:tomorrow or scheduled:tomorrow +PENDING
 context.tomorrow.write=due:tomorrow OR scheduled:tomorrow +PENDING
 context.week.read=+WEEK
 context.week.write=+WEEK
-context=today
+context=week
