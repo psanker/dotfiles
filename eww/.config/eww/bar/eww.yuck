@@ -4,44 +4,15 @@
 
 ;; put path to aesthetic bar config files here ;;
 (defvar eww "/usr/bin/eww -c $HOME/.config/eww/bar")
+(defvar eww-conf "$HOME/.config/eww/bar")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;							Widget Section's							 ;;	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Power popup widgets
-(defvar power-popup-open false)
-(defwidget power-popup-cont []
-    (revealer
-                :reveal power-popup-open
-                :transition "crossfade"
-                :duration "550ms"
-    (eventbox
-                :cursor "pointer"
-	(box		:orientation "v"					
-				:space-evenly "false" 	 
-				:vexpand "false" 	
-				:class "power-popup-cont"
-
-  	(button		:class "power-popup-button reb"					
-	  			:tooltip "Reboot"		 
-				:onclick "${eww} update power-popup-open=false && yad --form --text=\"Are you sure you want to reboot?\" && systemctl reboot" "􀊯")
-
-	(button		:class "power-popup-button quit" 				
-				:tooltip "Logout" 		 
-				:onclick "${eww} update power-popup-open=false && killall Hyprland" "􀆧")
-
-	(button		:class "power-popup-button lock" 				
-				:tooltip "Lock Screen"	 
-				:onclick "${eww} update power-popup-open=false && swaylock -ef -c 232136" "􀎠")
-
-	(button		:class "power-popup-button off"					
-				:tooltip "Shutdown"		 
-				:onclick "${eww} update power-popup-open=false && shutdown now" "􀆨")))))
-
-
 ;;;; LEFT SIDE ;;;;
 ;; Launcher Widgets ;;
+(defvar power-popup-open false)
 (defwidget launcher []
     (eventbox
          :cursor "pointer"
@@ -49,7 +20,32 @@
 		 :space-evenly "false" 
          :halign "start"
   	(button :class "launcher_icon" 
-		   	:onclick "${eww} update power-popup-open=${!power-popup-open}"  "􀣺"))))
+		   	:onclick "${eww} ${power-popup-open ? "close" : "open"} power-popup && ${eww} update power-popup-open=${power-popup-open ? false : true}" "􀣺"))))
+
+;; Power popup widgets
+(defwidget power-popup-cont []
+    (eventbox
+                :cursor "pointer"
+	(box		:orientation "v"					
+				:space-evenly "true" 	 
+				:vexpand "false" 	
+				:class "power-popup-cont"
+
+  	(button		:class "power-popup-button reb"					
+	  			:tooltip "Reboot"		 
+				:onclick "${eww} close power-popup && ${eww} update power-popup-open=false && ${eww} open dialog-restart" "􀊯")
+
+	(button		:class "power-popup-button quit" 				
+				:tooltip "Logout" 		 
+				:onclick "${eww} close power-popup && ${eww} update power-popup-open=false && ${eww} open dialog-logout" "􀆧")
+
+	(button		:class "power-popup-button lock" 				
+				:tooltip "Lock Screen"	 
+				:onclick "${eww} close power-popup && ${eww} update power-popup-open=false && ~/.config/hypr/scripts/lockscreen" "􀎠")
+
+	(button		:class "power-popup-button off"					
+				:tooltip "Shutdown"		 
+				:onclick "${eww} close power-popup && ${eww} update power-popup-open=false && ${eww} open dialog-shutdown" "􀆨"))))
 
 ;; Workspaces Widgets ;;
 (deflisten workspaces :initial "[]" "bash ~/.config/eww/bar/scripts/get-workspaces")
@@ -278,6 +274,90 @@
                         :height "100px")
     :stacking "fg"
     :exclusive true
-    :vexpand true
+    :vexpand false
     :hexpand false
 (power-popup-cont))
+
+;; Shutdown dialog box
+(defwidget dialog-shutdown-widget []
+           (box :orientation "v"
+                :class "dialog"
+                (box :orientation "h"
+                     :class "dialog-label"
+                     (label :text "Are you sure you want to shut down?"))
+                
+                (box :orientation "h"
+                     :class "dialog-buttons"
+                     (eventbox :cursor "pointer"
+                               (button :class "dialog-button no" 
+                                       :onclick "${eww} close dialog-shutdown"
+                                       "No"))
+                     (eventbox :cursor "pointer"
+                               (button :class "dialog-button yes"
+                                       :onclick "${eww} close dialog-shutdown && shutdown now"
+                                       "Yes")))))
+
+(defwindow dialog-shutdown
+           :monitor 0
+           :geometry (geometry :anchor "center"
+                               :x 0
+                               :y 0
+                               :width "350px"
+                               :height "125px")
+           (dialog-shutdown-widget))
+
+;; Logout dialog box
+(defwidget dialog-logout-widget []
+           (box :orientation "v"
+                :class "dialog"
+                (box :orientation "h"
+                     :class "dialog-label"
+                     (label :text "Are you sure you want to log out?"))
+                
+                (box :orientation "h"
+                     :class "dialog-buttons"
+                     (eventbox :cursor "pointer"
+                               (button :class "dialog-button no" 
+                                       :onclick "${eww} close dialog-logout"
+                                       "No"))
+                     (eventbox :cursor "pointer"
+                               (button :class "dialog-button yes"
+                                       :onclick "${eww} close dialog-logout && killall Hyprland"
+                                       "Yes")))))
+
+(defwindow dialog-logout
+           :monitor 0
+           :geometry (geometry :anchor "center"
+                               :x 0
+                               :y 0
+                               :width "350px"
+                               :height "125px")
+           (dialog-logout-widget))
+
+;; Restart dialog box
+(defwidget dialog-restart-widget []
+           (box :orientation "v"
+                :class "dialog"
+                (box :orientation "h"
+                     :class "dialog-label"
+                     (label :text "Are you sure you want to restart?"))
+                
+                (box :orientation "h"
+                     :class "dialog-buttons"
+                     (eventbox :cursor "pointer"
+                               (button :class "dialog-button no" 
+                                       :onclick "${eww} close dialog-restart"
+                                       "No"))
+                     (eventbox :cursor "pointer"
+                               (button :class "dialog-button yes"
+                                       :onclick "${eww} close dialog-restart && reboot"
+                                       "Yes")))))
+
+(defwindow dialog-restart
+           :monitor 0
+           :geometry (geometry :anchor "center"
+                               :x 0
+                               :y 0
+                               :width "350px"
+                               :height "125px")
+           (dialog-restart-widget))

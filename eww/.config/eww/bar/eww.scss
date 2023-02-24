@@ -25,6 +25,7 @@ $cyan: #ea9a97;
 $white: $foreground;
 
 $fontSize: 1.2rem;
+$headerFontSize: 1.4rem;
 
 // EWW BAR
 .eww_bar{
@@ -248,3 +249,43 @@ calendar:indeterminate {
 .power-popup-button:hover {
     color: $yellow;
 }
+
+// Dialog boxes
+.dialog {
+    background-color: $background;
+    border-radius: 11px;
+    border: 2px solid $red;
+    font-family: "SF Pro Display";
+    font-size: $fontSize;
+
+    .dialog-label {
+        padding: 0 1rem;
+        font-weight: bold;
+        font-size: $headerFontSize;
+    }
+
+    .dialog-buttons {
+        margin: 20px 10px 10px 100px;
+
+        .dialog-button {
+            border: 1px solid $red;
+            border-radius: 11px;
+            padding: 0.5rem;
+
+            &.yes {
+                margin-left: 10px;
+            }
+
+            &.no {
+                margin-left: 10px;
+            }
+
+            &:hover {
+                border: none;
+                color: $background;
+                background-color: $red;
+            }
+        }
+    }
+}
+
