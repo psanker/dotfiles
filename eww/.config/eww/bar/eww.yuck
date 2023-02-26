@@ -82,28 +82,32 @@
 ;;;; RIGHT SIDE ;;;;
 
 ;; Tasks/working Widgets
-(defpoll task-count :interval "1s" "scripts/task-helper count")
+(defpoll task-count :interval "1s"
+                    :initial 0
+                    "scripts/task-helper count")
 ; Cursed shell script but I love it
 (defpoll task-description :interval "1s" "scripts/task-helper description")
 (defpoll task-overdue :interval "1s" "scripts/task-helper overdue")
 (defwidget task [] 
   (box :orientation "h"
-       :class "task"
-       :space-evenly false
-       :visible "${task-count > 0 ? "true" : "false"}"
-    (button :class "task-count"
-            :onclick "hyprctl dispatch -- exec kitty -1 taskwarrior-tui"
-            "􀷾 ${task-count}"
-      )
-    (label :class "task-description ${task-overdue == "true" ? "overdue" : ""}"
-           :visible "${strlength(task-description) > 0 ? "true" : "false"}"
-           :text task-description)))
+      :class "task"
+      :space-evenly false
+      :visible "${task-count > 0 ? "true" : "false"}"
+   (button :class "task-count"
+           :onclick "hyprctl dispatch -- exec kitty -1 taskwarrior-tui"
+           "􀷾 ${task-count}")
+   (label :class "task-description ${task-overdue == "true" ? "overdue" : ""}"
+          :visible "${strlength(task-description) > 0 ? "true" : "false"}"
+          :text task-description)))
 
 (defwidget task-widgets [] 
-  (box  :orientation "h"
-        :space-evenly false
-        :class "task-widgets"
-    (task)))
+  (revealer :reveal "${task-count > 0 ? "true" : "false"}"
+            :transition "slideleft"
+            :duration "550ms"
+            (box  :orientation "h"
+                  :space-evenly false
+                  :class "task-widgets"
+              (task))))
 
 ;; Battery Widgets ;;
 (defpoll battery			:interval "1s"	"scripts/battery icon")
@@ -294,7 +298,7 @@
                                        "No"))
                      (eventbox :cursor "pointer"
                                (button :class "dialog-button yes"
-                                       :onclick "${eww} close dialog-shutdown && shutdown now"
+                                       :onclick "${eww} close dialog-shutdown && notify-send \"Shutting down in 5 seconds\" && shutdown"
                                        "Yes")))))
 
 (defwindow dialog-shutdown
