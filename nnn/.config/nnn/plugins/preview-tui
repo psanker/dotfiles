@@ -111,15 +111,15 @@ CURSEL=$TMPDIR/nnn-preview-tui-selection.$NNN_PARENT
 FIFO_UEBERZUG=$TMPDIR/nnn-preview-tui-ueberzug-fifo.$NNN_PARENT
 POSOFFSET=$TMPDIR/nnn-preview-tui-posoffset"
 
-if [ -z "$NNN_TERMINAL" ] && [ -e "${TMUX%%,*}" ] && tmux -V | grep -q '[ -][3456789]\.'; then
+if [ -e "${TMUX%%,*}" ] && tmux -V | grep -q '[ -][3456789]\.'; then
     NNN_TERMINAL=tmux
-elif [ -z "$NNN_TERMINAL" ] && [ -n "$KITTY_LISTEN_ON" ]; then
+elif [ -n "$KITTY_LISTEN_ON" ]; then
     NNN_TERMINAL=kitty
-elif [ -z "$NNN_TERMINAL" ] && [ -n "$WEZTERM_PANE" ]; then
+elif [ -n "$WEZTERM_PANE" ]; then
     NNN_TERMINAL=wezterm
 elif [ -z "$NNN_TERMINAL" ] && [ "$TERM_PROGRAM" = "iTerm.app" ]; then
     NNN_TERMINAL=iterm
-elif [ -z "$NNN_TERMINAL" ] && [ -n "$WT_SESSION" ]; then
+elif [ -n "$WT_SESSION" ]; then
     NNN_TERMINAL=winterm
 else
     NNN_TERMINAL="${NNN_TERMINAL:-xterm}"
@@ -146,10 +146,20 @@ for env in $ENVVARS; do
     esac
 done; unset IFS
 
+trap '' PIPE
 exists() { type "$1" >/dev/null 2>&1 ;}
 pkill() { command pkill "$@" >/dev/null 2>&1 ;}
-pidkill() { [ -f "$1" ] && kill "$(cat "$1" 2>/dev/null)" >/dev/null 2>&1 ;}
 prompt() { printf "%b" "$@"; cfg=$(stty -g); stty raw -echo; head -c 1; stty "$cfg" ;}
+pidkill() {
+	if [ -f "$1" ]; then
+		PID="$(cat "$1" 2>/dev/null)" || return 1
+		kill "$PID" >/dev/null 2>&1
+		RET=$?
+		wait "$PID" 2>/dev/null
+		return $RET
+	fi
+	return 1
+}
 
 start_preview() {
     case "$NNN_TERMINAL" in
@@ -163,7 +173,7 @@ start_preview() {
                 --cwd "$PWD" "$ENVSTRING" --location "${NNN_SPLIT}split" "$0" "$1" 1 ;;
         wezterm)
             if [ "$NNN_SPLIT" = "v" ]; then split="--horizontal"; else split="--bottom"; fi
-            wezterm cli split-pane --cwd "$PWD" $split "$0" "$1" 1
+            wezterm cli split-pane --cwd "$PWD" $split "$0" "$1" 1 >/dev/null
             wezterm cli activate-pane-direction Prev ;;
         iterm)
             command="$SHELL -c 'cd $PWD; env $ENVSTRING $0 $1 1'"
@@ -253,7 +263,7 @@ handle_mime() {
         video/*) generate_preview "$cols" "$lines" "$1" "video" ;;
         audio/*) generate_preview "$cols" "$lines" "$1" "audio" ;;
         application/font*|application/*opentype|font/*) generate_preview "$cols" "$lines" "$1" "font" ;;
-        */*office*|*/*document*) generate_preview "$cols" "$lines" "$1" "office" ;;
+        */*office*|*/*document*|*/*msword|*/*ms-excel) generate_preview "$cols" "$lines" "$1" "office" ;;
         application/zip) fifo_pager unzip -l "$1" ;;
         text/troff)
             if exists man; then
@@ -337,13 +347,14 @@ preview_file() {
             [ "$NNN_SPLIT" = v ] && BSTR="\n"
             # shellcheck disable=SC2012
             ls -F --group-directories-first | head -n "$((lines - 3))" | "$(dirname "$0")"/.iconlookup -l "$cols" -B "$BSTR" -b " "
-        elif exists exa; then
-            fifo_pager exa -aT --group-directories-first --colour=always --level=3
         elif exists tree; then
             fifo_pager tree --filelimit "$(find . -maxdepth 1 | wc -l)" -L 3 -C -F --dirsfirst --noreport
+        elif exists exa; then
+            exa -G --group-directories-first --colour=always
         else
             fifo_pager ls -F --group-directories-first --color=always
         fi
+        cd ..
     elif [ "${encoding#*)}" = "binary" ]; then
         handle_mime "$1" "$mimetype" "$ext" "bin"
     else
@@ -482,4 +493,3 @@ else
         toggle_preview "$1" &
     fi
 fi
-
