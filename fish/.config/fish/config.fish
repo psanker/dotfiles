@@ -15,8 +15,7 @@ set --export GPG_TTY (eval tty)
 set --export LEDGER_FILE "$HOME/personal/pkm/finance/current.journal"
 
 set --export NNN_PLUG "p:preview-tui;f:fzopen;x:togglex"
-set --export NNN_FIFO "/tmp/nnn.fifo"
-set --export NNN_OPENER "/usr/bin/open"
+set --export NNN_TRASH 1
 
 set BLK "0B"
 set CHR "0B"
@@ -53,6 +52,8 @@ if status is-interactive
     alias hlu="hledger-ui"
     alias hlw="hledger-web"
 
+    alias gpl="git pull --rebase"
+    alias gpu="git push"
 
     alias ls="exa --group-directories-first"
     alias la="exa -la --color=always --group-directories-first"

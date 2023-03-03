@@ -10,6 +10,7 @@ procs=(
     "eww"
     "hyprpaper"
     "gammastep"
+    "nm-applet"
 )
 
 for proc in "${procs[@]}"; do
@@ -39,6 +40,11 @@ apply_themes() {
 }
 
 apply_themes
+
+# nm-applet needed for VPNs to work
+if [[ ! $(pidof nm-applet) ]]; then
+    nm-applet &
+fi
 
 # Launch mako
 MAKO_CONFIG="$HOME/.config/hypr/mako/config"

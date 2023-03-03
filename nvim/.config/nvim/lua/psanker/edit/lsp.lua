@@ -33,8 +33,8 @@ function M.bind_lsp_keymaps(_, bufnr)
     inoremap('<C-h>', function() vim.lsp.buf.signature_help() end,
         { buffer = bufnr, desc = 'Display signature of symbol under cursor' }) -- Displays function signature
     nnoremap('<Leader>r', function() vim.lsp.buf.rename() end, { buffer = bufnr, desc = 'Rename symbol under cursor' }) -- Renames all references of symbol
-    nnoremap('<Leader>q', function() vim.lsp.buf.code_action() end, { buffer = bufnr, desc = 'Perform a code action' }) -- Selects a code action
-    xnoremap('<Leader>q', function() vim.lsp.buf.range_code_action() end,
+    nnoremap('<Leader>ca', function() vim.lsp.buf.code_action() end, { buffer = bufnr, desc = 'Perform a code action' }) -- Selects a code action
+    xnoremap('<Leader>ca', function() vim.lsp.buf.range_code_action() end,
         { buffer = bufnr, desc = 'Perform a code action' }) -- "" for a range
 end
 
