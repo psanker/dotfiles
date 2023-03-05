@@ -60,6 +60,8 @@ return {
         ft = { 'yuck' },
     },
     {
-        'waycrate/swhkd',
+        'Fymyte/tree-sitter-rasi',
+        ft = "rasi"
     },
+
 }

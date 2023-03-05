@@ -1,5 +1,8 @@
 #!/bin/sh
 
+CAL_CLIENT="gnome-calendar"
+CAL_CLIENT_DOMAIN="org.gnome.Calendar"
+
 calendar() {
     LOCK_FILE="$HOME/.cache/eww-calendar.lock"
     EWW_BIN="/usr/bin/eww"
@@ -25,15 +28,15 @@ calendar() {
 }
 
 gcalendar() {
-    if [ -n "$(pidof gnome-calendar)" ]; then
+    if [ -n "$(pidof $CAL_CLIENT)" ]; then
         cal_workspace=$(hyprctl clients -j | \
                         jq ".[] | {(.class): .workspace.id}" | \
-                        grep org.gnome.Calendar | \
+                        grep "${CAL_CLIENT_DOMAIN:-$CAL_CLIENT}" | \
                         awk '{print $2}')
 
         hyprctl dispatch workspace "$cal_workspace"
     else
-        gnome-calendar
+        ${CAL_CLIENT}
     fi
 }
 

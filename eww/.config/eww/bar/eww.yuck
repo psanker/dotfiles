@@ -253,7 +253,6 @@
 	:monitor 0
 	:reserve (struts :distance "35px" 
 					 :side "top")
-    :stacking "fg"
     :exclusive true
 	:hexpand "false"
 	:vexpand "false"
