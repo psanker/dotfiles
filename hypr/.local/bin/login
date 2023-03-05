@@ -69,4 +69,4 @@ if [[ ! $(pidof hyprpaper) ]]; then
 fi
 
 # Set env vars
-export BEMOJI_PICKER_CMD=/usr/bin/wofi
+export BEMOJI_PICKER_CMD=/usr/bin/rofi

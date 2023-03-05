@@ -7,12 +7,13 @@ fish_add_path "$HOME/go/bin"
 fish_add_path "$HOME/.cargo/bin"
 
 set --export SHELL /usr/bin/fish
-set --export VISUAL nvim
+set --export VISUAL /usr/bin/nvim
 set --export EDITOR "$VISUAL"
 set --export PAGER less
 set --export RSTUDIO_PANDOC /Applications/RStudio.app/Contents/MacOS/pandoc
 set --export GPG_TTY (eval tty)
 set --export LEDGER_FILE "$HOME/personal/pkm/finance/current.journal"
+set --export BEMOJI_PICKER_CMD /usr/bin/rofi
 
 set --export NNN_PLUG "p:preview-tui;f:fzopen;x:togglex"
 set --export NNN_TRASH 1

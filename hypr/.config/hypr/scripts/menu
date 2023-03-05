@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [[ ! $(pidof wofi) ]]; then
-	wofi --show drun --prompt 'Search...'
+if [[ ! $(pidof rofi) ]]; then
+	rofi -show drun -config "$HOME/.config/rofi/launcher.rasi"
 else
-	pkill wofi
+	pkill rofi
 fi

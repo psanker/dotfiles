@@ -3,8 +3,8 @@ CONFIG="$HOME/.config/hypr/wofi/config"
 STYLE="$HOME/.config/hypr/wofi/style.css"
 COLORS="$HOME/.config/hypr/wofi/colors"
 
-if [[ ! $(pidof wofi) ]]; then
-	wofi --show run --prompt 'Search...' --conf ${CONFIG} --style ${STYLE} --color ${COLORS}
+if [[ ! $(pidof rofi) ]]; then
+	rofi -show run
 else
-	pkill wofi
+	pkill rofi
 fi

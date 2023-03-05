@@ -13,3 +13,6 @@
 [submodule "hledger"]
 	path = hledger
 	url = ./hledger
+[submodule "mutt"]
+	path = mutt
+	url = ./mutt
