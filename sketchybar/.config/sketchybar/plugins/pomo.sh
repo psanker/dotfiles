@@ -33,7 +33,10 @@ loop() {
 
     if [ "$status" = "0:00" ]; then
         pomo clear
-        pomo start break --duration $BREAK_TIME
+
+        if [ "$mode" != "break" ]; then
+            pomo start break --duration $BREAK_TIME
+        fi
     fi
 
     view

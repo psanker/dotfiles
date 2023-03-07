@@ -77,5 +77,8 @@ set -gx CC "/usr/local/opt/llvm/bin/clang"
 set -gx LDFLAGS "-L/usr/loca/opt/llvm/lib"
 set -gx CPPFLAGS "-I/usr/local/opt/llvm/include"
 
+# INIT JUMP
+jump shell fish | source
+
 # INIT STARSHIP
 starship init fish | source

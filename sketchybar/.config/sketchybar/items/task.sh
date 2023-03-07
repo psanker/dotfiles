@@ -19,5 +19,6 @@ sketchybar --add item task right \
                       background.height=26 \
                       script="$PLUGIN_DIR/task.sh" \
                       updates=on \
+                      click_script="kitty taskwarrior-tui" \
                       update_freq=30
 

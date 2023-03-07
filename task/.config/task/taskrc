@@ -60,6 +60,5 @@ uda.taskwarrior-tui.shortcuts.1=~/.local/bin/twgcalsync.sh
 context.today.read=due:today or scheduled:today +PENDING
 context.tomorrow.read=due:tomorrow or scheduled:tomorrow +PENDING
 context.tomorrow.write=due:tomorrow OR scheduled:tomorrow +PENDING
-context=today
 context.week.read=+WEEK
 context.week.write=+WEEK
