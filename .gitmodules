@@ -16,3 +16,6 @@
 [submodule "mutt"]
 	path = mutt
 	url = ./mutt
+[submodule "calcurse"]
+	path = calcurse
+	url = ./calcurse
