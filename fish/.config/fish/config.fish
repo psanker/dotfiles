@@ -41,6 +41,10 @@ if status is-interactive
         jump shell fish | source
     end
 
+    # Anti-footgun measures
+    alias rm="rm -i"
+    alias mv="mv -i"
+
     alias nv="nvim"
     alias gi="gitignore"
     alias pt="python3.10 -m poetry"
