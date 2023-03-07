@@ -15,7 +15,7 @@
 	url = ./hledger
 [submodule "mutt"]
 	path = mutt
-	url = ./mutt
+	url = git@github.com:psanker/email.git
 [submodule "calcurse"]
 	path = calcurse
 	url = ./calcurse
