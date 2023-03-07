@@ -183,11 +183,12 @@
 ;; Clock Widgets ;;
 (defpoll timestamp :interval "1s" "date '+%a, %b %d  %H:%M'")
 (defwidget time []
+    (eventbox :cursor "pointer"
 	(box	:orientation "h" 
 			:class "time" 
 			:halign "end"
 	(button	:onclick "scripts/popup calendar"
-			:class "time-hour" timestamp)))
+			:class "time-hour" timestamp))))
 
 ;; Calendar Widgets ;;
 (defwidget cal []
