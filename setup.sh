@@ -13,6 +13,7 @@ progs=(
     "hyprpaper"
     "neovim"
     "nnn"
+    "protonmail-bridge-bin"
     "rclone"
     "rofi-lbonn-wayland-git"
     "rofimoji"
