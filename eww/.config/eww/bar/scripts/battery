@@ -34,10 +34,10 @@ icon() {
         icon="􀛩"
     elif [ "$per" -gt "10" ]; then
         icon="􀛩"
-        notify-send -u critical "Battery Low" "Connect Charger"
+        notify-send -u critical "Battery Low" "Connect charger soon" -h string:x-canonical-private-synchronous:battery-low
     elif [ "$per" -gt "0" ]; then
         icon="􀛪"
-        notify-send -u critical "Battery Low" "Connect Charger"
+        notify-send -u critical "Battery Very Low" "Connect charger now" -h string:x-canonical-private-synchronous:battery-very-low
     else
             echo "􀛪" && exit
     fi
@@ -46,7 +46,7 @@ icon() {
 }
 
 percent() {
-echo $per
+    echo $per
 }
 
 [ "$1" = "icon" ] && icon && exit
