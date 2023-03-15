@@ -1,6 +1,5 @@
 // vim:set ft=rasi:
 configuration {
-  sidebar-mode:  true;
   hide-scrollbar: true;
   kb-cancel: "Escape,Control+bracketleft";
   kb-mode-next: "Alt+Right,Shift+Right,Control+Tab,Alt+l";
@@ -8,6 +7,18 @@ configuration {
   /* kb-row-select:; */
   modi: "drun,run,calc";
   monitor: "-4";
+
+  drun {
+    display-name: "Apps";
+  }
+
+  run {
+    display-name: "Programs";
+  }
+
+  calc {
+    display-name: "> ";
+  }
 }
 
 @theme "rose-pine-moon"

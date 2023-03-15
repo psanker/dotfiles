@@ -2,10 +2,11 @@
 
 bat=/sys/class/power_supply/BAT0/
 
-now="$(cat "$bat/charge_now")"
-full="$(cat "$bat/charge_full")"
-per=$(( 100*now/full ))
-per="${per%.*}"
+# now="$(cat "$bat/charge_now")"
+# full="$(cat "$bat/charge_full")"
+# per=$(( 100*now/full ))
+# per="${per%.*}"
+per="$(cat "$bat/capacity")"
 
 # Sometimes the battery may overcharge, reading wrong mAh values
 if [ $per -gt 100 ]; then

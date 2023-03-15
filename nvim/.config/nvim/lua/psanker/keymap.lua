@@ -23,6 +23,7 @@ local function local_bind(op, outer_opts)
 end
 
 M.nmap = bind("n", { noremap = false })
+M.vmap = bind("v", { noremap = false })
 M.nnoremap = bind("n")
 M.vnoremap = bind("v")
 M.xnoremap = bind("x")
@@ -33,5 +34,9 @@ M.buf_nnoremap = local_bind("n")
 M.buf_vnoremap = local_bind("v")
 M.buf_xnoremap = local_bind("x")
 M.buf_inoremap = local_bind("i")
+
+-- Disable the popup menu
+M.nmap('<RightMouse>', '<nop>')
+M.vmap('<RightMouse>', '<nop>')
 
 return M
