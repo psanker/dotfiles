@@ -51,8 +51,6 @@ if status is-interactive
     alias bfg="java -jar $HOME/.local/bin/bfg.jar"
     alias sioyek="/Applications/sioyek.app/Contents/MacOS/sioyek"
     alias cat="bat"
-    alias t="task"
-    alias tw="taskwarrior-tui"
     alias hl="hledger"
     alias hlu="hledger-ui"
     alias hlw="hledger-web"
@@ -70,6 +68,14 @@ if status is-interactive
     alias n="better_n -deaH"
     alias n3="better_n -deaH"
     alias nnn="better_n -deaH"
+
+    alias t="task"
+    alias tt="task +TODAY"
+    alias ta="task add"
+    alias td="task $1 done"
+    alias tm="task $1 modify"
+    alias tW="task +WEEK"
+    alias tw="taskwarrior-tui"
 
     alias z="zathura"
     alias zf="z (fzf)"

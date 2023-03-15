@@ -44,8 +44,7 @@ if [ "$1" = "launcher" ]; then
     $HOME/.local/bin/launcher
 elif [ "$1" = "wifi" ]; then
     # Refresh station list
-    nmcli d wifi &
-    kitty -1 nmtui
+    $HOME/.local/bin/wifimenu
 elif [ "$1" = "audio" ]; then
     pavucontrol
 elif [ "$1" = "calendar" ]; then

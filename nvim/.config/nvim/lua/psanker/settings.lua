@@ -8,6 +8,7 @@ g.inactive_buf_syntax = 0
 
 -- Global settings
 g.mapleader = ' '
+set.mouse = 'nv'
 
 set.tabstop = 4
 set.shiftwidth = 4
