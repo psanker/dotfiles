@@ -24,8 +24,8 @@ $magenta: #c4a7e7;
 $cyan: #ea9a97;
 $white: $foreground;
 
-$fontSize: 1.2rem;
-$headerFontSize: 1.4rem;
+$fontSize: 1.0rem;
+$headerFontSize: $fontSize + 0.2rem;
 
 // EWW BAR
 .eww_bar{
@@ -38,7 +38,7 @@ $headerFontSize: 1.4rem;
 .launcher_icon {
     color: $white;
     font-family: "SF Pro Display";
-    font-size: $fontSize + 0.5rem;
+    font-size: $fontSize + 0.2rem;
     padding: 0 1rem 0 0.5rem;
 }
 
@@ -70,7 +70,6 @@ $headerFontSize: 1.4rem;
 // Window title
 .window-title {
     margin-left: 0.75rem;   
-    font-size: $fontSize - 0.1rem;
     color: $magenta;
 }
 
