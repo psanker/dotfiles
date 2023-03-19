@@ -29,8 +29,8 @@ else
 	# Message to show when connection is activated successfully
 	success_message="You are now connected to the WiFi network \"$chosen_id\"."
 	# Get known connections
-	saved_connections=$(nmcli -g NAME connection)
-	if [[ $(echo "$saved_connections" | grep -w "$chosen_id") = "$chosen_id" ]]; then
+	saved_connections=$(nmcli -g NAME connection | tr [:space:] \n)
+	if [[ $(echo "$saved_connections" | grep -w "^$chosen_id\$") = "$chosen_id" ]]; then
 		nmcli connection up id "$chosen_id" | grep "successfully" && notify-send "Connection Established" "$success_message"
 	else
 		if [[ "$chosen_network" =~ "" ]]; then
