@@ -10,29 +10,8 @@ set --export SHELL /usr/bin/fish
 set --export VISUAL /usr/bin/nvim
 set --export EDITOR "$VISUAL"
 set --export PAGER less
-set --export RSTUDIO_PANDOC /Applications/RStudio.app/Contents/MacOS/pandoc
 set --export GPG_TTY (eval tty)
 set --export LEDGER_FILE "$HOME/personal/pkm/finance/current.journal"
-set --export BEMOJI_PICKER_CMD /usr/bin/rofi
-
-set --export NNN_PLUG "p:preview-tui;f:fzopen;x:togglex"
-set --export NNN_TRASH 1
-
-set BLK "0B"
-set CHR "0B"
-set DIR "02" 
-set EXE "09" 
-set REG "07" 
-set HARDLINK "06" 
-set SYMLINK "05" 
-set MISSING "04" 
-set ORPHAN "04" 
-set FIFO "03" 
-set SOCK "03" 
-set OTHER "0F"
-
-set --export NNN_COLORS "6666"
-set --export NNN_FCOLORS "$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
@@ -65,9 +44,8 @@ if status is-interactive
 
     alias mvln="$HOME/.bin/mvln.sh"
 
-    alias n="better_n -deaH"
-    alias n3="better_n -deaH"
-    alias nnn="better_n -deaH"
+    alias n="$HOME/.local/bin/nnn.sh -deaHQ -Pp"
+    alias nnn="$HOME/.local/bin/nnn.sh -deaHQ -Pp"
 
     alias t="task"
     alias tt="task +TODAY"
