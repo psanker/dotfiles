@@ -1,21 +1,21 @@
-[submodule "common/tmux/.tmux/plugins/tpm"]
+[submodule "tpm"]
 	path = common/tmux/.tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
-[submodule "common/tmux/.tmux/plugins/tmux-pomodoro-plus"]
+[submodule "tmux-pomodoro-plus"]
 	path = common/tmux/.tmux/plugins/tmux-pomodoro-plus
 	url = https://github.com/olimorris/tmux-pomodoro-plus
-[submodule "macos/gpg"]
+[submodule "gpg-macos"]
 	path = macos/gpg
 	url = git@github.com:psanker/gpg-macos.git
-[submodule "macos/git"]
+[submodule "git-macos"]
 	path = macos/git
 	url = git@github.com:psanker/git-macos.git
-[submodule "common/mutt"]
+[submodule "mutt"]
 	path = common/mutt
 	url = git@github.com:psanker/email.git
-[submodule "common/calcurse"]
+[submodule "calcurse"]
 	path = common/calcurse
 	url = git@github.com:psanker/calendar.git
-[submodule "common/gpg"]
+[submodule "gpg-common"]
 	path = common/gpg
 	url = git@github.com:psanker/gpg-common.git
