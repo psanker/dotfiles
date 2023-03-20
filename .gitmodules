@@ -6,10 +6,10 @@
 	url = https://github.com/olimorris/tmux-pomodoro-plus
 [submodule "macos/gpg"]
 	path = macos/gpg
-	url = ./macos/gpg
+	url = git@github.com:psanker/gpg-macos.git
 [submodule "macos/git"]
 	path = macos/git
-	url = ./macos/git
+	url = git@github.com:psanker/git-macos.git
 [submodule "common/mutt"]
 	path = common/mutt
 	url = git@github.com:psanker/email.git
@@ -18,4 +18,4 @@
 	url = git@github.com:psanker/calendar.git
 [submodule "common/gpg"]
 	path = common/gpg
-	url = ./common/gpg
+	url = git@github.com:psanker/gpg-common.git
