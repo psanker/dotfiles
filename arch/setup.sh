@@ -54,4 +54,4 @@ progs=(
 
 yay -Sy "${progs[@]}"
 
-source "$root/stow.sh"
+source "$root/stow.sh arch"
