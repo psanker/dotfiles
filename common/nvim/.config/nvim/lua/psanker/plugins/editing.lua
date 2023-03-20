@@ -69,4 +69,11 @@ return {
         'junegunn/vim-easy-align',
         event = { 'BufReadPost', 'BufNewFile' },
     },
+    {
+        'echasnovski/mini.splitjoin',
+        event = { 'BufReadPost', 'BufNewFile' },
+        config = function(_)
+            require('mini.splitjoin').setup()
+        end,
+    },
 }
