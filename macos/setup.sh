@@ -22,7 +22,7 @@ if [ ! $found -eq 1 ]; then
 fi
 
 # Stow dotfiles
-exec "$root/stow.sh"
+exec "$root/stow.sh macos"
 
 # Install software
 brew bundle install --file=~/.Brewfile
