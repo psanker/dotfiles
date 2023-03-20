@@ -1,0 +1,6 @@
+notify = true
+
+[keybindings]
+"Ctrl+q" = "focus queue" 
+"Ctrl+w" = "focus search" 
+"Ctrl+e" = "focus library" 

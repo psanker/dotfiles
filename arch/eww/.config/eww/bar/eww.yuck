@@ -1,0 +1,367 @@
+;; Created   by https://github.com/rxyhn
+;; Designed  by https://github.com/rxyhn
+;; Maintaned by https://github.com/rxyhn
+
+;; put path to aesthetic bar config files here ;;
+(defvar eww "/usr/bin/eww -c $HOME/.config/eww/bar")
+(defvar eww-conf "$HOME/.config/eww/bar")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;							Widget Section's							 ;;	
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;; LEFT SIDE ;;;;
+;; Launcher Widgets ;;
+(defvar power-popup-open false)
+(defwidget launcher []
+    (eventbox
+         :cursor "pointer"
+	(box :orientation "h" 
+		 :space-evenly "false" 
+         :halign "start"
+  	(button :class "launcher_icon" 
+		   	:onclick "${eww} ${power-popup-open ? "close" : "open"} power-popup && ${eww} update power-popup-open=${power-popup-open ? false : true}" "􀣺"))))
+
+;; Power popup widgets
+(defwidget power-popup-cont []
+    (eventbox
+                :cursor "pointer"
+	(box		:orientation "v"					
+				:space-evenly "true" 	 
+				:vexpand "false" 	
+				:class "power-popup-cont"
+
+  	(button		:class "power-popup-button reb"					
+	  			:tooltip "Reboot"		 
+				:onclick "${eww} close power-popup && ${eww} update power-popup-open=false && ${eww} open dialog-restart" "􀊯")
+
+	(button		:class "power-popup-button quit" 				
+				:tooltip "Logout" 		 
+				:onclick "${eww} close power-popup && ${eww} update power-popup-open=false && ${eww} open dialog-logout" "􀆧")
+
+	(button		:class "power-popup-button lock" 				
+				:tooltip "Lock Screen"	 
+				:onclick "${eww} close power-popup && ${eww} update power-popup-open=false && ~/.config/hypr/scripts/lockscreen" "􀎠")
+
+	(button		:class "power-popup-button off"					
+				:tooltip "Shutdown"		 
+				:onclick "${eww} close power-popup && ${eww} update power-popup-open=false && ${eww} open dialog-shutdown" "􀆨"))))
+
+;; Workspaces Widgets ;;
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/bar/scripts/get-workspaces")
+(deflisten current_workspace :initial "1" "bash ~/.config/eww/bar/scripts/get-active-workspace")
+
+;; a little annoying that this has to be manually specified -- limitations of DSL without full
+;; Lisp capabilities
+(defwidget workspaces []
+  (eventbox :onscroll "bash ~/.config/eww/bar/scripts/change-active-workspace {} ${current_workspace}" :class "workspaces-widget"
+    (box :space-evenly true :class "workspace-entries-cont"
+      (eventbox :onclick "hyprctl dispatch workspace 1"
+        (box :class "workspace-entry workspace-entry-1 ${current_workspace == 1 ? "current" : ""}"
+          (label :text "󰈹" :class "workspace-entry-content")))
+      (eventbox :onclick "hyprctl dispatch workspace 2"
+        (box :class "workspace-entry workspace-entry-2 ${current_workspace == 2 ? "current" : ""}"
+          (label :text "󰄛" :class "workspace-entry-content")))
+      (eventbox :onclick "hyprctl dispatch workspace 3"
+        (box :class "workspace-entry workspace-entry-3 ${current_workspace == 3 ? "current" : ""}"
+          (label :text "󰭹" :class "workspace-entry-content")))
+      (eventbox :onclick "hyprctl dispatch workspace 4"
+        (box :class "workspace-entry workspace-entry-4 ${current_workspace == 4 ? "current" : ""}"
+          (label :text "󰇮" :class "workspace-entry-content")))
+      (eventbox :onclick "hyprctl dispatch workspace 5"
+        (box :class "workspace-entry workspace-entry-5 ${current_workspace == 5 ? "current" : ""}"
+          (label :text "󰐌" :class "workspace-entry-content"))))))
+
+;; Current window widget
+(deflisten window :initial "..." "bash ~/.config/eww/bar/scripts/get-window-title")
+(defwidget window_w []
+  (box
+    :class "window-title"
+    (label :text "${window}" :class "window-title-label")))
+
+;;;; RIGHT SIDE ;;;;
+
+;; Tasks/working Widgets
+(defpoll task-count :interval "1s"
+                    :initial 0
+                    "scripts/task-helper count")
+; Cursed shell script but I love it
+(defpoll task-description :interval "1s" "scripts/task-helper description")
+(defpoll task-overdue :interval "1s" "scripts/task-helper overdue")
+(defwidget task [] 
+  (box :orientation "h"
+      :class "task"
+      :space-evenly false
+      :visible "${task-count > 0 ? "true" : "false"}"
+   (button :class "task-count"
+           :onclick "hyprctl dispatch -- exec kitty -1 taskwarrior-tui"
+           "􀷾 ${task-count}")
+   (label :class "task-description ${task-overdue == "true" ? "overdue" : ""}"
+          :visible "${strlength(task-description) > 0 ? "true" : "false"}"
+          :text task-description)))
+
+(defwidget task-widgets [] 
+  (revealer :reveal "${task-count > 0 ? "true" : "false"}"
+            :transition "slideleft"
+            :duration "550ms"
+            (box  :orientation "h"
+                  :space-evenly false
+                  :class "task-widgets"
+              (task))))
+
+;; Battery Widgets ;;
+(defpoll battery			:interval "1s"	"scripts/battery icon")
+(defpoll battery-capacity	:interval "1s"	"scripts/battery percent")
+(defwidget bat []
+	(box	:orientation "h"	
+			:space-evenly "false"
+            :class "control-item"
+	(label	:class "bat"		
+			:halign "end"		
+			:text battery	
+			:tooltip "Battery: ${battery-capacity}%")))
+
+;; Wifi Widgets ;;
+(defpoll wifi-icon :interval "1s" "scripts/wifi icon")
+(defpoll wifi-name :interval "1s" "scripts/wifi name")
+(defwidget wifi []
+    (eventbox
+        :cursor "pointer"
+        (box		:orientation "h"  
+                    :tooltip wifi-name
+                    :class "control-item"
+        (button		:onclick "scripts/popup wifi" 
+                    :class "wifi-icon control-item" wifi-icon))))
+
+;; Brightness Widgets ;;
+; (defwidget bright []
+;   (eventbox :onhover "${eww} update bright=true"   
+;   			:onhoverlost "${eww} update bright=false"
+;   			(box    :orientation "h"  
+; 			  		:space-evenly "false"  
+; 					:spacing 2
+;   			(revealer :transition "slideup" 
+; 			  		  :reveal bright   
+; 					  :duration "550ms"
+;   			(scale :class "bribar" 
+; 			  	   :value current-brightness 
+; 				   :tooltip "Brightness: ${current-brightness}%" 
+; 				   :onchange "brightnessctl set {}%" 
+; 				   :orientation "h" 
+; 				   :flipped true 
+; 				   :max 101 
+; 				   :min 0))
+;   			(label :class "brightness-icon" 
+; 			  	   :text ""))))
+; (defpoll current-brightness :interval "1s" "brightnessctl -m -d amdgpu_bl0 | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")
+; (defvar bright false)
+
+;; Volume Widgets ;;
+(defpoll current-volume :interval "1s" "pamixer --get-volume")
+(defpoll current-volume-icon :interval "1s" "scripts/volume")
+(defvar volum false)
+(defwidget volum []
+	(eventbox :onhover "${eww} update volum=true" 		
+			  :onhoverlost "${eww} update volum=false"
+              :cursor "pointer"
+	(box      :orientation "h" 	  
+			  :space-evenly "false" 
+			  :spacing "2"
+	(button   :onclick "scripts/popup audio"   
+              :class "volume-icon control-item" 
+              "${current-volume-icon}"))))
+
+;; Control Panel Widgets ;;	
+(defwidget control []
+	(box :orientation "h" 
+		 :space-evenly false  
+		 :class "control"
+(bat)
+(wifi)
+(volum)))
+
+;; Clock Widgets ;;
+(defpoll timestamp :interval "1s" "date '+%a, %b %d  %H:%M'")
+(defwidget time []
+    (eventbox :cursor "pointer"
+	(box	:orientation "h" 
+			:class "time" 
+			:halign "end"
+	(button	:onclick "scripts/popup calendar"
+			:class "time-hour" timestamp))))
+
+;; Calendar Widgets ;;
+(defwidget cal []
+	(box :class "cal-box" 
+		 :orientation "h"
+	(box :class "cal-inner-box"
+	(calendar :class "cal" 
+			  :day calendar_day 
+			  :month calendar_month 
+			  :year calendar_year))))
+(defpoll calendar_day :interval "10h"
+    "date '+%d'")
+(defpoll calendar_month :interval "10h"
+    "scripts/calendar")
+(defpoll calendar_year :interval "10h"
+    "date '+%Y'")
+
+;; Top Widgets ;;
+(defwidget top []
+	(box	:orientation "h" 
+			:space-evenly "false" 
+            :align "start"
+            :width "400px"
+(launcher)
+(workspaces)
+(window_w)))
+
+;; Bottom Widgets ;;
+(defwidget bottom []
+	(box	:orientation "h" 
+			:space-evenly false 
+(time)))
+
+;; End Widgets ;;
+(defwidget end []
+	(box :orientation "h" 
+		 :space-evenly false 
+         :spacing 5
+		 :halign "end" 
+         :hexpand "true"
+(task-widgets)
+(control)
+(bottom)))
+
+;; Bar Widgets ;;
+(defwidget bar []
+	(box :class "eww_bar" 
+		 :orientation "h" 
+		 :vexpand "false" 
+         :hexpand "false"
+(top)
+(end)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;							Window Section's							 ;;	
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Bar Windows ;;
+(defwindow bar
+	:geometry (geometry :anchor "bottom center"
+                        :x "0" 
+						:y "0" 
+						:width "100%")
+	:monitor 0
+	:reserve (struts :distance "35px" 
+					 :side "top")
+    :exclusive true
+	:hexpand "false"
+	:vexpand "false"
+(bar))
+
+;; Calendar Windows ;;
+(defwindow calendar
+    :monitor 0
+	:geometry (geometry :anchor "bottom right"
+                        :x "0" 
+						:y "0" 
+						:width "270px" 
+						:height "60px")
+(cal))
+
+;; Power popup dialog
+(defwindow power-popup
+    :monitor 0
+    :geometry (geometry :anchor "bottom left"
+                        :x "0"
+                        :y "0"
+                        :height "100px")
+    :stacking "fg"
+    :exclusive true
+    :vexpand false
+    :hexpand false
+(power-popup-cont))
+
+;; Shutdown dialog box
+(defwidget dialog-shutdown-widget []
+           (box :orientation "v"
+                :class "dialog"
+                (box :orientation "h"
+                     :class "dialog-label"
+                     (label :text "Are you sure you want to shut down?"))
+                
+                (box :orientation "h"
+                     :class "dialog-buttons"
+                     (eventbox :cursor "pointer"
+                               (button :class "dialog-button no" 
+                                       :onclick "${eww} close dialog-shutdown"
+                                       "No"))
+                     (eventbox :cursor "pointer"
+                               (button :class "dialog-button yes"
+                                       :onclick "${eww} close dialog-shutdown && notify-send \"Shutting down in 5 seconds\" && shutdown"
+                                       "Yes")))))
+
+(defwindow dialog-shutdown
+           :monitor 0
+           :geometry (geometry :anchor "center"
+                               :x 0
+                               :y 0
+                               :width "350px"
+                               :height "125px")
+           (dialog-shutdown-widget))
+
+;; Logout dialog box
+(defwidget dialog-logout-widget []
+           (box :orientation "v"
+                :class "dialog"
+                (box :orientation "h"
+                     :class "dialog-label"
+                     (label :text "Are you sure you want to log out?"))
+                
+                (box :orientation "h"
+                     :class "dialog-buttons"
+                     (eventbox :cursor "pointer"
+                               (button :class "dialog-button no" 
+                                       :onclick "${eww} close dialog-logout"
+                                       "No"))
+                     (eventbox :cursor "pointer"
+                               (button :class "dialog-button yes"
+                                       :onclick "${eww} close dialog-logout && killall Hyprland"
+                                       "Yes")))))
+
+(defwindow dialog-logout
+           :monitor 0
+           :geometry (geometry :anchor "center"
+                               :x 0
+                               :y 0
+                               :width "350px"
+                               :height "125px")
+           (dialog-logout-widget))
+
+;; Restart dialog box
+(defwidget dialog-restart-widget []
+           (box :orientation "v"
+                :class "dialog"
+                (box :orientation "h"
+                     :class "dialog-label"
+                     (label :text "Are you sure you want to restart?"))
+                
+                (box :orientation "h"
+                     :class "dialog-buttons"
+                     (eventbox :cursor "pointer"
+                               (button :class "dialog-button no" 
+                                       :onclick "${eww} close dialog-restart"
+                                       "No"))
+                     (eventbox :cursor "pointer"
+                               (button :class "dialog-button yes"
+                                       :onclick "${eww} close dialog-restart && reboot"
+                                       "Yes")))))
+
+(defwindow dialog-restart
+           :monitor 0
+           :geometry (geometry :anchor "center"
+                               :x 0
+                               :y 0
+                               :width "350px"
+                               :height "125px")
+           (dialog-restart-widget))

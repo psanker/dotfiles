@@ -1,8 +1,8 @@
-[submodule "tmux/.tmux/plugins/tpm"]
-	path = tmux/.tmux/plugins/tpm
+[submodule "common/tmux/.tmux/plugins/tpm"]
+	path = common/tmux/.tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
-[submodule "tmux/.tmux/plugins/tmux-pomodoro-plus"]
-	path = tmux/.tmux/plugins/tmux-pomodoro-plus
+[submodule "common/tmux/.tmux/plugins/tmux-pomodoro-plus"]
+	path = common/tmux/.tmux/plugins/tmux-pomodoro-plus
 	url = https://github.com/olimorris/tmux-pomodoro-plus
 [submodule "gpg"]
 	path = gpg
@@ -10,12 +10,9 @@
 [submodule "git"]
 	path = git
 	url = ./git
-[submodule "hledger"]
-	path = hledger
-	url = ./hledger
-[submodule "mutt"]
-	path = mutt
+[submodule "common/mutt"]
+	path = common/mutt
 	url = git@github.com:psanker/email.git
-[submodule "calcurse"]
-	path = calcurse
-	url = ./calcurse
+[submodule "common/calcurse"]
+	path = common/calcurse
+	url = ./common/calcurse
