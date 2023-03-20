@@ -1,3 +1,5 @@
+fish_vi_key_bindings
+
 fish_add_path /usr/local/bin
 fish_add_path /usr/local/go/bin
 fish_add_path /usr/local/opt/llvm/bin
@@ -71,4 +73,3 @@ set -gx PATH "$VOLTA_HOME/bin" $PATH
 
 # INIT STARSHIP
 starship init fish | source
-fish_add_path /home/pickle/.spicetify
