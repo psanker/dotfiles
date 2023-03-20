@@ -1,13 +1,12 @@
 fish_add_path /usr/local/bin
 fish_add_path /usr/local/go/bin
 fish_add_path /usr/local/opt/llvm/bin
-fish_add_path "$HOME/.spicetify"
 fish_add_path "$HOME/.local/bin"
 fish_add_path "$HOME/go/bin"
 fish_add_path "$HOME/.cargo/bin"
 
-set --export SHELL /usr/bin/fish
-set --export VISUAL /usr/bin/nvim
+set --export SHELL "$(which fish)"
+set --export VISUAL "$(which nvim)"
 set --export EDITOR "$VISUAL"
 set --export PAGER less
 set --export GPG_TTY (eval tty)
@@ -28,12 +27,14 @@ if status is-interactive
     alias gi="gitignore"
     alias pt="python3.10 -m poetry"
     alias bfg="java -jar $HOME/.local/bin/bfg.jar"
-    alias sioyek="/Applications/sioyek.app/Contents/MacOS/sioyek"
     alias cat="bat"
     alias hl="hledger"
     alias hlu="hledger-ui"
     alias hlw="hledger-web"
 
+    alias gs="git status"
+    alias ga="git add"
+    alias gc="git commit"
     alias gpl="git pull --rebase"
     alias gpu="git push"
 
