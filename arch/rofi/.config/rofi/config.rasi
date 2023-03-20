@@ -1,0 +1,54 @@
+// vim:set ft=rasi:
+configuration {
+  hide-scrollbar: true;
+  kb-cancel: "Escape,Control+bracketleft";
+  kb-mode-next: "Alt+Right,Shift+Right,Control+Tab,Alt+l";
+  kb-mode-previous: "Alt+Left,Shift+Left,Control+ISO_Left_Tab,Alt+h";
+  /* kb-row-select:; */
+  modi: "drun,run,calc";
+  monitor: "-4";
+
+  drun {
+    display-name: "Apps";
+  }
+
+  run {
+    display-name: "Programs";
+  }
+
+  calc {
+    display-name: "> ";
+  }
+}
+
+@theme "rose-pine-moon"
+
+* {
+    font: "SF Pro Display 12";
+}
+
+window {
+    border: 1;
+}
+
+#message {
+	border:       0;
+	border-color: @separatorcolor;
+	padding:      5px;
+}
+
+listview {
+	fixed-height: 0;
+	border:       0;
+	border-color: @bordercolor;
+	scrollbar:    false;
+	padding:      1em 0 1em 0;
+}
+
+entry {
+    margin: 0 0 0 0.5em;
+}
+
+inputbar {
+	children: [prompt, entry, case-indicator];
+}
