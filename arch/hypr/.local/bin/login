@@ -21,7 +21,7 @@ done
 
 # Start gammastep *first*
 if [[ ! $(pidof gammastep) ]]; then
-    gammastep &
+    systemctl --user restart gammastep
 fi
 
 # GTK theme
@@ -67,6 +67,3 @@ fi
 if [[ ! $(pidof hyprpaper) ]]; then
     hyprpaper &
 fi
-
-# Set env vars
-export BEMOJI_PICKER_CMD=/usr/bin/rofi
