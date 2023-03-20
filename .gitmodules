@@ -4,15 +4,18 @@
 [submodule "common/tmux/.tmux/plugins/tmux-pomodoro-plus"]
 	path = common/tmux/.tmux/plugins/tmux-pomodoro-plus
 	url = https://github.com/olimorris/tmux-pomodoro-plus
-[submodule "gpg"]
-	path = gpg
-	url = ./gpg
-[submodule "git"]
-	path = git
-	url = ./git
+[submodule "macos/gpg"]
+	path = macos/gpg
+	url = ./macos/gpg
+[submodule "macos/git"]
+	path = macos/git
+	url = ./macos/git
 [submodule "common/mutt"]
 	path = common/mutt
 	url = git@github.com:psanker/email.git
 [submodule "common/calcurse"]
 	path = common/calcurse
 	url = git@github.com:psanker/calendar.git
+[submodule "common/gpg"]
+	path = common/gpg
+	url = ./common/gpg
