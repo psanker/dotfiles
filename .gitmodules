@@ -15,4 +15,4 @@
 	url = git@github.com:psanker/email.git
 [submodule "common/calcurse"]
 	path = common/calcurse
-	url = ./common/calcurse
+	url = git@github.com:psanker/calendar.git
