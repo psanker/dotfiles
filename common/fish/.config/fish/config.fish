@@ -38,6 +38,7 @@ if status is-interactive
     alias ga="git add"
     alias gc="git commit"
     alias gpl="git pull --rebase"
+    alias gplS="git pull --rebase origin main && git submodule foreach --recursive git pull --rebase origin main"
     alias gpu="git push"
 
     alias ls="exa --group-directories-first"
