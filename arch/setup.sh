@@ -10,10 +10,14 @@ while [ $found -eq 0 ]; do
 
     for file in $root/*; do
         if [[ "$file" = "stow.sh" ]]; then
-            $found=1
+            found=1
             break
         fi
     done
+
+    if [ $found -eq 0 ]; then
+        root=$(dirname $root)
+    fi
 done
 
 if [ ! $found -eq 1 ]; then
@@ -26,31 +30,13 @@ if [ ! -x /usr/bin/yay ]; then
     exit 1
 fi
 
-progs=(
-    "apple_cursor"
-    "eww-wayland-git"
-    "exa"
-    "gammastep"
-    "hyprpaper"
-    "neovim"
-    "nnn"
-    "openbsd-netcat"
-    "pipewire"
-    "pipewire-audio"
-    "pipewire-pulse"
-    "protonmail-bridge-bin"
-    "rclone"
-    "rofi-lbonn-wayland-git"
-    "rofimoji"
-    "sddm-theme-corners-git"
-    "socat"
-    "starship"
-    "task"
-    "taskwarrior-tui"
-    "ttf-apple-emoji"
-    "ttf-mac-fonts"
-    "wtype"
-)
+progs=()
+
+while IFS= read -r line; do
+    progs+=($line)
+done < pkgs.txt
+
+echo "Installing ${#progs[@]} packages.."
 
 yay -Sy "${progs[@]}"
 
