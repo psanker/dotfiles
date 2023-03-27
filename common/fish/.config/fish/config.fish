@@ -17,7 +17,7 @@ set --export LEDGER_FILE "$HOME/personal/pkm/finance/current.journal"
 if status is-interactive
     # Commands to run in interactive sessions can go here
 
-    if test -x /usr/bin/jump
+    if test -x /usr/bin/jump || test -x /usr/local/bin/jump
         jump shell fish | source
     end
 
