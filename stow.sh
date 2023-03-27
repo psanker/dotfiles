@@ -2,30 +2,33 @@
 
 # Inspired by https://github.com/NeshHari/XMonad
 
-POSITIONAL_ARGS=()
+show_help() {
+    echo "Usage: $(basename $0) [-v] [-C] [-h]"
+    echo "  -C: Stow the common configuration files only"
+    echo "  -v: Show verbose messages"
+    echo "  -h: Show this help message"
+}
 
-while [[ $# -gt 0 ]]; do
-  case $1 in
-    -v|--verbose)
+while getopts ':vC' OPTION; do
+  case "$OPTION" in
+    v)
       VERBOSE=1
-      shift
       ;;
-    -C|--common-only)
+    C)
       COMMON_ONLY=1
-      shift
       ;;
-    -*|--*)
-      echo "Unknown option $1"
+    h)
+        show_help
+        exit 0
+        ;;
+    ?)
+      show_help
       exit 1
-      ;;
-    *)
-      POSITIONAL_ARGS+=("$1") # save positional arg
-      shift # past argument
       ;;
   esac
 done
 
-set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
+shift "$(( $OPTIND - 1 ))"
 
 debug() {
     if [ $VERBOSE -eq 1 ]; then
@@ -39,6 +42,12 @@ stow_package() {
     stowignore="./$package/.stowignore"
     ignored_dirs=()
     stow_dirs=()
+
+    verbose_stow=""
+
+    if [ $VERBOSE -eq 1 ]; then
+        verbose_stow="-v"
+    fi
 
     if [ -f $stowignore ]; then
         while IFS= read -r line; do
@@ -56,7 +65,7 @@ stow_package() {
             continue
         fi
 
-        if ! stow -d "$package" -t $HOME $(basename $dir); then
+        if ! stow -d "$package" -t $HOME "$verbose_stow" $(basename $dir); then
             stow_dirs+=($dir)
         fi
     done
@@ -71,10 +80,26 @@ stow_package() {
 stow_package "common"
 
 if [ -z $COMMON_ONLY ]; then
-    if [ -z "$1" ]; then
-        echo "Please provide a platform"
-        exit 1
+    PLATFORM="$1"
+
+    if [ -z "$PLATFORM" ]; then
+        agent=$(uname)
+
+        case $agent in
+            Linux) 
+                PLATFORM="arch" 
+                debug "Using 'arch' as a default.."
+                ;;
+            Darwin)
+                PLATFORM="macos"
+                debug "Using 'macos' as a default.."
+                ;;
+            *)
+                echo "Please provide a platform"
+                exit 1
+                ;;
+        esac
     fi
 
-    stow_package "$1"
+    stow_package "$PLATFORM"
 fi

@@ -19,3 +19,6 @@
 [submodule "gpg-common"]
 	path = common/gpg
 	url = git@github.com:psanker/gpg-common.git
+[submodule "newsboat-common"]
+	path = common/newsboat
+	url = git@github.com:psanker/newsboat.git

@@ -173,6 +173,7 @@ geary
 gettext
 ghc
 ghostscript
+gibo
 git
 git-annex
 github-cli
@@ -300,6 +301,7 @@ networkmanager-openconnect
 networkmanager-openvpn
 networkmanager-pptp
 networkmanager-vpnc
+newsboat
 nfs-utils
 nilfs-utils
 nitrogen
