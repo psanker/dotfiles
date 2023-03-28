@@ -53,23 +53,17 @@ nnoremap(']d', function() vim.diagnostic.goto_next() end) -- Go to next diagnost
 
 -- 2. Git --
 local function fugitive_state()
-    local open = false
+    vim.g.fugitive_state = not vim.g.fugitive_state
 
-    return function()
-        open = not open
-
-        if open then
-            vim.cmd [[Git]]
-        else
-            vim.cmd [[Git]]
-            vim.cmd [[q]]
-        end
+    if vim.g.fugitive_state then
+        vim.cmd [[Git]]
+    else
+        vim.cmd [[Git]]
+        vim.cmd [[q]]
     end
 end
 
-local f_state = fugitive_state()
-
-nnoremap('<Leader>gg', f_state, { silent = true, desc = 'Toggle fu[g]itive window' })
+nnoremap('<Leader>gg', fugitive_state, { silent = true, desc = 'Toggle fu[g]itive window' })
 nnoremap('<Leader>gp', '<cmd>Git pull<CR>', { silent = true, desc = '[g]it [p]ull' })
 nnoremap('<Leader>gP', '<cmd>Git push<CR>', { silent = true, desc = '[g]it [P]ush' })
 nnoremap('<Leader>gl', '<cmd>Git log<CR>', { desc = '[g]it [l]og' })

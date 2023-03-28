@@ -79,3 +79,6 @@ g.zen_mode_open = false
 -- Which-key help
 set.timeout = true
 set.timeoutlen = 500
+
+-- fugitive open?
+g.fugitive_open = false
