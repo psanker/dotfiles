@@ -52,7 +52,7 @@ if status is-interactive
     alias nnn="$HOME/.local/bin/nnn.sh -deaHQ -Pp"
 
     alias t="task"
-    alias tt="task +TODAY"
+    alias tt="task +TODAY or +OVERDUE"
     alias ta="task add"
     alias td="task $1 done"
     alias tm="task $1 modify"
@@ -60,7 +60,7 @@ if status is-interactive
     alias tw="taskwarrior-tui"
 
     alias z="zathura"
-    alias zf="z (fzf)"
+    alias zf="fzf | xargs zathura"
 
     alias reload="source ~/.config/fish/config.fish"
 end
