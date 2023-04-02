@@ -60,7 +60,7 @@ if status is-interactive
     alias tw="taskwarrior-tui"
 
     alias z="zathura"
-    alias zf="fzf | xargs zathura"
+    alias zf="zathura (fzf) & disown"
 
     alias reload="source ~/.config/fish/config.fish"
 end
