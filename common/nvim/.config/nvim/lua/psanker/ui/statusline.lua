@@ -185,16 +185,6 @@ local std_opts = {
                     return str
                 end,
             },
-            {
-                'fileformat',
-                fmt = function(str)
-                    if vim.g.zen_mode_open then
-                        return ''
-                    end
-
-                    return str
-                end,
-            }
         },
         lualine_y = {
             {
