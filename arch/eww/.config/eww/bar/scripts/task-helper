@@ -20,7 +20,7 @@ description() {
 }
 
 count() {
-    echo "$(task +TODAY count)"
+    echo "$(task +TODAY or +OVERDUE count)"
 }
 
 overdue() {

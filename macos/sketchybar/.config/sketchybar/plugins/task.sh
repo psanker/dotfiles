@@ -2,7 +2,7 @@
 
 source "$HOME/.config/sketchybar/colors.sh"
 
-TW_COUNT=$(task +TODAY count)
+TW_COUNT=$(task +TODAY or +OVERDUE count)
 TW_ACTIVE_ID=$(task +ACTIVE ids | cut -w -f1)
 
 TW_ACTIVE=""
