@@ -11,6 +11,7 @@ procs=(
     "hyprpaper"
     "gammastep"
     "nm-applet"
+    "udiskie"
 )
 
 for proc in "${procs[@]}"; do
@@ -66,4 +67,8 @@ fi
 # Launch hyprpaper
 if [[ ! $(pidof hyprpaper) ]]; then
     hyprpaper &
+fi
+
+if [[ ! $(pidof udiskie) ]]; then
+    udiskie &
 fi
