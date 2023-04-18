@@ -52,7 +52,7 @@ if status is-interactive
     alias nnn="$HOME/.local/bin/nnn.sh -deaHQ -Pp"
 
     alias t="task"
-    alias tt="task +TODAY or +OVERDUE"
+    alias tt="task +TODAY or +OVERDUE or +SCHEDULED"
     alias ta="task add"
     alias td="task $1 done"
     alias tm="task $1 modify"
