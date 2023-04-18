@@ -20,7 +20,7 @@ description() {
 }
 
 count() {
-    echo "$(task +TODAY or +OVERDUE or scheduled.before:tomorrow count)"
+    echo "$(task +TODAY or +OVERDUE or \(+SCHEDULED and due.after:today\) count)"
 }
 
 overdue() {
