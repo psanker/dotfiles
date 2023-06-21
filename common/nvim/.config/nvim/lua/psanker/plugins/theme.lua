@@ -3,7 +3,7 @@ return {
         'rose-pine/neovim',
         config = function()
             require('rose-pine').setup({
-                dark_variant = 'moon',
+                variant = 'dawn',
                 highlight_groups = {
                     NormalNC = {
                         fg = 'subtle',
