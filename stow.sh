@@ -31,7 +31,7 @@ done
 shift "$(( $OPTIND - 1 ))"
 
 debug() {
-    if [ $VERBOSE -eq 1 ]; then
+    if [ -n $VERBOSE ]; then
         echo $1
     fi
 }
@@ -45,7 +45,7 @@ stow_package() {
 
     verbose_stow=""
 
-    if [ $VERBOSE -eq 1 ]; then
+    if [ -n $VERBOSE ]; then
         verbose_stow="-v"
     fi
 
