@@ -1,5 +1,4 @@
 **/*.luarc.json
 **/*.jar
 doom/
-wezterm/
 **/*.DS_Store

@@ -180,4 +180,4 @@ pomo < p : pomo start && skhd -k "escape"
 pomo < x : pomo cancel && skhd -k "escape"
 
 # Shortcut to create a new kitty term on the fly
-lalt - return : kitty --single-instance --listen-on=unix:"$TMPDIR/kitty" "$HOME"
+lalt - return : wezterm
