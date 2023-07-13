@@ -40,6 +40,7 @@ if status is-interactive
     alias gpl="git pull --rebase"
     alias gplS="git pull --rebase origin main && git submodule foreach --recursive git pull --rebase origin main"
     alias gpu="git push"
+    alias gco="git checkout"
 
     alias ls="exa --group-directories-first"
     alias la="exa -la --color=always --group-directories-first"
