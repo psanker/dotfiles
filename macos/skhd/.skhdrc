@@ -164,9 +164,8 @@ apps < escape ; default
 
 apps < n : open ~ && skhd -k "escape"
 apps < f : open /Applications/Firefox.app && skhd -k "escape"
-apps < k : open /Applications/kitty.app && skhd -k "escape"
 apps < m : open /System/Applications/Messages.app && skhd -k "escape"
-apps < shift - m : kitty -1 --listen-on=unix:"$TMPDIR/kitty" neomutt && skhd -k "escape"
+apps < shift - m : wezterm -e neomutt && skhd -k "escape"
 apps < s : open /Applications/Spotify.app && skhd -k "escape"
 apps < shift - s : open /Applications/Slack.app && skhd -k "escape"
 apps < shift - o : open /Applications/Obsidian.app && skhd -k "escape"
@@ -179,5 +178,5 @@ pomo < escape ; default
 pomo < p : pomo start && skhd -k "escape"
 pomo < x : pomo cancel && skhd -k "escape"
 
-# Shortcut to create a new kitty term on the fly
+# Shortcut to create a new wezterm term on the fly
 lalt - return : wezterm
