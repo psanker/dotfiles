@@ -13,6 +13,7 @@ return {
             })
 
             vim.cmd.colorscheme('rose-pine')
+            vim.cmd [[ hi Normal guibg=NONE ctermbg=NONE ]]
         end,
         priority = 1000,
         lazy = false,
