@@ -19,4 +19,7 @@ cfg.font = wez.font 'Hasklug Nerd Font'
 -- Theme
 cfg.color_scheme = 'rose-pine-moon'
 
+-- Shell
+cfg.default_prog = { '/usr/local/bin/fish', '-l' }
+
 return cfg
