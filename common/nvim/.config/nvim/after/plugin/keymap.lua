@@ -47,9 +47,9 @@ vnoremap('J', ":m '>+1<CR>gv=gv")
 vnoremap('K', ":m '<-2<CR>gv=gv")
 
 -- 1. LSP --
-nnoremap('gl', function() vim.diagnostic.open_float() end) -- Show diagnostics in floating pane
-nnoremap('[d', function() vim.diagnostic.goto_prev() end) -- Go to prev diagnositc
-nnoremap(']d', function() vim.diagnostic.goto_next() end) -- Go to next diagnostic
+nnoremap('gl', function() vim.diagnostic.open_float() end, { desc = 'Open diagnostic float' })
+nnoremap('[d', function() vim.diagnostic.goto_prev() end, { desc = 'Go to next diagnostic' })
+nnoremap(']d', function() vim.diagnostic.goto_next() end, { desc = 'Go to previous diagnostic' })
 
 -- 2. Git --
 nnoremap('<Leader>gg', '<cmd>Git<CR>', { silent = true, desc = 'Open fu[g]itive window' })
