@@ -58,7 +58,8 @@ return {
             require('nvim-tree').setup()
         end,
         keys = {
-            { '<Leader>fb', '<cmd>NvimTreeToggle<CR>', desc = '[f]ile [b]rowser', noremap = true, }
+            { '<Leader>fb', '<cmd>NvimTreeToggle<CR>',   desc = '[f]ile [b]rowser',         noremap = true, },
+            { '<Leader>fF', '<cmd>NvimTreeFindFile<CR>', desc = '[f]ind [F]ile in browser', noremap = true, },
         },
     },
     {

@@ -61,9 +61,13 @@ nnoremap('<Leader>gl', '<cmd>Git log<CR>', { desc = '[g]it [l]og' })
 nnoremap('<Leader>vo', '<cmd>SymbolsOutline<CR>', { desc = '[v]iew [o]utline' })
 nnoremap('<Leader>vt', '<cmd>TodoTrouble<CR>', { desc = '[v]iew [t]odos' })
 nnoremap('<Leader>vT', '<cmd>TodoTelescope<CR>', { desc = '[v]iew [T]odos in Telescope' })
-nnoremap('<Leader>vx', '<cmd>TroubleToggle<CR>', { desc = '[v]iew quickfi[x]' })
 
--- 4. Note capture and quick actions (q) --
+-- 4. Quickfix commands
+nnoremap('<Leader>vx', '<cmd>TroubleToggle<CR>', { desc = '[v]iew quickfi[x]' })
+nnoremap(']x', '<cmd>cnext<CR>', { desc = 'Go to next quickfi[x]' })
+nnoremap('[x', '<cmd>cprevious<CR>', { desc = 'Go to previous quickfi[x]' })
+
+-- 5. Note capture and quick actions (q) --
 nnoremap('<Leader>qn', '<cmd>FloatermNew! --cwd=~/personal/pkm ~/.local/bin/quick-note.sh<CR>',
     { desc = 'Open a [q]uick note in a floating term' })
 nnoremap('<Leader>qj', '<cmd>FloatermNew! --cwd=~/personal/pkm ~/.local/bin/quick-journal.sh<CR>',
