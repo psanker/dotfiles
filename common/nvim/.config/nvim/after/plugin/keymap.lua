@@ -56,6 +56,7 @@ nnoremap('<Leader>gg', '<cmd>Git<CR>', { silent = true, desc = 'Open fu[g]itive 
 nnoremap('<Leader>gp', '<cmd>Git pull<CR>', { silent = true, desc = '[g]it [p]ull' })
 nnoremap('<Leader>gP', '<cmd>Git push<CR>', { silent = true, desc = '[g]it [P]ush' })
 nnoremap('<Leader>gl', '<cmd>Git log<CR>', { desc = '[g]it [l]og' })
+nnoremap('<Leader>gf', '<cmd>Git fetch<CR>', { desc = '[g]it [f]etch' })
 
 -- 3. View different windows
 nnoremap('<Leader>vo', '<cmd>SymbolsOutline<CR>', { desc = '[v]iew [o]utline' })
