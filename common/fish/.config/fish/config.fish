@@ -42,6 +42,7 @@ if status is-interactive
     alias gpu="git push"
     alias gco="git checkout"
     alias gf="git fetch"
+    alias gr="git rebase"
 
     alias ls="exa --group-directories-first"
     alias la="exa -la --color=always --group-directories-first"
