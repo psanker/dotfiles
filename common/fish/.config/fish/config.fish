@@ -14,6 +14,18 @@ set --export PAGER less
 set --export GPG_TTY (eval tty)
 set --export LEDGER_FILE "$HOME/personal/pkm/finance/current.journal"
 
+function fish_user_key_bindings
+    # todoist
+    bind -M insert \eti fzf_todoist_item
+    bind -M insert \etp fzf_todoist_project
+    bind -M insert \etl fzf_todoist_labels
+    bind -M insert \etc fzf_todoist_close
+    bind -M insert \etd fzf_todoist_delete
+    bind -M insert \eto fzf_todoist_open
+    bind -M insert \ett fzf_todoist_date
+    bind -M insert \etq fzf_todoist_quick_add
+end
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
 
@@ -66,7 +78,10 @@ if status is-interactive
     alias zf="zathura (fzf) & disown"
 
     alias reload="source ~/.config/fish/config.fish"
+
+    fish_user_key_bindings
 end
+
 
 if test -e "$HOME/.config/.env"
     source ~/.config/.env

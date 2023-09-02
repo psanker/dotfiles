@@ -1,6 +1,8 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR __fish_initialized:3400
+SETUVAR _fisher_mordax7_2F_fish_2D_fzf_2D_todoist_files:/Users/patrickanker/\x2econfig/fish/functions/fzf_todoist_close\x2efish\x1e/Users/patrickanker/\x2econfig/fish/functions/fzf_todoist_date\x2efish\x1e/Users/patrickanker/\x2econfig/fish/functions/fzf_todoist_delete\x2efish\x1e/Users/patrickanker/\x2econfig/fish/functions/fzf_todoist_item\x2efish\x1e/Users/patrickanker/\x2econfig/fish/functions/fzf_todoist_labels\x2efish\x1e/Users/patrickanker/\x2econfig/fish/functions/fzf_todoist_open\x2efish\x1e/Users/patrickanker/\x2econfig/fish/functions/fzf_todoist_project\x2efish\x1e/Users/patrickanker/\x2econfig/fish/functions/fzf_todoist_quick_add\x2efish
+SETUVAR _fisher_plugins:mordax7/fish\x2dfzf\x2dtodoist
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:blue
