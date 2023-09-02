@@ -24,4 +24,4 @@
 	url = git@github.com:psanker/newsboat.git
 [submodule "common/todoist"]
 	path = common/todoist
-	url = ./common/todoist
+	url = git@github.com:psanker/todoist.git
