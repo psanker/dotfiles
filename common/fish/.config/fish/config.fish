@@ -16,14 +16,14 @@ set --export LEDGER_FILE "$HOME/personal/pkm/finance/current.journal"
 
 function fish_user_key_bindings
     # todoist
-    bind -M insert \eti fzf_todoist_item
-    bind -M insert \etp fzf_todoist_project
-    bind -M insert \etl fzf_todoist_labels
-    bind -M insert \etc fzf_todoist_close
-    bind -M insert \etd fzf_todoist_delete
-    bind -M insert \eto fzf_todoist_open
-    bind -M insert \ett fzf_todoist_date
-    bind -M insert \etq fzf_todoist_quick_add
+    bind -M insert \cti fzf_todoist_item
+    bind -M insert \ctp fzf_todoist_project
+    bind -M insert \ctl fzf_todoist_labels
+    bind -M insert \ctc fzf_todoist_close
+    bind -M insert \ctd fzf_todoist_delete
+    bind -M insert \cto fzf_todoist_open
+    bind -M insert \ctt fzf_todoist_date
+    bind -M insert \ctq fzf_todoist_quick_add
 end
 
 if status is-interactive
@@ -74,6 +74,8 @@ if status is-interactive
     alias tm="task $1 modify"
     alias tW="task +WEEK"
     alias tw="taskwarrior-tui"
+
+    alias todoist-cli="todoist"
 
     alias z="zathura"
     alias zf="zathura (fzf) & disown"
