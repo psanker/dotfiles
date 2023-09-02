@@ -55,6 +55,7 @@ if status is-interactive
     alias gco="git checkout"
     alias gf="git fetch"
     alias gr="git rebase"
+    alias gS="git submodule foreach --recursive"
 
     alias ls="exa --group-directories-first"
     alias la="exa -la --color=always --group-directories-first"
