@@ -76,9 +76,9 @@ if status is-interactive
     alias tw="taskwarrior-tui"
 
     alias todoist-cli="todoist"
-
-    alias z="zathura"
-    alias zf="zathura (fzf) & disown"
+    
+    alias z="sioyek --new-window"
+    alias zf="sioyek --new-window (fzf) & disown"
 
     alias reload="source ~/.config/fish/config.fish"
 
