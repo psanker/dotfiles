@@ -131,7 +131,7 @@ return {
                 end
             })
         end,
-        event = { 'BufReadPre', 'BufNewFile' }
+        event = { 'BufReadPost', 'BufNewFile' }
     },
     {
         'goolord/alpha-nvim',

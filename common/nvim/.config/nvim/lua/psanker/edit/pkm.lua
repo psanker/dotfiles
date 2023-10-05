@@ -29,7 +29,7 @@ return {
         local api = require('zk.api')
 
         -- Journaling stuff
-        commands.add('ZkDailyEntry', function(opts)
+        commands.add('ZkDailyEntry', function(_)
             local today = os.date('%Y%m%d')
             local today_human = os.date('%Y-%m-%d')
             local entry_path = 'journal/' .. today .. '.md'
@@ -43,7 +43,7 @@ return {
                         dir = 'journal',
                         date = 'today',
                         template = 'journal.md'
-                    }, function(err, res)
+                    }, function(_, _)
                         assert(res ~= nil, tostring(err))
 
                         local dir = dirname(res.path)

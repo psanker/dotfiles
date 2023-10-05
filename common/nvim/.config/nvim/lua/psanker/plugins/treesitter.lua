@@ -5,7 +5,7 @@ return {
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects',
         },
-        event = 'BufEnter',
+        event = { 'BufReadPre', 'BufNewFile' },
         config = function()
             require('nvim-treesitter.configs').setup({
                 ensure_installed = { 'r', 'rust', 'python', 'go', 'org' },
@@ -114,8 +114,11 @@ return {
         end,
         keys = {
             { '<Leader>bsi', '<cmd>InactiveBufSyntaxEnable<CR>', desc = '[b]uffers: enable inactive buffer [s]yntax (i)' },
-            { '<Leader>bso', '<cmd>InactiveBufSyntaxDisable<CR>',
-                desc = '[b]uffers: disable inactive buffer [s]yntax (o)' },
+            {
+                '<Leader>bso',
+                '<cmd>InactiveBufSyntaxDisable<CR>',
+                desc = '[b]uffers: disable inactive buffer [s]yntax (o)'
+            },
         },
     },
     {
