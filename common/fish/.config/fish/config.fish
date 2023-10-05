@@ -77,8 +77,8 @@ if status is-interactive
 
     alias todoist-cli="todoist"
     
-    alias z="sioyek --new-window"
-    alias zf="sioyek --new-window (fzf) & disown"
+    alias z="sioyek"
+    alias zf="sioyek (fzf)"
 
     alias reload="source ~/.config/fish/config.fish"
 
