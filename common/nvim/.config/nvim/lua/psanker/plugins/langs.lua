@@ -9,19 +9,6 @@ return {
         ft = 'markdown',
     },
     {
-        'simrat39/rust-tools.nvim',
-        ft = 'rust',
-        config = function(_)
-            require('rust-tools').setup({
-                tools = {
-                    inlay_hints = {
-                        auto = true
-                    }
-                }
-            })
-        end,
-    },
-    {
         'lukas-reineke/headlines.nvim',
         config = function(_)
             require('headlines').setup({
@@ -52,9 +39,9 @@ return {
                     }
                 }
             })
-        end
+        end,
+        ft = { 'quarto' },
     },
-    ft = { 'quarto' },
     {
         'elkowar/yuck.vim',
         ft = { 'yuck' },
