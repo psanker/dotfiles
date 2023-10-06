@@ -1,6 +1,5 @@
 local p = require('rose-pine.palette')
 local util = require('rose-pine.util')
-local lualine = require('lualine')
 
 local function element_in(el, tab)
     local els_set = {}
