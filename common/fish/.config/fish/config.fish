@@ -78,7 +78,7 @@ if status is-interactive
     alias todoist-cli="todoist"
     
     alias z="sioyek"
-    alias zf="sioyek (fzf)"
+    alias zf="sioyek (find . -name \"*.pdf\" -type f | fzf)"
 
     alias reload="source ~/.config/fish/config.fish"
 
