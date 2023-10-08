@@ -57,10 +57,10 @@ if status is-interactive
     alias gr="git rebase"
     alias gS="git submodule foreach --recursive"
 
-    alias ls="exa --group-directories-first"
-    alias la="exa -la --color=always --group-directories-first"
-    alias ll="exa -l --color=always --group-directories-first"
-    alias lt="exa -aT --color=always --group-directories-first --level=3"
+    alias ls="eza --group-directories-first"
+    alias la="eza -la --color=always --group-directories-first"
+    alias ll="eza -l --color=always --group-directories-first"
+    alias lt="eza -aT --color=always --group-directories-first --level=3"
 
     alias mvln="$HOME/.bin/mvln.sh"
 
