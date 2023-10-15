@@ -78,7 +78,6 @@ if status is-interactive
     alias todoist-cli="todoist"
     
     alias z="sioyek"
-    alias zf="sioyek (find . -name \"*.pdf\" -type f | fzf)"
 
     alias reload="source ~/.config/fish/config.fish"
 
@@ -98,3 +97,4 @@ source $HOME/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
 # INIT STARSHIP
 starship init fish | source
+
