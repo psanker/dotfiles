@@ -50,5 +50,8 @@ return {
         'Fymyte/tree-sitter-rasi',
         ft = "rasi"
     },
-
+    {
+        'ledger/vim-ledger',
+        ft = "ledger"
+    },
 }
