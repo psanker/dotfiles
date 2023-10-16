@@ -1,10 +1,6 @@
 local function configure_lsp(lsp, navic, cmp)
-    local cmp_select = { behavior = cmp.SelectBehavior.Select }
-    local cmp_mappings = lsp.defaults.cmp_mappings({
-        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-        ['<C-Space>'] = cmp.mapping.complete(),
-    })
+    lsp.extend_lspconfig()
+
 
     lsp.set_preferences({
         suggest_lsp_servers = true,
@@ -17,8 +13,14 @@ local function configure_lsp(lsp, navic, cmp)
         sign_icons = {}
     })
 
-    lsp.setup_nvim_cmp({
-        mapping = cmp_mappings,
+    local cmp_select = { behavior = cmp.SelectBehavior.Select }
+
+    cmp.setup({
+        mapping = cmp.mapping.preset.insert({
+            ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+            ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+            ['<C-Space>'] = cmp.mapping.complete(),
+        }),
         sources = {
             { name = 'path' },
             { name = 'nvim_lsp', keyword_length = 3 },
@@ -27,7 +29,7 @@ local function configure_lsp(lsp, navic, cmp)
         },
     })
 
-    lsp.configure('lua-language-server', {
+    lsp.configure('lua_ls', {
         settings = {
             Lua = {
                 runtime = {
@@ -63,8 +65,6 @@ local function configure_lsp(lsp, navic, cmp)
         }
     })
 
-    lsp.nvim_workspace()
-
     lsp.on_attach(function(client, bufnr)
         require('psanker.edit.lsp').bind_lsp_keymaps(client, bufnr)
 
@@ -98,6 +98,11 @@ return {
             {
                 'williamboman/mason-lspconfig.nvim',
                 config = function()
+                    configure_lsp(
+                        require 'lsp-zero',
+                        require 'nvim-navic',
+                        require 'cmp'
+                    )
                     require('mason-lspconfig').setup({
                         ensure_installed = { "lua_ls", "rust_analyzer", "r_language_server" }
                     })
@@ -115,13 +120,6 @@ return {
             -- Snippets
             'L3MON4D3/LuaSnip',
         },
-        config = function()
-            configure_lsp(
-                require 'lsp-zero',
-                require 'nvim-navic',
-                require 'cmp'
-            )
-        end,
         event = { 'BufReadPre', 'BufNewFile' },
     },
     {
