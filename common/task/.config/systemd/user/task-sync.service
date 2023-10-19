@@ -1,6 +1,0 @@
-[Unit]
-Description=Synchronize Taskwarrior server
-
-[Service]
-type=oneshot
-ExecStart=/usr/bin/task sync
