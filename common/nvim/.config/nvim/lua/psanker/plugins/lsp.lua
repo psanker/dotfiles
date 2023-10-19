@@ -1,6 +1,46 @@
 local function configure_lsp(lsp, navic, cmp)
-    lsp.extend_lspconfig()
+    require('mason-lspconfig').setup({
+        ensure_installed = { "lua_ls", "rust_analyzer", "r_language_server" },
+        handlers = {
+            lsp.default_setup,
+            lua_ls = function()
+                require('lspconfig').lua_ls.setup({
+                    settings = {
+                        Lua = {
+                            runtime = {
+                                version = 'LuaJIT',
+                            },
+                            diagnostics = {
+                                globals = { 'vim' },
+                            },
+                            workspace = {
+                                library = vim.api.nvim_get_runtime_file("", true),
+                            },
+                            telemetry = {
+                                enable = false,
+                            },
+                        },
+                    },
 
+                })
+            end,
+            rust_analyzer = function()
+                require('lspconfig').rust_analyzer.setup({
+                    cmd = { "rustup", "run", "nightly", "rust-analyzer" },
+                    settings = {
+                        ["rust-analyzer"] = {
+                            unstable_features = true,
+                            build_on_save = false,
+                            all_features = true,
+                            diagnostics = {
+                                experimental = true,
+                            },
+                        }
+                    }
+                })
+            end,
+        },
+    })
 
     lsp.set_preferences({
         suggest_lsp_servers = true,
@@ -19,7 +59,9 @@ local function configure_lsp(lsp, navic, cmp)
         mapping = cmp.mapping.preset.insert({
             ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
             ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+            ['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
             ['<C-Space>'] = cmp.mapping.complete(),
+            ['<CR>'] = cmp.mapping.confirm(cmp_select),
         }),
         sources = {
             { name = 'path' },
@@ -27,42 +69,6 @@ local function configure_lsp(lsp, navic, cmp)
             { name = 'buffer',   keyword_length = 3 },
             { name = 'luasnip',  keyword_length = 2 },
         },
-    })
-
-    lsp.configure('lua_ls', {
-        settings = {
-            Lua = {
-                runtime = {
-                    -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                    version = 'LuaJIT',
-                },
-                diagnostics = {
-                    -- Get the language server to recognize the `vim` global
-                    globals = { 'vim' },
-                },
-                workspace = {
-                    -- Make the server aware of Neovim runtime files
-                    library = vim.api.nvim_get_runtime_file("", true),
-                },
-                -- Do not send telemetry data containing a randomized but unique identifier
-                telemetry = {
-                    enable = false,
-                },
-            },
-        },
-    })
-    lsp.configure('rust_analyzer', {
-        cmd = { "rustup", "run", "nightly", "rust-analyzer" },
-        settings = {
-            ["rust-analyzer"] = {
-                unstable_features = true,
-                build_on_save = false,
-                all_features = true,
-                diagnostics = {
-                    experimental = true,
-                },
-            }
-        }
     })
 
     lsp.on_attach(function(client, bufnr)
@@ -103,9 +109,6 @@ return {
                         require 'nvim-navic',
                         require 'cmp'
                     )
-                    require('mason-lspconfig').setup({
-                        ensure_installed = { "lua_ls", "rust_analyzer", "r_language_server" }
-                    })
                 end,
             },
 
