@@ -25,3 +25,6 @@
 [submodule "common/todoist"]
 	path = common/todoist
 	url = git@github.com:psanker/todoist.git
+[submodule "common/task"]
+	path = common/task
+	url = git@github.com:psanker/taskrc.git
