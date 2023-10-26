@@ -68,14 +68,13 @@ if status is-interactive
     alias nnn="$HOME/.local/bin/nnn.sh -deaHQ -Pp"
 
     alias t="task"
-    alias tt="task +TODAY or +OVERDUE or \(+SCHEDULED and due.after:today\)"
+    alias tt="task +PENDING and \(+TODAY or +OVERDUE or \(scheduled.before:tomorrow and due.after:today\)\)"
     alias ta="task add"
-    alias td="task $1 done"
     alias tm="task $1 modify"
     alias tW="task +WEEK"
     alias tw="taskwarrior-tui"
-
-    alias todoist-cli="todoist"
+    alias ts="task start"
+    alias tsy="task sync"
     
     alias z="sioyek"
 
