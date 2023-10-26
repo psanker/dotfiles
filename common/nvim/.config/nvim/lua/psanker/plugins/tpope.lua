@@ -13,7 +13,11 @@ return {
     },
     {
         'tpope/vim-fugitive',
-        cmd = 'Git'
+        cmd = 'Git',
+        keys = {
+            { '<Leader>gdv', '<cmd>Gvdiffsplit!<CR>', desc = '[g]it: open 3-way [d]iff [v]ertical split' },
+            { '<Leader>gdh', '<cmd>Gdiffsplit!<CR>', desc = '[g]it: open 3-way [d]iff [h]orizontal split' },
+        },
     },
     {
         'kristijanhusak/vim-dadbod-ui',
