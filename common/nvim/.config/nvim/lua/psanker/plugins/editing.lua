@@ -35,23 +35,40 @@ return {
             require('telescope').load_extension('zk')
         end,
         keys = {
-            { '<Leader>nn', '<cmd>ZkNew {dir = "notes"}<CR>', desc = '[n]ew [n]ote' },
-            { '<Leader>nj', '<cmd>ZkDailyEntry<CR>', desc = '[n]ew [j]ournal entry' },
+            { '<Leader>nn', '<cmd>ZkNew {dir = "notes"}<CR>',                          desc = '[n]ew [n]ote' },
+            { '<Leader>nj', '<cmd>ZkDailyEntry<CR>',                                   desc = '[n]ew [j]ournal entry' },
             { '<Leader>nm', '<cmd>ZkNew {dir = "notes", template = "meeting.md"}<CR>', desc = '[n]ew [m]eeting note' },
-            { '<Leader>nn', ":'<,'>ZkNewFromTitleSelection {dir = 'notes'}<CR>",
-                desc = '[n]ew [n]ote; title from selected text', mode = 'v' },
-            { '<Leader>ni', ":'<,'>ZkNewFromTitleSelection {dir = 'notes', edit = false}<CR>",
-                desc = 'New [n]ote [i]nsert link; title from selected text', mode = 'v' },
-            { '<Leader>fn', '<cmd>ZkNotes<CR>', desc = '[f]ind [n]ote' },
-            { '<Leader>fn', ":'<,'>ZkMatch<CR>", desc = '[f]ind [n]ote based on selected text', mode = 'v' },
-            { '<Leader>ft', '<cmd>ZkTags<CR>', desc = '[f]ind [t]ag' },
-            { '<Leader>lb', '<cmd>ZkBacklinks<CR>', desc = '[l]inking: show [b]acklinks' },
-            { '<Leader>ll', '<cmd>ZkLinks<CR>', desc = '[l]inking: show [l]inks to file' },
+            {
+                '<Leader>nn',
+                ":'<,'>ZkNewFromTitleSelection {dir = 'notes'}<CR>",
+                desc = '[n]ew [n]ote; title from selected text',
+                mode = 'v'
+            },
+            {
+                '<Leader>ni',
+                ":'<,'>ZkNewFromTitleSelection {dir = 'notes', edit = false}<CR>",
+                desc = 'New [n]ote [i]nsert link; title from selected text',
+                mode = 'v'
+            },
+            { '<Leader>fn', '<cmd>ZkNotes<CR>',      desc = '[f]ind [n]ote' },
+            { '<Leader>fn', ":'<,'>ZkMatch<CR>",     desc = '[f]ind [n]ote based on selected text', mode = 'v' },
+            { '<Leader>ft', '<cmd>ZkTags<CR>',       desc = '[f]ind [t]ag' },
+            { '<Leader>lb', '<cmd>ZkBacklinks<CR>',  desc = '[l]inking: show [b]acklinks' },
+            { '<Leader>ll', '<cmd>ZkLinks<CR>',      desc = '[l]inking: show [l]inks to file' },
             { '<Leader>li', "<cmd>ZkInsertLink<CR>", desc = '[l]inking: [i]nsert link at cursor' },
-            { '<Leader>li', ":'<,'>ZkInsertLinkAtSelection<CR>", desc = '[l]inking: [i]nsert link around selected text',
-                mode = 'v' },
-            { '<Leader>ls', ":'<,'>ZkInsertLinkAtSelection {match = true}<CR>",
-                desc = '[l]inking: insert link, [s]earching for selected text', mode = 'v' },
+            {
+                '<Leader>li',
+                ":'<,'>ZkInsertLinkAtSelection<CR>",
+                desc = '[l]inking: [i]nsert link around selected text',
+                mode = 'v'
+            },
+            {
+                '<Leader>ls',
+                ":'<,'>ZkInsertLinkAtSelection {match = true}<CR>",
+                desc = '[l]inking: insert link, [s]earching for selected text',
+                mode = 'v'
+            },
+            { '<Leader>nr', ':15split | terminal ~/.local/bin/render-note.R -v "%:p" && exit<CR>', desc = '[n]ote: [r]ender PDF (assuming Rmd)' },
         }
     },
     {
