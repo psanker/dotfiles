@@ -39,6 +39,17 @@ local function configure_lsp(lsp, navic, cmp)
                     }
                 })
             end,
+            nil_ls = function()
+                require('lspconfig').nil_ls.setup({
+                    settings = {
+                        ["nil"] = {
+                            formatting = {
+                                command = { "nixfmt" },
+                            },
+                        },
+                    },
+                })
+            end,
         },
     })
 
