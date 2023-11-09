@@ -53,16 +53,6 @@ return {
         },
     },
     {
-        'nvim-tree/nvim-tree.lua',
-        config = function()
-            require('nvim-tree').setup()
-        end,
-        keys = {
-            { '<Leader>fb', '<cmd>NvimTreeToggle<CR>',   desc = '[f]ile [b]rowser',         noremap = true, },
-            { '<Leader>fF', '<cmd>NvimTreeFindFile<CR>', desc = '[f]ind [F]ile in browser', noremap = true, },
-        },
-    },
-    {
         'nvim-lualine/lualine.nvim',
         dependencies = {
             { 'rose-pine/neovim' },
@@ -139,5 +129,15 @@ return {
             require('alpha').setup(require('psanker.ui.dashboard').config)
         end,
         event = 'BufEnter',
+    },
+    {
+        "stevearc/oil.nvim",
+        config = function()
+            require('oil').setup()
+        end,
+        keys = {
+            { '<Leader>fF', '<cmd>Oil --float<CR>', desc = 'oil: open [f]ile browser in a [F]loat', noremap = true, },
+            { '<Leader>fb', '<cmd>Oil<CR>',   desc = 'oil: open [f]ile browser in the current [b]uffer', noremap = true, },
+        },
     },
 }
