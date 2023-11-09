@@ -33,6 +33,11 @@ if status is-interactive
         jump shell fish | source
     end
 
+    # Let neorg compile on macOS
+    if test (uname) = "Darwin"
+        set --export CC /usr/local/opt/llvm/bin/clang
+    end
+
     # Anti-footgun measures
     alias rm="rm -i"
     alias mv="mv -i"
