@@ -66,6 +66,9 @@ if status is-interactive
     alias n="$HOME/.local/bin/nnn.sh -deaHQ -Pp"
     alias nnn="$HOME/.local/bin/nnn.sh -deaHQ -Pp"
 
+    alias r="r --no-save --no-restore"
+    alias R="R --no-save --no-restore"
+
     alias t="task"
     alias tt="task +PENDING and \(+TODAY or +OVERDUE or \(scheduled.before:tomorrow and due.after:today\)\)"
     alias ta="task add"
