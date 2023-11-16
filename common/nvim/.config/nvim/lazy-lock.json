@@ -6,6 +6,7 @@
   "cmp-nvim-lsp": { "branch": "main", "commit": "44b16d11215dce86f253ce0c30949813c0a90765" },
   "cmp-nvim-lua": { "branch": "main", "commit": "f12408bdb54c39c23e67cab726264c10db33ada8" },
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
+  "cmp-zotcite": { "branch": "main", "commit": "431c720a73fb84c8b1a51b4f123e2a7cc8a58bfd" },
   "cmp_luasnip": { "branch": "master", "commit": "05a9ab28b53f71d1aece421ef32fee2cb857a843" },
   "gitsigns.nvim": { "branch": "main", "commit": "af0f583cd35286dd6f0e3ed52622728703237e50" },
   "harpoon": { "branch": "master", "commit": "c1aebbad9e3d13f20bedb8f2ce8b3a94e39e424a" },
@@ -55,5 +56,6 @@
   "which-key.nvim": { "branch": "main", "commit": "ce741eb559c924d72e3a67d2189ad3771a231414" },
   "yuck.vim": { "branch": "master", "commit": "9b5e0370f70cc30383e1dabd6c215475915fe5c3" },
   "zen-mode.nvim": { "branch": "main", "commit": "50e2e2a36cc97847d9ab3b1a3555ba2ef6839b50" },
-  "zk-nvim": { "branch": "main", "commit": "142625638d2fad464939c6ee1775571aba6379c6" }
+  "zk-nvim": { "branch": "main", "commit": "142625638d2fad464939c6ee1775571aba6379c6" },
+  "zotcite": { "branch": "master", "commit": "442519a20a80b9ccc8a2baa0607080a21c4ecee0" }
 }
