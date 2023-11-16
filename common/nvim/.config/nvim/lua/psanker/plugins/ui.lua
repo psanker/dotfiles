@@ -137,7 +137,12 @@ return {
         end,
         keys = {
             { '<Leader>fF', '<cmd>Oil --float<CR>', desc = 'oil: open [f]ile browser in a [F]loat', noremap = true, },
-            { '<Leader>fb', '<cmd>Oil<CR>',   desc = 'oil: open [f]ile browser in the current [b]uffer', noremap = true, },
+            {
+                '<Leader>fb',
+                '<cmd>Oil<CR>',
+                desc = 'oil: open [f]ile browser in the current [b]uffer',
+                noremap = true,
+            },
         },
     },
 }
