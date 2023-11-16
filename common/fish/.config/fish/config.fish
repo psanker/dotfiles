@@ -2,7 +2,6 @@ fish_vi_key_bindings
 
 fish_add_path /usr/local/bin
 fish_add_path /usr/local/go/bin
-fish_add_path /usr/local/opt/llvm/bin
 fish_add_path "$HOME/.local/bin"
 fish_add_path "$HOME/go/bin"
 fish_add_path "$HOME/.cargo/bin"
@@ -31,11 +30,6 @@ if status is-interactive
 
     if test -x /usr/bin/jump || test -x /usr/local/bin/jump
         jump shell fish | source
-    end
-
-    # Let neorg compile on macOS
-    if test (uname) = "Darwin"
-        set --export CC /usr/local/opt/llvm/bin/clang
     end
 
     # Anti-footgun measures

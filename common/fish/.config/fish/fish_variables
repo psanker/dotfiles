@@ -1,8 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR __fish_initialized:3400
-SETUVAR _fisher_mordax7_2F_fish_2D_fzf_2D_todoist_files:/Users/patrickanker/\x2econfig/fish/functions/fzf_todoist_close\x2efish\x1e/Users/patrickanker/\x2econfig/fish/functions/fzf_todoist_date\x2efish\x1e/Users/patrickanker/\x2econfig/fish/functions/fzf_todoist_delete\x2efish\x1e/Users/patrickanker/\x2econfig/fish/functions/fzf_todoist_item\x2efish\x1e/Users/patrickanker/\x2econfig/fish/functions/fzf_todoist_labels\x2efish\x1e/Users/patrickanker/\x2econfig/fish/functions/fzf_todoist_open\x2efish\x1e/Users/patrickanker/\x2econfig/fish/functions/fzf_todoist_project\x2efish\x1e/Users/patrickanker/\x2econfig/fish/functions/fzf_todoist_quick_add\x2efish
-SETUVAR _fisher_plugins:mordax7/fish\x2dfzf\x2dtodoist
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:blue
@@ -31,4 +29,3 @@ SETUVAR fish_pager_color_description:B3A06D\x1eyellow\x1e\x2di
 SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/Users/patrickanker/\x2ecargo/bin\x1e/Users/patrickanker/go/bin\x1e/Users/patrickanker/\x2elocal/bin\x1e/usr/local/opt/llvm/bin\x1e/usr/local/go/bin\x1e/home/pickle/\x2ecargo/bin\x1e/home/pickle/go/bin\x1e/home/pickle/go\x1e/home/pickle/\x2elocal/bin\x1e/home/pickle/\x2espicetify\x1e/usr/local/bin
