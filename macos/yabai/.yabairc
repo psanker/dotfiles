@@ -38,6 +38,7 @@ yabai -m config window_gap 06
 # Applications to ignore
 yabai -m rule --add app="^System Preferences$" manage=off
 yabai -m rule --add app="^zoom.us$" manage=off
+yabai -m rule --add app="^Cisco AnyConnect Secure Mobility Client$" manage=off
 yabai -m rule --add app="^Wally$" manage=off
 yabai -m rule --add app="^Alfred Preferences$" manage=off
 yabai -m rule --add app="^LibreOffice$" title="^Delete Contents$" manage=off
