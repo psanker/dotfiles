@@ -36,7 +36,7 @@ return {
         end,
         keys = {
             { '<Leader>nn', '<cmd>ZkNew {dir = "notes"}<CR>',                          desc = '[n]ew [n]ote' },
-            { '<Leader>nj', '<cmd>ZkDailyEntry<CR>',                                   desc = '[n]ew [j]ournal entry' },
+            { '<Leader>nj', '<cmd>ZkNew {dir = "journal", group = "journal"}<CR>',     desc = '[n]ew [j]ournal entry' },
             { '<Leader>nm', '<cmd>ZkNew {dir = "notes", template = "meeting.md"}<CR>', desc = '[n]ew [m]eeting note' },
             {
                 '<Leader>nn',
