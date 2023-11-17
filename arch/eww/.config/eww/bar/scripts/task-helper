@@ -5,6 +5,7 @@ description() {
            cut -d" " -f1 | \
            xargs -I {} task {} info | \
            grep ^Description | \
+           head -n1 | \
            cut -d" " -f1 --complement | \
            xargs)"
 

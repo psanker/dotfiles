@@ -11,6 +11,7 @@ TW_ACTIVE_OVERDUE=""
 if [ -n "$TW_ACTIVE_ID" ]; then
     TW_ACTIVE=$(task "$TW_ACTIVE_ID" info | \
                 grep Description | \
+                head -n1 | \
                 awk '{ for (i=2; i<=NF; i++) printf("%s%s", $i, (i<NF ? OFS : ORS))}')
     TW_ACTIVE_OVERDUE=$(task "$TW_ACTIVE_ID" info | \
                         grep "Virtual tags" | \
@@ -22,7 +23,7 @@ TW_ACTIVE_MAX_LEN=35
 
 if [ "$TW_ACTIVE_SIZE" -gt "$TW_ACTIVE_MAX_LEN" ]; then
     cut_size=$(( TW_ACTIVE_MAX_LEN - 3 ))
-   TW_ACTIVE="$(echo "$TW_ACTIVE" | cut -c -"$cut_size")..."
+    TW_ACTIVE="$(echo "$TW_ACTIVE" | cut -c "-$cut_size")..."
 fi
 
 
