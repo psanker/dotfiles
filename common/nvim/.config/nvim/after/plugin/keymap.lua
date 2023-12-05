@@ -59,7 +59,7 @@ nnoremap('<Leader>gl', '<cmd>Git log<CR>', { desc = '[g]it [l]og' })
 nnoremap('<Leader>gf', '<cmd>Git fetch<CR>', { desc = '[g]it [f]etch' })
 
 -- 3. View different windows
-nnoremap('<Leader>vo', '<cmd>SymbolsOutline<CR>', { desc = '[v]iew [o]utline' })
+nnoremap('<Leader>vo', '<cmd>AerialToggle<CR>', { desc = '[v]iew [o]utline' })
 nnoremap('<Leader>vt', '<cmd>TodoTrouble<CR>', { desc = '[v]iew [t]odos' })
 nnoremap('<Leader>vT', '<cmd>TodoTelescope<CR>', { desc = '[v]iew [T]odos in Telescope' })
 
