@@ -4,7 +4,7 @@ local cfg = {}
 
 -- From https://stackoverflow.com/questions/1340230/check-if-directory-exists-in-lua
 --- Check if a file or directory exists in this path
-function exists(file)
+local function exists(file)
    local ok, err, code = os.rename(file, file)
    if not ok then
       if code == 13 then
@@ -16,7 +16,7 @@ function exists(file)
 end
 
 --- Check if a directory exists in this path
-function isdir(path)
+local function isdir(path)
    -- "/" works on both Unix and Windows
    return exists(path.."/")
 end
