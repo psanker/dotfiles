@@ -1,3 +1,3 @@
 #!/bin/bash
 
-nvim -c 'ZkDailyEntry'
+nvim -c 'ZkNew {dir = "journal", group = "journal"}'
