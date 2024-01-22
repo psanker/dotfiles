@@ -75,10 +75,10 @@ end
 local buttons = {
     type = "group",
     val = {
-        button('SPC f b', '  Open file browser'),
-        button('SPC h h', 'ﯠ  Open Harpoon'),
-        button('SPC f f', '  Find file'),
-        button('SPC f g', '  Find word'),
+        button('-', '  Open file browser'),
+        button('SPC h h', '🪝 Open Harpoon'),
+        button('SPC f f', '󰈙  Find file'),
+        button('SPC f g', '🔤  Find word'),
     },
     opts = {
         spacing = 1,
