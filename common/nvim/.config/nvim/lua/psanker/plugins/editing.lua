@@ -1,9 +1,10 @@
 return {
     {
-        'mickael-menu/zk-nvim',
+        'zk-org/zk-nvim',
         dependencies = {
             'nvim-telescope/telescope.nvim',
         },
+        lazy = false,
         config = function()
             local bind_lsp_keymaps = require('psanker.edit.lsp').bind_lsp_keymaps
 
