@@ -14,5 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
     spec = {
         { import = 'psanker.plugins' }
-    }
+    },
+    git = {
+        url_format = "git@github.com:%s.git",
+    },
 })
