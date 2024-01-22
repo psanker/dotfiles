@@ -1,5 +1,5 @@
 local p = require('rose-pine.palette')
-local util = require('rose-pine.util')
+local util = require('rose-pine.utilities')
 
 local function element_in(el, tab)
     local els_set = {}
