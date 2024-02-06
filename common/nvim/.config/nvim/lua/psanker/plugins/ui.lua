@@ -15,6 +15,10 @@ return {
             window = {
                 width = .75,
             },
+            plugins = {
+                gitsigns = { enabled = true },
+                tmux = { enabled = true },
+            },
         },
         config = function(_, opts)
             require('zen-mode').setup(opts)
@@ -40,6 +44,9 @@ return {
         on_close = function()
             require('lualine').setup(require('psanker.ui.statusline').opts(false))
         end,
+    },
+    {
+        'folke/twilight.nvim',
     },
     {
         'folke/which-key.nvim',

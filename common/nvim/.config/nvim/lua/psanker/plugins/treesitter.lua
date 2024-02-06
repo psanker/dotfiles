@@ -8,9 +8,15 @@ return {
         event = { 'BufReadPre', 'BufNewFile' },
         config = function()
             require('nvim-treesitter.configs').setup({
-                ensure_installed = { 'r', 'rust', 'python', 'go', 'org' },
+                ensure_installed = {
+                    'r', 'rust', 'markdown',
+                    'markdown_inline', 'python',
+                    'go', 'ocaml', 'gitcommit'
+                },
                 highlight = {
                     enable = true,
+                    -- Use Nvim-R highlighting instead...?
+                    disable = { 'markdown', 'markdown_inline' },
                 },
                 textobjects = {
                     move = {
@@ -93,24 +99,6 @@ return {
                     vim.cmd('TSBufDisable highlight')
                 end
             end, {})
-
-            -- vim.api.nvim_create_autocmd(
-            --     { 'BufLeave' },
-            --     {
-            --         group = 'inactive_buf_syntax',
-            --         pattern = '*',
-            --         command = 'InactiveBufSyntaxOff'
-            --     }
-            -- )
-
-            -- vim.api.nvim_create_autocmd(
-            --     { 'BufEnter' },
-            --     {
-            --         group = 'inactive_buf_syntax',
-            --         pattern = '*',
-            --         command = 'InactiveBufSyntaxOn'
-            --     }
-            -- )
         end,
         keys = {
             { '<Leader>bsi', '<cmd>InactiveBufSyntaxEnable<CR>', desc = '[b]uffers: enable inactive buffer [s]yntax (i)' },

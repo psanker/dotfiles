@@ -6,7 +6,7 @@ return {
         },
         lazy = false,
         config = function()
-            local bind_lsp_keymaps = require('psanker.edit.lsp').bind_lsp_keymaps
+            local bind_lsp_keymaps = require('psanker.keymap').bind_lsp_keymaps
 
             require('zk').setup({
                 -- can be "telescope", "fzf" or "select" (`vim.ui.select`)

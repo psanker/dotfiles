@@ -1,6 +1,23 @@
 local p = require('rose-pine.palette')
 local util = require('rose-pine.utilities')
 
+-- Copied from older version of rose-pine
+local highlight = function(group, highlight, blend_on)
+	local fg = highlight.fg and util.parse_color(highlight.fg) or "NONE"
+	local bg = highlight.bg and util.parse_color(highlight.bg) or "NONE"
+	local sp = highlight.sp and util.parse_color(highlight.sp) or "NONE"
+
+	if highlight.blend ~= nil and (highlight.blend >= 0 and highlight.blend <= 100) and bg ~= nil then
+		bg = util.blend(bg, blend_on or p.base, highlight.blend / 100)
+	end
+
+	highlight.fg = fg
+	highlight.bg = bg
+	highlight.sp = sp
+
+	vim.api.nvim_set_hl(0, group, highlight)
+end
+
 local function element_in(el, tab)
     local els_set = {}
 
@@ -21,6 +38,7 @@ end
 
 local function word_count()
     local out = ''
+
     if element_in(vim.bo.filetype, { 'md', 'markdown', 'txt', 'rmd' }) then
         local wc = 0
         if vim.fn.wordcount().visual_words ~= nil then
@@ -132,7 +150,7 @@ local custom_highlights = {
 }
 
 for k, v in pairs(custom_highlights) do
-    util.highlight(k, v)
+    highlight(k, v)
 end
 
 local function apply_color(highlight_group, content)
@@ -155,7 +173,17 @@ local std_opts = {
         },
         lualine_b = {},
         lualine_c = {
-            { 'filetype', icon_only = true, },
+            {
+                'filetype',
+                icon_only = true,
+                fmt = function(str)
+                    if vim.g.zen_mode_open then
+                        return ''
+                    end
+
+                    return str
+                end
+            },
             {
                 'filename',
                 path = 1,
@@ -163,14 +191,8 @@ local std_opts = {
                 symbols = {
                     modified = apply_color('PsaFileModified', '(+)')
                 },
-                fmt = function(str)
-                    if vim.g.zen_mode_open then
-                        return ''
-                    end
+            }
 
-                    return str
-                end,
-            },
         },
         lualine_x = {
             { word_count },
