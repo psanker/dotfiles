@@ -75,11 +75,11 @@ if status is-interactive
     alias tdt="task completed end:today"
     alias ta="task add"
     alias tm="task $1 modify"
-    alias tW="task +WEEK"
+    alias tW="task +WEEK or scheduled.before:saturday"
     alias tw="taskwarrior-tui"
-    alias ts="task start"
+    alias ts="task $1 start"
     alias tsy="task sync"
-    alias tX="task delete"
+    alias tX="task $1 delete"
     
     alias z="sioyek"
 
