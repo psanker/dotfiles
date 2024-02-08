@@ -42,7 +42,7 @@ M.vmap('<RightMouse>', '<nop>')
 function M.bind_lsp_keymaps(_, bufnr)
     local opts = { buffer = bufnr }
 
-    M.nnoremap('<Leader>F', function() vim.lsp.buf.format({ async = true }) end, opts)
+    M.nnoremap('=', function() vim.lsp.buf.format({ async = true }) end, opts)
     M.nnoremap('K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Display hover information of symbol under cursor' })
     M.nnoremap('gd', function() vim.lsp.buf.definition() end,
         { buffer = bufnr, desc = 'Go to definition of symbol under cursor' })                                            -- Jump to the definition
@@ -60,7 +60,7 @@ function M.bind_lsp_keymaps(_, bufnr)
         { buffer = bufnr, desc = 'Display signature of symbol under cursor' })                                           -- Displays function signature
     M.nnoremap('<Leader>r', function() vim.lsp.buf.rename() end, { buffer = bufnr, desc = 'Rename symbol under cursor' })  -- Renames all references of symbol
     M.nnoremap('<Leader>ca', function() vim.lsp.buf.code_action() end, { buffer = bufnr, desc = 'Perform a code action' }) -- Selects a code action
-    M.xnoremap('<Leader>ca', function() vim.lsp.buf.range_code_action() end,
+    M.xnoremap('<Leader>ca', function() vim.lsp.buf.code_action() end,
         { buffer = bufnr, desc = 'Perform a code action' })                                                              -- "" for a range
 end
 

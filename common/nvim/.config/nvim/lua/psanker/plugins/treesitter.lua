@@ -15,8 +15,6 @@ return {
                 },
                 highlight = {
                     enable = true,
-                    -- Use Nvim-R highlighting instead...?
-                    disable = { 'markdown', 'markdown_inline' },
                 },
                 textobjects = {
                     move = {
