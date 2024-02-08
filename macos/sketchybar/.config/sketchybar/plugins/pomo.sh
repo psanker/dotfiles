@@ -4,9 +4,11 @@ source "$HOME/.config/sketchybar/colors.sh"
 
 WORK_TIME=25
 BREAK_TIME=5
+
+POMO=~/go/bin/pomo
  
 handle_click() {
-    status=$(pomo status)
+    status=$(${POMO} status)
 
     if [ -n "$status" ]; then
         cancel_pomo
@@ -16,26 +18,26 @@ handle_click() {
 }
 
 start_pomo() {
-    pomo start --duration $WORK_TIME
+    ${POMO} start --duration $WORK_TIME
 
     view
 }
 
 cancel_pomo() {
-    pomo cancel
+    ${POMO} cancel
 
     view
 }
 
 loop() {
-    status=$(pomo status -f "%r")
-    mode=$(pomo status -f "%d")
+    status=$(${POMO} status -f "%r")
+    mode=$(${POMO} status -f "%d")
 
     if [ "$status" = "0:00" ]; then
-        pomo clear
+        ${POMO} clear
         
         if [ "$mode" != "break" ]; then
-            pomo start break --duration $BREAK_TIME
+            ${POMO} start break --duration $BREAK_TIME
         fi
     fi
 
@@ -43,7 +45,7 @@ loop() {
 }
 
 view() {
-    status=$(pomo status)
+    status=$(${POMO} status)
     mode=""
 
     icon="􀐯"
@@ -56,8 +58,8 @@ view() {
 
     # View
     if [ -n "$status" ]; then
-        mode=$(pomo status -f "%d")
-        label="$(pomo status -f "%R")m"
+        mode=$(${POMO} status -f "%d")
+        label="$(${POMO} status -f "%R")m"
         icon_padding_right=0
         label_width="dynamic"
         label_bg="on"
