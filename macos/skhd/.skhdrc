@@ -175,8 +175,8 @@ apps < shift - o : open /Applications/Obsidian.app && skhd -k "escape"
 hyper - p ; pomo
 pomo < escape ; default
 
-pomo < p : pomo start && skhd -k "escape"
-pomo < x : pomo cancel && skhd -k "escape"
+pomo < p : ~/go/bin/pomo start && skhd -k "escape"
+pomo < x : ~/go/bin/pomo cancel && skhd -k "escape"
 
 # Shortcut to create a new wezterm term on the fly
 lalt - return : wezterm
