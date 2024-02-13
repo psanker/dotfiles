@@ -24,11 +24,15 @@ M.setup = function()
                 buf_vnoremap('j', 'gj')
                 buf_nnoremap('k', 'gk')
                 buf_vnoremap('k', 'gk')
+
+                pcall(function() vim.cmd[[ TogglePencil ]] end)
             else
                 buf_nnoremap('j', 'j')
                 buf_vnoremap('j', 'j')
                 buf_nnoremap('k', 'k')
                 buf_vnoremap('k', 'k')
+
+                pcall(function() vim.cmd[[ TogglePencil ]] end)
             end
         end
     end

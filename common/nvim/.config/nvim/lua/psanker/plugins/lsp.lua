@@ -71,6 +71,10 @@ local function configure_lsp(lsp, navic, cmp, cmp_lsp)
         capabilities = capabilities
     })
 
+    lsp.ocamllsp.setup({
+        capabilities = capabilities
+    })
+
     vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(e)
             local bufnr = e.buf

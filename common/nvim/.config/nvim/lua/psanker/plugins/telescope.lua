@@ -28,7 +28,6 @@ return {
                     }
                 }
             })
-
         end,
         keys = {
             {
@@ -80,5 +79,22 @@ return {
                 noremap = true,
             },
         },
-    }
+    },
+    {
+        'nvim-telescope/telescope-bibtex.nvim',
+        dependencies = {
+            'nvim-tele/telescope.nvim',
+        },
+        config = function()
+            require('telescope').load_extension('bibtex')
+        end,
+        keys = {
+            {
+                '<Leader>fc',
+                '<cmd>Telescope bibtex<CR>',
+                desc = "[f]ind [c]itation BibTeX files",
+                noremap = true,
+            },
+        },
+    },
 }

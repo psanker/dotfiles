@@ -26,7 +26,7 @@ return {
                     -- automatically attach buffers in a zk notebook that match the given filetypes
                     auto_attach = {
                         enabled = true,
-                        filetypes = { "markdown", "rmd" },
+                        filetypes = { "markdown", "rmd", "quarto" },
                     },
                 }
             })
@@ -93,5 +93,9 @@ return {
         config = function(_)
             require('mini.splitjoin').setup()
         end,
+    },
+    {
+        'preservim/vim-pencil',
+        event = { 'BufReadPost', 'BufNewFile' },
     },
 }

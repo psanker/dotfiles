@@ -1,7 +1,6 @@
 local Remap = require("psanker.keymap")
 local nnoremap = Remap.nnoremap
 
-
 require('psanker.edit.writing').setup()
 
 vim.opt.tabstop = 2

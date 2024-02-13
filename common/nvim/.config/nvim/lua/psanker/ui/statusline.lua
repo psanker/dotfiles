@@ -39,7 +39,7 @@ end
 local function word_count()
     local out = ''
 
-    if element_in(vim.bo.filetype, { 'md', 'markdown', 'txt', 'rmd' }) then
+    if element_in(vim.bo.filetype, { 'md', 'markdown', 'txt', 'rmd', 'quarto' }) then
         local wc = 0
         if vim.fn.wordcount().visual_words ~= nil then
             wc = vim.fn.wordcount().visual_words
