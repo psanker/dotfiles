@@ -19,7 +19,10 @@ return {
                         "--column",
                         "--glob=!{_site,renv}"
                     },
-                }
+                },
+              highlight = {
+                comments_only = false,
+              },
             })
         end,
         event = { 'BufReadPost', 'BufNewFile' },

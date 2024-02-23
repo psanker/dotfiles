@@ -17,7 +17,6 @@ return {
             },
             plugins = {
                 gitsigns = { enabled = true },
-                tmux = { enabled = true },
             },
         },
         config = function(_, opts)

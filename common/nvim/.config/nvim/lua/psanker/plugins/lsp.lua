@@ -1,9 +1,9 @@
 local bind_lsp_keymaps = require("psanker.keymap").bind_lsp_keymaps
 
-local function configure_lsp(lsp, navic, cmp, cmp_lsp)
+local function configure_lsp(lsp, navic, cmp, cmp_lsp, lspkind)
     require('mason').setup({})
     require('mason-lspconfig').setup({
-        ensure_installed = { "lua_ls", "rust_analyzer", "r_language_server" },
+        ensure_installed = { "lua_ls", "rust_analyzer", "r_language_server", "gopls" },
     })
 
     local capabilities = cmp_lsp.default_capabilities()
@@ -29,6 +29,20 @@ local function configure_lsp(lsp, navic, cmp, cmp_lsp)
             { name = 'luasnip',     keyword_length = 2 },
             { name = 'cmp_zotcite', keyword_length = 2 },
         }),
+        formatting = {
+            format = lspkind.cmp_format({
+                mode = "symbol",
+                maxwidth = 50,
+                ellipsis_char = "...",
+                menu = {
+                    buffer = "[buf]",
+                    nvim_lsp = "[LSP]",
+                    luasnip = "[snip]",
+                    path = "[path]",
+                    nvim_lua = "[api]",
+                },
+            }),
+        },
     })
 
     lsp.lua_ls.setup({
@@ -71,18 +85,41 @@ local function configure_lsp(lsp, navic, cmp, cmp_lsp)
         capabilities = capabilities
     })
 
+    lsp.gopls.setup({
+        capabilities = capabilities
+    })
+
     lsp.ocamllsp.setup({
         capabilities = capabilities
     })
 
+    lsp.zk.setup({
+        capabilities = capabilities,
+        cmd = { "zk", "lsp" },
+        filetypes = { "markdown", "rmd", "quarto" },
+
+    })
+
     vim.api.nvim_create_autocmd("LspAttach", {
-        callback = function(e)
-            local bufnr = e.buf
-            local client = vim.lsp.get_client_by_id(e.data.client_id)
+        callback = function(ev)
+            local bufnr = ev.buf
+            local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
             bind_lsp_keymaps(client, bufnr)
             if client.server_capabilities.documentSymbolProvider then
                 pcall(function() navic.attach(client, bufnr) end)
+            end
+
+            if client.server_capabilities.documentHighlightProvider then
+                vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+                    buffer = ev.buf,
+                    callback = vim.lsp.buf.document_highlight
+                })
+
+                vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+                    buffer = ev.buf,
+                    callback = vim.lsp.buf.clear_references
+                })
             end
         end
     })
@@ -102,7 +139,8 @@ return {
                 require('lspconfig'),
                 require('nvim-navic'),
                 require('cmp'),
-                require('cmp_nvim_lsp')
+                require('cmp_nvim_lsp'),
+                require('lspkind')
             )
         end,
         dependencies = {
@@ -118,6 +156,7 @@ return {
                     'saadparwaiz1/cmp_luasnip',
                     'hrsh7th/cmp-nvim-lsp',
                     'hrsh7th/cmp-nvim-lua',
+                    'onsails/lspkind.nvim',
                 },
             },
 
@@ -128,7 +167,6 @@ return {
             'nvim-treesitter/nvim-treesitter',
         },
     },
-
     {
         'SmiteshP/nvim-navic',
         lazy = false,

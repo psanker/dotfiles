@@ -6,48 +6,38 @@ return {
         },
         lazy = false,
         config = function()
-            local bind_lsp_keymaps = require('psanker.keymap').bind_lsp_keymaps
-
             require('zk').setup({
-                -- can be "telescope", "fzf" or "select" (`vim.ui.select`)
-                -- it's recommended to use "telescope" or "fzf"
                 picker = "telescope",
-
-                lsp = {
-                    -- `config` is passed to `vim.lsp.start_client(config)`
-                    config = {
-                        cmd = { "zk", "lsp" },
-                        name = "zk",
-                        -- on_attach = ...
-                        on_attach = bind_lsp_keymaps,
-                        -- etc, see `:h vim.lsp.start_client()`
-                    },
-
-                    -- automatically attach buffers in a zk notebook that match the given filetypes
-                    auto_attach = {
-                        enabled = true,
-                        filetypes = { "markdown", "rmd", "quarto" },
-                    },
-                }
             })
 
             require('psanker.edit.pkm').setup()
-
             require('telescope').load_extension('zk')
         end,
         keys = {
-            { '<Leader>nn', '<cmd>ZkNew {dir = "notes"}<CR>',                          desc = '[n]ew [n]ote' },
-            { '<Leader>nj', '<cmd>ZkNew {dir = "journal", group = "journal"}<CR>',     desc = '[n]ew [j]ournal entry' },
-            { '<Leader>nm', '<cmd>ZkNew {dir = "notes", template = "meeting.md"}<CR>', desc = '[n]ew [m]eeting note' },
             {
                 '<Leader>nn',
-                ":'<,'>ZkNewFromTitleSelection {dir = 'notes'}<CR>",
+                function() require('zk.commands').get('ZkNew')({ dir = "notes" }) end,
+                desc = '[n]ew [n]ote'
+            },
+            {
+                '<Leader>nj',
+                function() require('zk.commands').get('ZkNew')({ dir = "journal", group = "journal" }) end,
+                desc = '[n]ew [j]ournal entry'
+            },
+            {
+                '<Leader>nm',
+                function() require('zk.commands').get('ZkNew')({ dir = "notes", template = "meeting.md" }) end,
+                desc = '[n]ew [m]eeting note'
+            },
+            {
+                '<Leader>nn',
+                function() require('zk.commands').get('ZkNewFromTitleSelection')({ dir = 'notes' }) end,
                 desc = '[n]ew [n]ote; title from selected text',
                 mode = 'v'
             },
             {
                 '<Leader>ni',
-                ":'<,'>ZkNewFromTitleSelection {dir = 'notes', edit = false}<CR>",
+                function() require('zk.commands').get('ZkNewFromTitleSelection')({ dir = 'notes', edit = false }) end,
                 desc = 'New [n]ote [i]nsert link; title from selected text',
                 mode = 'v'
             },
@@ -65,7 +55,7 @@ return {
             },
             {
                 '<Leader>ls',
-                ":'<,'>ZkInsertLinkAtSelection {match = true}<CR>",
+                function() require('zk.commands').get('ZkInsertLinkAtSelection')({ match = true }) end,
                 desc = '[l]inking: insert link, [s]earching for selected text',
                 mode = 'v'
             },
