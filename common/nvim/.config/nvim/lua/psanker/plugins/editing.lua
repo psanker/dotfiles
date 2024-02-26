@@ -88,4 +88,10 @@ return {
         'preservim/vim-pencil',
         event = { 'BufReadPost', 'BufNewFile' },
     },
+    {
+        'dhruvasagar/vim-table-mode',
+        keys = {
+            { '<Leader>tm', '<CMD>TableModeToggle<CR>', desc = '[t]able [m]ode: toggle markdown table editing' },
+        },
+    },
 }
