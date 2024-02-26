@@ -61,7 +61,7 @@
           (label :text "󰈹" :class "workspace-entry-content")))
       (eventbox :onclick "hyprctl dispatch workspace 2"
         (box :class "workspace-entry workspace-entry-2 ${current_workspace == 2 ? "current" : ""}"
-          (label :text "󰄛" :class "workspace-entry-content")))
+          (label :text "" :class "workspace-entry-content")))
       (eventbox :onclick "hyprctl dispatch workspace 3"
         (box :class "workspace-entry workspace-entry-3 ${current_workspace == 3 ? "current" : ""}"
           (label :text "󰭹" :class "workspace-entry-content")))
