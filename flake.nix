@@ -29,7 +29,7 @@
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       # Change this to select the machine to render
-      host = "maris"
+      host = "maris";
 
       inherit (import ./nix/hosts/${host}.nix) system;
       pkgs = nixpkgs.legacyPackages.${system};
