@@ -15,31 +15,24 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-
-      # Keep Neovim fresh 
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
     # Make Treesitter behave its damn self
     nvim-treesitter.url = "github:nvim-treesitter/nvim-treesitter/v0.9.1";
     nvim-treesitter.flake = false;
 
-    hyprland-contrib = {
-      url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
     };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      # Change this to select the machine to render
+      host = "maris"
 
-      overlays = [
-        inputs.neovim-nightly-overlay.overlay
-      ];
+      inherit (import ./nix/hosts/${host}.nix) system;
+      pkgs = nixpkgs.legacyPackages.${system};
     in
     {
     

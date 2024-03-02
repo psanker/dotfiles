@@ -30,7 +30,6 @@ cfg.window_padding = {
     bottom = '0cell',
 }
 cfg.window_background_opacity = 0.97
-cfg.window_decorations = 'RESIZE'
 
 -- Font
 cfg.font = wez.font_with_fallback {
