@@ -44,14 +44,13 @@ cfg.font = wez.font_with_fallback {
 cfg.color_scheme = 'rose-pine-moon'
 
 -- Shell
-local prefix = '/usr/local'
 
-if isdir('/opt/homebrew') then
-    prefix = '/opt/homebrew'
-end
+local handle = io.popen 'which fish'
+local fish_path = handle:read '*a'
+fish_path = fish_path:gsub('[\n\r]', '')
 
 -- Shell config
-cfg.default_prog = { prefix .. '/bin/fish', '-l' }
+cfg.default_prog = { fish_path, '-l' }
 
 -- Autoreload
 cfg.automatically_reload_config = true
