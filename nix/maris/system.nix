@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      ./hardware.nix
     ];
 
   # Enable Flake support
@@ -46,17 +46,18 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
   services.xserver = {
+    enable = true;
+
     layout = "us";
     xkbVariant = "";
+
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
   };
+
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -76,6 +77,25 @@
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
+  };
+
+  # Polkit
+  security.polkit.enable = true;
+
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -102,9 +122,6 @@
     #  thunderbird
     ];
   };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

@@ -2,7 +2,6 @@
   description = "Nix Configuration";
 
   inputs = {
-
     # Primary Nix channel
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
 
@@ -31,18 +30,22 @@
       # Change this to select the machine to render
       host = "maris";
 
-      inherit (import ./nix/hosts/${host}.nix) system;
-      pkgs = nixpkgs.legacyPackages.${system};
+      inherit (import ./nix/${host}/options.nix) system nixSystemType;
+
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
     in
     {
-    
-      nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.${host} = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs;};
           modules = [ 
-            ./configuration.nix
+            ./nix/${host}/system.nix
             # inputs.home-manager.nixosModules.default
           ];
         };
-
     };
 }
