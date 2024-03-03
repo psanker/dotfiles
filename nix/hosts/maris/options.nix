@@ -1,10 +1,11 @@
 let
   user = "pickles";
+  hostName = "maris";
   system = "x86_64-linux";
   userHome = "/home/${user}";
   flakeDir = "${userHome}/workspace/dotfiles";
 in {
-  inherit user system;
+  inherit user hostName system;
 
   locale = "en_US.UTF-8";
   kbdLayout = "us";
@@ -12,4 +13,4 @@ in {
   tz = "America/New_York";
   shell = "zsh"; # Possible options: bash, zsh
   kernel = "zen"; # Possible options: default, latest, lqx, xanmod, zen
-};
+}

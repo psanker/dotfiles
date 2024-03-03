@@ -38,10 +38,15 @@
           allowUnfree = true;
         };
       };
+
+      lib = nixpkgs.lib;
     in
     {
-      nixosConfigurations.${host} = pkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs;};
+      nixosConfigurations.${host} = lib.nixosSystem {
+          specialArgs = {
+            inherit pkgs; 
+            inherit inputs;
+          };
           modules = [ 
             ./nix/hosts/${host}
             # inputs.home-manager.nixosModules.default
