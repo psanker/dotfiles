@@ -40,7 +40,7 @@
       };
     in
     {
-      nixosConfigurations.${host} = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.${host} = pkgs.lib.nixosSystem {
           specialArgs = {inherit inputs;};
           modules = [ 
             ./nix/hosts/${host}
