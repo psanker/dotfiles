@@ -24,6 +24,7 @@ in
   environment.systemPackages = with pkgs; [
      wget curl git libvirt polkit_gnome go
      tmux networkmanagerapplet vim playerctl
+     udiskie mako hyprpaper
   ];
 
   hardware = {
@@ -151,6 +152,7 @@ in
     packages = with pkgs; [
       bat
       cargo
+      eww-wayland
       firefox
       fish
       fzf
