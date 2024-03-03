@@ -30,7 +30,7 @@
       # Change this to select the machine to render
       host = "maris";
 
-      inherit (import ./nix/${host}/options.nix) system nixSystemType;
+      inherit (import ./nix/hosts/${host}/options.nix) system;
 
       pkgs = import nixpkgs {
         inherit system;
@@ -43,7 +43,7 @@
       nixosConfigurations.${host} = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs;};
           modules = [ 
-            ./nix/${host}/system.nix
+            ./nix/hosts/${host}
             # inputs.home-manager.nixosModules.default
           ];
         };
