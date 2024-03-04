@@ -14,43 +14,41 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Make Treesitter behave its damn self
-    nvim-treesitter.url = "github:nvim-treesitter/nvim-treesitter/v0.9.1";
-    nvim-treesitter.flake = false;
+    # NixOS User Repository
+    nur.url = "github:nix-community/NUR"
 
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
+    # Neovim but configured with Nix
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-23.11";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixvim-unstable = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixvim, nixvim-unstable, home-manager, ... }@inputs:
     let
-      # Change this to select the machine to render
-      host = "maris";
-
-      inherit (import ./nix/hosts/${host}/options.nix) system;
-
-      pkgs = import nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
+      vars = {
+        user = "pickles";
+        name = "Patrick Anker";
+        email = "patricksanker@gmail.com";
+        terminal = "wezterm";
+        editor = "nvim";
       };
-
-      lib = nixpkgs.lib;
     in
     {
-      nixosConfigurations.${host} = lib.nixosSystem {
-          specialArgs = {
-            inherit pkgs; 
-            inherit inputs;
-          };
-          modules = [ 
-            ./nix/hosts/${host}
-            # inputs.home-manager.nixosModules.default
-          ];
-        };
+      nixosConfigurations = import ./nixos/hosts {
+        inherit (nixpkgs) lib;
+        inherit inputs nixpkgs nixvim-unstable home-manager nur nixvim hyprland var;
+      };
     };
 }
