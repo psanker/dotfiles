@@ -9,7 +9,7 @@
 #           └─ default.nix
 #
 
-{ lib, inputs, nixpkgs, nixpkgs-unstable, home-manager, nur, nixvim, hyprland, vars, ... }:
+{ inputs, nixpkgs, nixpkgs-unstable, home-manager, nur, nixvim, hyprland, ... }:
 
 let
   system = "x86_64-linux";                                  # System Architecture
@@ -25,23 +25,22 @@ let
   };
 
   lib = nixpkgs.lib;
+
+  vars = import ./maris/vars.nix;
 in
 {
   maris = lib.nixosSystem {                         # Personal laptop
     inherit system;
     specialArgs = {                                 # Pass Flake Variable
       inherit inputs system pkgs unstable hyprland vars;
-      host = {
-        hostName = "maris";
-      };
     };
-    modules = [                                             # Modules Used
+    modules = [
       nur.nixosModules.nur
       nixvim.nixosModules.nixvim
-      ./maris
       ./configuration.nix
+      ./maris
 
-      home-manager.nixosModules.home-manager {              # Home-Manager Module
+      home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
       }

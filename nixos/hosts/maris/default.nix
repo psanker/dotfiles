@@ -1,8 +1,5 @@
-{ pkgs, config, inputs, options, ... }:
+{ pkgs, unstable, vars, hyprland, ... }:
 
-let 
-  opts = import ./options.nix;
-in
 {
   imports =
     [
@@ -12,20 +9,14 @@ in
   # Enable Flake support
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  system.stateVersion = "23.11"; # Did you read the comment?
 
-  ## ALPHABETICAL ORDER STARTING NOW ##  
+  ## ALPHABETICAL ORDER STARTING NOW ##
 
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
+    timeout = 5;
   };
-
-  environment.systemPackages = with pkgs; [
-     wget curl git libvirt polkit_gnome go
-     tmux networkmanagerapplet vim playerctl
-     udiskie mako hyprpaper
-  ];
 
   hardware = {
     bluetooth.enable = true;
@@ -40,32 +31,11 @@ in
     pulseaudio.enable = false; # We usin' Pipewire boisss
   };
 
-  i18n = {
-    defaultLocale = opts.locale;
-
-    extraLocaleSettings = {
-      LC_ADDRESS = opts.locale;
-      LC_IDENTIFICATION = opts.locale;
-      LC_MEASUREMENT = opts.locale;
-      LC_MONETARY = opts.locale;
-      LC_NAME = opts.locale;
-      LC_NUMERIC = opts.locale;
-      LC_PAPER = opts.locale;
-      LC_TELEPHONE = opts.locale;
-      LC_TIME = opts.locale;
-    };
-  };
-
-  networking = {
-    inherit (opts) hostName;
-    networkmanager.enable = true;
-  };
-
   programs = {
     dconf.enable = true;
     hyprland = {
       enable = true;
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+      package = hyprland.packages.${unstable.system}.hyprland;
       xwayland.enable = true;
     };
     gnupg.agent = {
@@ -81,11 +51,11 @@ in
         auth include login
       '';
     };
-    polkit.enable = true;
-    rtkit.enable = true;
   };
 
   services = {
+    auto-cpufreq.enable = true;
+
     blueman.enable = true;
     flatpak.enable = true;
     gnome.gnome-keyring.enable = true;
@@ -142,14 +112,14 @@ in
     };
   };
 
-  time.timeZone = opts.tz;
+  time.timeZone = vars.tz;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${opts.user} = {
+  users.users.${vars.user} = {
     isNormalUser = true;
-    description = "Patrick Anker";
+    description = vars.userDesc;
     extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
-    packages = with pkgs; [
+    packages = (with pkgs; [
       bat
       cargo
       eww-wayland
@@ -165,17 +135,19 @@ in
       stow
       wezterm
     #  thunderbird
-    ];
+    ]) ++ (with unstable; [
+      eza
+    ]);
   };
 
   xdg.portal = {
     enable = true;
-    configPackages = [ 
+    configPackages = [
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal-hyprland
       pkgs.xdg-desktop-portal
     ];
-    extraPortals = [ 
+    extraPortals = [
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal
     ];

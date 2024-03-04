@@ -15,7 +15,7 @@
     };
 
     # NixOS User Repository
-    nur.url = "github:nix-community/NUR"
+    nur.url = "github:nix-community/NUR";
 
     # Neovim but configured with Nix
     nixvim = {
@@ -32,10 +32,9 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixvim, nixvim-unstable, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixvim, nixvim-unstable, home-manager, hyprland, nur, ... }@inputs:
     let
       vars = {
         user = "pickles";
@@ -48,7 +47,7 @@
     {
       nixosConfigurations = import ./nixos/hosts {
         inherit (nixpkgs) lib;
-        inherit inputs nixpkgs nixvim-unstable home-manager nur nixvim hyprland var;
+        inherit inputs nixpkgs nixvim-unstable home-manager nur nixvim hyprland vars;
       };
     };
 }
