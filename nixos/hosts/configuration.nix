@@ -61,6 +61,7 @@ in {
       unzip
       vim
       wget
+      xdg-user-dirs
       xdg-utils
       zip
     ];

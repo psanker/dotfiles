@@ -31,8 +31,9 @@
       XDG_SESSION_DESKTOP = "Hyprland";
     };
     systemPackages = with pkgs; [
-      brillo # Backlight
       grimblast # Screenshot
+      light # Backlight controls w/o messing with the sys vars
+      pamixer # Messing with sound
       socat # Socket reader -- needed for eww
       swayidle # Idle Daemon
       swaylock # Lock Screen
@@ -56,6 +57,18 @@
   };
 
   home-manager.users.${vars.user} = {
+    dconf.settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+      };
+    };
+    gtk = {
+      enable = true;
+      theme = {
+        name = "Adwaita-dark";
+        package = pkgs.gnome.gnome-themes-extra;
+      };
+    };
     home.packages = [pkgs.libnotify];
     services.mako.enable = true;
   };
@@ -73,11 +86,18 @@
       package = hyprland.packages.${unstable.system}.hyprland;
       xwayland.enable = true;
     };
+    light.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
     };
     thunar.enable = true;
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "gnome";
+    style = "adwaita-dark";
   };
 
   security = {
