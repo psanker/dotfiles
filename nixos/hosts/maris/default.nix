@@ -55,6 +55,11 @@
     pulseaudio.enable = false; # We usin' Pipewire boisss
   };
 
+  home-manager.users.${vars.user} = {
+    home.packages = [pkgs.libnotify];
+    services.mako.enable = true;
+  };
+
   # So we don't have to rebuild Hyprland each time
   nix.settings = {
     substituters = ["https://hyprland.cachix.org"];
