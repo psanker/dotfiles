@@ -32,22 +32,35 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    # Apple's fonts
+    apple-fonts = {
+      url = "github:Lyndeno/apple-fonts.nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixvim, nixvim-unstable, home-manager, hyprland, nur, ... }@inputs:
-    let
-      vars = {
-        user = "pickles";
-        name = "Patrick Anker";
-        email = "patricksanker@gmail.com";
-        terminal = "wezterm";
-        editor = "nvim";
-      };
-    in
-    {
-      nixosConfigurations = import ./nixos/hosts {
-        inherit (nixpkgs) lib;
-        inherit inputs nixpkgs nixvim-unstable home-manager nur nixvim hyprland vars;
-      };
+  outputs = {
+    self,
+    nixpkgs,
+    nixpkgs-unstable,
+    nixvim,
+    nixvim-unstable,
+    home-manager,
+    hyprland,
+    nur,
+    apple-fonts,
+    ...
+  } @ inputs: let
+    vars = {
+      user = "pickles";
     };
+  in {
+    nixosConfigurations = import ./nixos/hosts {
+      inherit (nixpkgs) lib;
+      inherit inputs nixpkgs nixpkgs-unstable nixvim-unstable home-manager nur nixvim hyprland vars;
+    };
+
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+  };
 }

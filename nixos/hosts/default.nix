@@ -8,15 +8,21 @@
 #       └─ ./<host>.nix
 #           └─ default.nix
 #
-
-{ inputs, nixpkgs, nixpkgs-unstable, home-manager, nur, nixvim, hyprland, ... }:
-
-let
-  system = "x86_64-linux";                                  # System Architecture
+{
+  inputs,
+  nixpkgs,
+  nixpkgs-unstable,
+  home-manager,
+  nur,
+  nixvim,
+  hyprland,
+  ...
+}: let
+  system = "x86_64-linux"; # System Architecture
 
   pkgs = import nixpkgs {
     inherit system;
-    config.allowUnfree = true;                              # Allow Proprietary Software
+    config.allowUnfree = true; # Allow Proprietary Software
   };
 
   unstable = import nixpkgs-unstable {
@@ -27,11 +33,12 @@ let
   lib = nixpkgs.lib;
 
   vars = import ./maris/vars.nix;
-in
-{
-  maris = lib.nixosSystem {                         # Personal laptop
+in {
+  maris = lib.nixosSystem {
+    # Personal laptop
     inherit system;
-    specialArgs = {                                 # Pass Flake Variable
+    specialArgs = {
+      # Pass Flake Variable
       inherit inputs system pkgs unstable hyprland vars;
     };
     modules = [
@@ -40,7 +47,8 @@ in
       ./configuration.nix
       ./maris
 
-      home-manager.nixosModules.home-manager {
+      home-manager.nixosModules.home-manager
+      {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
       }

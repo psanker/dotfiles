@@ -37,6 +37,7 @@ cfg.font = wez.font_with_fallback {
     'Hasklug Nerd Font',
     'SF Mono',
     'SF Pro',
+    'JetBrains Mono',
 }
 
 -- Theme

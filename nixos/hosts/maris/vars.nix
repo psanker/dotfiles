@@ -12,5 +12,9 @@ in {
   tz = "America/New_York";
   shell = "zsh";
   kernel = "zen";
-  terminal = "wezterm";
+  editor = "nvim";
+  terminal = "kitty";
+  homeDir = "/home/${user}";
+  name = "Patrick Anker";
+  email = "patricksanker@gmail.com";
 }

@@ -5,7 +5,7 @@ configuration {
   kb-mode-next: "Alt+Right,Shift+Right,Control+Tab,Alt+l";
   kb-mode-previous: "Alt+Left,Shift+Left,Control+ISO_Left_Tab,Alt+h";
   /* kb-row-select:; */
-  modi: "drun,run,calc";
+  modi: "drun,run";
   monitor: "-4";
 
   drun {
@@ -15,17 +15,9 @@ configuration {
   run {
     display-name: "Programs";
   }
-
-  calc {
-    display-name: "> ";
-  }
 }
 
 @theme "rose-pine-moon"
-
-* {
-    font: "SF Pro Display 12";
-}
 
 window {
     border: 1;

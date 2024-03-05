@@ -1,15 +1,17 @@
-{ pkgs, vars, ...}: {
-  programs.git = {
-    enable = true;
+{vars, ...}: {
+  config = {
+    programs.git = {
+      enable = true;
 
-    config = {
-      init = {
-        defaultBranch = "main";
-      };
+      config = {
+        init = {
+          defaultBranch = "main";
+        };
 
-      user = {
-        name = "${vars.name}";
-        email = "${vars.email}";
+        user = {
+          inherit (vars) name;
+          inherit (vars) email;
+        };
       };
     };
   };

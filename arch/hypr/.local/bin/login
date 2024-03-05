@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 localBin="$HOME/.local/bin"
 BG="$localBin/bg"
@@ -61,7 +61,7 @@ if [[ ! $(pidof eww) ]]; then
     ${EWW} daemon
     sleep 1
 
-	${EWW} open bar &
+    ${EWW} open bar &
 fi
 
 # Launch hyprpaper

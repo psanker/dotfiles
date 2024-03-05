@@ -5,7 +5,7 @@ CAL_CLIENT_DOMAIN="Morgen"
 
 calendar() {
     LOCK_FILE="$HOME/.cache/eww-calendar.lock"
-    EWW_BIN="/usr/bin/eww"
+    EWW_BIN="eww" # We don't actually know where eww is on nix
 
     run() {
         ${EWW_BIN} -c $HOME/.config/eww/bar open calendar
