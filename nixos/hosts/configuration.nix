@@ -68,19 +68,26 @@ in {
   };
 
   fonts = {
-    packages = with pkgs; [
-      carlito
-      vegur
-      source-code-pro
-      jetbrains-mono
-      font-awesome
-      corefonts
-      (nerdfonts.override {
-        fonts = [
-          "FiraCode"
-        ];
-      })
-    ];
+    packages =
+      (with pkgs; [
+        carlito
+        vegur
+        source-code-pro
+        jetbrains-mono
+        font-awesome
+        corefonts
+        (nerdfonts.override {
+          fonts = [
+            "FiraCode"
+            "Hasklig"
+          ];
+        })
+      ])
+      ++ (with inputs; [
+        apple-fonts.packages.${pkgs.system}.sf-pro
+        apple-fonts.packages.${pkgs.system}.sf-mono
+        apple-fonts.packages.${pkgs.system}.ny
+      ]);
   };
 
   home-manager.users.${vars.user} = {

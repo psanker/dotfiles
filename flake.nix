@@ -49,7 +49,6 @@
     home-manager,
     hyprland,
     nur,
-    apple-fonts,
     ...
   } @ inputs: let
     vars = {
@@ -58,7 +57,8 @@
   in {
     nixosConfigurations = import ./nixos/hosts {
       inherit (nixpkgs) lib;
-      inherit inputs nixpkgs nixpkgs-unstable nixvim-unstable home-manager nur nixvim hyprland vars;
+      inherit inputs nixpkgs nixpkgs-unstable;
+      inherit nixvim-unstable home-manager nur nixvim hyprland vars;
     };
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;

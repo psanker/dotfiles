@@ -6,6 +6,7 @@ require('rose-pine').setup({
             bg = 'base',
         },
     },
+    disable_italics = true,
 })
 
 vim.cmd.colorscheme('rose-pine')

@@ -43,6 +43,16 @@
     ];
   };
 
+  fonts = {
+    fontconfig = {
+      defaultFonts = {
+        sansSerif = ["SF Pro" "Carlito" "Liberation Sans"];
+        serif = ["New York" "Times New Roman" "Liberation Serif"];
+        monospace = ["SF Mono" "Source Code Pro" "Liberation Mono"];
+      };
+    };
+  };
+
   hardware = {
     bluetooth.enable = true;
     bluetooth.powerOnBoot = true;
