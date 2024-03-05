@@ -75,11 +75,14 @@
     gtk = {
       enable = true;
       theme = {
-        name = "Adwaita-dark";
-        package = pkgs.gnome.gnome-themes-extra;
+        name = "rose-pine-moon";
+        package = pkgs.rose-pine-gtk-theme;
       };
     };
-    home.packages = [pkgs.libnotify];
+    home.packages = with pkgs; [
+      libnotify
+      spotify
+    ];
     services.mako.enable = true;
   };
 
