@@ -1,4 +1,5 @@
 (import ./lsp.nix
+  // import ./noice.nix
   // import ./telescope.nix
   // {
     commentary.enable = true;

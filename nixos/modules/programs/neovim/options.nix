@@ -23,6 +23,7 @@
   cursorline = true;
   laststatus = 3;
   winbar = "%{%v:lua.require'nvim-navic'.get_location()%}";
+  scrolloff = 8;
 
   # Split defaults
   splitright = true;

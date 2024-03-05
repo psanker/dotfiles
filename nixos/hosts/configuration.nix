@@ -51,6 +51,7 @@ in {
       kitty
       lf
       nano
+      neofetch # For the lols
       networkmanagerapplet
       playerctl
       polkit_gnome
