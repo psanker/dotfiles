@@ -24,6 +24,7 @@
   laststatus = 3;
   winbar = "%{%v:lua.require'nvim-navic'.get_location()%}";
   scrolloff = 8;
+  cmdheight = 0;
 
   # Split defaults
   splitright = true;

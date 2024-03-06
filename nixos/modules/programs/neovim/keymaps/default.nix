@@ -2,5 +2,6 @@
   ++ import ./harpoon.nix
   ++ import ./oil.nix
   ++ import ./telescope.nix
+  ++ import ./zk.nix
   ++ [
   ])

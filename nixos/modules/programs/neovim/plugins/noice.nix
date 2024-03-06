@@ -1,6 +1,6 @@
 {
   noice = {
-    enable = true;
+    enable = false;
     cmdline = {
       view = "cmdline";
       format = {

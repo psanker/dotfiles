@@ -2,6 +2,8 @@
   ./core.nix
   ./git.nix
   ./kitty.nix
+  ./media
   ./neovim
+  ./sioyek.nix
   ./wezterm.nix
 ]

@@ -1,9 +1,13 @@
 {
+  config,
+  lib,
   pkgs,
   vars,
   ...
 }: {
-  config = {
+  config = let
+    hmcfg = config.home-manager.users.${vars.user};
+  in {
     programs.nixvim =
       {
         enable = true;
@@ -22,8 +26,17 @@
           ${builtins.readFile ./lua/interface.lua}
 
           ${builtins.readFile ./lua/lsp-helper.lua}
+
+          ${builtins.readFile ./lua/nvimr.lua}
         '';
       }
       // import ./plugins {inherit pkgs;};
+
+    home-manager.users.${vars.user} = {
+      xdg.mimeApps.defaultApplications = lib.mkIf hmcfg.xdg.mimeApps.enable {
+        "text/plain" = "nvim.desktop";
+        "text/html" = "nvim.desktop";
+      };
+    };
   };
 }

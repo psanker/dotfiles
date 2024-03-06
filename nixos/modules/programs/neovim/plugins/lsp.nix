@@ -11,6 +11,9 @@
         installRustc = true;
       };
     };
+    postConfig = ''
+      vim.diagnostic.config({virtual_text = false})
+    '';
   };
   lspkind = {
     enable = true;

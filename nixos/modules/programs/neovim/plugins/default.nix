@@ -5,6 +5,7 @@
     // import ./telescope.nix
     // {
       commentary.enable = true;
+      fidget.enable = true;
       fugitive.enable = true;
       lualine.enable = true;
       navic.enable = true;
@@ -33,6 +34,11 @@
         nixGrammars = true;
         ensureInstalled = "all";
         incrementalSelection.enable = true;
+      };
+      which-key.enable = true;
+      zk = {
+        enable = true;
+        picker = "telescope";
       };
     };
   extraPlugins = with pkgs.vimPlugins; [
@@ -64,6 +70,7 @@
       };
     })
 
+    # Harpoon 2 is on a separate branch
     (pkgs.vimUtils.buildVimPlugin rec {
       pname = "harpoon";
       version = "a38be6e0dd4c6db66997deab71fc4453ace97f9c";
@@ -73,6 +80,19 @@
         rev = version;
         sha256 = "sha256-RjwNUuKQpLkRBX3F9o25Vqvpu3Ah1TCFQ5Dk4jXhsbI=";
       };
+    })
+
+    # Nvim-R is not anywhere because it's *fancy*
+    (pkgs.vimUtils.buildVimPlugin rec {
+      pname = "Nvim-R";
+      version = "167ccf60f57616708bc6c556bc3f915bf91591a8";
+      src = pkgs.fetchFromGitHub {
+        owner = "jalvesaq";
+        repo = "Nvim-R";
+        rev = version;
+        sha256 = "0msn7zz0hr5gj72i04vdl1kdrfz3bcms7fzv05l3gvndby1iagb0";
+      };
+      buildInputs = [pkgs.which pkgs.zip];
     })
   ];
 }

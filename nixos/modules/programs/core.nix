@@ -38,8 +38,7 @@
             cleaner = pkgs.writeShellScriptBin "clean.sh" ''
               ${pkgs.kitty}/bin/kitty +kitten icat --clear --stdin no --silent --transfer-mode file < /dev/null > /dev/tty
             '';
-          in 
-          ''
+          in ''
             set cleaner ${cleaner}/bin/clean.sh
             set previewer ${previewer}/bin/pv.sh
           '';
@@ -52,6 +51,7 @@
         unstable.discord
         unstable.eza
         stow
+        zk
       ];
     };
   };

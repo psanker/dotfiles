@@ -14,6 +14,9 @@
         "--glob=!.git"
       ];
     };
+    enabledExtensions = [
+      "zk"
+    ];
     extraOptions = {
       pickers = {
         find_files = {
