@@ -6,6 +6,7 @@
     // {
       commentary.enable = true;
       fidget.enable = true;
+      floaterm.enable = true;
       fugitive.enable = true;
       lualine.enable = true;
       navic.enable = true;

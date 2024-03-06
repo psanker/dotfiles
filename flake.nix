@@ -38,6 +38,8 @@
       url = "github:Lyndeno/apple-fonts.nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = {
@@ -49,18 +51,23 @@
     home-manager,
     hyprland,
     nur,
+    flake-utils,
     ...
-  } @ inputs: let
-    vars = {
-      user = "pickles";
-    };
-  in {
-    nixosConfigurations = import ./nixos/hosts {
-      inherit (nixpkgs) lib;
-      inherit inputs nixpkgs nixpkgs-unstable;
-      inherit nixvim-unstable home-manager nur nixvim hyprland vars;
-    };
-
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
-  };
+  } @ inputs:
+    (let
+      vars = {
+        user = "pickles";
+      };
+    in {
+      nixosConfigurations = import ./nixos/hosts {
+        inherit (nixpkgs) lib;
+        inherit inputs nixpkgs nixpkgs-unstable;
+        inherit nixvim-unstable home-manager nur nixvim hyprland vars;
+      };
+    })
+    // (flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = import nixpkgs {inherit system;};
+    in {
+      formatter = pkgs.alejandra;
+    }));
 }
