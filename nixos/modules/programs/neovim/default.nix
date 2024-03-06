@@ -18,7 +18,11 @@
           inherit vars;
         };
         keymaps = import ./keymaps;
-        extraConfigLua = builtins.readFile ./lua/interface.lua;
+        extraConfigLua = ''
+          ${builtins.readFile ./lua/interface.lua}
+
+          ${builtins.readFile ./lua/lsp-helper.lua}
+        '';
       }
       // import ./plugins {inherit pkgs;};
   };

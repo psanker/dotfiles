@@ -18,6 +18,7 @@
         taskwarrior.enable = true;
       };
       home.packages = with pkgs; [
+        unstable.discord
         unstable.eza
         stow
       ];

@@ -1,7 +1,13 @@
 {
   noice = {
     enable = true;
-    cmdline.view = "cmdline";
+    cmdline = {
+      view = "cmdline";
+      format = {
+        search_down.view = "cmdline";
+        search_up.view = "cmdline";
+      };
+    };
     lsp = {
       override = {
         "vim.lsp.util.convert_input_to_markdown_lines" = true;
@@ -14,7 +20,7 @@
     notify.view = "mini";
     presets = {
       bottom_search = true;
-      command_palette = true;
+      command_palette = false;
       long_message_to_split = true;
       inc_rename = false;
       lsp_doc_border = false;
