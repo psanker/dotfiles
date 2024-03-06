@@ -13,6 +13,7 @@
     programs.nixvim =
       {
         enable = true;
+        autoCmd = import ./autocmd;
         globals = {
           syntax = true;
           mapleader = " ";
