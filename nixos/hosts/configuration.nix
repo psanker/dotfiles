@@ -49,7 +49,6 @@ in {
       jq
       killall
       kitty
-      lf
       nano
       neofetch # For the lols
       networkmanagerapplet

@@ -4,7 +4,6 @@
   ...
 }: {
   config = {
-    programs.fish.enable = true; # Needed for the Wezterm shell
     home-manager.users.${vars.user}.programs = {
       wezterm = {
         extraConfig = ''

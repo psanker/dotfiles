@@ -94,6 +94,7 @@
 
   programs = {
     dconf.enable = true;
+    fish.enable = true;
     hyprland = {
       enable = true;
       package = hyprland.packages.${unstable.system}.hyprland;
@@ -169,7 +170,7 @@
       extraConfig = ''
         AllowSuspend=yes
         AllowHibernation=no
-        AllowSuspendThenHibernate=no
+        AllowSuspendThenHibernate=yes
         AllowHybridSleep=yes
       '';
     };
@@ -195,28 +196,16 @@
     isNormalUser = true;
     description = vars.userDesc;
     extraGroups = ["networkmanager" "wheel" "audio" "video"];
-    packages =
-      (with pkgs; [
-        bat
-        cargo
-        eww-wayland
-        fish
-        fzf
-        gammastep
-        hyprpaper
-        kitty
-        libreoffice-qt
-        mako
-        ripgrep
-        rofi-wayland
-        rustup
-        starship
-        stow
-        taskwarrior
-      ])
-      ++ (with unstable; [
-        eza
-      ]);
+    packages = with pkgs; [
+      cargo
+      eww-wayland
+      gammastep
+      hyprpaper
+      libreoffice-qt
+      mako
+      rofi-wayland
+      rustup
+    ];
     shell = pkgs.fish;
   };
 
