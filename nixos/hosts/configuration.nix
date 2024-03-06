@@ -56,6 +56,7 @@ in {
         playerctl
         polkit_gnome
         rsync
+        signal-desktop
         tmux
         udiskie
         unzip
