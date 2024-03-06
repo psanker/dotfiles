@@ -92,9 +92,27 @@ in {
   home-manager.users.${vars.user} = {
     home = {
       stateVersion = "23.11";
+      packages = with pkgs; [
+        libnotify
+        spotify
+      ];
+    };
+    gtk = {
+      enable = true;
+      theme = {
+        name = "rose-pine-moon";
+        package = pkgs.rose-pine-gtk-theme;
+      };
+    };
+    dconf.settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+      };
     };
     programs = {
       home-manager.enable = true;
+      # TODO: Move this into a module
+      mpv.enable = true;
     };
     xdg = {
       mime.enable = true;
@@ -107,6 +125,7 @@ in {
           "text/plain" = "nvim.desktop";
           "text/html" = "nvim.desktop";
           "text/csv" = "nvim.desktop";
+          "video/*" = "mpv.desktop";
         };
       };
     };

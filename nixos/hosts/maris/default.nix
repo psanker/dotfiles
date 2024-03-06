@@ -67,22 +67,6 @@
   };
 
   home-manager.users.${vars.user} = {
-    dconf.settings = {
-      "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
-      };
-    };
-    gtk = {
-      enable = true;
-      theme = {
-        name = "rose-pine-moon";
-        package = pkgs.rose-pine-gtk-theme;
-      };
-    };
-    home.packages = with pkgs; [
-      libnotify
-      spotify
-    ];
     services.mako.enable = true;
   };
 

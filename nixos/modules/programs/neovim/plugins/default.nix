@@ -10,6 +10,21 @@
       navic.enable = true;
       oil.enable = true;
       surround.enable = true;
+      todo-comments = {
+        enable = true;
+        search = {
+          # Default is ripgrep, so just need to provide the args
+          args = [
+            "--color=never"
+            "--no-heading"
+            "--with-filename"
+            "--line-number"
+            "--column"
+            "--glob=!{_site,renv}"
+          ];
+        };
+        highlight.commentsOnly = false;
+      };
       treesitter = {
         enable = true;
         nixvimInjections = true;
