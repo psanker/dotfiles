@@ -37,6 +37,7 @@
         incrementalSelection.enable = true;
       };
       trouble.enable = true;
+      undotree.enable = true;
       which-key.enable = true;
       zk = {
         enable = true;
@@ -45,6 +46,7 @@
     };
   extraPlugins = with pkgs.vimPlugins; [
     luasnip
+    zen-mode-nvim
 
     ## User interface
     #  Since my statusline is interconnected with
@@ -58,17 +60,6 @@
         repo = "neovim";
         rev = version;
         sha256 = "sha256-MA1le+hIMpm7uqx4UsJLE+iuySX4VDgDjqxfRBgZa2Y=";
-      };
-    })
-
-    (pkgs.vimUtils.buildVimPlugin rec {
-      pname = "zen-mode";
-      version = "78557d972b4bfbb7488e17b5703d25164ae64e6a";
-      src = pkgs.fetchFromGitHub {
-        owner = "folke";
-        repo = "zen-mode.nvim";
-        rev = version;
-        sha256 = "sha256-G5/AskXEA0vl9GGUR8NG8PmL/HFcItZJWB+LyKd3R2k=";
       };
     })
 

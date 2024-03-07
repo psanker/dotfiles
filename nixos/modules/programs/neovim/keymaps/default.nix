@@ -6,6 +6,7 @@
   ++ import ./harpoon.nix
   ++ import ./oil.nix
   ++ import ./telescope.nix
+  ++ import ./undotree.nix
   ++ import ./views.nix
   ++ import ./zk.nix
   ++ [
