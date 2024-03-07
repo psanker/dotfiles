@@ -11,9 +11,6 @@
         installRustc = true;
       };
     };
-    postConfig = ''
-      vim.diagnostic.config({virtual_text = false})
-    '';
   };
   lspkind = {
     enable = true;
@@ -28,7 +25,6 @@
       };
     };
   };
-  lsp-lines.enable = true;
   luasnip.enable = true;
   cmp_luasnip.enable = true;
   cmp-nvim-lsp.enable = true;

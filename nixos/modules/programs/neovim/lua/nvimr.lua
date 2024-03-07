@@ -4,4 +4,3 @@ vim.cmd [[let R_cmd = 'R' ]]
 vim.cmd [[let R_app = 'R' ]]
 vim.cmd [[let R_assign = 0 ]]
 vim.cmd [[let R_nvim_wd = 1]]
-

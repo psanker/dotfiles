@@ -1,13 +1,13 @@
 {pkgs}: {
   plugins =
-    import ./lsp.nix
+    import ./git.nix
+    // import ./lsp.nix
     // import ./noice.nix
     // import ./telescope.nix
     // {
       commentary.enable = true;
       fidget.enable = true;
       floaterm.enable = true;
-      fugitive.enable = true;
       lualine.enable = true;
       navic.enable = true;
       oil.enable = true;
@@ -36,6 +36,7 @@
         ensureInstalled = "all";
         incrementalSelection.enable = true;
       };
+      trouble.enable = true;
       which-key.enable = true;
       zk = {
         enable = true;

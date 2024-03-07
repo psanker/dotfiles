@@ -18,19 +18,19 @@ local util = require('rose-pine.utilities')
 
 -- Copied from older version of rose-pine
 local highlight = function(group, highlight, blend_on)
-	local fg = highlight.fg and util.parse_color(highlight.fg) or "NONE"
-	local bg = highlight.bg and util.parse_color(highlight.bg) or "NONE"
-	local sp = highlight.sp and util.parse_color(highlight.sp) or "NONE"
+    local fg = highlight.fg and util.parse_color(highlight.fg) or "NONE"
+    local bg = highlight.bg and util.parse_color(highlight.bg) or "NONE"
+    local sp = highlight.sp and util.parse_color(highlight.sp) or "NONE"
 
-	if highlight.blend ~= nil and (highlight.blend >= 0 and highlight.blend <= 100) and bg ~= nil then
-		bg = util.blend(bg, blend_on or p.base, highlight.blend / 100)
-	end
+    if highlight.blend ~= nil and (highlight.blend >= 0 and highlight.blend <= 100) and bg ~= nil then
+        bg = util.blend(bg, blend_on or p.base, highlight.blend / 100)
+    end
 
-	highlight.fg = fg
-	highlight.bg = bg
-	highlight.sp = sp
+    highlight.fg = fg
+    highlight.bg = bg
+    highlight.sp = sp
 
-	vim.api.nvim_set_hl(0, group, highlight)
+    vim.api.nvim_set_hl(0, group, highlight)
 end
 
 local function element_in(el, tab)
@@ -283,12 +283,12 @@ require('zen-mode').setup({
         width = 0.65,
     },
     plugins = {
-        gitsigns = { enabled = true };
+        gitsigns = { enabled = true },
     },
-    on_open = function (_)
+    on_open = function(_)
         require('lualine').setup(lualine_opts(true))
     end,
-    on_close = function ()
+    on_close = function()
         require('lualine').setup(lualine_opts(false))
     end
 })
