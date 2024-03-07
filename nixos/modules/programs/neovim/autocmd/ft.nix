@@ -14,4 +14,12 @@
       __raw = builtins.readFile ./ft/r.lua;
     };
   }
+
+  {
+    event = ["BufEnter" "BufWinEnter"];
+    pattern = ["*.rmd" "*.Rmd"];
+    callback = {
+      __raw = builtins.readFile ./ft/rmd.lua;
+    };
+  }
 ]
