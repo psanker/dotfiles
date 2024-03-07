@@ -11,6 +11,7 @@
         installRustc = true;
       };
     };
+    postConfig = builtins.readFile ./lua/extra-ls-clients.lua;
   };
   lspkind = {
     enable = true;
