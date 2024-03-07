@@ -12,6 +12,7 @@
   hlsearch = false;
   incsearch = true;
   smartindent = true;
+  clipboard = "unnamedplus";
 
   # Better undo/swap support
   swapfile = false;
