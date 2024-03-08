@@ -6,7 +6,11 @@
 }: let
   terminal = pkgs.${vars.terminal};
 in {
-  imports = import ../modules/programs;
+  imports =
+    import ../modules/programs
+    ++ [
+      ../modules/secrets
+    ];
 
   config = {
     system.stateVersion = "23.11"; # DO NOT TOUCH
@@ -57,6 +61,7 @@ in {
         polkit_gnome
         rsync
         signal-desktop
+        sops
         tmux
         udiskie
         unzip

@@ -40,6 +40,11 @@
     };
 
     flake-utils.url = "github:numtide/flake-utils";
+
+    # SOPS integration so we can better handle secrets management
+    # without the need of crazy submodule structures 
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -52,6 +57,7 @@
     hyprland,
     nur,
     flake-utils,
+    sops-nix,
     ...
   } @ inputs:
     (let

@@ -44,14 +44,15 @@ in {
     modules = [
       nur.nixosModules.nur
       nixvim.nixosModules.nixvim
-      ./configuration.nix
-      ./maris
 
       home-manager.nixosModules.home-manager
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
       }
+
+      ./configuration.nix
+      ./maris
     ];
   };
 }
