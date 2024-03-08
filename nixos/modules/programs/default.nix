@@ -5,5 +5,6 @@
   ./media
   ./neovim
   ./sioyek.nix
+  ./taskwarrior.nix
   ./wezterm.nix
 ]

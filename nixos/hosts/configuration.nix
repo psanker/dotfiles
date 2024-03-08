@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   vars,
+  lib,
   ...
 }: let
   terminal = pkgs.${vars.terminal};
@@ -12,8 +13,18 @@ in {
       ../modules/secrets
     ];
 
+  options = {
+    myopts.platform.linux = with lib; mkOption {
+      type = types.bool;
+      default = false;
+      example = true;
+      description = mdDoc "Whether we're on Linux or not";
+    };
+  };
+
   config = {
     system.stateVersion = "23.11"; # DO NOT TOUCH
+    myopts.platform.linux = true;
 
     # Nix Stuff
     nix = {

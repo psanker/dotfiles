@@ -45,7 +45,6 @@
         };
         ripgrep.enable = true;
         starship.enable = true;
-        taskwarrior.enable = true;
       };
       home.packages = with pkgs; [
         unstable.discord
