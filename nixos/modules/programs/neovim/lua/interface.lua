@@ -286,12 +286,15 @@ require('zen-mode').setup({
         gitsigns = { enabled = true },
     },
     on_open = function(_)
-        require('lualine').setup(lualine_opts(true))
+        vim.g.zen_mode_open = true
+        require('lualine').setup(lualine_opts(vim.g.zen_mode_open))
     end,
     on_close = function()
-        require('lualine').setup(lualine_opts(false))
+        vim.g.zen_mode_open = false
+        require('lualine').setup(lualine_opts(vim.g.zen_mode_open))
     end
 })
 
 -- Assuming zen-mode is off by default
 require('lualine').setup(lualine_opts(false))
+

@@ -46,13 +46,11 @@
     };
   extraPlugins = with pkgs.vimPlugins; [
     luasnip
+    vim-pencil
     zen-mode-nvim
 
-    ## User interface
-    #  Since my statusline is interconnected with
-    #  zen-mode, I need to pull these and configure manually
+    # I need the actual lua code for the statusline and theme
     (pkgs.vimUtils.buildVimPlugin rec {
-      # I need the actual lua code for the statusline and theme
       pname = "rose-pine";
       version = "14b371fb783a8cfdade04544fb782f0bb6f7c904";
       src = pkgs.fetchFromGitHub {

@@ -8,6 +8,7 @@
   ++ import ./telescope.nix
   ++ import ./undotree.nix
   ++ import ./views.nix
+  ++ import ./writing.nix
   ++ import ./zk.nix
   ++ [
     {

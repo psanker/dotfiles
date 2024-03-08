@@ -14,12 +14,14 @@
       {
         enable = true;
         autoCmd = import ./autocmd;
+        autoGroups = {
+          MyWriting = {
+            clear = true;
+          };
+        };
         globals = {
           syntax = true;
           mapleader = " ";
-
-          # Custom thingies
-          zen_mode_open = false;
         };
         options = import ./options.nix {
           inherit vars;
@@ -31,6 +33,8 @@
           ${builtins.readFile ./lua/lsp-helper.lua}
 
           ${builtins.readFile ./lua/nvimr.lua}
+
+          ${builtins.readFile ./lua/writing-helper.lua}
         '';
       }
       // import ./plugins {inherit pkgs;};
