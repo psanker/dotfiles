@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   vars,
   ...
 }: {
@@ -26,16 +27,17 @@
     myopts.programs.gpg.enable = true;
 
     home-manager.users.${vars.user} = {
+      programs.password-store.enable = true;
+
       programs.gpg = {
         enable = true;
         homedir = "${xdgConfigHome}/gnupg";
       };
 
-      programs.git.signing =
-        lib.mkIf config.myopts.programs.git.enable {
-          key = "BF9AB14D3B994BB1";
-          signByDefault = true;
-        };
+      programs.git.signing = lib.mkIf config.myopts.programs.git.enable {
+        key = "BF9AB14D3B994BB1";
+        signByDefault = true;
+      };
     };
 
     systemd.user.services.gpgimporter = lib.mkIf usingLinux {

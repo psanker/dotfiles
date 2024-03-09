@@ -72,12 +72,12 @@
         inherit nixvim-unstable home-manager nur nixvim hyprland vars;
       };
 
-      postInstallBundle = import ./nixos/scripts/post-install.nix {
+      postBuildBundle = import ./nixos/scripts/post-build.nix {
         inherit self nixpkgs flake-utils;
       };
     in {
-      inherit (postInstallBundle.bundle) packages;
-      inherit (postInstallBundle.bundle) apps;
+      inherit (postBuildBundle.bundle) packages;
+      inherit (postBuildBundle.bundle) apps;
 
       inherit nixosConfigurations;
     })
