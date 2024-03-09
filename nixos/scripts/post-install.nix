@@ -11,6 +11,7 @@ in {
   in {
     packages.${binName} = pkgs.writeScriptBin binName ''
       systemctl --user start taskrcwriter.service
+      systemctl --user start gpgimporter.service
     '';
 
     apps.${binName} = {

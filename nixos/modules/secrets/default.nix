@@ -16,6 +16,10 @@
       age.keyFile = "/home/${vars.user}/.config/sops/age/keys.txt";
 
       secrets = {
+        "gpg/keyring" = {
+          owner = config.users.users.${vars.user}.name;
+        };
+
         "taskwarrior/taskd/server" = {
           owner = config.users.users.${vars.user}.name;
         };
