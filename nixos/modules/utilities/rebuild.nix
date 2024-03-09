@@ -27,7 +27,7 @@
 
           sudo nixos-rebuild switch --flake .
 
-          if [ $? = 0 ]; then
+          if [ $? = 0 ] && [ -z $NO_SECRETS ]; then
             echo "deploying secrets to config files..."
             nix run .#${rebuildTarget}
           fi
