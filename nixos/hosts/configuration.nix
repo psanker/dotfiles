@@ -64,6 +64,7 @@ in {
         curl
         firefox
         git
+        gh
         go
         htop-vim
         jq
@@ -78,8 +79,8 @@ in {
         signal-desktop
         sops
         tmux
-        udiskie
         unzip
+        usbutils
         vim
         wget
         xdg-user-dirs
@@ -143,6 +144,11 @@ in {
           };
         };
       };
+      services.udiskie = {
+        enable = true;
+        automount = true;
+        tray = "auto";
+      };
     };
 
     i18n = {
@@ -168,6 +174,13 @@ in {
     security = {
       polkit.enable = true;
       rtkit.enable = true;
+    };
+
+    # USB mounting support
+    services = {
+      devmon.enable = true;
+      gvfs.enable = true;
+      udisks2.enable = true;
     };
   };
 }
