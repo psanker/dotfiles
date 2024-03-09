@@ -9,6 +9,7 @@
 in {
   imports =
     import ../modules/programs
+    ++ import ../modules/dewm
     ++ import ../modules/utilities
     ++ [
       ../modules/secrets

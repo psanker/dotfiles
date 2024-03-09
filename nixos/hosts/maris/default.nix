@@ -9,6 +9,8 @@
     ./hardware.nix
   ];
 
+  myopts.dewm.hyprland.enable = true;
+
   ## ALPHABETICAL ORDER STARTING NOW ##
 
   boot.loader = {
@@ -31,15 +33,8 @@
       XDG_SESSION_DESKTOP = "Hyprland";
     };
     systemPackages = with pkgs; [
-      grimblast # Screenshot
       light # Backlight controls w/o messing with the sys vars
       pamixer # Messing with sound
-      socat # Socket reader -- needed for eww
-      swayidle # Idle Daemon
-      swaylock # Lock Screen
-      wl-clipboard # Clipboard
-      wlr-randr # Monitor Settings
-      xwayland # X session
     ];
   };
 
@@ -191,19 +186,5 @@
       rustup
     ];
     shell = pkgs.fish;
-  };
-
-  xdg.portal = {
-    enable = true;
-    configPackages = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal
-    ];
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal
-    ];
-    wlr.enable = true;
   };
 }
