@@ -1,0 +1,3 @@
+[
+  ./rebuild.nix
+]

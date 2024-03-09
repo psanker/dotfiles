@@ -63,13 +63,23 @@
     (let
       vars = {
         user = "pickles";
+        target = "maris";
       };
-    in {
+    in let
       nixosConfigurations = import ./nixos/hosts {
         inherit (nixpkgs) lib;
         inherit inputs nixpkgs nixpkgs-unstable;
         inherit nixvim-unstable home-manager nur nixvim hyprland vars;
       };
+
+      postInstallBundle = import ./nixos/scripts/post-install.nix {
+        inherit self nixpkgs flake-utils;
+      };
+    in {
+      inherit (postInstallBundle.bundle) packages;
+      inherit (postInstallBundle.bundle) apps;
+
+      inherit nixosConfigurations;
     })
     // (flake-utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {inherit system;};

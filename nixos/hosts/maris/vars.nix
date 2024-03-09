@@ -3,7 +3,7 @@ let
   userDesc = "Patrick";
   hostName = "maris";
   system = "x86_64-linux";
-in {
+in rec {
   inherit user userDesc hostName system;
 
   locale = "en_US.UTF-8";
@@ -15,6 +15,7 @@ in {
   editor = "nvim";
   terminal = "kitty";
   homeDir = "/home/${user}";
+  flakeDir = "${homeDir}/workspace/dotfiles";
   name = "Patrick Anker";
   email = "patricksanker@gmail.com";
 }

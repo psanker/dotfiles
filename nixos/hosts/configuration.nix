@@ -9,22 +9,25 @@
 in {
   imports =
     import ../modules/programs
+    ++ import ../modules/utilities
     ++ [
       ../modules/secrets
     ];
 
   options = {
-    myopts.platform.linux = with lib; mkOption {
-      type = types.bool;
-      default = false;
-      example = true;
-      description = mdDoc "Whether we're on Linux or not";
-    };
+    myopts.platform.linux = with lib;
+      mkOption {
+        type = types.bool;
+        default = false;
+        example = true;
+        description = mdDoc "Whether we're on Linux or not";
+      };
   };
 
   config = {
     system.stateVersion = "23.11"; # DO NOT TOUCH
     myopts.platform.linux = true;
+    myopts.rebuild.target = "nixos";
 
     # Nix Stuff
     nix = {
