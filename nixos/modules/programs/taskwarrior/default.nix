@@ -30,9 +30,50 @@
     myopts.taskwarrior.enable = true;
 
     home-manager.users.${vars.user} = {
-      home.packages = with pkgs; [
-        taskwarrior-tui
-      ];
+      home = {
+        packages = with pkgs; [
+          python3
+          taskwarrior-tui
+          timewarrior
+        ];
+
+        file."${xdgConfigHome}/task/hooks/on-modify.sh" = {
+          source = ./on-modify.timewarrior;
+          executable = true;
+        };
+
+        file."${xdgConfigHome}/task/hooks/on-exit-sync.sh" = {
+          text = ''
+            #!/bin/sh
+
+            check_internet() {
+              # 1.1.1.1 is the cloudflare DNS
+              ${pkgs.netcat}/bin/nc -z 1.1.1.1 53 &>/dev/null 2>&1
+
+              if [ $? != 0 ]; then
+                exit 0
+              fi
+            }
+
+            n=0
+
+            while read modified_task; do
+              n=$((n + 1))
+            done
+
+            if [ $n != 0 ]; then
+              check_internet
+
+              log_file=${xdgDataHome}/task/sync_hook.log
+
+              date >> $log_file
+              ${hmcfg.programs.taskwarrior.package}/bin/task rc.verbose:nothing sync >> $log_file &
+            fi
+          '';
+
+          executable = true;
+        };
+      };
       programs.taskwarrior = {
         enable = true;
         config = {
@@ -65,6 +106,7 @@
       '';
       serviceConfig = {
         WorkingDirectory = "${xdgConfigHome}/task";
+        Type = "oneshot";
       };
     };
   };

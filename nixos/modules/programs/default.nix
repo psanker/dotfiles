@@ -7,6 +7,6 @@
   ./neomutt.nix
   ./neovim
   ./sioyek.nix
-  ./taskwarrior.nix
+  ./taskwarrior
   # ./wezterm.nix
 ]
