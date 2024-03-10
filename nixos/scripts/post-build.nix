@@ -13,7 +13,7 @@ in {
       systemctl --user start taskrcwriter.service
       systemctl --user start gpgimporter.service
 
-      ${(import ../modules/scripts/post-install.nix).sync-pass}
+      ${(import ../modules/scripts/post-build.nix).sync-pass}
     '';
 
     apps.${binName} = {
