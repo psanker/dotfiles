@@ -4,7 +4,7 @@
   ./gnupg.nix
   ./kitty.nix
   ./media
-  ./neomutt.nix
+  ./neomutt
   ./neovim
   ./sioyek.nix
   ./taskwarrior

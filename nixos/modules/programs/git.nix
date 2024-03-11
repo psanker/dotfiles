@@ -30,6 +30,8 @@
           init = {
             defaultBranch = "main";
           };
+
+          rerere.enable = true;
         };
       };
     };

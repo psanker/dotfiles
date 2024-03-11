@@ -10,6 +10,7 @@ in {
   imports =
     import ../modules/programs
     ++ import ../modules/dewm
+    ++ import ../modules/services
     ++ import ../modules/utilities
     ++ [
       ../modules/secrets
