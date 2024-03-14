@@ -109,5 +109,26 @@
         Type = "oneshot";
       };
     };
+
+    systemd.user.services.task-sync = lib.mkIf usingLinux {
+      script = ''
+        ${hmcfg.programs.taskwarrior.package}/bin/task sync
+      '';
+      description = "Synchronize with WingTask";
+
+      serviceConfig = {
+        Type = "oneshot";
+      };
+    };
+
+    systemd.user.timers.task-sync = lib.mkIf usingLinux {
+      description = "Synchronize with WingTask";
+      wantedBy = ["timers.target"];
+      
+      timerConfig = {
+        OnUnitActiveSec = "60s";
+        OnBootSec = "60s";
+      };
+    };
   };
 }
