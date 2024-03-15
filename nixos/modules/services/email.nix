@@ -249,6 +249,12 @@
 
               "msglist_flagged.bg" = "red";
               "msglist_flagged.fg" = "white";
+
+              "tab.reverse" = false;
+              "tab.bg" = "black";
+              "tab.fg" = "magenta";
+
+              "dirlist_default.fg" = "grey";
             };
           };
         };
