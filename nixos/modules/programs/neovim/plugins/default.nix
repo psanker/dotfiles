@@ -4,6 +4,7 @@
     // import ./lsp.nix
     // import ./noice.nix
     // import ./telescope.nix
+    // import ./treesitter.nix
     // {
       commentary.enable = true;
       fidget.enable = true;
@@ -26,15 +27,6 @@
           ];
         };
         highlight.commentsOnly = false;
-      };
-      treesitter = {
-        enable = true;
-        nixvimInjections = true;
-        folding = false;
-        indent = true;
-        nixGrammars = true;
-        ensureInstalled = "all";
-        incrementalSelection.enable = true;
       };
       trouble.enable = true;
       undotree.enable = true;
