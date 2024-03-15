@@ -124,7 +124,7 @@
     systemd.user.timers.task-sync = lib.mkIf usingLinux {
       description = "Synchronize with WingTask";
       wantedBy = ["timers.target"];
-      
+
       timerConfig = {
         OnUnitActiveSec = "60s";
         OnBootSec = "60s";
