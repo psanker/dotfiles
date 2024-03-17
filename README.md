@@ -2,7 +2,7 @@
 
 | Platform | Preview |
 |:--------:|:-------:|
-| ArcoLinux (personal) | ![Screenshot of my Archie (ArcoLinux) personal laptop](./static/arch.png) |
+| NixOS (personal) | ![Screenshot of NixOS](./static/nixos.png) |
 | macOS (work) | ![Screenshot of my macOS workstation](./static/macos.png) |
 
 Just my dotfiles. Everything is managed with [GNU Stow](https://www.gnu.org/software/stow/).
@@ -13,5 +13,5 @@ Depending on platform, these are the installation instructions.
 
 |  Platform | Install instructions |
 |:---------:|---------------------:|
-| ArcoLinux |    `./arch/setup.sh` |
+|     NixOS |    (Quick script TK) |
 |     macOS |   `./macos/setup.sh` |

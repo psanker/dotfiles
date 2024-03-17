@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [[ ! $(pidof rofi) ]]; then
 	rofi -show drun -config "$HOME/.config/rofi/launcher.rasi"

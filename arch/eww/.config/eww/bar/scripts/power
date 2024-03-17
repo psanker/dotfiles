@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 shutdown() {
     OK=$(yad --form --text="Are you sure you want to shut down?" && echo "ok")

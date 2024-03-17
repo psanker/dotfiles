@@ -3,7 +3,7 @@
 ;; Maintaned by https://github.com/rxyhn
 
 ;; put path to aesthetic bar config files here ;;
-(defvar eww "/usr/bin/eww -c $HOME/.config/eww/bar")
+(defvar eww "eww -c $HOME/.config/eww/bar")
 (defvar eww-conf "$HOME/.config/eww/bar")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -298,7 +298,7 @@
                                        "No"))
                      (eventbox :cursor "pointer"
                                (button :class "dialog-button yes"
-                                       :onclick "${eww} close dialog-shutdown && notify-send \"Shutting down in 5 seconds\" && shutdown"
+                                       :onclick "${eww} close dialog-shutdown && systemctl poweroff -i"
                                        "Yes")))))
 
 (defwindow dialog-shutdown
@@ -326,7 +326,7 @@
                                        "No"))
                      (eventbox :cursor "pointer"
                                (button :class "dialog-button yes"
-                                       :onclick "${eww} close dialog-logout && killall Hyprland"
+                                       :onclick "${eww} close dialog-logout && hyprctl dispatch exit"
                                        "Yes")))))
 
 (defwindow dialog-logout
@@ -354,7 +354,7 @@
                                        "No"))
                      (eventbox :cursor "pointer"
                                (button :class "dialog-button yes"
-                                       :onclick "${eww} close dialog-restart && reboot"
+                                       :onclick "${eww} close dialog-restart && systemctl reboot"
                                        "Yes")))))
 
 (defwindow dialog-restart
