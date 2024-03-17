@@ -50,6 +50,7 @@ if status is-interactive
     alias hl="hledger"
     alias hlu="hledger-ui"
     alias hlw="hledger-web"
+    alias nd="nix develop --command fish"
 
     alias gs="git status"
     alias ga="git add"
