@@ -30,6 +30,7 @@ cfg.window_padding = {
     bottom = '0cell',
 }
 cfg.window_background_opacity = 0.97
+cfg.window_decorations = 'RESIZE'
 
 -- Font
 cfg.font = wez.font_with_fallback {
@@ -37,20 +38,20 @@ cfg.font = wez.font_with_fallback {
     'Hasklug Nerd Font',
     'SF Mono',
     'SF Pro',
-    'JetBrains Mono',
 }
 
 -- Theme
 cfg.color_scheme = 'rose-pine-moon'
 
 -- Shell
+local prefix = '/usr/local'
 
-local handle = io.popen 'which fish'
-local fish_path = handle:read '*a'
-fish_path = fish_path:gsub('[\n\r]', '')
+if isdir('/opt/homebrew') then
+    prefix = '/opt/homebrew'
+end
 
 -- Shell config
-cfg.default_prog = { fish_path, '-l' }
+cfg.default_prog = { prefix .. '/bin/fish', '-l' }
 
 -- Autoreload
 cfg.automatically_reload_config = true
