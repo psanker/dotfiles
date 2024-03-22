@@ -76,6 +76,7 @@
       };
 
       programs = {
+        abook.enable = true;
         aerc = {
           enable = true;
 
@@ -235,6 +236,10 @@
               "text/html" = "${pkgs.w3m}/bin/w3m -T text/html";
               "application/pdf" = "${hmcfg.programs.sioyek.package}/sioyek";
               "image/*" = "${pkgs.feh}/bin/feh";
+            };
+
+            compose = {
+              "address-book-cmd" = "${pkgs.abook}/bin/abook --mutt-query \"%s\"";
             };
           };
 
