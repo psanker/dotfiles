@@ -89,6 +89,10 @@ local function configure_lsp(lsp, navic, cmp, cmp_lsp, lspkind)
         capabilities = capabilities
     })
 
+    lsp.nil_ls.setup({
+        capabilities = capabilities
+    })
+
     lsp.ocamllsp.setup({
         capabilities = capabilities
     })
