@@ -8,12 +8,12 @@
   terminal = pkgs.${vars.terminal};
 in {
   imports =
-    import ../modules/programs
-    ++ import ../modules/dewm
-    ++ import ../modules/services
-    ++ import ../modules/utilities
+    import ../../modules/programs
+    ++ import ../../modules/dewm
+    ++ import ../../modules/services
+    ++ import ../../modules/utilities
     ++ [
-      ../modules/secrets
+      ../../modules/secrets
     ];
 
   options = {
