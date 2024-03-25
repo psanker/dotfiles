@@ -38,6 +38,7 @@
           };
 
           rerere.enable = true;
+          rebase.updateRefs = true;
         };
       };
     };
