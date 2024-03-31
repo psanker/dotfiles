@@ -5,6 +5,7 @@
   ./kitty.nix
   ./media
   ./neovim
+  ./rofi
   ./sioyek.nix
   ./taskwarrior
   # ./wezterm.nix
