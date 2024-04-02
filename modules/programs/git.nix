@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   vars,
   lib,
@@ -8,16 +9,16 @@
     myopts.programs.git.enable = with lib;
       mkOption {
         type = types.bool;
-        default = false;
+        default = true;
         example = true;
         description = "Whether to enable the git module";
       };
   };
 
-  config = {
-    myopts.programs.git.enable = true;
-
-    home-manager.users.${vars.user} = {
+  config = let
+    gitEnabled = config.myopts.programs.git.enable;
+  in {
+    home-manager.users.${vars.user} = lib.mkIf gitEnabled {
       programs.git = {
         enable = true;
 
