@@ -228,7 +228,7 @@
             filters = {
               "text/plain" = "${pkgs.aerc}/libexec/aerc/filters/colorize";
               "text/html" = "${pkgs.aerc}/libexec/aerc/filters/html | ${pkgs.aerc}/libexec/aerc/filters/colorize";
-              "application/pdf" = "${hmcfg.programs.sioyek.package}/sioyek";
+              "application/pdf" = "${hmcfg.programs.sioyek.package}/bin/sioyek";
             };
 
             openers = {
