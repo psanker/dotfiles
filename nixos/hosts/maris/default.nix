@@ -10,6 +10,7 @@
   ];
 
   myopts.dewm.hyprland.enable = true;
+  myopts.services.music.enable = true;
 
   ## ALPHABETICAL ORDER STARTING NOW ##
 
@@ -114,6 +115,7 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+      jack.enable = true;
     };
 
     printing = {

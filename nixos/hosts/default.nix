@@ -44,6 +44,7 @@ in {
     modules = [
       nur.nixosModules.nur
       nixvim.nixosModules.nixvim
+      inputs.musnix.nixosModules.musnix
 
       home-manager.nixosModules.home-manager
       {

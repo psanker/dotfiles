@@ -45,6 +45,12 @@
     # without the need of crazy submodule structures
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # musnix for Linux music-making
+    musnix = {
+      url = "github:musnix/musnix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = {
@@ -58,6 +64,7 @@
     nur,
     flake-utils,
     sops-nix,
+    musnix,
     ...
   } @ inputs:
     (let

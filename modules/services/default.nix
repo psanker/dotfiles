@@ -1,3 +1,4 @@
 [
   ./email.nix
+  ./music.nix
 ]
