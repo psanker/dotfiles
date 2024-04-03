@@ -9,9 +9,8 @@ Just my dotfiles. Everything is managed with [GNU Stow](https://www.gnu.org/soft
 
 ## Installation
 
-Depending on platform, these are the installation instructions.
+`git clone` this repo and then run
 
-|  Platform | Install instructions |
-|:---------:|---------------------:|
-|     NixOS |    (Quick script TK) |
-|     macOS |   `./macos/setup.sh` |
+```sh
+./setup.sh
+```
