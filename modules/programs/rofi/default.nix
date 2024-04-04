@@ -32,11 +32,13 @@ in {
     };
   in
     lib.mkIf (usingLinux && rofiEnabled) {
+      home.packages = with pkgs; [
+        rofimoji
+      ];
       programs.rofi = {
         enable = true;
         package = pkgs.rofi-wayland;
         plugins = with pkgs; [
-          rofimoji
           rofi-calc
         ];
 
@@ -45,7 +47,7 @@ in {
           kb-cancel = "Escape,Control+bracketleft";
           kb-mode-next = "Alt+Right,Shift+Right,Control+Tab,Alt+l";
           kb-mode-previous = "Alt+Left,Shift+Left,Control+ISO_Left_Tab,Alt+h";
-          modi = "drun,run,emoji:${pkgs.rofimoji}/bin/rofimoji";
+          modi = "drun,run,emoji:${pkgs.rofimoji}/bin/rofimoji,calc";
           monitor = "-4";
         };
 
