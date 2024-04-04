@@ -37,6 +37,12 @@
 
             passwordCommand = "${hmcfg.programs.password-store.package}/bin/pass ${email}";
 
+            signature.text = ''
+              ---
+              Patrick Anker | Data Manager
+              NYU Global TIES for Children <https://globaltiesforchildren.nyu.edu/>
+            '';
+
             imap = {
               host = "imap.gmail.com";
               port = 993;
@@ -228,13 +234,12 @@
             filters = {
               "text/plain" = "${pkgs.aerc}/libexec/aerc/filters/colorize";
               "text/html" = "${pkgs.aerc}/libexec/aerc/filters/html | ${pkgs.aerc}/libexec/aerc/filters/colorize";
-              "application/pdf" = "${hmcfg.programs.sioyek.package}/bin/sioyek";
             };
 
             openers = {
               "text/plain" = "${config.programs.nixvim.package}/bin/nvim";
               "text/html" = "${pkgs.w3m}/bin/w3m -T text/html";
-              "application/pdf" = "${hmcfg.programs.sioyek.package}/sioyek";
+              "application/pdf" = "${hmcfg.programs.sioyek.package}/bin/sioyek";
               "image/*" = "${pkgs.feh}/bin/feh";
             };
 
