@@ -182,9 +182,6 @@
       hyprpaper
       libreoffice-qt
       mako
-      rofi-wayland
-      rofi-calc
-      rofimoji
       rustup
     ];
     shell = pkgs.fish;
