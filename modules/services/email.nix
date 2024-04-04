@@ -20,8 +20,17 @@
       if hmcfg.xdg.enable
       then hmcfg.xdg.dataHome
       else "${hmcfg.home.homeDirectory}/.local/share";
+    nyuSignatureFile = "${xdgConfigHome}/aerc/signatures/nyu";
   in {
     home-manager.users.${vars.user} = {
+      home.file.${nyuSignatureFile} = {
+        text = ''
+          -- 
+          Patrick Anker | Data Manager
+          NYU Global TIES for Children <https://globaltiesforchildren.nyu.edu/>
+        '';
+      };
+
       accounts.email = {
         maildirBasePath = "${xdgDataHome}/mail";
         accounts = {
@@ -36,12 +45,6 @@
             aliases = ["psanker@nyu.edu"];
 
             passwordCommand = "${hmcfg.programs.password-store.package}/bin/pass ${email}";
-
-            signature.text = ''
-              ---
-              Patrick Anker | Data Manager
-              NYU Global TIES for Children <https://globaltiesforchildren.nyu.edu/>
-            '';
 
             imap = {
               host = "imap.gmail.com";
@@ -68,6 +71,7 @@
                 default = "INBOX";
                 archive = "Archive";
                 from = "Patrick Anker <psanker@nyu.edu>";
+                signature-file = nyuSignatureFile;
               };
               extraConfig = {
                 ui = {
