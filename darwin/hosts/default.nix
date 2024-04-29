@@ -6,10 +6,7 @@
   darwin,
   nixvim,
   ...
-}: let
-  lib = nixpkgs.lib;
-in
-{
+}: {
   # Work computer
   STSFVFGW093Q6LR = let
     system = "aarch64-darwin";
@@ -23,6 +20,20 @@ in
       config.allowUnfree = true;
     };
     vars = import ./work/vars.nix;
-  in {
+  in darwin.lib.darwinSystem {
+    inherit system;
+    specialArgs = {
+      inherit inputs system pkgs unstable vars;
+    };
+    modules = [
+      nixvim.nixDarwinModules.nixvim
+      home-manager.darwinModules.home-manager {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+      }
+
+      ./configuration.nix
+      ./work
+    ];
   };
 }
