@@ -36,6 +36,7 @@
     systemPackages = with pkgs; [
       light # Backlight controls w/o messing with the sys vars
       pamixer # Messing with sound
+      unstable.protonvpn-gui
     ];
   };
 
