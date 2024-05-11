@@ -80,6 +80,7 @@ if status is-interactive
     alias tt="task +PENDING and \(+TODAY or +OVERDUE or \(scheduled.before:tomorrow and due.after:today\)\)"
     alias tdt="task completed end:today"
     alias ta="task add"
+    alias tA="task $1 annotate"
     alias tm="task $1 modify"
     alias tW="task +WEEK or scheduled.before:saturday"
     alias tw="taskwarrior-tui"
