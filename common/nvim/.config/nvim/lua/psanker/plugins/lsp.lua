@@ -81,6 +81,10 @@ local function configure_lsp(lsp, navic, cmp, cmp_lsp, lspkind)
         }
     })
 
+    lsp.basedpyright.setup({
+        capabilities = capabilities,
+    })
+
     lsp.r_language_server.setup({
         capabilities = capabilities
     })
@@ -178,5 +182,18 @@ return {
     {
         'mfussenegger/nvim-dap',
         event = { 'BufReadPre', 'BufNewFile' },
+    },
+
+    -- Thank you based stevearc
+    {
+        'stevearc/conform.nvim',
+        dependencies = {
+            'neovim/nvim-lspconfig',
+        },
+        opts = {
+            formatters_by_ft = {
+                python = { 'black' },
+            },
+        },
     },
 }
