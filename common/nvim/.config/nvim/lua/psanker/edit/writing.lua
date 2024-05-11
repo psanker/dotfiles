@@ -25,14 +25,14 @@ M.setup = function()
                 buf_nnoremap('k', 'gk')
                 buf_vnoremap('k', 'gk')
 
-                pcall(function() vim.cmd[[ TogglePencil ]] end)
+                pcall(function() vim.cmd[[ SoftPencil ]] end)
             else
                 buf_nnoremap('j', 'j')
                 buf_vnoremap('j', 'j')
                 buf_nnoremap('k', 'k')
                 buf_vnoremap('k', 'k')
 
-                pcall(function() vim.cmd[[ TogglePencil ]] end)
+                pcall(function() vim.cmd[[ NoPencil ]] end)
             end
         end
     end
