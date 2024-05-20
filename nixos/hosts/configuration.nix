@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  unstable,
   vars,
   lib,
   ...
@@ -77,7 +78,7 @@ in {
         playerctl
         polkit_gnome
         rsync
-        signal-desktop
+        unstable.signal-desktop
         sops
         tmux
         unzip
