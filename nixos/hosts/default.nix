@@ -15,7 +15,6 @@
   home-manager,
   nur,
   nixvim,
-  hyprland,
   ...
 }: let
   system = "x86_64-linux"; # System Architecture
@@ -39,7 +38,7 @@ in {
     inherit system;
     specialArgs = {
       # Pass Flake Variable
-      inherit inputs system pkgs unstable hyprland vars;
+      inherit inputs system pkgs unstable vars;
     };
     modules = [
       nur.nixosModules.nur

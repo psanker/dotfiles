@@ -77,11 +77,6 @@
   programs = {
     dconf.enable = true;
     fish.enable = true;
-    hyprland = {
-      enable = true;
-      package = hyprland.packages.${unstable.system}.hyprland;
-      xwayland.enable = true;
-    };
     light.enable = true;
     gnupg.agent = {
       enable = true;

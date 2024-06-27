@@ -29,8 +29,7 @@
     };
 
     hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     };
 
     # Apple's fonts
@@ -60,7 +59,6 @@
     nixvim,
     nixvim-unstable,
     home-manager,
-    hyprland,
     nur,
     flake-utils,
     sops-nix,
@@ -76,7 +74,7 @@
       nixosConfigurations = import ./nixos/hosts {
         inherit (nixpkgs) lib;
         inherit inputs nixpkgs nixpkgs-unstable;
-        inherit nixvim-unstable home-manager nur nixvim hyprland vars;
+        inherit nixvim-unstable home-manager nur nixvim vars;
       };
 
       postBuildBundle = import ./nixos/scripts/post-build.nix {

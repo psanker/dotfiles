@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: {
   options = {
@@ -15,6 +16,12 @@
   };
 
   config = lib.mkIf config.myopts.dewm.hyprland.enable {
+    # So we don't have to rebuild Hyprland each time
+    nix.settings = {
+      substituters = ["https://hyprland.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    };
+
     environment = let
       exec = "exec dbus-launch Hyprland";
     in {
@@ -37,6 +44,12 @@
         wlr-randr # Monitor Settings
         xwayland # X session
       ];
+    };
+
+    programs.hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      xwayland.enable = true;
     };
 
     xdg.portal = {
