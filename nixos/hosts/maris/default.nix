@@ -38,6 +38,7 @@
       pamixer # Messing with sound
       unstable.protonvpn-gui
       steam
+      gimp
     ];
   };
 

@@ -25,7 +25,7 @@
     home-manager.users.${vars.user} = {
       home.file.${nyuSignatureFile} = {
         text = ''
-          -- 
+          --
           Patrick Anker | Data Manager
           NYU Global TIES for Children <https://globaltiesforchildren.nyu.edu/>
         '';
