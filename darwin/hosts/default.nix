@@ -20,20 +20,25 @@
       config.allowUnfree = true;
     };
     vars = import ./work/vars.nix;
-  in darwin.lib.darwinSystem {
-    inherit system;
-    specialArgs = {
-      inherit inputs system pkgs unstable vars;
-    };
-    modules = [
-      nixvim.nixDarwinModules.nixvim
-      home-manager.darwinModules.home-manager {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-      }
+  in
+    darwin.lib.darwinSystem {
+      inherit system;
+      specialArgs = {
+        inherit inputs system pkgs unstable vars;
+      };
+      modules = [
+        nixvim.nixDarwinModules.nixvim
+        home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.sharedModules = [
+            inputs.sops-nix.homeManagerModules.sops
+          ];
+        }
 
-      ./configuration.nix
-      ./work
-    ];
-  };
+        ./configuration.nix
+        ./work
+      ];
+    };
 }

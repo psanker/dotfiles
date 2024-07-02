@@ -21,16 +21,15 @@ in {
     # FIXME: use `pkgs.stdenv.isDarwin` instead
     myopts.platform.linux = with lib;
       mkOption {
-        type = types.bool;
-        default = false;
-        example = true;
-        description = mdDoc "Whether we're on Linux or not";
+        type = types.enum ["nixos" "macos"];
+        example = "nixos";
+        description = "Which platform we're currently using";
       };
   };
 
   config = {
     system.stateVersion = "23.11"; # DO NOT TOUCH
-    myopts.platform.linux = true;
+    myopts.platform = "nixos";
     myopts.rebuild.target = "nixos";
 
     # Nix Stuff

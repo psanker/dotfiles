@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   vars,
   ...
 }: {
@@ -17,16 +16,29 @@
 
   config = let
     hmcfg = config.home-manager.users.${vars.user};
-    usingLinux = config.myopts.platform.linux;
+    usingLinux = config.myopts.platform == "nixos";
+    usingMacos = config.myopts.platform == "macos";
     xdgConfigHome =
       if hmcfg.xdg.enable
       then hmcfg.xdg.configHome
       else "${hmcfg.home.homeDirectory}/.config";
     sopsSecrets = config.sops.secrets;
+    gpgImporterScript = ''
+      cat ${sopsSecrets."gpg/keyring".path} | base64 -d | ${hmcfg.programs.gpg.package}/bin/gpg --import
+    '';
+    gpgImporterScriptMacosLocation = "${hmcfg.home.homeDirectory}/.local/bin/gpgimporter.sh";
   in {
     myopts.programs.gpg.enable = true;
 
     home-manager.users.${vars.user} = {
+      home.file.${gpgImporterScriptMacosLocation} = {
+        text = ''
+          #!/bin/sh
+          ${gpgImporterScript}
+        '';
+        executable = true;
+      };
+
       programs.password-store.enable = true;
 
       programs.gpg = {
@@ -38,12 +50,21 @@
         key = "BF9AB14D3B994BB1";
         signByDefault = true;
       };
+
+      launchd = lib.mkIf usingMacos {
+        agents."com.patrickanker.nix.gpgimporter" = {
+          enable = true;
+          config = {
+            LaunchOnlyOnce = true;
+            RunAtLoad = true;
+            Program = gpgImporterScriptMacosLocation; # Lord, this is starting to look like Obj-C
+          };
+        };
+      };
     };
 
     systemd.user.services.gpgimporter = lib.mkIf usingLinux {
-      script = ''
-        cat ${sopsSecrets."gpg/keyring".path} | base64 -d | ${hmcfg.programs.gpg.package}/bin/gpg --import
-      '';
+      script = gpgImporterScript;
       serviceConfig = {
         Type = "oneshot";
       };

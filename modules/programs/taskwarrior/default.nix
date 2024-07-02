@@ -16,7 +16,7 @@
   };
   config = let
     hmcfg = config.home-manager.users.${vars.user};
-    usingLinux = config.myopts.platform.linux;
+    usingLinux = config.myopts.platform == "nixos";
     xdgDataHome =
       if hmcfg.xdg.enable
       then hmcfg.xdg.dataHome

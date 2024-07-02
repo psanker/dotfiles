@@ -8,6 +8,12 @@
     # Unstable for some things (like eza)
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # macOS
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Home manager primarily for user programs
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
@@ -56,6 +62,7 @@
     self,
     nixpkgs,
     nixpkgs-unstable,
+    darwin,
     nixvim,
     nixvim-unstable,
     home-manager,
@@ -77,6 +84,12 @@
         inherit nixvim-unstable home-manager nur nixvim vars;
       };
 
+      darwinConfigurations = import ./darwin/hosts {
+        inherit (nixpkgs) lib;
+        inherit inputs nixpkgs nixpkgs-unstable darwin;
+        inherit nixvim-unstable home-manager nixvim;
+      };
+
       postBuildBundle = import ./nixos/scripts/post-build.nix {
         inherit self nixpkgs flake-utils;
       };
@@ -85,6 +98,7 @@
       inherit (postBuildBundle.bundle) apps;
 
       inherit nixosConfigurations;
+      inherit darwinConfigurations;
     })
     // (flake-utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {inherit system;};

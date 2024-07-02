@@ -1,21 +1,15 @@
 {
   config,
   pkgs,
-  lib,
   vars,
   ...
 }: {
   config = let
     hmcfg = config.home-manager.users.${vars.user};
-    usingLinux = config.myopts.platform.linux;
     xdgConfigHome =
       if hmcfg.xdg.enable
       then hmcfg.xdg.configHome
       else "${hmcfg.home.homeDirectory}/.config";
-    xdgCacheHome =
-      if hmcfg.xdg.enable
-      then hmcfg.xdg.cacheHome
-      else "${hmcfg.home.homeDirectory}/.cache";
     xdgDataHome =
       if hmcfg.xdg.enable
       then hmcfg.xdg.dataHome
