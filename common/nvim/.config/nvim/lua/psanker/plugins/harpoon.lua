@@ -10,7 +10,7 @@ return {
         end,
         keys = {
             { '<Leader>hh', '<cmd>lua require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())<CR>', desc = '[h]arpoon: Toggle [h]arpoon menu' },
-            { '<Leader>ha', '<cmd>lua require("harpoon"):list():append()<CR>', desc = '[h]arpoon: [a]dd file' },
+            { '<Leader>ha', '<cmd>lua require("harpoon"):list():add()<CR>', desc = '[h]arpoon: [a]dd file' },
 
             { '<Leader>hq', '<cmd>lua require("harpoon"):list():select(4)<CR>', desc = '[h]arpoon: go to 4th file (q)' },
             { '<Leader>hw', '<cmd>lua require("harpoon"):list():select(3)<CR>', desc = '[h]arpoon: go to 3rd file (w)' },
