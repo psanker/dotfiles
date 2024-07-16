@@ -75,6 +75,7 @@ in {
         nano
         neofetch # For the lols
         networkmanagerapplet
+        pavucontrol
         playerctl
         polkit_gnome
         rsync
