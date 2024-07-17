@@ -3,7 +3,7 @@ local bind_lsp_keymaps = require("psanker.keymap").bind_lsp_keymaps
 local function configure_lsp(lsp, navic, cmp, cmp_lsp, lspkind)
     require('mason').setup({})
     require('mason-lspconfig').setup({
-        ensure_installed = { "lua_ls", "rust_analyzer", "r_language_server", "gopls" },
+        ensure_installed = { "lua_ls", "rust_analyzer", "gopls" },
     })
 
     local capabilities = cmp_lsp.default_capabilities()
@@ -27,7 +27,6 @@ local function configure_lsp(lsp, navic, cmp, cmp_lsp, lspkind)
             { name = 'nvim_lsp',    keyword_length = 3 },
             { name = 'buffer',      keyword_length = 3 },
             { name = 'luasnip',     keyword_length = 2 },
-            { name = 'cmp_zotcite', keyword_length = 2 },
         }),
         formatting = {
             format = lspkind.cmp_format({
@@ -112,6 +111,10 @@ local function configure_lsp(lsp, navic, cmp, cmp_lsp, lspkind)
         callback = function(ev)
             local bufnr = ev.buf
             local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+            if (client == nil) then
+                return
+            end
 
             bind_lsp_keymaps(client, bufnr)
             if client.server_capabilities.documentSymbolProvider then

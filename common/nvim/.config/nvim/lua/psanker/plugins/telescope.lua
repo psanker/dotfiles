@@ -1,7 +1,7 @@
 return {
     -- Telescope
     {
-        'nvim-telescope/telescope.nvim',
+        'nvim-tele/telescope.nvim',
         config = function()
             require('telescope').setup({
                 defaults = {

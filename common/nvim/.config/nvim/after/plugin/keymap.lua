@@ -47,11 +47,8 @@ vnoremap('K', ":m '<-2<CR>gv=gv")
 
 -- 1. View different windows
 nnoremap('<Leader>vo', '<cmd>AerialToggle<CR>', { desc = '[v]iew [o]utline' })
-nnoremap('<Leader>vt', '<cmd>TodoTrouble<CR>', { desc = '[v]iew [t]odos' })
-nnoremap('<Leader>vT', '<cmd>TodoTelescope<CR>', { desc = '[v]iew [T]odos in Telescope' })
 
 -- 2. Quickfix commands
-nnoremap('<Leader>vx', '<cmd>TroubleToggle<CR>', { desc = '[v]iew quickfi[x]' })
 nnoremap(']x', '<cmd>cnext<CR>', { desc = 'Go to next quickfi[x]' })
 nnoremap('[x', '<cmd>cprevious<CR>', { desc = 'Go to previous quickfi[x]' })
 
