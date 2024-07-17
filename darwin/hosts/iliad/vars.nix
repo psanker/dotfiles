@@ -1,6 +1,6 @@
 rec {
   user = "patrickanker";
-  hostName = "STSFVFGW093Q6LR";
+  hostName = "iliad";
   shell = "zsh";
   terminal = "wezterm";
   homeDir = "/Users/${user}";

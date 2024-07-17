@@ -7,9 +7,9 @@
   nixvim,
   ...
 }: {
-  # Work computer
-  STSFVFGW093Q6LR = let
-    system = "aarch64-darwin";
+  # Desk computer
+  iliad = let
+    system = "x86_64-darwin";
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
@@ -19,7 +19,7 @@
       inherit system;
       config.allowUnfree = true;
     };
-    vars = import ./work/vars.nix;
+    vars = import ./iliad/vars.nix;
   in
     darwin.lib.darwinSystem {
       inherit system;
@@ -38,7 +38,7 @@
         }
 
         ./configuration.nix
-        ./work
+        ./iliad
       ];
     };
 }
