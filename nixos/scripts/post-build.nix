@@ -4,7 +4,7 @@
   flake-utils,
   ...
 }: let
-  binName = "nixos-post-build";
+  binName = "linux-post-build";
 in {
   bundle = flake-utils.lib.eachDefaultSystem (system: let
     pkgs = import nixpkgs {inherit system;};

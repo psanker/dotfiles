@@ -6,7 +6,7 @@
   config = {
     sops = let
       userCfg = config.users.users.${vars.user};
-      usingMacos = config.myopts.platform.macos;
+      usingMacos = config.myopts.platform == "darwin";
       homePrefix =
         if usingMacos
         then "/Users"

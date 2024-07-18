@@ -92,6 +92,7 @@
 
       postBuildBundle = import ./nixos/scripts/post-build.nix {
         inherit self nixpkgs flake-utils;
+        inherit (nixpkgs) lib;
       };
     in {
       inherit (postBuildBundle.bundle) packages;

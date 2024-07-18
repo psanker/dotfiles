@@ -28,8 +28,7 @@
       };
       modules = [
         nixvim.nixDarwinModules.nixvim
-        home-manager.darwinModules.home-manager
-        {
+        home-manager.darwinModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.sharedModules = [
@@ -38,7 +37,7 @@
         }
 
         ./configuration.nix
-        ./iliad
+        # ./iliad
       ];
     };
 }

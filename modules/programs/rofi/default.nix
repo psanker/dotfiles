@@ -6,7 +6,7 @@
   system,
   ...
 }: let
-  usingLinux = config.myopts.platform == "nixos";
+  usingLinux = config.myopts.platform == "linux";
   rofiEnabled = config.myopts.programs.rofi.enable;
 in {
   options = {

@@ -10,7 +10,7 @@
   };
 
   config = let
-    usingLinux = config.myopts.platform == "nixos";
+    usingLinux = config.myopts.platform == "linux";
   in
     lib.mkIf (usingLinux && config.myopts.services.music.enable) {
       musnix.enable = true;

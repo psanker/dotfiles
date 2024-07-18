@@ -16,7 +16,7 @@
 
   config = let
     hmcfg = config.home-manager.users.${vars.user};
-    usingLinux = config.myopts.platform == "nixos";
+    usingLinux = config.myopts.platform == "linux";
     usingMacos = config.myopts.platform == "macos";
     xdgConfigHome =
       if hmcfg.xdg.enable

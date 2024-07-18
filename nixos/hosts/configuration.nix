@@ -1,5 +1,6 @@
 {
   inputs,
+  system,
   pkgs,
   unstable,
   vars,
@@ -7,6 +8,11 @@
   ...
 }: let
   terminal = pkgs.${vars.terminal};
+  platformStr = sys: let
+    sys_split = builtins.split "-" sys;
+    sys_rev = lib.lists.reverseList sys_split;
+  in
+    builtins.head sys_rev;
 in {
   imports =
     import ../../modules/programs
@@ -21,7 +27,7 @@ in {
     # FIXME: use `pkgs.stdenv.isDarwin` instead
     myopts.platform.linux = with lib;
       mkOption {
-        type = types.enum ["nixos" "macos"];
+        type = types.str;
         example = "nixos";
         description = "Which platform we're currently using";
       };
@@ -29,8 +35,8 @@ in {
 
   config = {
     system.stateVersion = "23.11"; # DO NOT TOUCH
-    myopts.platform = "nixos";
-    myopts.rebuild.target = "nixos";
+    myopts.platform = platformStr system;
+    myopts.rebuild.target = platformStr system;
 
     # Nix Stuff
     nix = {

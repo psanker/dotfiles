@@ -7,8 +7,8 @@
   options = {
     myopts.rebuild.target = with lib;
       mkOption {
-        type = types.enum ["nixos" "macos"];
-        example = "nixos";
+        type = types.str;
+        example = "linux";
         description = "Which target to select for the rebuild command";
       };
   };
@@ -16,7 +16,7 @@
   config = let
     rebuildTarget = "${config.myopts.rebuild.target}-post-build";
     rebuildCommand =
-      if rebuildTarget == "nixos"
+      if rebuildTarget == "linux"
       then "sudo nixos-rebuild"
       else "darwin-rebuild";
   in {

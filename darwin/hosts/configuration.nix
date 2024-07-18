@@ -1,5 +1,6 @@
 {
   inputs,
+  system,
   config,
   pkgs,
   vars,
@@ -7,6 +8,11 @@
   ...
 }: let
   terminal = pkgs.${vars.terminal};
+  platformStr = sys: let
+    sys_split = builtins.split "-" sys;
+    sys_rev = lib.lists.reverseList sys_split;
+  in
+    builtins.head sys_rev;
 in {
   imports =
     import ../../modules/programs
@@ -16,16 +22,17 @@ in {
     ];
 
   options = {
-    myopts.platform = with lib; mkOption {
-      type = types.enum ["nixos" "macos"];
-      example = "macos";
-      description = "Which platform we're currently using";
-    };
+    myopts.platform = with lib;
+      mkOption {
+        type = types.str;
+        example = "macos";
+        description = "Which platform we're currently using";
+      };
   };
 
   config = {
     system.stateVersion = "23.11";
-    myopts.platform = "macos";
+    myopts.platform = platformStr system;
     myopts.rebuild.target = "darwin";
 
     home-manager.users.${vars.user} = {
