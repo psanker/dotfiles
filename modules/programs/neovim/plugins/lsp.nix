@@ -4,7 +4,7 @@
     servers = {
       gopls.enable = true;
       lua-ls.enable = true;
-      nil_ls.enable = true;
+      nil-ls.enable = true;
       rust-analyzer = {
         enable = true;
         installCargo = true;
@@ -29,22 +29,24 @@
   luasnip.enable = true;
   cmp_luasnip.enable = true;
   cmp-nvim-lsp.enable = true;
-  nvim-cmp = {
+  cmp = {
     enable = true;
-    snippet.expand = "luasnip";
-    mapping = {
-      "<C-p>" = "cmp.mapping.select_prev_item()";
-      "<C-n>" = "cmp.mapping.select_next_item()";
-      "<Tab>" = "cmp.mapping.select_next_item()";
-      "<C-Space>" = "cmp.mapping.complete()";
-      "<CR>" = "cmp.mapping.confirm()";
+    settings = {
+      snippet.expand = "luasnip";
+      mapping = {
+        "<C-p>" = "cmp.mapping.select_prev_item()";
+        "<C-n>" = "cmp.mapping.select_next_item()";
+        "<Tab>" = "cmp.mapping.select_next_item()";
+        "<C-Space>" = "cmp.mapping.complete()";
+        "<CR>" = "cmp.mapping.confirm()";
+      };
+      sources = [
+        {name = "nvim_lsp";}
+        {name = "luasnip";}
+        {name = "path";}
+        {name = "buffer";}
+        {name = "nvim_lua";}
+      ];
     };
-    sources = [
-      {name = "nvim_lsp";}
-      {name = "luasnip";}
-      {name = "path";}
-      {name = "buffer";}
-      {name = "nvim_lua";}
-    ];
   };
 }

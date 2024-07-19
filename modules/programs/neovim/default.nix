@@ -23,7 +23,7 @@
           syntax = true;
           mapleader = " ";
         };
-        options = import ./options.nix {
+        opts = import ./options.nix {
           inherit vars;
         };
         keymaps = import ./keymaps {inherit qjournal qnote;};

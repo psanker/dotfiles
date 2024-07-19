@@ -69,7 +69,6 @@
     services.mako.enable = true;
   };
 
-
   programs = {
     dconf.enable = true;
     fish.enable = true;
@@ -119,13 +118,15 @@
     xserver = {
       enable = true;
 
-      layout = "us";
-      xkbVariant = "";
-
-      displayManager.sddm = {
-        enable = true;
-        wayland.enable = true;
+      xkb = {
+        variant = "";
+        layout = "us";
       };
+    };
+
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
     };
   };
 
@@ -172,7 +173,7 @@
     extraGroups = ["networkmanager" "wheel" "audio" "video"];
     packages = with pkgs; [
       cargo
-      eww-wayland
+      eww
       gammastep
       hyprpaper
       libreoffice-qt
