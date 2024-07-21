@@ -17,7 +17,7 @@
     # NixOS User Repository
     nur.url = "github:nix-community/NUR";
 
-    # Neovim but configured with Nix
+    # Neovim and it's the same but it's configured with Nix so it's not
     nixvim = {
       url = "github:nix-community/nixvim/nixos-24.05";
       inputs.nixpkgs.follows = "nixpkgs";

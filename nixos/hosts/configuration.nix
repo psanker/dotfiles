@@ -18,6 +18,7 @@ in {
     ];
 
   options = {
+    # FIXME: use `pkgs.stdenv.isDarwin` instead
     myopts.platform.linux = with lib;
       mkOption {
         type = types.bool;
