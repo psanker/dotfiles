@@ -41,6 +41,21 @@
           in ''
             set cleaner ${cleaner}/bin/clean.sh
             set previewer ${previewer}/bin/pv.sh
+
+            cmd trash %set -f; ${pkgs.trashy}/bin/trash $fx 
+
+            map n
+
+            map <esc> clear
+            map D trash
+            map nd :push %mkdir<space>
+            map nf :push %touch<space>
+
+            map gd cd ~/Downloads
+            map gD cd ~/Documents
+            map gp cd ~/personal
+            map gP cd ~/Pictures
+            map gw cd ~/workspace
           '';
         };
         ripgrep.enable = true;
@@ -50,6 +65,7 @@
         unstable.discord
         unstable.eza
         stow
+        trashy
         zk
       ];
     };
