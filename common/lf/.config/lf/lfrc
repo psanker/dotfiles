@@ -1,0 +1,38 @@
+# Basic settings
+set hidden true
+set ignorecase true
+set icons true
+
+cmd trash &{{
+    if [ -z "$fs" ]; then
+        trash "$f"
+    else
+        IFS="$(printf '\n\t')"; trash $fs
+    fi
+}}
+
+cmd q quit
+
+# Unbind defaults that are unneeded
+map n
+map C
+
+map D trash
+map <enter> open
+
+# Make executable or not
+map x $chmod +x "$f"
+map X $chmod -x "$f"
+
+map <esc> clear
+
+map nd :push %mkdir<space>
+map nf :push %touch<space>
+
+map gw cd ~/workspace
+map gd cd ~/Downloads
+map gD cd ~/Documents
+map gp cd ~/personal/pkm
+map gP cd ~/Pictures
+
+map O &open "$f"
