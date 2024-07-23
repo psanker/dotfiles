@@ -5,10 +5,7 @@
   inputs,
   system,
   ...
-}: let
-  usingLinux = config.myopts.platform == "linux";
-  rofiEnabled = config.myopts.programs.rofi.enable;
-in {
+}: {
   options = {
     myopts.programs.rofi.enable = with lib;
       mkOption {
@@ -19,7 +16,8 @@ in {
       };
   };
 
-  config.home-manager.users.${vars.user} = let
+  config = let
+    rofiEnabled = config.myopts.programs.rofi.enable;
     pkgs = import inputs.nixpkgs {
       inherit system;
       overlays = [
@@ -31,7 +29,7 @@ in {
       ];
     };
   in
-    lib.mkIf (usingLinux && rofiEnabled) {
+    lib.mkIf (!pkgs.stdenv.isDarwin && rofiEnabled) {
       home.packages = with pkgs; [
         rofimoji
       ];

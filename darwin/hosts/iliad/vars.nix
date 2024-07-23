@@ -1,4 +1,5 @@
 rec {
+  system = "x86_64-darwin";
   user = "patrickanker";
   hostName = "iliad";
   shell = "zsh";

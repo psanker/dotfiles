@@ -9,7 +9,9 @@
 }: {
   # Desk computer
   iliad = let
-    system = "x86_64-darwin";
+    vars = import ./iliad/vars.nix;
+  in let
+    inherit (vars) system;
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
@@ -19,7 +21,6 @@
       inherit system;
       config.allowUnfree = true;
     };
-    vars = import ./iliad/vars.nix;
   in
     darwin.lib.darwinSystem {
       inherit system;
@@ -28,7 +29,8 @@
       };
       modules = [
         nixvim.nixDarwinModules.nixvim
-        home-manager.darwinModules.home-manager {
+        home-manager.darwinModules.home-manager
+        {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.sharedModules = [

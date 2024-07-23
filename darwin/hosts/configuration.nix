@@ -36,6 +36,10 @@ in {
     myopts.rebuild.target = "darwin";
 
     home-manager.users.${vars.user} = {
+      home = {
+        stateVersion = "23.11";
+      };
+
       launchd = {
         enable = true;
       };

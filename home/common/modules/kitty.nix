@@ -1,9 +1,14 @@
 {
-  vars,
+  config,
+  lib,
   pkgs,
   ...
 }: {
-  config.home-manager.users.${vars.user} = {
+  options = {
+    myopts.programs.kitty.enable = lib.mkEnableOption "Enable kitty module";
+  };
+
+  config = lib.mkIf config.myopts.programs.kitty.enable {
     programs.kitty = {
       enable = true;
       font = {

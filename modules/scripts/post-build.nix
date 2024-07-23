@@ -26,16 +26,15 @@
         fi
       fi
     '';
-    scheduledTasks = if (platformStr system) == "linux" then
-    ''
-      systemctl --user start taskrcwriter.service
-      systemctl --user start gpgimporter.service
-    ''
-    else
-    ''
+    scheduledTasks =
+      if (platformStr system) == "linux"
+      then ''
+        systemctl --user start taskrcwriter.service
+        systemctl --user start gpgimporter.service
+      ''
+      else ''
 
-    '';
-
+      '';
   in {
     packages.${binName} = pkgs.writeScriptBin binName ''
       ${scheduledTasks}

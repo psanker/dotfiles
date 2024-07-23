@@ -3,13 +3,19 @@
   lib,
   pkgs,
   vars,
+  inputs,
   ...
 }: {
+  imports = [ inputs.nixvim.homeManagerModules.nixvim ];
+
+  options = {
+    myopts.programs.nixvim.enable = lib.mkEnableOptions "Enable Nixvim module";
+  };
+
   config = let
-    hmcfg = config.home-manager.users.${vars.user};
     qjournal = ".local/bin/quick-journal.sh";
     qnote = ".local/bin/quick-note.sh";
-  in {
+  in lib.mkIf config.myopts.programs.nixvim.enable {
     programs.nixvim =
       {
         enable = true;
@@ -23,7 +29,7 @@
           syntax = true;
           mapleader = " ";
         };
-        opts = import ./options.nix {
+        opts = import ./opts.nix {
           inherit vars;
         };
         keymaps = import ./keymaps {inherit qjournal qnote;};
@@ -39,27 +45,25 @@
       }
       // import ./plugins {inherit pkgs;};
 
-    home-manager.users.${vars.user} = {
-      home.file = {
-        ${qjournal} = {
-          text = ''
-            #!/usr/bin/env bash
-            nvim -c 'ZkNew {dir = "journal", group = "journal"}'
-          '';
-          executable = true;
-        };
-        ${qnote} = {
-          text = ''
-            EDITOR=nvim
-            zk new --template=default.md notes
-          '';
-          executable = true;
-        };
+    home.file = {
+      ${qjournal} = {
+        text = ''
+          #!/usr/bin/env bash
+          nvim -c 'ZkNew {dir = "journal", group = "journal"}'
+        '';
+        executable = true;
       };
-      xdg.mimeApps.defaultApplications = lib.mkIf hmcfg.xdg.mimeApps.enable {
-        "text/plain" = "nvim.desktop";
-        "text/html" = "nvim.desktop";
+      ${qnote} = {
+        text = ''
+          EDITOR=nvim
+          zk new --template=default.md notes
+        '';
+        executable = true;
       };
+    };
+    xdg.mimeApps.defaultApplications = lib.mkIf config.xdg.mimeApps.enable {
+      "text/plain" = "nvim.desktop";
+      "text/html" = "nvim.desktop";
     };
   };
 }
