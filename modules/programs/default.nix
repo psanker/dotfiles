@@ -2,6 +2,7 @@
   ./core.nix
   ./git.nix
   ./gnupg.nix
+  ./hledger.nix
   ./kitty.nix
   ./media
   ./neovim

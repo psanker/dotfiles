@@ -10,6 +10,7 @@
   ];
 
   myopts.dewm.hyprland.enable = true;
+  myopts.programs.hledger.enable = true;
   myopts.services.music.enable = true;
 
   ## ALPHABETICAL ORDER STARTING NOW ##

@@ -42,7 +42,7 @@
             set cleaner ${cleaner}/bin/clean.sh
             set previewer ${previewer}/bin/pv.sh
 
-            cmd trash %set -f; ${pkgs.trashy}/bin/trash $fx 
+            cmd trash %set -f; ${pkgs.trashy}/bin/trash $fx
 
             map n
 
