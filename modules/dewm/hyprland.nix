@@ -40,6 +40,7 @@
         socat # Needed for Hyprland IPC
         swayidle # Idle Daemon
         swaylock # Lock Screen
+        sway-audio-idle-inhibit # Prevent sleep when audio is playing
         wl-clipboard # Clipboard
         wlr-randr # Monitor Settings
         xwayland # X session
