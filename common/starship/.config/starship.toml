@@ -18,6 +18,7 @@ $python\
 $rust\
 $sudo\
 $cmd_duration\
+$nix_shell\
 $line_break\
 $jobs\
 $battery\
@@ -30,3 +31,7 @@ $character"""
 
 [rlang]
 disabled = true
+
+[nix_shell]
+impure_msg='nix develop'
+format='via [$symbol$state]($style) '

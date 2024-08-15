@@ -38,6 +38,10 @@ if status is-interactive
         jump shell fish | source
     end
 
+    if test -n "$(command -v direnv)"
+        direnv hook fish | source
+    end
+
     # Anti-footgun measures
     alias rm="rm -i"
     alias mv="mv -i"
