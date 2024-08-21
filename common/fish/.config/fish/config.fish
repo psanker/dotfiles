@@ -17,7 +17,6 @@ set --export VISUAL "$(which nvim)"
 set --export EDITOR "$VISUAL"
 set --export PAGER less
 set --export GPG_TTY (eval tty)
-set --export LEDGER_FILE "$HOME/personal/pkm/finance/current.journal"
 
 function fish_user_key_bindings
     # todoist
