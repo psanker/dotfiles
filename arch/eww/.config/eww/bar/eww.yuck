@@ -94,7 +94,7 @@
       :space-evenly false
       :visible "${task-count > 0 ? "true" : "false"}"
    (button :class "task-count"
-           :onclick "hyprctl dispatch -- exec kitty -1 taskwarrior-tui"
+           :onclick "hyprctl dispatch -- exec kitty -1 --hold task"
            "􀷾 ${task-count}")
    (label :class "task-description ${task-overdue == "true" ? "overdue" : ""}"
           :visible "${strlength(task-description) > 0 ? "true" : "false"}"
