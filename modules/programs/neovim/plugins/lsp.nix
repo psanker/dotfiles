@@ -5,11 +5,13 @@
       gopls.enable = true;
       lua-ls.enable = true;
       nil-ls.enable = true;
+      ocamllsp.enable = true;
       rust-analyzer = {
         enable = true;
         installCargo = true;
         installRustc = true;
       };
+      templ.enable = true;
     };
     postConfig = builtins.readFile ./lua/extra-ls-clients.lua;
   };
