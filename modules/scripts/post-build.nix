@@ -1,6 +1,6 @@
 {
   sync-pass = ''
-    if [ -n $(command -v pass) ]; then
+    if [ -n "$(command -v pass)" ]; then
       if [ ! -d "$HOME/.password-store" ]; then
         pushd $HOME &> /dev/null;
 

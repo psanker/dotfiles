@@ -14,6 +14,7 @@ in {
 
       systemctl --user start taskrcwriter.service
       systemctl --user start gpgimporter.service
+      systemctl --user start email-account-rewrite.service
 
       ${(import ../../modules/scripts/post-build.nix).sync-pass}
     '';

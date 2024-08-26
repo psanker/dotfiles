@@ -5,45 +5,70 @@
   vars,
   ...
 }: {
+  imports = let
+    platformFile =
+      if pkgs.stdenv.isDarwin
+      then ./darwin.nix
+      else ./nixos.nix;
+  in [
+    platformFile
+  ];
+
   config = let
     hmcfg = config.home-manager.users.${vars.user};
-    usingLinux = config.myopts.platform.linux;
+    xdgBinHome = "${hmcfg.home.homeDirectory}/.local/bin";
     xdgConfigHome =
       if hmcfg.xdg.enable
       then hmcfg.xdg.configHome
       else "${hmcfg.home.homeDirectory}/.config";
-    xdgCacheHome =
-      if hmcfg.xdg.enable
-      then hmcfg.xdg.cacheHome
-      else "${hmcfg.home.homeDirectory}/.cache";
     xdgDataHome =
       if hmcfg.xdg.enable
       then hmcfg.xdg.dataHome
       else "${hmcfg.home.homeDirectory}/.local/share";
     nyuSignatureFile = "${xdgConfigHome}/aerc/signatures/nyu";
+    personalSignatureFile = "${xdgConfigHome}/aerc/signatures/personal";
+    aercAccountsPath = "${xdgConfigHome}/aerc/accounts.conf";
+    emailPlaceholder = "%%PROTON@ADDRESS%%";
+    accountRewriterPath = "${xdgBinHome}/email-account-rewrite.sh";
+    sopsSecrets = config.sops.secrets;
   in {
     home-manager.users.${vars.user} = {
-      home.file.${nyuSignatureFile} = {
-        text = ''
+      home.file = {
+        ${nyuSignatureFile}.text = ''
           --
           Patrick Anker
         '';
+        ${personalSignatureFile}.text = ''
+          --
+          Patrick
+        '';
+        ${accountRewriterPath} = {
+          text = ''
+            #!/bin/sh
+            set -e
+
+            mv "${aercAccountsPath}" "${aercAccountsPath}.bak"
+
+            account="$(cat ${sopsSecrets."email/personal/address".path})"
+
+            cat "${aercAccountsPath}.bak" | sed "'s/${emailPlaceholder}/$account'" > "${aercAccountsPath}"
+          '';
+          executable = true;
+        };
       };
 
       accounts.email = {
         maildirBasePath = "${xdgDataHome}/mail";
         accounts = {
           nyu = let
-            email = "psa251@nyu.edu";
+            nyuEmail = "psa251@nyu.edu";
           in {
-            primary = true;
-
-            address = email;
-            userName = email;
+            address = nyuEmail;
+            userName = nyuEmail;
             realName = "Patrick Anker";
             aliases = ["psanker@nyu.edu"];
 
-            passwordCommand = "${hmcfg.programs.password-store.package}/bin/pass ${email}";
+            passwordCommand = "${hmcfg.programs.password-store.package}/bin/pass ${nyuEmail}";
 
             imap = {
               host = "imap.gmail.com";
@@ -78,8 +103,50 @@
                 };
               };
             };
+          };
 
-            notmuch.enable = false;
+          personal = {
+            primary = true;
+
+            address = emailPlaceholder;
+            userName = emailPlaceholder;
+            realName = "Patrick Anker";
+
+            passwordCommand = "${hmcfg.programs.password-store.package}/bin/pass ${emailPlaceholder}";
+
+            imap = {
+              host = "imap.gmail.com";
+              port = 993;
+              tls.enable = true;
+            };
+
+            smtp = {
+              host = "smtp.gmail.com";
+              port = 465;
+              tls.enable = true;
+            };
+
+            mbsync = {
+              enable = false;
+              extraConfig.account = {
+                AuthMechs = "LOGIN";
+              };
+            };
+
+            aerc = {
+              enable = true;
+              extraAccounts = {
+                default = "INBOX";
+                archive = "Archive";
+                from = "Patrick Anker <${emailPlaceholder}>";
+                signature-file = personalSignatureFile;
+              };
+              extraConfig = {
+                ui = {
+                  "reverse-thread-order" = true;
+                };
+              };
+            };
           };
         };
       };

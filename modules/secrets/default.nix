@@ -20,6 +20,10 @@
           owner = config.users.users.${vars.user}.name;
         };
 
+        "email/personal/address" = {
+          owner = config.users.users.${vars.user}.name;
+        };
+
         "taskwarrior/taskd/server" = {
           owner = config.users.users.${vars.user}.name;
         };
