@@ -35,6 +35,7 @@
       XDG_SESSION_DESKTOP = "Hyprland";
     };
     systemPackages = with pkgs; [
+      du-dust # Better du
       light # Backlight controls w/o messing with the sys vars
       pamixer # Messing with sound
       unstable.protonvpn-gui
