@@ -3,7 +3,7 @@ local bind_lsp_keymaps = require("psanker.keymap").bind_lsp_keymaps
 local function configure_lsp(lsp, navic, cmp, cmp_lsp, lspkind)
     require('mason').setup({})
     require('mason-lspconfig').setup({
-        ensure_installed = { "lua_ls", "rust_analyzer", "gopls" },
+        ensure_installed = { "lua_ls" },
     })
 
     local capabilities = cmp_lsp.default_capabilities()
