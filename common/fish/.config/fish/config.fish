@@ -1,17 +1,5 @@
 fish_vi_key_bindings
 
-fish_add_path /usr/local/bin
-fish_add_path /usr/local/go/bin
-fish_add_path /opt/homebrew/bin
-fish_add_path "$HOME/.local/bin"
-fish_add_path "$HOME/go/bin"
-fish_add_path "$HOME/.cargo/bin"
-fish_add_path "$HOME/.cabal/bin"
-
-if test (uname) = "Darwin"
-    fish_add_path "$(brew --prefix)/opt/python3/libexec/bin"
-end
-
 set --export SHELL "$(which fish)"
 set --export VISUAL "$(which nvim)"
 set --export EDITOR "$VISUAL"
