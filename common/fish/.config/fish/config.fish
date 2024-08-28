@@ -64,7 +64,7 @@ if status is-interactive
     alias n="$HOME/.local/bin/nnn.sh -deaHQ -Pp"
     alias nnn="$HOME/.local/bin/nnn.sh -deaHQ -Pp"
 
-    alias r="r --no-save --no-restore"
+    alias r="R --no-save --no-restore"
     alias R="R --no-save --no-restore"
 
     alias t="task"
