@@ -91,9 +91,6 @@ if test -e "$HOME/.config/.env"
     source ~/.config/.env
 end
 
-set -gx VOLTA_HOME "$HOME/.volta"
-set -gx PATH "$VOLTA_HOME/bin" $PATH
-
 # OCaml stuff
 source $HOME/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
