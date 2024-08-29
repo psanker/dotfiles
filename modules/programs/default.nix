@@ -1,4 +1,5 @@
 [
+  ./calcurse
   ./core.nix
   ./git.nix
   ./gnupg.nix

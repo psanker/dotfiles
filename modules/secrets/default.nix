@@ -51,6 +51,10 @@
         "taskwarrior/taskd/cert/content" = {
           owner = config.users.users.${vars.user}.name;
         };
+
+        "calcurse/oauth" = {
+          owner = config.users.users.${vars.user}.name;
+        };
       };
     };
   };

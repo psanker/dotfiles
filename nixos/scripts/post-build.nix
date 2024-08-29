@@ -14,6 +14,7 @@ in {
 
       systemctl --user start taskrcwriter.service
       systemctl --user start gpgimporter.service
+      systemctl --user start calcursecfgwriter.service
 
       ${(import ../../modules/scripts/post-build.nix).sync-pass}
     '';

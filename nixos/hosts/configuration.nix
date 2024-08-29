@@ -33,6 +33,8 @@ in {
     myopts.platform.linux = true;
     myopts.rebuild.target = "nixos";
 
+    myopts.programs.calcurse.enable = lib.mkDefault true;
+
     # Nix Stuff
     nix = {
       settings = {
