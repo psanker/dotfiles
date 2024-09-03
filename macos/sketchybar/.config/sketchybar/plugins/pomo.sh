@@ -2,8 +2,8 @@
 
 source "$HOME/.config/sketchybar/colors.sh"
 
-WORK_TIME=25
-BREAK_TIME=5
+WORK_TIME=50
+BREAK_TIME=10
 
 POMO=~/go/bin/pomo
  
