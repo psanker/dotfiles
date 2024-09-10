@@ -179,4 +179,4 @@ pomo < p : ~/go/bin/pomo start --duration 50 && skhd -k "escape"
 pomo < x : ~/go/bin/pomo cancel && skhd -k "escape"
 
 # Shortcut to create a new wezterm term on the fly
-lalt - return : wezterm
+lalt - return : kitty -1 -d $HOME fish
