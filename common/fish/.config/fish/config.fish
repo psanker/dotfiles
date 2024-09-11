@@ -3,20 +3,7 @@ fish_vi_key_bindings
 set --export SHELL "$(which fish)"
 set --export VISUAL "$(which nvim)"
 set --export EDITOR "$VISUAL"
-set --export PAGER less
 set --export GPG_TTY (eval tty)
-
-function fish_user_key_bindings
-    # todoist
-    bind -M insert \cti fzf_todoist_item
-    bind -M insert \ctp fzf_todoist_project
-    bind -M insert \ctl fzf_todoist_labels
-    bind -M insert \ctc fzf_todoist_close
-    bind -M insert \ctd fzf_todoist_delete
-    bind -M insert \cto fzf_todoist_open
-    bind -M insert \ctt fzf_todoist_date
-    bind -M insert \ctq fzf_todoist_quick_add
-end
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
@@ -82,8 +69,6 @@ if status is-interactive
     alias z="sioyek"
 
     alias reload="source ~/.config/fish/config.fish"
-
-    fish_user_key_bindings
 end
 
 
