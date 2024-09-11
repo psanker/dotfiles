@@ -1,20 +1,14 @@
 {
-  config,
-  lib,
   vars,
+  pkgs,
   ...
 }: {
-  options = {
-    myopts.rebuild.target = with lib;
-      mkOption {
-        type = types.enum ["nixos"];
-        example = "nixos";
-        description = "Which target to select for the rebuild command";
-      };
-  };
-
   config = let
-    rebuildTarget = "${config.myopts.rebuild.target}-post-build";
+    platformString =
+      if pkgs.stdenv.isDarwin
+      then "darwin"
+      else "nixos";
+    rebuildTarget = "${platformString}-post-build";
   in {
     # Custom rebuild
     home-manager.users.${vars.user} = {
@@ -41,7 +35,7 @@
 
           pushd ${vars.flakeDir} &> /dev/null
 
-          sudo nixos-rebuild switch --flake .
+          sudo ${platformString}-rebuild switch --flake .
 
           if [ $? = 0 ] && [ -z $NO_POST_BUILD ]; then
             echo "running post-build jobs..."

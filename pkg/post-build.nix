@@ -3,11 +3,14 @@
   nixpkgs,
   flake-utils,
   ...
-}: let
-  binName = "nixos-post-build";
-in {
+}: {
   bundle = flake-utils.lib.eachDefaultSystem (system: let
     pkgs = import nixpkgs {inherit system;};
+    platformString =
+      if pkgs.stdenv.isDarwin
+      then "darwin"
+      else "nixos";
+    binName = "${platformString}-post-build";
   in {
     packages.${binName} = pkgs.writeScriptBin binName ''
       #!/usr/bin/env bash

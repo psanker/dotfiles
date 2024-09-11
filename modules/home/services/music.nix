@@ -10,7 +10,7 @@
   };
 
   config = let
-    usingLinux = config.myopts.platform.linux;
+    usingLinux = !pkgs.stdenv.isDarwin;
   in
     lib.mkIf (usingLinux && config.myopts.services.music.enable) {
       musnix.enable = true;

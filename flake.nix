@@ -66,18 +66,13 @@
     ...
   } @ inputs:
     (let
-      vars = {
-        user = "pickles";
-        target = "maris";
-      };
-    in let
-      nixosConfigurations = import ./nixos/hosts {
+      nixosConfigurations = import ./hosts/nixos {
         inherit (nixpkgs) lib;
         inherit inputs nixpkgs nixpkgs-unstable;
-        inherit nixvim-unstable home-manager nur nixvim vars;
+        inherit nixvim-unstable home-manager nur nixvim;
       };
 
-      postBuildBundle = import ./nixos/scripts/post-build.nix {
+      postBuildBundle = import ./pkg/post-build.nix {
         inherit self nixpkgs flake-utils;
       };
     in {

@@ -25,7 +25,6 @@
     home-manager.users.${vars.user} = {
       home.file.${nyuSignatureFile} = {
         text = ''
-          --
           Patrick Anker
         '';
       };

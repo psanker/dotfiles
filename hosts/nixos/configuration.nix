@@ -9,31 +9,19 @@
   terminal = pkgs.${vars.terminal};
 in {
   imports =
-    import ../../modules/programs
-    ++ import ../../modules/dewm
-    ++ import ../../modules/services
-    ++ import ../../modules/utilities
+    import ../../modules/home/programs
+    ++ import ../../modules/nixos/dewm
+    ++ import ../../modules/home/services
+    ++ import ../../modules/home/utilities
     ++ [
-      ../../modules/secrets
+      ../../modules/home/secrets
     ];
-
-  options = {
-    # FIXME: use `pkgs.stdenv.isDarwin` instead
-    myopts.platform.linux = with lib;
-      mkOption {
-        type = types.bool;
-        default = false;
-        example = true;
-        description = mdDoc "Whether we're on Linux or not";
-      };
-  };
 
   config = {
     system.stateVersion = "23.11"; # DO NOT TOUCH
-    myopts.platform.linux = true;
-    myopts.rebuild.target = "nixos";
 
     myopts.programs.calcurse.enable = lib.mkDefault true;
+    myopts.programs.gpg.enable = lib.mkDefault true;
 
     # Nix Stuff
     nix = {

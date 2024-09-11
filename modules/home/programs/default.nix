@@ -2,7 +2,7 @@
   ./calcurse
   ./core.nix
   ./git.nix
-  ./gnupg.nix
+  ./gnupg
   ./hledger.nix
   ./kitty.nix
   ./media
