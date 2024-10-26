@@ -41,6 +41,16 @@ inc_backlight() {
 	light -A "$amt" && get_icon && notify_user
 }
 
+inc_keyb_backlight() {
+    amt=5
+
+    if [ -n "$1" ]; then
+        amt=$1
+    fi
+
+	light -s sysfs/leds/smc::kbd_backlight -A "$amt"
+}
+
 # Decrease brightness
 dec_backlight() {
     amt=5
@@ -52,6 +62,16 @@ dec_backlight() {
 	light -U "$amt" && get_icon && notify_user
 }
 
+dec_keyb_backlight() {
+    amt=5
+
+    if [ -n "$1" ]; then
+        amt=$1
+    fi
+
+	light -s sysfs/leds/smc::kbd_backlight -U "$amt"
+}
+
 # Execute accordingly
 if [[ "$1" == "--get" ]]; then
 	get_backlight
@@ -59,6 +79,10 @@ elif [[ "$1" == "--inc" ]]; then
 	inc_backlight "$2"
 elif [[ "$1" == "--dec" ]]; then
 	dec_backlight "$2"
+elif [[ "$1" == "--kinc" ]]; then
+	inc_keyb_backlight "$2"
+elif [[ "$1" == "--kdec" ]]; then
+	dec_keyb_backlight "$2"
 else
 	get_backlight
 fi
