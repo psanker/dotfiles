@@ -1,3 +1,4 @@
 [
   ./hyprland.nix
+  ./plasma.nix
 ]

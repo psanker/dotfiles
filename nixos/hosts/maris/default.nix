@@ -1,8 +1,8 @@
 {
+  lib,
   pkgs,
   unstable,
   vars,
-  hyprland,
   ...
 }: {
   imports = [
@@ -10,6 +10,7 @@
   ];
 
   myopts.dewm.hyprland.enable = true;
+  myopts.dewm.plasma.enable = true;
   myopts.programs.hledger.enable = true;
   myopts.services.music.enable = true;
 
@@ -127,7 +128,7 @@
     };
 
     displayManager.sddm = {
-      enable = true;
+      enable = lib.mkDefault true;
       wayland.enable = true;
     };
   };
