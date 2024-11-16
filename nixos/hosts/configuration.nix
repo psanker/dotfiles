@@ -67,7 +67,7 @@ in {
         alsa-utils
         coreutils
         curl
-        firefox
+        unstable.firefox
         git
         gh
         go

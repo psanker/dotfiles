@@ -68,8 +68,12 @@
     pulseaudio.enable = false; # We usin' Pipewire boisss
   };
 
-  home-manager.users.${vars.user} = {
-    services.mako.enable = true;
+  home-manager = {
+    backupFileExtension = "hmbak";
+
+    users.${vars.user} = {
+      services.mako.enable = true;
+    };
   };
 
   programs = {
