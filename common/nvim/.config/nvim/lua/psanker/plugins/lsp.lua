@@ -100,6 +100,10 @@ local function configure_lsp(lsp, navic, cmp, cmp_lsp, lspkind)
         capabilities = capabilities
     })
 
+    lsp.sqlfluff.setup({
+        capabilities = capabilities
+    })
+
     lsp.zk.setup({
         capabilities = capabilities,
         cmd = { "zk", "lsp" },

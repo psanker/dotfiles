@@ -32,6 +32,7 @@ require('nvim-treesitter.configs').setup({
     },
     highlight = {
         enable = true,
+        disable = { 'tsql' },
     },
     textobjects = {
         move = {

@@ -16,3 +16,8 @@ vim.api.nvim_create_autocmd("TermClose", {
         vim.cmd("close")
     end
 })
+
+vim.api.nvim_create_autocmd(
+    { "BufRead", "BufNewFile" },
+    { pattern = { "*.tsql" }, command = "set ft=tsql" }
+)
