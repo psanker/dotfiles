@@ -66,7 +66,7 @@ return {
                 name = 'rose-pine',
                 config = function()
                     require('rose-pine').setup({
-                        dark_variant = 'moon',
+                        dark_variant = 'dawn',
                         highlight_groups = {
                             NormalNC = {
                                 fg = 'subtle',
