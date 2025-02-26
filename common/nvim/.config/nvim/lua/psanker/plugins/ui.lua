@@ -75,12 +75,22 @@ return {
                         },
                     })
 
-                    vim.cmd.colorscheme('rose-pine')
+                    -- vim.cmd.colorscheme('rose-pine')
                     vim.cmd [[ hi Normal guibg=NONE ctermbg=NONE ]]
                     vim.cmd [[ hi NormalNC guibg=NONE ctermbg=NONE ]]
                 end,
                 priority = 1000,
                 lazy = false,
+            },
+            {
+                'e-ink-colorscheme/e-ink.nvim',
+                config = function()
+                    require('e-ink').setup()
+
+                    vim.opt.background = 'light'
+
+                    vim.cmd.colorscheme('e-ink')
+                end
             },
         },
         config = function(_)

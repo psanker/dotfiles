@@ -1,4 +1,5 @@
 local p = require('rose-pine.palette')
+local eink = require('e-ink.palette')
 local util = require('rose-pine.utilities')
 
 -- Copied from older version of rose-pine
@@ -69,84 +70,84 @@ end
 
 local lualine_theme = {
     normal = {
-        a = { bg = p.surface, fg = p.rose },
-        b = { bg = p.surface, fg = p.rose },
-        c = { bg = p.surface, fg = p.subtle },
-        z = { bg = p.rose, fg = p.surface },
+        a = { bg = eink.mono()[2], fg = p.rose },
+        b = { bg = eink.mono()[2], fg = p.rose },
+        c = { bg = eink.mono()[2], fg = p.subtle },
+        z = { bg = p.rose, fg = eink.mono()[2] },
     },
     insert = {
-        a = { bg = p.surface, fg = p.foam },
-        b = { bg = p.surface, fg = p.foam },
-        c = { bg = p.surface, fg = p.subtle },
-        z = { bg = p.foam, fg = p.surface },
+        a = { bg = eink.mono()[2], fg = p.foam },
+        b = { bg = eink.mono()[2], fg = p.foam },
+        c = { bg = eink.mono()[2], fg = p.subtle },
+        z = { bg = p.foam, fg = eink.mono()[2] },
     },
     visual = {
-        a = { bg = p.surface, fg = p.iris },
-        b = { bg = p.surface, fg = p.iris },
-        c = { bg = p.surface, fg = p.subtle },
-        z = { bg = p.iris, fg = p.surface },
+        a = { bg = eink.mono()[2], fg = p.iris },
+        b = { bg = eink.mono()[2], fg = p.iris },
+        c = { bg = eink.mono()[2], fg = p.subtle },
+        z = { bg = p.iris, fg = eink.mono()[2] },
     },
     replace = {
-        a = { bg = p.surface, fg = p.pine },
-        b = { bg = p.surface, fg = p.pine },
-        c = { bg = p.surface, fg = p.subtle },
-        z = { bg = p.pine, fg = p.surface },
+        a = { bg = eink.mono()[2], fg = p.pine },
+        b = { bg = eink.mono()[2], fg = p.pine },
+        c = { bg = eink.mono()[2], fg = p.subtle },
+        z = { bg = p.pine, fg = eink.mono()[2] },
     },
     command = {
-        a = { bg = p.surface, fg = p.love },
-        b = { bg = p.surface, fg = p.love },
-        c = { bg = p.surface, fg = p.subtle },
-        z = { bg = p.love, fg = p.surface },
+        a = { bg = eink.mono()[2], fg = p.love },
+        b = { bg = eink.mono()[2], fg = p.love },
+        c = { bg = eink.mono()[2], fg = p.subtle },
+        z = { bg = p.love, fg = eink.mono()[2] },
     },
     inactive = {
-        a = { bg = p.surface, fg = p.muted },
-        b = { bg = p.surface, fg = p.muted },
-        c = { bg = p.surface, fg = p.muted },
-        z = { bg = p.muted, fg = p.surface },
+        a = { bg = eink.mono()[2], fg = p.muted },
+        b = { bg = eink.mono()[2], fg = p.muted },
+        c = { bg = eink.mono()[2], fg = p.muted },
+        z = { bg = p.muted, fg = eink.mono()[2] },
     },
 }
 
 local zen_lualine_theme = {
     normal = {
-        a = { bg = p.surface, fg = p.rose },
-        b = { bg = p.surface, fg = p.rose },
+        a = { bg = eink.mono()[2], fg = p.rose },
+        b = { bg = eink.mono()[2], fg = p.rose },
         c = { bg = p.none, fg = p.subtle },
-        z = { bg = p.rose, fg = p.surface },
+        z = { bg = p.rose, fg = eink.mono()[2] },
     },
     insert = {
-        a = { bg = p.surface, fg = p.foam },
-        b = { bg = p.surface, fg = p.foam },
+        a = { bg = eink.mono()[2], fg = p.foam },
+        b = { bg = eink.mono()[2], fg = p.foam },
         c = { bg = p.none, fg = p.subtle },
-        z = { bg = p.foam, fg = p.surface },
+        z = { bg = p.foam, fg = eink.mono()[2] },
     },
     visual = {
-        a = { bg = p.surface, fg = p.iris },
-        b = { bg = p.surface, fg = p.iris },
+        a = { bg = eink.mono()[2], fg = p.iris },
+        b = { bg = eink.mono()[2], fg = p.iris },
         c = { bg = p.none, fg = p.subtle },
-        z = { bg = p.iris, fg = p.surface },
+        z = { bg = p.iris, fg = eink.mono()[2] },
     },
     replace = {
-        a = { bg = p.surface, fg = p.pine },
-        b = { bg = p.surface, fg = p.pine },
+        a = { bg = eink.mono()[2], fg = p.pine },
+        b = { bg = eink.mono()[2], fg = p.pine },
         c = { bg = p.none, fg = p.subtle },
-        z = { bg = p.pine, fg = p.surface },
+        z = { bg = p.pine, fg = eink.mono()[2] },
     },
     command = {
-        a = { bg = p.surface, fg = p.love },
-        b = { bg = p.surface, fg = p.love },
+        a = { bg = eink.mono()[2], fg = p.love },
+        b = { bg = eink.mono()[2], fg = p.love },
         c = { bg = p.none, fg = p.subtle },
-        z = { bg = p.love, fg = p.surface },
+        z = { bg = p.love, fg = eink.mono()[2] },
     },
     inactive = {
-        a = { bg = p.surface, fg = p.muted },
-        b = { bg = p.surface, fg = p.muted },
+        a = { bg = eink.mono()[2], fg = p.muted },
+        b = { bg = eink.mono()[2], fg = p.muted },
         c = { bg = p.none, fg = p.muted },
-        z = { bg = p.muted, fg = p.surface },
+        z = { bg = p.muted, fg = eink.mono()[2] },
     },
 }
 
 local custom_highlights = {
-    PsaFileModified = { bg = p.surface, fg = p.gold },
+    PsaFileModified = { bg = eink.mono()[2], fg = p.gold },
 }
 
 for k, v in pairs(custom_highlights) do
