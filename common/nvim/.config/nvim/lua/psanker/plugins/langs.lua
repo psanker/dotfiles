@@ -1,10 +1,7 @@
 return {
     {
-        'jalvesaq/Nvim-R',
+        'R-nvim/R.nvim',
         ft = { 'r', 'rmd' },
-        -- Something in the newest version of Nvim-R may be broken?
-        commit = "97601b006d8c572fd9c3cf33e2e8d20b6e5f81e8",
-        lazy = false,
     },
     {
         "iamcco/markdown-preview.nvim",
