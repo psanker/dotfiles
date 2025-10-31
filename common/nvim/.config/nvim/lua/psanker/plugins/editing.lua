@@ -8,6 +8,9 @@ return {
         config = function()
             require('zk').setup({
                 picker = "telescope",
+                picker_options = {
+                    telescope = require('telescope.themes').get_ivy(),
+                },
             })
 
             require('psanker.edit.pkm').setup()

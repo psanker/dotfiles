@@ -15,6 +15,9 @@ set.shiftwidth = 4
 set.softtabstop = 4
 set.expandtab = true
 
+-- Local project configuration
+set.exrc = true
+
 -- Better undo/swap support
 set.swapfile = false
 set.backup = false
