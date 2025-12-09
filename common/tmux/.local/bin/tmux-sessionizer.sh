@@ -3,7 +3,7 @@
 if [ $# -eq 1 ]; then
   selected=$1
 else
-  selected=$(find $HOME/repos $HOME/personal $HOME/Documents -type d -mindepth 1 -maxdepth 1 | fzf)
+  selected=$(find $HOME/workspace $HOME/personal $HOME/Documents -type d -mindepth 1 -maxdepth 1 | fzf)
 fi
 
 echo "$selected"
