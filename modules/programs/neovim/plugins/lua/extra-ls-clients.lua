@@ -1,4 +1,4 @@
-local lsp = require('lspconfig')
+local lsp = vim.lsp.config
 
 -- Attach & capabilities are defined in 
 -- nixvim/plugins/lsp/default.nix

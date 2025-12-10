@@ -44,72 +44,36 @@ local function configure_lsp(lsp, navic, cmp, cmp_lsp, lspkind)
         },
     })
 
-    lsp.lua_ls.setup({
-        capabilities = capabilities,
-        settings = {
-            Lua = {
-                runtime = {
-                    version = 'LuaJIT',
-                },
-                diagnostics = {
-                    globals = { 'vim' },
-                },
-                workspace = {
-                    library = vim.api.nvim_get_runtime_file("", true),
-                },
-                telemetry = {
-                    enable = false,
+    local servers = {
+        lua_ls = {
+            settings = {
+                Lua = {
+                    runtime = {
+                        version = 'LuaJIT',
+                    },
+                    diagnostics = {
+                        globals = { 'vim' },
+                    },
+                    workspace = {
+                        library = vim.api.nvim_get_runtime_file("", true),
+                    },
+                    telemetry = {
+                        enable = false,
+                    },
                 },
             },
         },
+        r_language_server = {},
+        gopls = {},
+        nil_ls = {},
+        ocamllsp = {},
+    }
 
-    })
-
-    lsp.rust_analyzer.setup({
-        capabilities = capabilities,
-        cmd = { "rustup", "run", "nightly", "rust-analyzer" },
-        settings = {
-            ["rust-analyzer"] = {
-                unstable_features = true,
-                build_on_save = false,
-                all_features = true,
-                diagnostics = {
-                    experimental = true,
-                },
-            }
-        }
-    })
-
-    lsp.basedpyright.setup({
-        capabilities = capabilities,
-    })
-
-    lsp.r_language_server.setup({
-        capabilities = capabilities
-    })
-
-    lsp.gopls.setup({
-        capabilities = capabilities
-    })
-
-    lsp.nil_ls.setup({
-        capabilities = capabilities
-    })
-
-    lsp.ocamllsp.setup({
-        capabilities = capabilities
-    })
-
-    lsp.sqlfluff.setup({
-        capabilities = capabilities
-    })
-
-    lsp.zk.setup({
-        capabilities = capabilities,
-        cmd = { "zk", "lsp" },
-        filetypes = { "markdown", "rmd", "quarto" },
-
-    })
+    for name, config in pairs(servers) do
+        local config = config or {}
+        config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
+        vim.lsp.config(name, config)
+    end
 
     vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(ev)
@@ -151,7 +115,7 @@ return {
         'neovim/nvim-lspconfig',
         config = function()
             configure_lsp(
-                require('lspconfig'),
+                vim.lsp.config,
                 require('nvim-navic'),
                 require('cmp'),
                 require('cmp_nvim_lsp'),

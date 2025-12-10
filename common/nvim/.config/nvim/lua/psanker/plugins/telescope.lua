@@ -90,6 +90,7 @@ return {
     },
     config = function()
       require('telescope').load_extension('bibtex')
+      require('telescope').load_extension('neorg')
     end,
     keys = {
       {

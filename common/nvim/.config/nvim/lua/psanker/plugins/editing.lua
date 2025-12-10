@@ -70,13 +70,6 @@ return {
         event = { 'BufReadPre', 'BufNewFile' }
     },
     {
-        'ggandor/leap.nvim',
-        event = 'VeryLazy',
-        config = function(_)
-            require('leap').add_default_mappings()
-        end,
-    },
-    {
         'junegunn/vim-easy-align',
         event = { 'BufReadPost', 'BufNewFile' },
     },
