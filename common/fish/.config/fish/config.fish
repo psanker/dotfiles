@@ -1,4 +1,5 @@
 fish_vi_key_bindings
+fish_config theme choose "rose-pine-moon"
 
 set --export SHELL "$(which fish)"
 set --export VISUAL "$(which nvim)"
