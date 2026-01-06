@@ -21,7 +21,7 @@ require('lazy').setup({
 })
 
 -- Post Lazy weirdness (mainly just treesitter)
-require('nvim-treesitter.configs').setup({
+require('nvim-treesitter.config').setup({
     auto_install = true,
     sync_install = false,
     ignore_install = {},

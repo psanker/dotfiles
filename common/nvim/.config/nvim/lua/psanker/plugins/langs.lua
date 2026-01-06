@@ -27,6 +27,7 @@ return {
         "nvim-neorg/neorg",
         lazy = false, -- Disable lazy loading 
         version = "*", -- Pin to latest stable release
+        enabled = false,
         opts = {
             load = {
                 ["core.defaults"] = {}, -- Load default modules
