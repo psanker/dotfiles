@@ -1,3 +1,6 @@
+-- Use treesitter highlighting
+vim.treesitter.start()
+
 local writing = require('psanker.edit.writing')
 
 local Remap = require("psanker.keymap")
