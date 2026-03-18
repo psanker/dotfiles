@@ -1,6 +1,8 @@
 fish_vi_key_bindings
 fish_config theme choose "rose-pine-moon"
 
+fish_add_path /home/psanker/.opencode/bin
+
 set --export SHELL "$(which fish)"
 set --export VISUAL "$(which nvim)"
 set --export EDITOR "$VISUAL"
@@ -82,4 +84,5 @@ source $HOME/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
 # INIT STARSHIP
 starship init fish | source
+
 
