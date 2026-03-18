@@ -203,4 +203,7 @@ return {
         },
         opts = {},
     },
+    {
+        'atiladefreitas/dooing'
+    },
 }
