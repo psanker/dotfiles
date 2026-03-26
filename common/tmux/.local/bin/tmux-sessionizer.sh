@@ -14,7 +14,7 @@ else
     
     dirs_nowt=$(${cmd} -mindepth 1 -maxdepth 1 -type d | grep '**')
 
-    selected=$(printf "$dirs_wt\n$dirs_nowt" | fzf)
+    selected=$(printf "$dirs_wt\n$dirs_nowt" | fzf --style full --preview 'fzf-preview.sh {}')
 
     for it in "${arr_wt[@]}"; do
         if [[ "$it" == "$selected" ]]; then

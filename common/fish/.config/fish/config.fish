@@ -74,6 +74,9 @@ if status is-interactive
     alias reload="source ~/.config/fish/config.fish"
 end
 
+if test -n (command -v fzf)
+    fzf --fish | source
+end
 
 if test -e "$HOME/.config/.env"
     source ~/.config/.env
