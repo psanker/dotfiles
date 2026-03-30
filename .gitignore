@@ -3,3 +3,4 @@
 doom/
 **/*.DS_Store
 **/*.db
+tmp

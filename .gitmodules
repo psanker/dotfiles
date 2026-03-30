@@ -28,3 +28,6 @@
 [submodule "common/task"]
 	path = common/task
 	url = git@github.com:psanker/taskrc.git
+[submodule "common/tmux/.tmux/plugins/tpm"]
+	path = common/tmux/.tmux/plugins/tpm
+	url = git@github.com:tmux-plugins/tpm.git
