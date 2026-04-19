@@ -90,4 +90,48 @@ return {
             { '<Leader>tm', '<CMD>TableModeToggle<CR>', desc = '[t]able [m]ode: toggle markdown table editing' },
         },
     },
+    -- trying this on for size
+    {
+        'ThePrimeagen/99',
+        config = function()
+            local _99 = require('99')
+
+            local cwd = vim.uv.cwd()
+            local basename = vim.fs.basename(cwd)
+
+            _99.setup({
+                logger = {
+                    level = _99.DEBUG,
+                    path = './tmp/' .. basename .. '.99.debug',
+                    print_on_error = true,
+                },
+                tmp_dir = './tmp',
+            })
+        end,
+        keys = {
+            { '<Leader>oo', function() require('99').visual() end,            mode = 'v',                                       desc = '[o]pencode: [o]pen prompt' },
+            { '<Leader>o/', function() require('99').search() end,            desc = '[o]pencode: search[/] cwd' },
+            { '<Leader>ox', function() require('99').stop_all_requests() end, desc = '[o]pencode: stop[x] all running requests' },
+            {
+                '<Leader>osm',
+                function()
+                    local _99 = require('99')
+                    local tsext = require('99.extensions.telescope')
+
+                    local provider = _99.get_provider()
+                    tsext.select_model(provider)
+                end,
+                desc = '[o]pencode [s]ettings: select [m]odel',
+            },
+            {
+                '<Leader>osp',
+                function()
+                    local tsext = require('99.extensions.telescope')
+
+                    tsext.select_provider()
+                end,
+                desc = '[o]pencode [s]ettings: select [p]rovider',
+            },
+        }
+    },
 }

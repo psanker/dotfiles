@@ -45,9 +45,6 @@ return {
         end,
     },
     {
-        'folke/twilight.nvim',
-    },
-    {
         'folke/which-key.nvim',
         tag = "stable",
         opts = {

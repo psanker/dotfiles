@@ -18,7 +18,6 @@ local function configure_lsp(lsp, navic, cmp, cmp_lsp, lspkind)
         mapping = cmp.mapping.preset.insert({
             ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
             ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-            ['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
             ['<C-Space>'] = cmp.mapping.complete(),
             ['<CR>'] = cmp.mapping.confirm(cmp_select),
         }),
