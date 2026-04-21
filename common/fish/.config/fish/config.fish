@@ -85,8 +85,5 @@ end
 # OCaml stuff
 source $HOME/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
-# Apparently the SSH Agent is never caught even if login shell is supershell to this one
-eval (ssh-agent -c) > /dev/null
-
 # INIT STARSHIP
 starship init fish | source
