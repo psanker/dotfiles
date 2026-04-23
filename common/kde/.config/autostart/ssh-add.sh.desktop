@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=/home/psanker/.local/bin/ssh-add.sh
+Icon=dialog-scripts
+Name=ssh-add.sh
+Type=Application
+X-KDE-AutostartScript=true
