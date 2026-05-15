@@ -79,4 +79,12 @@ function M.bind_lsp_keymaps(_, bufnr)
         { buffer = bufnr, desc = 'Perform a code action' })                                                                -- "" for a range
 end
 
+-- Populate search
+M.nnoremap('<Leader>w', '"vyiw:%s/<C-r>v//g<Left><Left>', { desc = 'Replace [w]ord under cursor in file' })
+M.vnoremap('<Leader>w', '"vy:%s/<C-r>v//g<Left><Left>', { desc = 'Replace selected [w]ord in file' })
+
+-- Move macro recording to Q
+M.nnoremap('q', '<Nop>')
+M.nnoremap('Q', 'q')
+
 return M
