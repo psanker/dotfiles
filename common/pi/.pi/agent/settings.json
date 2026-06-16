@@ -1,0 +1,14 @@
+{
+  "lastChangelogVersion": "0.79.4",
+  "defaultProvider": "openrouter",
+  "defaultModel": "deepseek/deepseek-v4-flash",
+  "defaultThinkingLevel": "high",
+  "packages": [
+    "npm:context-mode",
+    "npm:pi-subagents",
+    "npm:pi-hermes-memory",
+    "npm:pi-search-hub",
+    "git:github.com/raphapr/pi-zk"
+  ],
+  "theme": "dark"
+}
