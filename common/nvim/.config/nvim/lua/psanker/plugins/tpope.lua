@@ -25,10 +25,14 @@ return {
                 '<Leader>gP', '<cmd>Git push<CR>', silent = true, desc = '[g]it [P]ush'
             },
             {
-                '<Leader>gl', '<cmd>Gclog!<CR>', desc = 'Load [g]it [l]og into quickfix'
+                -- Copied this from https://dpwright.com/posts/2018/04/06/graphical-log-with-vimfugitive/
+                '<Leader>gl', '<cmd>Git! lg<CR>', desc = 'View prettified [g]it [l]og'
             },
             {
-                '<Leader>gl',
+                '<Leader>gL', '<cmd>Gclog!<CR>', desc = 'Load [g]it [L]og into quickfix'
+            },
+            {
+                '<Leader>gL',
                 ":'<,'>Gclog!<CR>",
                 mode = 'v',
                 desc = 'Load [g]it [l]og for current hunk into quickfix',
