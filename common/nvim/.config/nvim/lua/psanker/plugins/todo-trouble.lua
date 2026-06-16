@@ -15,7 +15,6 @@ return {
                 },
             },
         },
-        cmd = 'Trouble',
         keys = {
             {
                 '<Leader>vx',
@@ -27,7 +26,7 @@ return {
     {
         'folke/todo-comments.nvim',
         dependencies = 'nvim-lua/plenary.nvim',
-        cmd = { 'TodoTelescope', 'TodoQuickFix' },
+        lazy = false,
         config = function(_)
             require('todo-comments').setup({
                 search = {
