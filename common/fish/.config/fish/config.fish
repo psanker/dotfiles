@@ -87,3 +87,7 @@ source $HOME/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
 # INIT STARSHIP
 starship init fish | source
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
