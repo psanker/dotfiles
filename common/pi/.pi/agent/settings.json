@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.79.4",
+  "lastChangelogVersion": "0.79.5",
   "defaultProvider": "openrouter",
   "defaultModel": "deepseek/deepseek-v4-flash",
   "defaultThinkingLevel": "high",
@@ -8,7 +8,7 @@
     "npm:pi-subagents",
     "npm:pi-hermes-memory",
     "npm:pi-search-hub",
-    "git:github.com/raphapr/pi-zk"
+    "npm:pi-zk"
   ],
   "theme": "dark"
 }
