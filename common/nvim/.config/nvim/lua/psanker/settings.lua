@@ -86,3 +86,6 @@ set.timeoutlen = 500
 
 -- fugitive open?
 g.fugitive_open = false
+
+-- Slime+tmux
+vim.cmd [[let g:slime_target="tmux"]]

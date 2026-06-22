@@ -203,4 +203,8 @@ return {
     {
         'atiladefreitas/dooing'
     },
+    {
+        'jpalardy/vim-slime',
+        lazy = false
+    },
 }
