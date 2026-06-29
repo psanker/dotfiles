@@ -2,6 +2,7 @@ return {
     {
         'nvim-treesitter/nvim-treesitter',
         lazy = false,
+        commit = '90cd6580e720caedacb91fdd587b747a6e77d61f',
         build = ':TSUpdate',
         config = function (_)
             require('nvim-treesitter').setup({
