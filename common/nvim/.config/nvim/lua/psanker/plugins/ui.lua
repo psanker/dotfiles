@@ -182,13 +182,13 @@ return {
             processor = 'magick_cli',
             integrations = {
                 markdown = {
-                  enabled = true,
-                  clear_in_insert_mode = false,
-                  download_remote_images = true,
-                  only_render_image_at_cursor = true,
-                  only_render_image_at_cursor_mode = 'inline', -- or "popup"
-                  floating_windows = false, -- if true, images will be rendered in floating markdown windows
-                  filetypes = { 'markdown', 'vimwiki' }, -- markdown extensions (ie. quarto) can go here
+                    enabled = true,
+                    clear_in_insert_mode = false,
+                    download_remote_images = true,
+                    only_render_image_at_cursor = true,
+                    only_render_image_at_cursor_mode = 'inline', -- or "popup"
+                    floating_windows = false,                  -- if true, images will be rendered in floating markdown windows
+                    filetypes = { 'markdown', 'vimwiki' },     -- markdown extensions (ie. quarto) can go here
                 },
             },
         },
@@ -205,6 +205,20 @@ return {
     },
     {
         'jpalardy/vim-slime',
-        lazy = false
+        lazy = false,
+        keys = {
+            {
+                '<Leader>sm',
+                ':SlimeSend1 targets::tar_make()<CR>',
+                desc = 'Slime: [s]end tar_[m]ake command',
+                noremap = true
+            },
+            {
+                '<Leader>sp',
+                ':SlimeSend1 source(here::here("projects/prelude.R"))<CR>',
+                desc = 'Slime: [s]end project [p]relude command',
+                noremap = true
+            }
+        },
     },
 }
