@@ -1,14 +1,13 @@
-fish_vi_key_bindings
-fish_config theme choose "rose-pine-moon"
-
-fish_add_path /home/psanker/.opencode/bin
-
-set --export SHELL "$(which fish)"
-set --export VISUAL "$(which nvim)"
-set --export EDITOR "$VISUAL"
-set --export GPG_TTY (eval tty)
-
 if status is-interactive
+    fish_vi_key_bindings
+    fish_config theme choose "rose-pine-moon"
+
+    fish_add_path /home/psanker/.opencode/bin
+
+    set --export VISUAL "$(which nvim)"
+    set --export EDITOR "$VISUAL"
+    set --export GPG_TTY (eval tty)
+
     # Commands to run in interactive sessions can go here
 
     if test -x /usr/bin/jump || test -x /usr/local/bin/jump
@@ -72,22 +71,22 @@ if status is-interactive
     alias z="sioyek"
 
     alias reload="source ~/.config/fish/config.fish"
-end
 
-if test -n (command -v fzf)
-    fzf --fish | source
-end
+    if test -n (command -v fzf)
+        fzf --fish | source
+    end
 
-if test -e "$HOME/.config/.env"
-    source ~/.config/.env
-end
+    # INIT STARSHIP
+    starship init fish | source
+
+    if test -e "$HOME/.config/.env"
+        source ~/.config/.env
+    end
 
 # OCaml stuff
-source $HOME/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
-
-# INIT STARSHIP
-starship init fish | source
+    source $HOME/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
 # bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
+    set --export BUN_INSTALL "$HOME/.bun"
+    set --export PATH $BUN_INSTALL/bin $PATH
+end

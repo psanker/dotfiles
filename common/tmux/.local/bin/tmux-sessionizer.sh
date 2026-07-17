@@ -39,11 +39,11 @@ selected_name=$(echo "$selected_name" | tr . _)
 open_tmux=$(pgrep tmux)
 
 if [ -z $TMUX ] && [ -z $open_tmux ]; then
-  tmux new-session -s $selected_name -c $selected \; set default-shell /usr/bin/fish
+  tmux new-session -s $selected_name -c $selected
 fi
 
 if ! tmux has-session -t=$selected_name 2> /dev/null; then
-  tmux new-session -ds $selected_name -c $selected \; set default-shell /usr/bin/fish
+  tmux new-session -ds $selected_name -c $selected
 fi
 
 tmux switch-client -t $selected_name
