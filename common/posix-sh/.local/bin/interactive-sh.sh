@@ -9,7 +9,7 @@ alias mv="mv -i"
 
 alias nv="nvim"
 alias cat="bat"
-alias nd="nix develop"
+alias nd="nix develop --command zsh"
 
 alias gs="git status"
 alias ga="git add"
