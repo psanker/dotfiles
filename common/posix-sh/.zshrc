@@ -109,5 +109,7 @@ if [[ $- == *i* ]]; then
     if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
 
     . ~/.local/bin/interactive-sh.sh
+
+    bindkey "^R" history-incremental-search-backward
 fi
 
