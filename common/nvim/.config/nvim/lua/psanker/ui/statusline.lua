@@ -1,6 +1,9 @@
 local p = require('rose-pine.palette')
 local util = require('rose-pine.utilities')
 
+local ok, cendre = pcall(require, 'cendre')
+local pc = require('cendre.palette').get(ok and cendre.config.background or 'hard')
+
 -- Copied from older version of rose-pine
 local highlight = function(group, highlight, blend_on)
 	local fg = highlight.fg and util.parse_color(highlight.fg) or "NONE"
@@ -69,79 +72,79 @@ end
 
 local lualine_theme = {
     normal = {
-        a = { bg = p.surface, fg = p.rose },
-        b = { bg = p.surface, fg = p.rose },
-        c = { bg = p.surface, fg = p.subtle },
+        a = { bg = pc.bg2, fg = p.rose },
+        b = { bg = pc.bg2, fg = p.rose },
+        c = { bg = pc.bg2, fg = pc.fg },
         z = { bg = p.rose, fg = p.surface },
     },
     insert = {
-        a = { bg = p.surface, fg = p.foam },
-        b = { bg = p.surface, fg = p.foam },
-        c = { bg = p.surface, fg = p.subtle },
-        z = { bg = p.foam, fg = p.surface },
+        a = { bg = pc.bg2, fg = p.foam },
+        b = { bg = pc.bg2, fg = p.foam },
+        c = { bg = pc.bg2, fg = pc.fg },
+        z = { bg = p.foam, fg = pc.bg2 },
     },
     visual = {
-        a = { bg = p.surface, fg = p.iris },
-        b = { bg = p.surface, fg = p.iris },
-        c = { bg = p.surface, fg = p.subtle },
-        z = { bg = p.iris, fg = p.surface },
+        a = { bg = pc.bg2, fg = p.iris },
+        b = { bg = pc.bg2, fg = p.iris },
+        c = { bg = pc.bg2, fg = pc.fg },
+        z = { bg = p.iris, fg = pc.bg2 },
     },
     replace = {
-        a = { bg = p.surface, fg = p.pine },
-        b = { bg = p.surface, fg = p.pine },
-        c = { bg = p.surface, fg = p.subtle },
-        z = { bg = p.pine, fg = p.surface },
+        a = { bg = pc.bg2, fg = p.pine },
+        b = { bg = pc.bg2, fg = p.pine },
+        c = { bg = pc.bg2, fg = pc.fg },
+        z = { bg = p.pine, fg = pc.bg2 },
     },
     command = {
-        a = { bg = p.surface, fg = p.love },
-        b = { bg = p.surface, fg = p.love },
-        c = { bg = p.surface, fg = p.subtle },
-        z = { bg = p.love, fg = p.surface },
+        a = { bg = pc.bg2, fg = p.love },
+        b = { bg = pc.bg2, fg = p.love },
+        c = { bg = pc.bg2, fg = pc.fg },
+        z = { bg = p.love, fg = pc.bg2 },
     },
     inactive = {
-        a = { bg = p.surface, fg = p.muted },
-        b = { bg = p.surface, fg = p.muted },
-        c = { bg = p.surface, fg = p.muted },
-        z = { bg = p.muted, fg = p.surface },
+        a = { bg = pc.bg2, fg = p.muted },
+        b = { bg = pc.bg2, fg = p.muted },
+        c = { bg = pc.bg2, fg = p.muted },
+        z = { bg = p.muted, fg = pc.bg2 },
     },
 }
 
 local zen_lualine_theme = {
     normal = {
-        a = { bg = p.surface, fg = p.rose },
-        b = { bg = p.surface, fg = p.rose },
-        c = { bg = p.none, fg = p.subtle },
-        z = { bg = p.rose, fg = p.surface },
+        a = { bg = pc.bg2, fg = p.rose },
+        b = { bg = pc.bg2, fg = p.rose },
+        c = { bg = p.none, fg = pc.fg },
+        z = { bg = p.rose, fg = pc.bg2 },
     },
     insert = {
-        a = { bg = p.surface, fg = p.foam },
-        b = { bg = p.surface, fg = p.foam },
-        c = { bg = p.none, fg = p.subtle },
-        z = { bg = p.foam, fg = p.surface },
+        a = { bg = pc.bg2, fg = p.foam },
+        b = { bg = pc.bg2, fg = p.foam },
+        c = { bg = p.none, fg = pc.fg },
+        z = { bg = p.foam, fg = pc.bg2 },
     },
     visual = {
-        a = { bg = p.surface, fg = p.iris },
-        b = { bg = p.surface, fg = p.iris },
-        c = { bg = p.none, fg = p.subtle },
-        z = { bg = p.iris, fg = p.surface },
+        a = { bg = pc.bg2, fg = p.iris },
+        b = { bg = pc.bg2, fg = p.iris },
+        c = { bg = p.none, fg = pc.fg },
+        z = { bg = p.iris, fg = pc.bg2 },
     },
     replace = {
-        a = { bg = p.surface, fg = p.pine },
-        b = { bg = p.surface, fg = p.pine },
-        c = { bg = p.none, fg = p.subtle },
-        z = { bg = p.pine, fg = p.surface },
+        a = { bg = pc.bg2, fg = p.pine },
+        b = { bg = pc.bg2, fg = p.pine },
+        c = { bg = p.none, fg = pc.fg },
+        z = { bg = p.pine, fg = pc.bg2 },
     },
     command = {
-        a = { bg = p.surface, fg = p.love },
-        b = { bg = p.surface, fg = p.love },
-        c = { bg = p.none, fg = p.subtle },
-        z = { bg = p.love, fg = p.surface },
+        a = { bg = pc.bg2, fg = p.love },
+        b = { bg = pc.bg2, fg = p.love },
+        c = { bg = p.none, fg = pc.fg },
+        z = { bg = p.love, fg = pc.bg2 },
     },
     inactive = {
-        a = { bg = p.surface, fg = p.muted },
-        b = { bg = p.surface, fg = p.muted },
+        a = { bg = pc.bg2, fg = p.muted },
+        b = { bg = pc.bg2, fg = p.muted },
         c = { bg = p.none, fg = p.muted },
-        z = { bg = p.muted, fg = p.surface },
+        z = { bg = p.muted, fg = pc.bg2 },
     },
 }
 
