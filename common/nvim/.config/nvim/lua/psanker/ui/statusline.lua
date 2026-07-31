@@ -149,7 +149,7 @@ local zen_lualine_theme = {
 }
 
 local custom_highlights = {
-    PsaFileModified = { bg = p.surface, fg = p.gold },
+    PsaFileModified = { bg = pc.bg2, fg = p.gold },
 }
 
 for k, v in pairs(custom_highlights) do
