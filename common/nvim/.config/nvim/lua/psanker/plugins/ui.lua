@@ -56,30 +56,37 @@ return {
         },
     },
     {
-        'nvim-lualine/lualine.nvim',
-        dependencies = {
-            {
-                'rose-pine/neovim',
-                name = 'rose-pine',
-                config = function()
-                    require('rose-pine').setup({
-                        dark_variant = 'moon',
-                        highlight_groups = {
-                            NormalNC = {
-                                fg = 'subtle',
-                                bg = 'base'
-                            },
-                        },
-                    })
+        'rose-pine/neovim',
+        name = 'rose-pine',
+        config = function()
+            require('rose-pine').setup({
+                dark_variant = 'moon',
+                highlight_groups = {
+                    NormalNC = {
+                        fg = 'subtle',
+                        bg = 'base'
+                    },
+                },
+            })
 
-                    vim.cmd.colorscheme('rose-pine')
-                    vim.cmd [[ hi Normal guibg=NONE ctermbg=NONE ]]
-                    vim.cmd [[ hi NormalNC guibg=NONE ctermbg=NONE ]]
-                end,
-                priority = 1000,
-                lazy = false,
-            },
-        },
+            -- vim.cmd.colorscheme('rose-pine')
+            -- vim.cmd [[ hi Normal guibg=NONE ctermbg=NONE ]]
+            -- vim.cmd [[ hi NormalNC guibg=NONE ctermbg=NONE ]]
+        end,
+        priority = 1000,
+        lazy = false,
+    },
+    {
+        'Aejkatappaja/cendre',
+        config = function()
+            vim.cmd.colorscheme('cendre')
+        end,
+        priority = 1000,
+        lazy = false,
+    },
+    {
+        'nvim-lualine/lualine.nvim',
+        enabled = true,
         config = function(_)
             require('lualine').setup(require('psanker.ui.statusline').opts(false))
         end,
