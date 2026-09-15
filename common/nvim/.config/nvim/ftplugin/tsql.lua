@@ -1,5 +1,5 @@
--- If enabled, kill treesitter so formatting works
-vim.treesitter.stop()
+-- Redirect to sql; tsql syntax outdate now, treesitter works well enough
+vim.bo.filetype = 'sql'
 
 vim.bo.commentstring = '-- %s'
 
