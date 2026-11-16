@@ -1,0 +1,27 @@
+onboarding = false
+
+[ui]
+tab_bar_position = "top"
+tab_bar_right = [{type = "datetime", format = "%H:%M"}]
+prompt_new_tab_name = false
+
+[ui.toast]
+delivery = "herdr"
+
+[theme]
+name = "gruvbox"
+auto_switch = false
+
+[keys]
+prefix = "ctrl+a"
+previous_workspace = "prefix+shift+k"
+next_workspace = "prefix+shift+j"
+
+[[keys.command]]
+key = "prefix+i"
+type = "popup"
+command = "~/.local/bin/herdr-sessionizer.sh"
+description = "herdr sessionizer"
+width = "90%"
+height = "90%"
+
