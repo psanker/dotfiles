@@ -32,3 +32,4 @@ if [[ $- == *i* ]]; then
     . ~/.local/bin/interactive-sh.sh
 fi
 
+export DOCKER_HOST=unix:///run/user/1000/docker.sock
